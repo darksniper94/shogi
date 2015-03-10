@@ -5,3 +5,11 @@ C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Shogi\Shogi\obj\x86\Debug\Sho
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Shogi\Shogi\obj\x86\Debug\Shogi.exe
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Shogi\Shogi\obj\x86\Debug\Shogi.pdb
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.pdb
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\Shogi.pdb
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csprojResolveAssemblyReference.cache
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Form1.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe
