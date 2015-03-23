@@ -13,3 +13,4 @@ C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Form1.resources
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources.resources
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.pdb

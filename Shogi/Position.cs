@@ -6,19 +6,33 @@ using System.Text;
 
 namespace Shogi
 {
+    /// <summary>
+    /// Diese Klasse repräsentiert die Position auf einem Shogi-Brett.
+    /// 
+    /// In der Notation werden die Spalten mit Ziffern und die Zeilen mit Buchstaben angegeben.
+    /// So ist das Feld links oben z.B. 9a, das Feld rechts unten ist 1i;
+    /// (Quelle: http://de.wikipedia.org/wiki/Sh%C5%8Dgi#Notation)
+    /// 
+    /// Die Position ist in dieser Klasse erstmal nicht entsprechend dem Shogi-Brett begrenzt. 
+    /// Für die Spalten gibt es Ziffern von 0-9 und für die Zeilen A-Z bzw. a-z.
+    /// Die Werte der Zeilen können entsprechend in Zahlen dargestellt werden (A=1, B=2, ..., Z=26).
+    /// 
+    /// Als Position außerhalb des Spielfeldes gilt die Position(0, 0) was den Chars ('0','@') entspricht.
+    /// 
+    /// </summary>
     class Position //: Point
     {
         private int x;
         private int y;
 
         public char Spalte
-        { // 'A' = 65 und 'Z' = 90
-            get { return (char) (x + 64); }
+        {
+            get { return (char)(x + 48); }
             set
-            {
-                if (value > 64 && value < 91)
+            {   // '0' = 48 und '9' = 57
+                if (value > 47 && value < 58)
                 {
-                    x = value - 64;
+                    x = value - 48;
                 }
                 else
                 {   // eigene Exceptionklasse einführen.
@@ -26,15 +40,18 @@ namespace Shogi
                 }
             }
         }
-
         public char Zeile
-        { // '0' = 48 und '9' = 57
-            get { return (char)(y + 48); }
+        {
+            get { return (char)(y + 64); }
             set
-            {
-                if (value > 47 && value < 58)
+            {   // 'A' = 65 und 'Z' = 90
+                if (value > 64 && value < 91)
                 {
-                    y = value - 48;
+                    y = value - 64;
+                }   // 'a' = 97 und 'z' = 122
+                else if (value > 96 && value < 123)
+                {
+                    y = value - 96;
                 }
                 else
                 {   // eigene Exceptionklasse einführen.
@@ -43,37 +60,66 @@ namespace Shogi
             }
         }
 
+        /// <summary>
+        /// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
+        /// </summary>
+        /// <param name="spalte">Spaltenwert der Position.</param>
+        /// <param name="zeile">Zeilenwert der Position.</param>
         public Position(char spalte, char zeile)
         {
             this.Spalte = spalte;
             this.Zeile = zeile;
         }
 
-        public Position(char spalte, int zeile)
+        /// <summary>
+        /// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
+        /// </summary>
+        /// <param name="spalte">Spaltenwert der Position.</param>
+        /// <param name="zeile">Zeilenwert der Position.</param>
+        public Position(int spalte, char zeile)
         {
-            this.Spalte = spalte;
-            this.y = zeile;
+            this.x = spalte;
+            this.Zeile = zeile;
         }
 
+        /// <summary>
+        /// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
+        /// </summary>
+        /// <param name="spalte">Spaltenwert der Position.</param>
+        /// <param name="zeile">Zeilenwert der Position.</param>
         public Position(int spalte, int zeile)
         {
             this.x = spalte;
             this.y = zeile;
         }
 
-        public int getX()
+        /// <summary>
+        /// Vergleicht diese Position mit der übergebenen Position.
+        /// </summary>
+        /// <param name="pos">Position die mit dieser Position verglichen werden soll.</param>
+        /// <returns>True, wenn die beiden Positionen gleich sind, sonst false.</returns>
+        public Boolean Equals(Position pos)
         {
-            return this.x;
+            return this.x == pos.x && this.y == pos.y;
         }
 
-        public int getY()
-        {
-            return this.y;
-        }
-
+        /// <summary>
+        /// Gibt einen String zurück, der die Position repräsentiert.
+        /// </summary>
+        /// <returns>Position als String.</returns>
         public override String ToString()
         {
             return this.Spalte.ToString() + "" + this.Zeile.ToString();
         }
+
+        //public int getX()
+        //{
+        //    return this.x;
+        //}
+
+        //public int getY()
+        //{
+        //    return this.y;
+        //}
     }
 }
