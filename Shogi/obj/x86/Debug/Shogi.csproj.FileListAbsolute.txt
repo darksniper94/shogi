@@ -15,3 +15,4 @@ C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.pdb
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.formAnmeldung.resources
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.formRegistrierung.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.pdb
