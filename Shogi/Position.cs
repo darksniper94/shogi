@@ -123,7 +123,8 @@ namespace Shogi
         /// <returns>Position als String.</returns>
         public override String ToString()
         {
-            return this.Spalte.ToString() + "" + this.Zeile.ToString();
+            return this.x + " " + this.y;
+            //return this.Spalte.ToString() + "" + this.Zeile.ToString();
         }
     }
 }

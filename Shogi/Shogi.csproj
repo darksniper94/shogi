@@ -101,6 +101,7 @@
     <Compile Include="Spieler.cs" />
     <Compile Include="Spielfigur.cs" />
     <Compile Include="Statistik.cs" />
+    <Compile Include="Testklasse_Logik.cs" />
     <EmbeddedResource Include="Anmeldung.resx">
       <DependentUpon>Anmeldung.cs</DependentUpon>
     </EmbeddedResource>
