@@ -9,6 +9,9 @@ namespace Shogi
     /// <summary>
     /// Diese Klasse repräsentiert die Position auf einem Shogi-Brett.
     /// 
+    /// Position wird auf beiden Koordinaten als Integer gespeichert, und muss später für die Darstellung 
+    /// auf die korrekte Shogi-Darstellung gemappt werden.
+    /// 
     /// In der Notation werden die Spalten mit Ziffern und die Zeilen mit Buchstaben angegeben.
     /// So ist das Feld links oben z.B. 9a, das Feld rechts unten ist 1i;
     /// (Quelle: http://de.wikipedia.org/wiki/Sh%C5%8Dgi#Notation)
@@ -20,67 +23,78 @@ namespace Shogi
     /// Als Position außerhalb des Spielfeldes gilt die Position(0, 0) was den Chars ('0','@') entspricht.
     /// 
     /// </summary>
-    class Position //: Point
+    class Position
     {
         private int x;
         private int y;
 
-        public char Spalte
+        public int X
         {
-            get { return (char)(x + 48); }
-            set
-            {   // '0' = 48 und '9' = 57
-                if (value > 47 && value < 58)
-                {
-                    x = value - 48;
-                }
-                else
-                {   // eigene Exceptionklasse einführen.
-                    throw new OverflowException("Spaltenwert ungueltig.");
-                }
-            }
+            get { return x; }
+            set { x = value; }
         }
-        public char Zeile
+        public int Y
         {
-            get { return (char)(y + 64); }
-            set
-            {   // 'A' = 65 und 'Z' = 90
-                if (value > 64 && value < 91)
-                {
-                    y = value - 64;
-                }   // 'a' = 97 und 'z' = 122
-                else if (value > 96 && value < 123)
-                {
-                    y = value - 96;
-                }
-                else
-                {   // eigene Exceptionklasse einführen.
-                    throw new OverflowException("Zeilenwert ungueltig.");
-                }
-            }
+            get { return y; }
+            set { y = value; }
         }
 
-        /// <summary>
-        /// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
-        /// </summary>
-        /// <param name="spalte">Spaltenwert der Position.</param>
-        /// <param name="zeile">Zeilenwert der Position.</param>
-        public Position(char spalte, char zeile)
-        {
-            this.Spalte = spalte;
-            this.Zeile = zeile;
-        }
+        //public char Spalte
+        //{
+        //    get { return (char)(x + 48); }
+        //    set
+        //    {   // '0' = 48 und '9' = 57
+        //        if (value > 47 && value < 58)
+        //        {
+        //            x = value - 48;
+        //        }
+        //        else
+        //        {   // eigene Exceptionklasse einführen.
+        //            throw new OverflowException("Spaltenwert ungueltig.");
+        //        }
+        //    }
+        //}
+        //public char Zeile
+        //{
+        //    get { return (char)(y + 64); }
+        //    set
+        //    {   // 'A' = 65 und 'Z' = 90
+        //        if (value > 64 && value < 91)
+        //        {
+        //            y = value - 64;
+        //        }   // 'a' = 97 und 'z' = 122
+        //        else if (value > 96 && value < 123)
+        //        {
+        //            y = value - 96;
+        //        }
+        //        else
+        //        {   // eigene Exceptionklasse einführen.
+        //            throw new OverflowException("Zeilenwert ungueltig.");
+        //        }
+        //    }
+        //}
 
-        /// <summary>
-        /// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
-        /// </summary>
-        /// <param name="spalte">Spaltenwert der Position.</param>
-        /// <param name="zeile">Zeilenwert der Position.</param>
-        public Position(int spalte, char zeile)
-        {
-            this.x = spalte;
-            this.Zeile = zeile;
-        }
+        ///// <summary>
+        ///// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
+        ///// </summary>
+        ///// <param name="spalte">Spaltenwert der Position.</param>
+        ///// <param name="zeile">Zeilenwert der Position.</param>
+        //public Position(char spalte, char zeile)
+        //{
+        //    this.Spalte = spalte;
+        //    this.Zeile = zeile;
+        //}
+
+        ///// <summary>
+        ///// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
+        ///// </summary>
+        ///// <param name="spalte">Spaltenwert der Position.</param>
+        ///// <param name="zeile">Zeilenwert der Position.</param>
+        //public Position(int spalte, char zeile)
+        //{
+        //    this.x = spalte;
+        //    this.Zeile = zeile;
+        //}
 
         /// <summary>
         /// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
@@ -111,15 +125,5 @@ namespace Shogi
         {
             return this.Spalte.ToString() + "" + this.Zeile.ToString();
         }
-
-        //public int getX()
-        //{
-        //    return this.x;
-        //}
-
-        //public int getY()
-        //{
-        //    return this.y;
-        //}
     }
 }
