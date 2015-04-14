@@ -7,10 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+// Anmeldung
 namespace Shogi
 {
+     // Windows Form für die Anmeldung
     public partial class FormAnmeldung : Form
     {
+
         public FormAnmeldung()
         {
             InitializeComponent();
@@ -21,20 +24,33 @@ namespace Shogi
 
         }
 
+        // Methode bei Betätigung des Anmeldebuttons
         private void bAnmelden_Click(object sender, EventArgs e)
         {
-           
+            bool anmeldungkorrekt = false;
+            lblMeldung.Visible = false;
+            //Prüfen der Anmeldedaten (fehlt noch)
+            //Verhalten anhand des Prüfungsergebnisses
+            if (anmeldungkorrekt){
+            ShogiSpielfeld frmshogiSpielfeld = new ShogiSpielfeld();
+            frmshogiSpielfeld.ShowDialog();
+            } else {
+                lblMeldung.Visible = true;
+            }
         }
-
+        
+        // Methode bei Betätigung des Abbrechenbuttons
         private void bAbbrechen_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
+        // Methode bei Betätigung des Registrierungsbuttons
         private void bRegistrieren_Click(object sender, EventArgs e)
         {
-            FormRegistrierung formRegistrieren = new FormRegistrierung();
-            formRegistrieren.ShowDialog();
+            lblMeldung.Visible = false;
+            FormRegistrierung frmRegistrieren = new FormRegistrierung();
+            frmRegistrieren.ShowDialog();
         }
     }
 }

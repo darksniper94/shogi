@@ -51,3 +51,13 @@ C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\System.Data.SQLite.xml
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.exe
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe.config
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\EntityFramework.dll
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\System.Data.SQLite.dll
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\EntityFramework.xml
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\System.Data.SQLite.xml
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.ShogiSpielfeld.resources

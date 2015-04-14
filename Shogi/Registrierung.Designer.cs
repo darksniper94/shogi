@@ -73,11 +73,12 @@
             // 
             this.lblMeldung.AutoSize = true;
             this.lblMeldung.Font = new System.Drawing.Font("Book Antiqua", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMeldung.Location = new System.Drawing.Point(80, 179);
+            this.lblMeldung.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblMeldung.Location = new System.Drawing.Point(34, 167);
             this.lblMeldung.Name = "lblMeldung";
-            this.lblMeldung.Size = new System.Drawing.Size(327, 18);
+            this.lblMeldung.Size = new System.Drawing.Size(517, 18);
             this.lblMeldung.TabIndex = 3;
-            this.lblMeldung.Text = "Benutzername darf keine Sonderzeichen enthalten";
+            this.lblMeldung.Text = "Der Benutzername darf nur Buchstaben und Ziffern zwischen 0 und 9 enthalten.";
             // 
             // txtBenutzername
             // 
@@ -110,7 +111,7 @@
             // 
             // bRegistrieren
             // 
-            this.bRegistrieren.Location = new System.Drawing.Point(86, 225);
+            this.bRegistrieren.Location = new System.Drawing.Point(93, 209);
             this.bRegistrieren.Name = "bRegistrieren";
             this.bRegistrieren.Size = new System.Drawing.Size(100, 30);
             this.bRegistrieren.TabIndex = 7;
@@ -120,7 +121,7 @@
             // 
             // bAbbrechen
             // 
-            this.bAbbrechen.Location = new System.Drawing.Point(299, 225);
+            this.bAbbrechen.Location = new System.Drawing.Point(299, 209);
             this.bAbbrechen.Name = "bAbbrechen";
             this.bAbbrechen.Size = new System.Drawing.Size(100, 30);
             this.bAbbrechen.TabIndex = 8;
@@ -132,7 +133,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(500, 286);
+            this.ClientSize = new System.Drawing.Size(580, 257);
             this.Controls.Add(this.bAbbrechen);
             this.Controls.Add(this.bRegistrieren);
             this.Controls.Add(this.txtPasswortWdh);

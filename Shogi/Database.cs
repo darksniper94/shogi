@@ -51,7 +51,7 @@ namespace Shogi
             return cmd.ExecuteNonQuery();
         }
 
-        // Mathode für select
+        // Methode für select
         public LinkedList<Object> executeQuery(String sql)
         {
             SQLiteCommand cmd = new SQLiteCommand(sql, connection);
@@ -76,7 +76,7 @@ namespace Shogi
             executeNonQuery(USER_TBL);
             for(int i=0; i<10; i++)
             {
-                executeNonQuery("INSERT INTO USER (name) VALUES ('Hure')");
+                executeNonQuery("INSERT INTO USER (name) VALUES ('Alex keine Schmutzwörter!')");
             }
             
         }

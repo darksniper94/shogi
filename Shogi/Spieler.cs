@@ -7,9 +7,9 @@ namespace Shogi
 {
     class Spieler
     {
-        private String benutzername;
-        private String passwort;
-        private String design;
+        public String benutzername { get; set; }
+        public String passwort { get; set; }
+        public String design { get; set; }
 
         public Spieler(String name, String passwort, String design)
         {

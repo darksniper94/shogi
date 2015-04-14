@@ -35,6 +35,7 @@
             this.lblBenutzername = new System.Windows.Forms.Label();
             this.lblPasswort = new System.Windows.Forms.Label();
             this.bRegistrieren = new System.Windows.Forms.Button();
+            this.lblMeldung = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // bAnmelden
@@ -106,12 +107,25 @@
             this.bRegistrieren.UseVisualStyleBackColor = true;
             this.bRegistrieren.Click += new System.EventHandler(this.bRegistrieren_Click);
             // 
+            // lblMeldung
+            // 
+            this.lblMeldung.AutoSize = true;
+            this.lblMeldung.Font = new System.Drawing.Font("Book Antiqua", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMeldung.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblMeldung.Location = new System.Drawing.Point(89, 125);
+            this.lblMeldung.Name = "lblMeldung";
+            this.lblMeldung.Size = new System.Drawing.Size(258, 18);
+            this.lblMeldung.TabIndex = 7;
+            this.lblMeldung.Text = "Benutzername oder Passwort ist falsch.";
+            this.lblMeldung.Visible = false;
+            // 
             // FormAnmeldung
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(453, 208);
+            this.Controls.Add(this.lblMeldung);
             this.Controls.Add(this.bRegistrieren);
             this.Controls.Add(this.lblPasswort);
             this.Controls.Add(this.lblBenutzername);
@@ -139,6 +153,7 @@
         private System.Windows.Forms.Label lblBenutzername;
         private System.Windows.Forms.Label lblPasswort;
         private System.Windows.Forms.Button bRegistrieren;
+        private System.Windows.Forms.Label lblMeldung;
 
     }
 }
