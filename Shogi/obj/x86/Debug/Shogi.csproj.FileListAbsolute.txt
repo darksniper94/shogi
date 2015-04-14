@@ -15,3 +15,39 @@ C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.pdb
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.formAnmeldung.resources
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.formRegistrierung.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.pdb
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.pdb
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.csprojResolveAssemblyReference.cache
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.FormAnmeldung.resources
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources.resources
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.FormRegistrierung.resources
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\Shogi.exe.config
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\Shogi.exe
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\Shogi.pdb
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\EntityFramework.dll
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\System.Data.SQLite.dll
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\EntityFramework.xml
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\bin\Debug\System.Data.SQLite.xml
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.exe
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.csprojResolveAssemblyReference.cache
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.FormAnmeldung.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.FormRegistrierung.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\Shogi.exe.config
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\Shogi.exe
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\Shogi.pdb
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\EntityFramework.dll
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\System.Data.SQLite.dll
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\EntityFramework.xml
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\System.Data.SQLite.xml
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.exe

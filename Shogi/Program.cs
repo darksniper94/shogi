@@ -13,9 +13,15 @@ namespace Shogi
         [STAThread]
         static void Main()
         {
+
+            // DB Test
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormAnmeldung());
+
+            Testklasse_Logik test = new Testklasse_Logik();
+
 
             //Position p = new Position('A', '1');
 
