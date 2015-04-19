@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-// Anmeldung
 namespace Shogi
 {
-     // Windows Form für die Anmeldung
+     /// <summary>
+    /// Klasse für die AnmeldungFenster, erbt von WindowsForms
+     /// </summary>
     public partial class FormAnmeldung : Form
     {
 
@@ -19,20 +20,21 @@ namespace Shogi
             InitializeComponent();
         }
 
-        private void Anmeldung_Load(object sender, EventArgs e)
-        {
+       
 
-        }
-
-        // Methode bei Betätigung des Anmeldebuttons
+       /// <summary>
+       /// Methode bei Betätigung des Anmeldebuttons
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
         private void bAnmelden_Click(object sender, EventArgs e)
         {
             lblMeldung.Visible = false;
-            //int spielerID = Database.instance.pruefeSpielerDaten(txtBenutzername.Text, txtPasswort.Text);
-            int spielerID = 1;
+            // prüft die Anmeldedaten
+            spielerID = Database.instance.pruefeSpielerDaten(txtBenutzername.Text, txtPasswort.Text);
+            //int spielerID = 1;
             if (spielerID == -1)
             {
-                DialogResult = DialogResult.Retry;
                 lblMeldung.Visible = true;
             }
             else
@@ -41,13 +43,21 @@ namespace Shogi
             }
         }
         
-        // Methode bei Betätigung des Abbrechenbuttons
+        /// <summary>
+        /// Methode bei Betätigung des Abbrechenbuttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bAbbrechen_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        // Methode bei Betätigung des Registrierungsbuttons
+        /// <summary>
+        /// Methode bei Betätigung des Registrierungsbuttons
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bRegistrieren_Click(object sender, EventArgs e)
         {
             lblMeldung.Visible = false;

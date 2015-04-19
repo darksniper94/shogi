@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shogi
 {
-    class Testklasse_Logik
+    public class Testklasse_Logik
     {
         private const String TRENNLINIE = "------------------------------------------------";
         private StringBuilder protokoll;

@@ -9,9 +9,17 @@ using System.Windows.Forms;
 
 namespace Shogi
 {
+    /// <summary>
+    /// Klasse für das ShogiFenster, erbt von WindowsForms
+    /// </summary>
     public partial class ShogiSpielfeld : Form
     {
-        public ShogiSpielfeld()
+
+        /// <summary>
+        /// Konstruktor für das ShogiFenster
+        /// </summary>
+        /// <param name="spAngemeldet">Der angemeldete Spieler als Spieler</param>
+        public ShogiSpielfeld(Spieler spAngemeldet)
         {
             InitializeComponent();
             FlowLayoutPanel pnlBasis = new FlowLayoutPanel();
@@ -39,11 +47,6 @@ namespace Shogi
             pnlBasis.Controls.Add(pnlSpielfeld);
 
             this.Controls.Add(pnlBasis);
-        }
-
-        private void ShogiSpielfeld_Load(object sender, EventArgs e)
-        {
-
         }
 
     }

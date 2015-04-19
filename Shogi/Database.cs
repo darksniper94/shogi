@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Shogi
 {
-    class Database
+    public class Database
     {
         private SQLiteConnection connection;
         private const String DBNAME = "data.dat";
@@ -16,8 +16,7 @@ namespace Shogi
         private Database()
         {
             // Create of Open Database
-           // bool createFile = !File.Exists(DBNAME);
-            bool createFile = true;
+            bool createFile = !File.Exists(DBNAME);
             if (createFile)
             {
                 SQLiteConnection.CreateFile(DBNAME);
