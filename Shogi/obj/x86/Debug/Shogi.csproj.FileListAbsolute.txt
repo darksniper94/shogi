@@ -79,3 +79,6 @@ C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.ShogiSpielfeld.r
 C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources.resources
 C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.FormRegistrierung.resources
 C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
+C:\Users\Tina\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe.config
+C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe
+C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.pdb
