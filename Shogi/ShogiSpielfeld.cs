@@ -14,6 +14,7 @@ namespace Shogi
     /// </summary>
     public partial class ShogiSpielfeld : Form
     {
+
         /// <summary>
         /// Konstruktor für das ShogiFenster
         /// </summary>

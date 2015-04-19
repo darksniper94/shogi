@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shogi
 {
-    class Spieler
+    public class Spieler
     {
         public String benutzername { get; set; }
         public String passwort { get; set; }

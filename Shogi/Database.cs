@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Shogi
 {
-    class Database
+    public class Database
     {
         private SQLiteConnection connection;
         private const String DBNAME = "data.dat";

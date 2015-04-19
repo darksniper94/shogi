@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shogi
 {
-    class FigurTyp
+    public class FigurTyp
     {
     }
 }

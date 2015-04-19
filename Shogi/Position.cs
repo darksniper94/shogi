@@ -23,7 +23,7 @@ namespace Shogi
     /// Als Position außerhalb des Spielfeldes gilt die Position(0, 0) was den Chars ('0','@') entspricht.
     /// 
     /// </summary>
-    class Position
+    public class Position
     {
         private int x;
         private int y;

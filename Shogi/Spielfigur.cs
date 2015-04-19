@@ -22,7 +22,7 @@ namespace Shogi
     /// 7. Lanze                --> Goldener General
     /// 8. Bauer                --> Goldener General
     /// </summary>
-    class Spielfigur
+    public class Spielfigur
     {
         private Position position;
         private Boolean aktiv;
