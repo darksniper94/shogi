@@ -16,8 +16,7 @@ namespace Shogi
         private Database()
         {
             // Create of Open Database
-           // bool createFile = !File.Exists(DBNAME);
-            bool createFile = true;
+            bool createFile = !File.Exists(DBNAME);
             if (createFile)
             {
                 SQLiteConnection.CreateFile(DBNAME);

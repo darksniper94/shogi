@@ -138,7 +138,6 @@
             this.Name = "FormAnmeldung";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Anmeldung";
-            this.Load += new System.EventHandler(this.Anmeldung_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,6 +154,15 @@
         private System.Windows.Forms.Button bRegistrieren;
         private System.Windows.Forms.Label lblMeldung;
         
+        /// <summary>
+        /// Property für die SpielerID 
+        /// </summary>
+        public int spielerID { get; set; }
+        
+        /// <summary>
+        /// "Getter" für den Benutzernamen
+        /// </summary>
+        /// <returns> String mit dem eingegebenen Benutzernamen</returns>
         public string getBenutzername()
         {
             return txtBenutzername.Text;

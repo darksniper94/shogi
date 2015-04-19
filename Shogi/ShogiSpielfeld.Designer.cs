@@ -39,7 +39,6 @@
             this.Name = "ShogiSpielfeld";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Shogi";
-            this.Load += new System.EventHandler(this.ShogiSpielfeld_Load);
             this.ResumeLayout(false);
 
         }
