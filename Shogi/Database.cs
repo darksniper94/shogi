@@ -16,8 +16,7 @@ namespace Shogi
         private Database()
         {
             // Create of Open Database
-           // bool createFile = !File.Exists(DBNAME);
-            bool createFile = true;
+            bool createFile = !File.Exists(DBNAME);
             if (createFile)
             {
                 SQLiteConnection.CreateFile(DBNAME);
@@ -107,7 +106,8 @@ namespace Shogi
             }
             else
             {
-                return new Spieler("a", "a", "b");
+                Object[] data = result.ElementAt(0);
+                return new Spieler(Convert.ToString(data[1]), Convert.ToString(data[2]), "");
             }
         }
 

@@ -15,24 +15,23 @@ namespace Shogi
 
         static void Main()
         {
-            
-           
-            // DB Test
-            Database.instance.pruefeSpielerDaten("Alex", "123456");
-
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //ruft das Anmeldefenster auf
             FormAnmeldung frmAnmeldung = new FormAnmeldung();
             frmAnmeldung.ShowDialog();
 
+            // Shogi nur starten wenn die Form mit "OK" geschlossen wurde
             DialogResult result;
-
             result = frmAnmeldung.DialogResult;
             if (result == DialogResult.OK)
             {
-                Application.Run(new ShogiSpielfeld());
+                //Alex  muss noch die ladeSpieler implementieren!
+              // Application.Run(new ShogiSpielfeld(Database.instance.ladeSpieler(frmAnmeldung.spielerID)));
             }
+
+            //Test
             Testklasse_Logik test = new Testklasse_Logik();
 
 
