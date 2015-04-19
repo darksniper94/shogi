@@ -107,7 +107,8 @@ namespace Shogi
             }
             else
             {
-                return new Spieler("a", "a", "b");
+                Object[] data = result.ElementAt(0);
+                return new Spieler(Convert.ToString(data[1]), Convert.ToString(data[2]), "");
             }
         }
 
