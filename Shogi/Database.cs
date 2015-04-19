@@ -16,7 +16,8 @@ namespace Shogi
         private Database()
         {
             // Create of Open Database
-            bool createFile = !File.Exists(DBNAME);
+           // bool createFile = !File.Exists(DBNAME);
+            bool createFile = true;
             if (createFile)
             {
                 SQLiteConnection.CreateFile(DBNAME);
@@ -82,7 +83,7 @@ namespace Shogi
 
         public int pruefeSpielerDaten(String benutzername, String passwort)
         {
-            String sql = "SELECT ID FROM USER WHERE user='" + benutzername + "' and pass='" + passwort + "'";
+            String sql = "SELECT ID FROM USER WHERE name='" + benutzername + "' and pass='" + passwort + "'";
             LinkedList<Object[]> result = executeQuery(sql);
             if (result.Count() == 0)
             {
@@ -96,9 +97,18 @@ namespace Shogi
             }
         }
 
-        public Spieler ladeSpieler()
+        public Spieler ladeSpieler(int spielerid)
         {
-            return null;
+            String sql = "SELECT * FROM USER WHERE ID='" + Convert.ToString(spielerid) + "'";
+            LinkedList<Object[]> result = executeQuery(sql);
+            if (result.Count() == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return new Spieler("a", "a", "b");
+            }
         }
 
         public void speichereSpieler(Spieler spieler)
