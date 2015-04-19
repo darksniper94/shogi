@@ -21,15 +21,15 @@ namespace Shogi
             {
                 SQLiteConnection.CreateFile(DBNAME);
             }
-            connection = new SQLiteConnection("Data Source="+DBNAME+";Version=3;");
+            connection = new SQLiteConnection("Data Source=" + DBNAME + ";Version=3;");
             connection.Open();
 
             // Create Tables
-            if(createFile)
+            if (createFile)
             {
                 createTables();
             }
-            
+
         }
 
         public static Database instance
@@ -52,15 +52,15 @@ namespace Shogi
         }
 
         // Methode für select
-        public LinkedList<Object> executeQuery(String sql)
+        public LinkedList<Object[]> executeQuery(String sql)
         {
             SQLiteCommand cmd = new SQLiteCommand(sql, connection);
             SQLiteDataReader reader = cmd.ExecuteReader();
-            LinkedList<Object> lines = new LinkedList<Object>();
-            while(reader.Read())
+            LinkedList<Object[]> lines = new LinkedList<Object[]>();
+            while (reader.Read())
             {
                 Object[] line = new Object[reader.FieldCount];
-                for(int i=0; i<reader.FieldCount; i++)
+                for (int i = 0; i < reader.FieldCount; i++)
                 {
                     line[i] = reader.GetValue(i);
                 }
@@ -71,17 +71,32 @@ namespace Shogi
 
         private void createTables()
         {
-            String USER_TBL = @"CREATE TABLE USER (ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                name VARCHAR(128));";
+            String USER_TBL = @"CREATE TABLE USER (
+                                ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                                name VARCHAR(128), 
+                                pass VARCHAR(128)
+                                );";
             executeNonQuery(USER_TBL);
-            for(int i=0; i<10; i++)
-            {
-                executeNonQuery("INSERT INTO USER (name) VALUES ('Alex keine Schmutzwörter!')");
-            }
-            
+            executeNonQuery("INSERT INTO USER (name, pass) VALUES ('Alex', '123456')");
         }
 
-        public Spieler[] ladeSpieler()
+        public int pruefeSpielerDaten(String benutzername, String passwort)
+        {
+            String sql = "SELECT ID FROM USER WHERE user='" + benutzername + "' and pass='" + passwort + "'";
+            LinkedList<Object[]> result = executeQuery(sql);
+            if (result.Count() == 0)
+            {
+                // Keine Übereinstimmung 
+                return -1;
+            }
+            else
+            {
+                // Gib die ID des Benutzers zurück
+                return Convert.ToInt32(result.ElementAt(0)[0]);
+            }
+        }
+
+        public Spieler ladeSpieler()
         {
             return null;
         }
@@ -100,9 +115,6 @@ namespace Shogi
         {
             return "";
         }
-
-
-
 
     }
 }
