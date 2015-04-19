@@ -13,12 +13,13 @@ namespace Shogi
         [STAThread]
         static void Main()
         {
-
+            
             // DB Test
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormAnmeldung());
+            FormAnmeldung frmAnmeldung = new FormAnmeldung();
+            Application.Run(frmAnmeldung);
 
             Testklasse_Logik test = new Testklasse_Logik();
 

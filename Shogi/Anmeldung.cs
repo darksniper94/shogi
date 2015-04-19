@@ -27,13 +27,14 @@ namespace Shogi
         // Methode bei Betätigung des Anmeldebuttons
         private void bAnmelden_Click(object sender, EventArgs e)
         {
-            bool anmeldungkorrekt = false;
+            bool anmeldungkorrekt = true;
             lblMeldung.Visible = false;
             //Prüfen der Anmeldedaten (fehlt noch)
             //Verhalten anhand des Prüfungsergebnisses
             if (anmeldungkorrekt){
             ShogiSpielfeld frmshogiSpielfeld = new ShogiSpielfeld();
-            frmshogiSpielfeld.ShowDialog();
+            frmshogiSpielfeld.Show();
+            this.Hide();
             } else {
                 lblMeldung.Visible = true;
             }
