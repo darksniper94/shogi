@@ -148,13 +148,17 @@
 
         private System.Windows.Forms.Button bAnmelden;
         private System.Windows.Forms.Button bAbbrechen;
-        private System.Windows.Forms.TextBox txtBenutzername;
+        private System.Windows.Forms.TextBox txtBenutzername; 
         private System.Windows.Forms.TextBox txtPasswort;
         private System.Windows.Forms.Label lblBenutzername;
         private System.Windows.Forms.Label lblPasswort;
         private System.Windows.Forms.Button bRegistrieren;
         private System.Windows.Forms.Label lblMeldung;
-
+        
+        public string getBenutzername()
+        {
+            return txtBenutzername.Text;
+        }
     }
 }
 
