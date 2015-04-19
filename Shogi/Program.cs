@@ -18,6 +18,8 @@ namespace Shogi
             
            
             // DB Test
+            Database.instance.pruefeSpielerDaten("Alex", "123456");
+
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
