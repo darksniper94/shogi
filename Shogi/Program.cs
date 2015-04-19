@@ -11,15 +11,19 @@ namespace Shogi
         /// Der Haupteinstiegspunkt für die Anwendung.
         /// </summary>
         [STAThread]
+
+
         static void Main()
         {
             
+           
             // DB Test
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             FormAnmeldung frmAnmeldung = new FormAnmeldung();
-            Application.Run(frmAnmeldung);
+            frmAnmeldung.ShowDialog();
+            Console.WriteLine(frmAnmeldung.getBenutzername());
 
             Testklasse_Logik test = new Testklasse_Logik();
 
