@@ -27,7 +27,18 @@ namespace Shogi
         // Methode bei Betätigung des Anmeldebuttons
         private void bAnmelden_Click(object sender, EventArgs e)
         {
-            
+            lblMeldung.Visible = false;
+            //int spielerID = Database.instance.pruefeSpielerDaten(txtBenutzername.Text, txtPasswort.Text);
+            int spielerID = 1;
+            if (spielerID == -1)
+            {
+                DialogResult = DialogResult.Retry;
+                lblMeldung.Visible = true;
+            }
+            else
+            {
+                DialogResult = DialogResult.OK;
+            }
         }
         
         // Methode bei Betätigung des Abbrechenbuttons

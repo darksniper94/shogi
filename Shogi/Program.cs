@@ -23,8 +23,14 @@ namespace Shogi
             Application.SetCompatibleTextRenderingDefault(false);
             FormAnmeldung frmAnmeldung = new FormAnmeldung();
             frmAnmeldung.ShowDialog();
-            Console.WriteLine(frmAnmeldung.getBenutzername());
 
+            DialogResult result;
+
+            result = frmAnmeldung.DialogResult;
+            if (result == DialogResult.OK)
+            {
+                Application.Run(new ShogiSpielfeld());
+            }
             Testklasse_Logik test = new Testklasse_Logik();
 
 
