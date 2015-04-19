@@ -27,8 +27,7 @@ namespace Shogi
             result = frmAnmeldung.DialogResult;
             if (result == DialogResult.OK)
             {
-                //Alex  muss noch die ladeSpieler implementieren!
-              // Application.Run(new ShogiSpielfeld(Database.instance.ladeSpieler(frmAnmeldung.spielerID)));
+               Application.Run(new ShogiSpielfeld(Database.instance.ladeSpieler(frmAnmeldung.spielerID)));
             }
 
             //Test

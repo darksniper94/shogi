@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shogi
 {
-    class Statistik
+    public class Statistik
     {
     }
 }
