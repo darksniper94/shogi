@@ -43,7 +43,7 @@
             this.bAnmelden.Location = new System.Drawing.Point(68, 157);
             this.bAnmelden.Name = "bAnmelden";
             this.bAnmelden.Size = new System.Drawing.Size(100, 30);
-            this.bAnmelden.TabIndex = 0;
+            this.bAnmelden.TabIndex = 3;
             this.bAnmelden.Text = "Anmelden";
             this.bAnmelden.UseVisualStyleBackColor = true;
             this.bAnmelden.Click += new System.EventHandler(this.bAnmelden_Click);
@@ -53,7 +53,7 @@
             this.bAbbrechen.Location = new System.Drawing.Point(280, 157);
             this.bAbbrechen.Name = "bAbbrechen";
             this.bAbbrechen.Size = new System.Drawing.Size(100, 30);
-            this.bAbbrechen.TabIndex = 1;
+            this.bAbbrechen.TabIndex = 5;
             this.bAbbrechen.Text = "Abbrechen";
             this.bAbbrechen.UseVisualStyleBackColor = true;
             this.bAbbrechen.Click += new System.EventHandler(this.bAbbrechen_Click);
@@ -65,7 +65,7 @@
             this.txtBenutzername.MaxLength = 30;
             this.txtBenutzername.Name = "txtBenutzername";
             this.txtBenutzername.Size = new System.Drawing.Size(233, 24);
-            this.txtBenutzername.TabIndex = 2;
+            this.txtBenutzername.TabIndex = 1;
             // 
             // txtPasswort
             // 
@@ -75,7 +75,7 @@
             this.txtPasswort.Name = "txtPasswort";
             this.txtPasswort.PasswordChar = '*';
             this.txtPasswort.Size = new System.Drawing.Size(233, 24);
-            this.txtPasswort.TabIndex = 3;
+            this.txtPasswort.TabIndex = 2;
             // 
             // lblBenutzername
             // 
@@ -102,7 +102,7 @@
             this.bRegistrieren.Location = new System.Drawing.Point(174, 157);
             this.bRegistrieren.Name = "bRegistrieren";
             this.bRegistrieren.Size = new System.Drawing.Size(100, 30);
-            this.bRegistrieren.TabIndex = 6;
+            this.bRegistrieren.TabIndex = 4;
             this.bRegistrieren.Text = "Registrieren";
             this.bRegistrieren.UseVisualStyleBackColor = true;
             this.bRegistrieren.Click += new System.EventHandler(this.bRegistrieren_Click);
