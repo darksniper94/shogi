@@ -82,6 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bewegungsmuster.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="FigurTyp.cs" />
     <Compile Include="Anmeldung.cs">
