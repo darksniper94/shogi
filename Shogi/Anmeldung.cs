@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 namespace Shogi
 {
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! SQL Injection abfangen implementieren
      /// <summary>
     /// Klasse für die AnmeldungFenster, erbt von WindowsForms
      /// </summary>
