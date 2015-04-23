@@ -25,18 +25,45 @@ namespace Shogi
     /// </summary>
     public class Position
     {
-        private int x;
-        private int y;
+        private Tuple<int, int> koordinaten;
 
-        public int X
+        public int Spalte
         {
-            get { return x; }
-            set { x = value; }
+            get { return koordinaten.Item1; }
         }
-        public int Y
+        public int Zeile
         {
-            get { return y; }
-            set { y = value; }
+            get { return koordinaten.Item2; }
+        }
+        
+        /// <summary>
+        /// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
+        /// </summary>
+        /// <param name="spalte">Spaltenwert der Position.</param>
+        /// <param name="zeile">Zeilenwert der Position.</param>
+        public Position(int spalte, int zeile)
+        {
+            this.koordinaten = new Tuple<int,int>(spalte, zeile);
+        }
+
+        /// <summary>
+        /// Vergleicht diese Position mit der übergebenen Position.
+        /// </summary>
+        /// <param name="pos">Position die mit dieser Position verglichen werden soll.</param>
+        /// <returns>True, wenn die beiden Positionen gleich sind, sonst false.</returns>
+        public Boolean Equals(Position pos)
+        {
+            return this.Spalte == pos.Spalte && this.Zeile == pos.Zeile;
+        }
+
+        /// <summary>
+        /// Gibt einen String zurück, der die Position repräsentiert.
+        /// </summary>
+        /// <returns>Position als String.</returns>
+        public override String ToString()
+        {
+            return this.Spalte + " " + this.Zeile;
+            //return this.Spalte.ToString() + "" + this.Zeile.ToString();
         }
 
         //public char Spalte
@@ -95,36 +122,5 @@ namespace Shogi
         //    this.x = spalte;
         //    this.Zeile = zeile;
         //}
-
-        /// <summary>
-        /// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
-        /// </summary>
-        /// <param name="spalte">Spaltenwert der Position.</param>
-        /// <param name="zeile">Zeilenwert der Position.</param>
-        public Position(int spalte, int zeile)
-        {
-            this.x = spalte;
-            this.y = zeile;
-        }
-
-        /// <summary>
-        /// Vergleicht diese Position mit der übergebenen Position.
-        /// </summary>
-        /// <param name="pos">Position die mit dieser Position verglichen werden soll.</param>
-        /// <returns>True, wenn die beiden Positionen gleich sind, sonst false.</returns>
-        public Boolean Equals(Position pos)
-        {
-            return this.x == pos.x && this.y == pos.y;
-        }
-
-        /// <summary>
-        /// Gibt einen String zurück, der die Position repräsentiert.
-        /// </summary>
-        /// <returns>Position als String.</returns>
-        public override String ToString()
-        {
-            return this.x + " " + this.y;
-            //return this.Spalte.ToString() + "" + this.Zeile.ToString();
-        }
     }
 }
