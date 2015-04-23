@@ -27,33 +27,16 @@ namespace Shogi
             result = frmAnmeldung.DialogResult;
             if (result == DialogResult.OK)
             {
-               Application.Run(new ShogiSpielfeld(Database.instance.ladeSpieler(frmAnmeldung.spielerID)));
+                Application.Run(new ShogiSpielfeld(Database.instance.ladeSpieler(frmAnmeldung.spielerID)));
             }
 
-            //Test
-            Testklasse_Logik test = new Testklasse_Logik();
+            //---------------------------------------------------------------------------------------------------
+            
+            ////Test
+            //Testklasse_Logik test = new Testklasse_Logik();
 
-
-            //Position p = new Position('A', '1');
-
-            //Console.WriteLine(p.ToString());
-            //Console.WriteLine(p.getX() + "" + p.getY());
-
-            //p = new Position('A', 1);
-            //Console.WriteLine(p.ToString());
-            //Console.WriteLine(p.getX() + "" + p.getY());
-
-            //p = new Position('Z', '9');
-            //Console.WriteLine(p.ToString());
-            //Console.WriteLine(p.getX() + " " + p.getY());
-
-            //p = new Position(0, 0);
-            //Console.WriteLine(p.ToString());
-            //Console.WriteLine(p.getX() + " " + p.getY());
-
-            //p = new Position('!', 9);
-            //Console.WriteLine(p.ToString());
-            //Console.WriteLine(p.getX() + " " + p.getY());
+            //Bewegungsmuster muster = FigurTyp.KOENIG.getBewegungsmuster();
+            //Console.WriteLine("---\n" + muster.ToString() + "---");
         }
     }
 }
