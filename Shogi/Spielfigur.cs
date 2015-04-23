@@ -24,11 +24,14 @@ namespace Shogi
     /// </summary>
     public class Spielfigur
     {
+        private Spieler besitzer;
         private Position position;
+
+        private FigurTyp typBefoerdert;
+        private FigurTyp typNichtBefoerdert;
+
         private Boolean aktiv;
         private Boolean befoerdert;
-        private FigurTyp typ;
-        private Spieler besitzer;
 
         public Position Position
         {
@@ -39,13 +42,23 @@ namespace Shogi
         {
             get { return aktiv; }
         }
-        public Boolean Befoerdert
+        public Boolean IstBefoerdert
         {
             get { return befoerdert; }
         }
         public FigurTyp Typ
         {
-            get { return typ; }
+            get
+            {
+                if (befoerdert)
+                {
+                    return typBefoerdert;
+                }
+                else
+                {
+                    return typNichtBefoerdert;
+                }
+            }
         }
         public Spieler Besitzer
         {
@@ -63,74 +76,24 @@ namespace Shogi
         /// <param name="position">Die Position auf der die Spielfigur platziert werden soll.</param>
         public Spielfigur(FigurTyp typ, Spieler spieler, Position position)
         {
+            this.besitzer = spieler;
             this.position = position;
+
+            this.typNichtBefoerdert = typ;
+            this.typBefoerdert = getBefoerdertenTyp(typ);
+
             this.aktiv = true;
             this.befoerdert = false;
-            this.typ = typ;
-            this.besitzer = spieler;
         }
 
         /// <summary>
-        /// Gibt die aktuelle Position der Spielfigur auf dem Spielbrett zurück.
+        /// Findet heraus, zu welchem FigurTyp der übergebene typ befoerdert wird und gibt desen zurück.
         /// </summary>
-        /// <returns>Die Position.</returns>
-        public Position getPosition()
+        /// <param name="typ">FigurTyp der befoerdert werden soll.</param>
+        /// <returns>Den befoerderten FigurTyp.</returns>
+        private FigurTyp getBefoerdertenTyp(FigurTyp typ)
         {
-            return this.position;
-        }
-
-        /// <summary>
-        /// Setzt die Spielfigur auf die angegebene Position auf dem Spielbrett.
-        /// </summary>
-        /// <param name="pos">Neue Position für die Spielfigur.</param>
-        public void setPosition(Position pos)
-        {
-            this.position = pos;
-        }
-
-        /// <summary>
-        /// Gibt zurück ob die Spielfigur aktiv (auf dem Spielbrett) oder inaktiv (außerhalb) ist.
-        /// </summary>
-        /// <returns>True, wenn die Spielfigur aktiv ist, sonst false.</returns>
-        public Boolean istAktiv()
-        {
-            return this.aktiv;
-        }
-
-        /// <summary>
-        /// Gibt zurück ob die Spielfigur bereits befördert wurde oder nicht.
-        /// </summary>
-        /// <returns>True, wenn die Spielfigur befoerdert ist, sonst false.</returns>
-        public Boolean istBefoerdert()
-        {
-            return this.befoerdert;
-        }
-
-        /// <summary>
-        /// Gibt den Figurtyp der Spielfigur zurück.
-        /// </summary>
-        /// <returns>Den Figurtyp.</returns>
-        public FigurTyp getTyp()
-        {
-            return this.typ;
-        }
-
-        /// <summary>
-        /// Gibt zurück welchem Spieler die Figur gehört.
-        /// </summary>
-        /// <returns>Den Besitzer.</returns>
-        public Spieler getBesitzer()
-        {
-            return this.besitzer;
-        }
-
-        /// <summary>
-        /// Ändert den Spieler, dem diese Figur gehört auf den übergebenen Wert.
-        /// </summary>
-        /// <param name="spieler">Der neue Besitzer der Spielfigur.</param>
-        public void setBesitzer(Spieler spieler)
-        {
-            this.besitzer = spieler;
+            return Befoerderungsmapper.getBefoerderung(typ);
         }
 
         /// <summary>
@@ -165,11 +128,19 @@ namespace Shogi
         }
 
         /// <summary>
-        /// Befoerdert die Spielfigur.
+        /// Befoerdert die Spielfigur. D.h. das Feld "befoerdert" wird auf True gesetzt.
         /// </summary>
         public void befoerdern()
         {
             this.befoerdert = true;
+        }
+
+        /// <summary>
+        /// Degradiert die Spielfigur. D.h. das Feld "befoerdert" wird auf False gesetzt.
+        /// </summary>
+        public void degradieren()
+        {
+            this.befoerdert = false;
         }
 
         /// <summary>
@@ -180,9 +151,9 @@ namespace Shogi
         public Boolean Equals(Spielfigur figur)
         {
             return this.position.Equals(figur.Position)
-                && this.typ.Equals(figur.Typ)
+                && this.Typ.Equals(figur.Typ)
                 && this.aktiv == figur.Aktiv
-                && this.befoerdert == figur.Befoerdert
+                && this.befoerdert == figur.IstBefoerdert
                 && this.besitzer.Equals(figur.Besitzer);
         }
 
