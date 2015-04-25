@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
 namespace Shogi
 {
     /// <summary>
@@ -25,6 +26,7 @@ namespace Shogi
             const int consbuttonbreite = 120;
             InitializeComponent();
             FlowLayoutPanel pnlBasis = new FlowLayoutPanel();
+            TableLayoutPanel pnlFeld = new TableLayoutPanel();
             Panel pnlMenu = new Panel();
             Panel pnlSpielfeld = new Panel();
             Button bBeenden = new Button();
@@ -32,6 +34,30 @@ namespace Shogi
             Button bCoop_Abbrechen = new Button();
             Button bStatistik = new Button();
             Button bspeichern_laden = new Button();
+            Panel[] arrPFeld = new Panel[81];
+
+            pnlFeld.Location = new Point(130, 110);
+            pnlFeld.ColumnCount = 9;
+            pnlFeld.BackColor = Color.FromArgb(170, 130, 70);
+            pnlFeld.Width = 470; // (Breite * Anzahl) + ((Anzahl + 1) * (2 * Rand))
+            pnlFeld.Height= 470;
+            pnlFeld.Padding = new Padding(1);
+            pnlFeld.Margin = new Padding(0);
+          
+            for (int i = 0; i < 81;i++ )
+            {
+
+                    arrPFeld[i] = new Panel();
+                    arrPFeld[i].Tag = "" + (i + 1);
+                    arrPFeld[i].Height = 50;
+                    arrPFeld[i].Width = 50;
+                    arrPFeld[i].BackColor = Color.FromArgb(255,200,140);
+                    arrPFeld[i].Padding = new Padding(0);
+                    arrPFeld[i].Margin = new Padding(1);
+                    arrPFeld[i].Click += PanelOnClick;
+                    pnlFeld.Controls.Add(arrPFeld[i]);
+
+            }
 
             bBeenden.Location = new Point(65, 80);
             bBeenden.Width = consbuttonbreite;
@@ -59,12 +85,12 @@ namespace Shogi
             bspeichern_laden.Height = consbuttonhohe;
             bspeichern_laden.BackColor = Color.LightGray;
 
-            pnlBasis.BackColor = Color.LightGray;
+            pnlBasis.BackColor = Color.Green;
             pnlBasis.Width = this.Width;
             pnlBasis.Height = this.Height;
             pnlBasis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
-            pnlMenu.BackColor = Color.Gray;
+            pnlMenu.BackColor = Color.Pink;
             pnlMenu.Margin = new Padding(0);
             pnlMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlMenu.Height = pnlBasis.Height;
@@ -75,17 +101,31 @@ namespace Shogi
             pnlMenu.Controls.Add(bStatistik);
             pnlMenu.Controls.Add(bBeenden);
 
-            pnlSpielfeld.BackColor = Color.LightGray;
+
+            pnlSpielfeld.BackColor = Color.Orange;
             pnlSpielfeld.Margin = new Padding(0);
             pnlSpielfeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             pnlSpielfeld.Height = pnlBasis.Height;
-            pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width;
-               
+            pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
+            pnlSpielfeld.BackgroundImage = global::Shogi.Properties.Resources._1212_0;
+            pnlSpielfeld.BackgroundImageLayout = ImageLayout.Stretch;
+            pnlSpielfeld.Controls.Add(pnlFeld);
+   
             pnlBasis.Controls.Add(pnlMenu);
             pnlBasis.Controls.Add(pnlSpielfeld);
-
             this.Controls.Add(pnlBasis);
         }
 
+        private void ShogiSpielfeld_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        void PanelOnClick(object sender, EventArgs e)
+        {
+            Panel pnl = new Panel();
+            pnl = (Panel)sender;
+            MessageBox.Show(pnl.Tag.ToString());
+        }
     }
 }
