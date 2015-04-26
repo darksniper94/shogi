@@ -165,22 +165,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Feld.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Menu.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\FeldNeu.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\MenuNeu.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\LogoKlein.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\MenuNeu1.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\MenuNeu2.jpg" />
