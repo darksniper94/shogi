@@ -135,6 +135,7 @@
             this.Controls.Add(this.bAnmelden);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormAnmeldung";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Anmeldung";

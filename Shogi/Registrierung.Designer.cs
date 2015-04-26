@@ -145,6 +145,7 @@
             this.Controls.Add(this.lblBenutzername);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "FormRegistrierung";
             this.Text = "Registrierung";
             this.Load += new System.EventHandler(this.formRegistrierung_Load);

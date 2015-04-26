@@ -82,3 +82,4 @@ C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateR
 C:\Users\Tina\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe.config
 C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe
 C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.pdb
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.ShogiSpielfeld.resources
