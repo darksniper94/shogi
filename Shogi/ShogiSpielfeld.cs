@@ -51,7 +51,7 @@ namespace Shogi
                     arrPFeld[i].Tag = "" + (i + 1);
                     arrPFeld[i].Height = 50;
                     arrPFeld[i].Width = 50;
-                    arrPFeld[i].BackColor = Color.FromArgb(255,200,140);
+                    arrPFeld[i].BackColor = Color.FromArgb(244, 223, 186);
                     arrPFeld[i].Padding = new Padding(0);
                     arrPFeld[i].Margin = new Padding(1);
                     arrPFeld[i].Click += PanelOnClick;
@@ -69,21 +69,31 @@ namespace Shogi
             bEinzel_pause_fort.Width = consbuttonbreite;
             bEinzel_pause_fort.Height = consbuttonhohe;
             bEinzel_pause_fort.BackColor = Color.LightGray;
+            bEinzel_pause_fort.Text = "Spiel fortsetzen";
 
             bCoop_Abbrechen.Location = new Point(65, 190);
             bCoop_Abbrechen.Width = consbuttonbreite;
             bCoop_Abbrechen.Height = consbuttonhohe;
             bCoop_Abbrechen.BackColor = Color.LightGray;
+            bCoop_Abbrechen.Text = "kooperatives Spiel";
 
             bStatistik.Location = new Point(65, 245);
             bStatistik.Width = consbuttonbreite;
             bStatistik.Height = consbuttonhohe;
             bStatistik.BackColor = Color.LightGray;
+            bStatistik.Text = "Statistik";
 
             bspeichern_laden.Location = new Point(65, 300);
             bspeichern_laden.Width = consbuttonbreite;
             bspeichern_laden.Height = consbuttonhohe;
             bspeichern_laden.BackColor = Color.LightGray;
+            bspeichern_laden.Text = "Spiel laden";
+
+            //PictureBox Logo = new PictureBox();
+            //Logo.Location = new System.Drawing.Point(5, 400);
+            //Logo.Name = "Logo";
+            //Logo.Size = new System.Drawing.Size(200, 200);
+            //Logo.Image = global::Shogi.Properties.Resources.LogoKlein;
 
             pnlBasis.BackColor = Color.Green;
             pnlBasis.Width = this.Width;
@@ -95,11 +105,13 @@ namespace Shogi
             pnlMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlMenu.Height = pnlBasis.Height;
             pnlMenu.Width = 250;
+            pnlMenu.BackgroundImage = global::Shogi.Properties.Resources.MenuNeu2;
             pnlMenu.Controls.Add(bEinzel_pause_fort);
             pnlMenu.Controls.Add(bCoop_Abbrechen);
             pnlMenu.Controls.Add(bspeichern_laden);
             pnlMenu.Controls.Add(bStatistik);
             pnlMenu.Controls.Add(bBeenden);
+            //pnlMenu.Controls.Add(Logo);
 
 
             pnlSpielfeld.BackColor = Color.Orange;
@@ -107,18 +119,13 @@ namespace Shogi
             pnlSpielfeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             pnlSpielfeld.Height = pnlBasis.Height;
             pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
-            pnlSpielfeld.BackgroundImage = global::Shogi.Properties.Resources._1212_0;
+            pnlSpielfeld.BackgroundImage = global::Shogi.Properties.Resources.FeldNeu;
             pnlSpielfeld.BackgroundImageLayout = ImageLayout.Stretch;
             pnlSpielfeld.Controls.Add(pnlFeld);
    
             pnlBasis.Controls.Add(pnlMenu);
             pnlBasis.Controls.Add(pnlSpielfeld);
             this.Controls.Add(pnlBasis);
-        }
-
-        private void ShogiSpielfeld_Load(object sender, EventArgs e)
-        {
-
         }
 
         void PanelOnClick(object sender, EventArgs e)
