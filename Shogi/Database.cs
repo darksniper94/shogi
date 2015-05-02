@@ -113,7 +113,9 @@ namespace Shogi
 
         public void speichereSpieler(Spieler spieler)
         {
-
+            String sql = @"INSERT INTO USER (name, pass)
+                           VALUES ('"+spieler.benutzername+"', '"+spieler.passwort+"')";
+            this.executeNonQuery(sql);
         }
 
         public Statistik ladeStatistik(Spieler spieler)

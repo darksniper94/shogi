@@ -35,8 +35,8 @@
             this.txtBenutzername = new System.Windows.Forms.TextBox();
             this.txtPasswort = new System.Windows.Forms.TextBox();
             this.txtPasswortWdh = new System.Windows.Forms.TextBox();
-            this.bRegistrieren = new System.Windows.Forms.Button();
             this.bAbbrechen = new System.Windows.Forms.Button();
+            this.bRegistrieren = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblBenutzername
@@ -109,16 +109,6 @@
             this.txtPasswortWdh.Size = new System.Drawing.Size(233, 24);
             this.txtPasswortWdh.TabIndex = 6;
             // 
-            // bRegistrieren
-            // 
-            this.bRegistrieren.Location = new System.Drawing.Point(93, 209);
-            this.bRegistrieren.Name = "bRegistrieren";
-            this.bRegistrieren.Size = new System.Drawing.Size(100, 30);
-            this.bRegistrieren.TabIndex = 7;
-            this.bRegistrieren.Text = "Registrieren";
-            this.bRegistrieren.UseVisualStyleBackColor = true;
-            this.bRegistrieren.Click += new System.EventHandler(this.bRegistrieren_Click);
-            // 
             // bAbbrechen
             // 
             this.bAbbrechen.Location = new System.Drawing.Point(299, 209);
@@ -128,6 +118,16 @@
             this.bAbbrechen.Text = "Abbrechen";
             this.bAbbrechen.UseVisualStyleBackColor = true;
             this.bAbbrechen.Click += new System.EventHandler(this.bAbbrechen_Click);
+            // 
+            // bRegistrieren
+            // 
+            this.bRegistrieren.Location = new System.Drawing.Point(93, 209);
+            this.bRegistrieren.Name = "bRegistrieren";
+            this.bRegistrieren.Size = new System.Drawing.Size(100, 30);
+            this.bRegistrieren.TabIndex = 7;
+            this.bRegistrieren.Text = "Registrieren";
+            this.bRegistrieren.UseVisualStyleBackColor = true;
+            this.bRegistrieren.Click += new System.EventHandler(this.bRegistrieren_Click);
             // 
             // FormRegistrierung
             // 

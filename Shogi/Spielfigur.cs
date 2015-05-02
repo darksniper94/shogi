@@ -9,18 +9,8 @@ namespace Shogi
     /// Diese Klasse repräsentiert eine Spielfigur für das japanische Schach, Shogi.
     /// Für solch eine Spielfigur muss man wissen wo sie sich auf dem Spielbrett befindet (Position),
     /// um was für eine Figur es sich handelt (Figurtyp) und welchem Spieler die Figur gehört (Besitzer).
-    /// Zudem kann eine Shogi-Spielfigur aktiv oder inaktiv sein, je nachdem ob sie geschlagen wurde oder nicht 
-    /// und es ist möglich Spielfiguren zu befördern.
-    /// 
-    /// Mögliche FigurenTypen sind:
-    /// 1. König
-    /// 2. Turm                 --> Drache
-    /// 3. Läufer               --> Pferd
-    /// 4. Goldener General
-    /// 5. Silberner General    --> Goldener General
-    /// 6. Springer             --> Goldener General
-    /// 7. Lanze                --> Goldener General
-    /// 8. Bauer                --> Goldener General
+    /// Zudem kann eine Shogi-Spielfigur aktiv oder inaktiv sein, je nachdem ob sie geschlagen wurde und 
+    /// nun außerhalb des Spielfeldes ist oder nicht. Außerdem ist es möglich Spielfiguren zu befördern.
     /// </summary>
     public class Spielfigur
     {
@@ -32,39 +22,6 @@ namespace Shogi
 
         private Boolean aktiv;
         private Boolean befoerdert;
-
-        public Position Position
-        {
-            get { return position; }
-            set { position = value; }
-        }
-        public Boolean Aktiv
-        {
-            get { return aktiv; }
-        }
-        public Boolean IstBefoerdert
-        {
-            get { return befoerdert; }
-        }
-        public FigurTyp Typ
-        {
-            get
-            {
-                if (befoerdert)
-                {
-                    return typBefoerdert;
-                }
-                else
-                {
-                    return typNichtBefoerdert;
-                }
-            }
-        }
-        public Spieler Besitzer
-        {
-            get { return besitzer; }
-            set { besitzer = value; }
-        }
 
         /// <summary>
         /// Erstellt eine Spielfigur des übergebenen Figurtyps. Die erstellte Figur gehört dem übergenem Spieler
@@ -84,6 +41,59 @@ namespace Shogi
 
             this.aktiv = true;
             this.befoerdert = false;
+        }
+
+        /// <summary>
+        /// Setzt bzw. gibt die Position der Spielfigur auf dem Spielbrett zurück.
+        /// </summary>
+        public Position Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
+        /// <summary>
+        /// Gibt zurück ob die Spielfigur aktiv (imSpielfeld) oder inaktiv (außerhalb) ist.
+        /// </summary>
+        public Boolean IstAktiv
+        {
+            get { return aktiv; }
+        }
+
+        /// <summary>
+        /// Gibt zurück ob die Spielfigur berfoerdert ist oder nicht.
+        /// </summary>
+        public Boolean IstBefoerdert
+        {
+            get { return befoerdert; }
+        }
+
+        /// <summary>
+        /// Gibt den FigurTyp der Spielfigur zurück. Abhängig davon, ob die Figur befoerdert ist
+        /// oder nicht, wird der entsprechende Figurtyp ausgegeben.
+        /// </summary>
+        public FigurTyp Typ
+        {
+            get
+            {
+                if (befoerdert)
+                {
+                    return typBefoerdert;
+                }
+                else
+                {
+                    return typNichtBefoerdert;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Setzt bzw. gibt den Besitzer der Spielfigur zurück.
+        /// </summary>
+        public Spieler Besitzer
+        {
+            get { return besitzer; }
+            set { besitzer = value; }
         }
 
         /// <summary>
@@ -152,7 +162,7 @@ namespace Shogi
         {
             return this.position.Equals(figur.Position)
                 && this.Typ.Equals(figur.Typ)
-                && this.aktiv == figur.Aktiv
+                && this.aktiv == figur.IstAktiv
                 && this.befoerdert == figur.IstBefoerdert
                 && this.besitzer.Equals(figur.Besitzer);
         }
