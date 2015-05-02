@@ -96,6 +96,22 @@ namespace Shogi
             }
         }
 
+        public bool pruefeBenutzerVorhanden(String benutzername)
+        {
+            String sql = "SELECT ID FROM USER WHERE name='" + benutzername + "'";
+            LinkedList<Object[]> result = executeQuery(sql);
+            if (result.Count() == 0)
+            {
+                // Keine Übereinstimmung 
+                return false;
+            }
+            else
+            {
+                // Gib die ID des Benutzers zurück
+                return true;
+            }
+        }
+
         public Spieler ladeSpieler(int spielerid)
         {
             String sql = "SELECT * FROM USER WHERE ID='" + Convert.ToString(spielerid) + "'";

@@ -69,6 +69,10 @@ namespace Shogi
         {
             System.Text.RegularExpressions.Regex regEx = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9äöüÄÖÜß]+$");
             //Benutzername schon vorhanden prüfung noch implementieren! (Rücksprache mit Alex)
+            if (Database.instance.pruefeBenutzerVorhanden(paSpielerTemp.benutzername))
+            {
+                return "Der Benutzername ist bereits vorhanden.";
+            }
             //Benutzernamen auf [A-Z,Ä,Ö,Ü], [a-z,ä,ö,ü,ß], [0-9] einschränken
              if (!regEx.IsMatch(paSpielerTemp.benutzername)) {
                 return "Der Benutzername darf nur Buchstaben und Ziffern zwischen 0 und 9 enthalten.";
