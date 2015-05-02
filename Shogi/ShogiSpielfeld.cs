@@ -35,7 +35,7 @@ namespace Shogi
             Button bStatistik = new Button();
             Button bspeichern_laden = new Button();
             Panel[] arrPFeld = new Panel[81];
-
+            Label lblSpielername = new Label();
             pnlFeld.Location = new Point(130, 110);
             pnlFeld.ColumnCount = 9;
             pnlFeld.BackColor = Color.FromArgb(170, 130, 70);
@@ -55,9 +55,19 @@ namespace Shogi
                     arrPFeld[i].Padding = new Padding(0);
                     arrPFeld[i].Margin = new Padding(1);
                     arrPFeld[i].Click += PanelOnClick;
+                    arrPFeld[i].Enabled = false;
                     pnlFeld.Controls.Add(arrPFeld[i]);
 
             }
+
+            lblSpielername.Font = new Font("Book Antiqua", 11);
+            lblSpielername.Width = TextRenderer.MeasureText(spAngemeldet.benutzername,lblSpielername.Font).Width;
+            lblSpielername.Location = new Point((125- (TextRenderer.MeasureText(spAngemeldet.benutzername, lblSpielername.Font).Width / 2)), 50);
+            lblSpielername.Visible = true;
+            lblSpielername.Text = spAngemeldet.benutzername;
+            lblSpielername.BackColor = Color.Transparent;
+            
+
 
             bBeenden.Location = new Point(65, 80);
             bBeenden.Width = consbuttonbreite;
@@ -94,13 +104,11 @@ namespace Shogi
             //Logo.Name = "Logo";
             //Logo.Size = new System.Drawing.Size(200, 200);
             //Logo.Image = global::Shogi.Properties.Resources.LogoKlein;
-
-            pnlBasis.BackColor = Color.Green;
+       
             pnlBasis.Width = this.Width;
             pnlBasis.Height = this.Height;
             pnlBasis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
-            pnlMenu.BackColor = Color.Pink;
             pnlMenu.Margin = new Padding(0);
             pnlMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlMenu.Height = pnlBasis.Height;
@@ -111,10 +119,10 @@ namespace Shogi
             pnlMenu.Controls.Add(bspeichern_laden);
             pnlMenu.Controls.Add(bStatistik);
             pnlMenu.Controls.Add(bBeenden);
+            pnlMenu.Controls.Add(lblSpielername);
             //pnlMenu.Controls.Add(Logo);
 
 
-            pnlSpielfeld.BackColor = Color.Orange;
             pnlSpielfeld.Margin = new Padding(0);
             pnlSpielfeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             pnlSpielfeld.Height = pnlBasis.Height;
