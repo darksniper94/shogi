@@ -74,18 +74,19 @@ namespace Shogi
             bBeenden.Height = consbuttonhohe;
             bBeenden.BackColor = Color.LightGray;
             bBeenden.Text = "Beenden";
+            bBeenden.Click += bBeendenOnClick;
 
             bEinzel_pause_fort.Location = new Point(65, 135);
             bEinzel_pause_fort.Width = consbuttonbreite;
             bEinzel_pause_fort.Height = consbuttonhohe;
             bEinzel_pause_fort.BackColor = Color.LightGray;
-            bEinzel_pause_fort.Text = "Spiel fortsetzen";
+            bEinzel_pause_fort.Text = "Einzel Spiel";
 
             bCoop_Abbrechen.Location = new Point(65, 190);
             bCoop_Abbrechen.Width = consbuttonbreite;
             bCoop_Abbrechen.Height = consbuttonhohe;
             bCoop_Abbrechen.BackColor = Color.LightGray;
-            bCoop_Abbrechen.Text = "kooperatives Spiel";
+            bCoop_Abbrechen.Text = "Kooperatives Spiel";
 
             bStatistik.Location = new Point(65, 245);
             bStatistik.Width = consbuttonbreite;
@@ -141,6 +142,16 @@ namespace Shogi
             Panel pnl = new Panel();
             pnl = (Panel)sender;
             MessageBox.Show(pnl.Tag.ToString());
+        }
+        void bBeendenOnClick(object sender, EventArgs e)
+        {
+            DialogResult result = new DialogResult();
+
+            result = MessageBox.Show("Möchten Sie das Spiel wirklich beenden ?", "Beenden", MessageBoxButtons.YesNoCancel);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }
