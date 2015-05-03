@@ -15,13 +15,14 @@ namespace Shogi
     /// </summary>
     public partial class ShogiSpielfeld : Form
     {
-       
+        Spieler spAngemeldet;
         /// <summary>
         /// Konstruktor für das ShogiFenster
         /// </summary>
         /// <param name="spAngemeldet">Der angemeldete Spieler als Spieler</param>
-        public ShogiSpielfeld(Spieler spAngemeldet)
+        public ShogiSpielfeld(Spieler paspAngemeldet)
         {
+            spAngemeldet = paspAngemeldet;
             const int consbuttonhohe = 35;
             const int consbuttonbreite = 120;
             InitializeComponent();
@@ -81,24 +82,28 @@ namespace Shogi
             bEinzel_pause_fort.Height = consbuttonhohe;
             bEinzel_pause_fort.BackColor = Color.LightGray;
             bEinzel_pause_fort.Text = "Einzel Spiel";
+            bEinzel_pause_fort.Click += bEinzel_pause_fortOnClick;
 
             bCoop_Abbrechen.Location = new Point(65, 190);
             bCoop_Abbrechen.Width = consbuttonbreite;
             bCoop_Abbrechen.Height = consbuttonhohe;
             bCoop_Abbrechen.BackColor = Color.LightGray;
             bCoop_Abbrechen.Text = "Kooperatives Spiel";
+            bCoop_Abbrechen.Click += bCoop_AbbrechenOnClick;
 
             bStatistik.Location = new Point(65, 245);
             bStatistik.Width = consbuttonbreite;
             bStatistik.Height = consbuttonhohe;
             bStatistik.BackColor = Color.LightGray;
             bStatistik.Text = "Statistik";
+            bStatistik.Click += bStatistikOnClick;
 
             bspeichern_laden.Location = new Point(65, 300);
             bspeichern_laden.Width = consbuttonbreite;
             bspeichern_laden.Height = consbuttonhohe;
             bspeichern_laden.BackColor = Color.LightGray;
             bspeichern_laden.Text = "Spiel laden";
+            bspeichern_laden.Click += bspeichern_ladenOnClick;
 
             //PictureBox Logo = new PictureBox();
             //Logo.Location = new System.Drawing.Point(5, 400);
@@ -145,13 +150,120 @@ namespace Shogi
         }
         void bBeendenOnClick(object sender, EventArgs e)
         {
+            beenden();
+        }
+
+        void bEinzel_pause_fortOnClick(object sender, EventArgs e)
+        {
+
+        }
+
+        void bCoop_AbbrechenOnClick(object sender, EventArgs e)
+        {
+
+        }
+        void bStatistikOnClick(object sender, EventArgs e)
+        {
+
+        }
+        void bspeichern_ladenOnClick(object sender, EventArgs e)
+        {
+            Button paButton = new Button();
+            paButton = (Button)sender;
+            if (paButton.Text == "Spiel speichern")
+            {
+                speichern();
+            } else if(paButton.Text == "Spiel laden")
+            {
+                laden();
+            }
+
+        }
+
+        private void spielBeendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            beenden();
+        }
+
+        private void spielLadenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            laden();
+        }
+
+        private void spielSpeichernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            speichern();
+        }
+
+        private void beenden()
+        {
             DialogResult result = new DialogResult();
 
-            result = MessageBox.Show("Möchten Sie das Spiel wirklich beenden ?", "Beenden", MessageBoxButtons.YesNoCancel);
+            result = MessageBox.Show("Möchten Sie das Spiel wirklich beenden?", "Beenden", MessageBoxButtons.YesNoCancel);
             if (result == DialogResult.Yes)
             {
                 this.Close();
             }
         }
+
+        private void speichern()
+        {
+            DialogResult result = new DialogResult();
+
+            result = MessageBox.Show("Möchten Sie das Spiel speichern?", "Beenden", MessageBoxButtons.YesNoCancel);
+            if (result == DialogResult.Yes)
+            {
+                //speichern Methode Datebank klasse
+            }
+        }
+
+        private void laden()
+        {
+            DialogResult result = new DialogResult();
+
+            result = MessageBox.Show("Möchten Sie das Spiel laden?", "Beenden", MessageBoxButtons.YesNoCancel);
+            if (result == DialogResult.Yes)
+            {
+                //laden Methode Datebank klasse
+            }
+        }
+
+        private void ansehenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //statistik 
+        }
+
+        private void zurücksetzenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //statistik zurück setzen Methode der Datenbank klasse
+        }
+
+        private void benutzernamenÄndernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //benutzernamen ändern Dialog
+        }
+
+        private void passwortÄndernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //passwort ändern Dialog
+        }
+
+        private void kontoLöschenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            //konto löschen Methode der  Datenbank fehlt noch für AbfragePasswort
+            frmPasswortAbfrage frmPasswort = new frmPasswortAbfrage(spAngemeldet);
+            DialogResult result = new DialogResult();
+            frmPasswort.ShowDialog();
+            result = frmPasswort.DialogResult;
+            
+            if (result == DialogResult.OK)
+            {
+                this.Close();
+            }
+            
+        }
+
+        
     }
 }

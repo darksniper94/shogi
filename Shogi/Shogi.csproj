@@ -92,6 +92,12 @@
     <Compile Include="Anmeldung.Designer.cs">
       <DependentUpon>Anmeldung.cs</DependentUpon>
     </Compile>
+    <Compile Include="AbfragePasswort.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AbfragePasswort.Designer.cs">
+      <DependentUpon>AbfragePasswort.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -118,6 +124,9 @@
     <Compile Include="Testklasse_Logik.cs" />
     <EmbeddedResource Include="Anmeldung.resx">
       <DependentUpon>Anmeldung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AbfragePasswort.resx">
+      <DependentUpon>AbfragePasswort.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ShogiSpielfeld.resx">
       <DependentUpon>ShogiSpielfeld.cs</DependentUpon>
