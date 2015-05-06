@@ -76,6 +76,7 @@
             // 
             // bAbbrechen
             // 
+            this.bAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bAbbrechen.Location = new System.Drawing.Point(260, 113);
             this.bAbbrechen.Name = "bAbbrechen";
             this.bAbbrechen.Size = new System.Drawing.Size(100, 30);
@@ -98,8 +99,10 @@
             // 
             // frmPasswortAbfrage
             // 
+            this.AcceptButton = this.bOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.bAbbrechen;
             this.ClientSize = new System.Drawing.Size(492, 156);
             this.Controls.Add(this.lblrueckMeldung);
             this.Controls.Add(this.bAbbrechen);

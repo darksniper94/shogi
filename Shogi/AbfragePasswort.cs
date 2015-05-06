@@ -11,7 +11,7 @@ namespace Shogi
 {
     public partial class frmPasswortAbfrage : Form
     {
-        Spieler spAngemeldet;
+        private Spieler spAngemeldet;
         public frmPasswortAbfrage(Spieler paspAngemeldet)
         {
             InitializeComponent();
@@ -29,6 +29,7 @@ namespace Shogi
             else
             {
                 // Konto löschen Methode
+                Database.instance.loescheSpieler(spAngemeldet);
                 MessageBox.Show("Ihr Konto wurde erfolgreich gelöscht, Sie werden jetzt abgemeldet.", "Konto löschen", MessageBoxButtons.OK);
                 this.DialogResult = DialogResult.OK;
                 this.Close();

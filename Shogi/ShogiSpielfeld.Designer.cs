@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.profilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.benutzernamenÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwortÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +41,7 @@
             this.spielSpeichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielBeendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,11 +66,6 @@
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "Menu";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // profilToolStripMenuItem
             // 
@@ -115,14 +110,14 @@
             // ansehenToolStripMenuItem
             // 
             this.ansehenToolStripMenuItem.Name = "ansehenToolStripMenuItem";
-            this.ansehenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ansehenToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.ansehenToolStripMenuItem.Text = "ansehen";
             this.ansehenToolStripMenuItem.Click += new System.EventHandler(this.ansehenToolStripMenuItem_Click);
             // 
             // zurücksetzenToolStripMenuItem
             // 
             this.zurücksetzenToolStripMenuItem.Name = "zurücksetzenToolStripMenuItem";
-            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.zurücksetzenToolStripMenuItem.Text = "zurücksetzen";
             this.zurücksetzenToolStripMenuItem.Click += new System.EventHandler(this.zurücksetzenToolStripMenuItem_Click);
             // 
@@ -147,6 +142,11 @@
             this.spielBeendenToolStripMenuItem.Text = "Spiel beenden";
             this.spielBeendenToolStripMenuItem.Click += new System.EventHandler(this.spielBeendenToolStripMenuItem_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // ShogiSpielfeld
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -158,6 +158,7 @@
             this.Name = "ShogiSpielfeld";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Shogi";
+            this.Load += new System.EventHandler(this.ShogiSpielfeld_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

@@ -169,7 +169,15 @@ namespace Shogi
         }
         void bStatistikOnClick(object sender, EventArgs e)
         {
-
+            Statistik stat = Database.instance.ladeStatistik(spAngemeldet);
+            if(stat == null)
+            {
+                MessageBox.Show(this, "Keine Statistik vorhanden!", "Warnung", MessageBoxButtons.OK);
+            }
+            else
+            {
+                MessageBox.Show(this, stat.statistikMessage, "Statistik", MessageBoxButtons.OK);
+            }
         }
         void bspeichern_ladenOnClick(object sender, EventArgs e)
         {
@@ -308,6 +316,11 @@ namespace Shogi
             {
                 //image auf anderes Panel setzen
             }
+        }
+
+        private void ShogiSpielfeld_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
