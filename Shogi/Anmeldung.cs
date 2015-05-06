@@ -19,6 +19,8 @@ namespace Shogi
         public FormAnmeldung()
         {
             InitializeComponent();
+            // Form zentrieren
+            this.CenterToScreen();
         }
 
        

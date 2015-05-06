@@ -100,3 +100,5 @@ C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources.
 C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.FormRegistrierung.resources
 C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
+C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.ShogiSpielfeld.resources

@@ -107,7 +107,6 @@ namespace Shogi
             }
             else
             {
-                // Gib die ID des Benutzers zurück
                 return true;
             }
         }
@@ -136,7 +135,59 @@ namespace Shogi
 
         public Statistik ladeStatistik(Spieler spieler)
         {
-            return null;
+            String sql = @"SELECT SUM(spiel_gewonnen), SUM(spiel_beendet), AVG(zuege), AVG(zeit)
+                           FROM STATISTIK
+                           WHERE spieler_id = " + this.getSpielerID(spieler);
+
+            LinkedList<Object[]> result = this.executeQuery(sql);
+            if(result.Count() == 1)
+            {
+                Object[] data = result.ElementAt(0);
+                return new Statistik(
+                        Convert.ToInt32(data[0]),
+                        Convert.ToInt32(data[1]), 
+                        Convert.ToDouble(data[2]), 
+                        Convert.ToDouble(data[3]) 
+                                    );
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+        /// <summary>
+        /// Sucht zum Benutzernamen die SpielerID raus
+        /// </summary>
+        /// <param name="spieler"></param>
+        /// <returns>ID</returns>
+
+        private int getSpielerID(Spieler spieler)
+        {
+            String sql = "SELECT ID FROM USER WHERE name = '" + spieler.benutzername + "'";
+            LinkedList<Object[]> result = this.executeQuery(sql);
+            return Convert.ToInt32(result.ElementAt(0)[0]);
+        }
+        /// <summary>
+        /// Erstellt einen neuen Statistik Eintrag im der Datenbank
+        /// </summary>
+        /// <param name="spieler"></param>
+        /// <param name="gewonnen"></param>
+        /// <param name="beendet"></param>
+        /// <param name="zuege"></param>
+        /// <param name="zeit"></param>
+
+        public void statistikErweitern(Spieler spieler, bool gewonnen, bool beendet, int zuege, int zeit)
+        {
+            if(gewonnen) beendet = true;
+            String sql = @"INSERT INTO STATISTIK (spieler_id, spiel_gewonnen, spiel_beendet, zuege, zeit)
+                           VALUES (" + this.getSpielerID(spieler) + ", "
+                                    + Convert.ToInt32(gewonnen) + ", "
+                                    + Convert.ToInt32(beendet) + ", "
+                                    + zuege + ", "
+                                    + zeit + ");";
+            this.executeNonQuery(sql);
+                                                        
         }
 
         public String ladeRegelwerk()
