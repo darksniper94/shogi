@@ -147,6 +147,19 @@ namespace Shogi
             this.Controls.Add(pnlBasis);
         }
 
+        void statistikAnzeigeBox()
+        {
+            Statistik stat = Database.instance.ladeStatistik(spAngemeldet);
+            if (stat == null)
+            {
+                MessageBox.Show(this, "Keine Statistik vorhanden!", "Warnung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show(this, stat.statistikMessage, "Statistik", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         void PanelOnClick(object sender, EventArgs e)
         {
             Panel pnl = new Panel();
@@ -169,15 +182,7 @@ namespace Shogi
         }
         void bStatistikOnClick(object sender, EventArgs e)
         {
-            Statistik stat = Database.instance.ladeStatistik(spAngemeldet);
-            if(stat == null)
-            {
-                MessageBox.Show(this, "Keine Statistik vorhanden!", "Warnung", MessageBoxButtons.OK);
-            }
-            else
-            {
-                MessageBox.Show(this, stat.statistikMessage, "Statistik", MessageBoxButtons.OK);
-            }
+            statistikAnzeigeBox();
         }
         void bspeichern_ladenOnClick(object sender, EventArgs e)
         {
@@ -208,14 +213,17 @@ namespace Shogi
             speichern();
         }
 
-        private void beenden()
+        private void beenden(FormClosingEventArgs e = null)
         {
             DialogResult result = new DialogResult();
-
-            result = MessageBox.Show("Möchten Sie das Spiel wirklich beenden?", "Beenden", MessageBoxButtons.YesNoCancel);
+            result = MessageBox.Show("Möchten Sie das Spiel wirklich beenden?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                this.Close();
+                Application.Exit();
+            }
+            else if(e!=null)
+            {
+                e.Cancel = true;
             }
         }
 
@@ -223,7 +231,7 @@ namespace Shogi
         {
             DialogResult result = new DialogResult();
 
-            result = MessageBox.Show("Möchten Sie das Spiel speichern?", "Beenden", MessageBoxButtons.YesNoCancel);
+            result = MessageBox.Show("Möchten Sie das Spiel speichern?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 //speichern Methode Datebank klasse
@@ -234,7 +242,7 @@ namespace Shogi
         {
             DialogResult result = new DialogResult();
 
-            result = MessageBox.Show("Möchten Sie das Spiel laden?", "Beenden", MessageBoxButtons.YesNoCancel);
+            result = MessageBox.Show("Möchten Sie das Spiel laden?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 //laden Methode Datebank klasse
@@ -244,12 +252,17 @@ namespace Shogi
 
         private void ansehenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //statistik 
+            statistikAnzeigeBox();
         }
 
         private void zurücksetzenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //statistik zurück setzen Methode der Datenbank klasse
+            DialogResult result = MessageBox.Show(this, "Möchten Sie ihre Statistik zurücksetzten?", "Statistik zurücksetzten", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(result == DialogResult.Yes)
+            {
+                Database.instance.loescheStatistik(spAngemeldet);
+            }
+            
         }
 
         private void benutzernamenÄndernToolStripMenuItem_Click(object sender, EventArgs e)
@@ -322,5 +335,16 @@ namespace Shogi
         {
 
         }
+
+        private void ShogiSpielfeld_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
+
+        private void ShogiSpielfeld_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Wenn nicht beendet werden soll, wird das Event abgebrochen
+        }
+
     }
 }

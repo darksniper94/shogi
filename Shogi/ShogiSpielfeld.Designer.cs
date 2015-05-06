@@ -153,11 +153,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ShogiSpielfeld";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Shogi";
+            this.Text = "Panda Shogi";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ShogiSpielfeld_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ShogiSpielfeld_FormClosed);
             this.Load += new System.EventHandler(this.ShogiSpielfeld_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

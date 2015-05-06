@@ -170,6 +170,13 @@ namespace Shogi
             }
             return new Statistik(Convert.ToInt32(data[0]),Convert.ToInt32(data[1]), Convert.ToDouble(data[2]), Convert.ToDouble(data[3]));
         }
+
+        public void loescheStatistik(Spieler spieler)
+        {
+            String sql = "DELETE FROM STATISTIK WHERE user_id = " + getSpielerID(spieler);
+            this.executeNonQuery(sql);
+        }
+
         /// <summary>
         /// Sucht zum Benutzernamen die SpielerID raus
         /// </summary>

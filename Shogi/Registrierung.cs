@@ -51,7 +51,6 @@ namespace Shogi
                 
                 // Spieler in db speichern
                 Database.instance.speichereSpieler(spielerTemp);
-                
                 MessageBox.Show("Registrierung erfolgreich abgeschlossen.", "Information",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Information);
