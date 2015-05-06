@@ -16,6 +16,8 @@ namespace Shogi
     public partial class ShogiSpielfeld : Form
     {
         Spieler spAngemeldet;
+        TableLayoutPanel pnlFeld;
+        
         /// <summary>
         /// Konstruktor für das ShogiFenster
         /// </summary>
@@ -27,7 +29,6 @@ namespace Shogi
             const int consbuttonbreite = 120;
             InitializeComponent();
             FlowLayoutPanel pnlBasis = new FlowLayoutPanel();
-            TableLayoutPanel pnlFeld = new TableLayoutPanel();
             Panel pnlMenu = new Panel();
             Panel pnlSpielfeld = new Panel();
             Button bBeenden = new Button();
@@ -35,8 +36,10 @@ namespace Shogi
             Button bCoop_Abbrechen = new Button();
             Button bStatistik = new Button();
             Button bspeichern_laden = new Button();
-            Panel[] arrPFeld = new Panel[81];
+            Panel[,] arrPFeld = new Panel[9,9];
             Label lblSpielername = new Label();
+            pnlFeld = new TableLayoutPanel();
+           
             pnlFeld.Location = new Point(130, 110);
             pnlFeld.ColumnCount = 9;
             pnlFeld.BackColor = Color.FromArgb(170, 130, 70);
@@ -45,46 +48,48 @@ namespace Shogi
             pnlFeld.Padding = new Padding(1);
             pnlFeld.Margin = new Padding(0);
           
-            for (int i = 0; i < 81;i++ )
+            for (int i = 0; i < 9;i++ )
             {
-
-                    arrPFeld[i] = new Panel();
-                    arrPFeld[i].Tag = "" + (i + 1);
-                    arrPFeld[i].Height = 50;
-                    arrPFeld[i].Width = 50;
-                    arrPFeld[i].BackColor = Color.FromArgb(244, 223, 186);
-                    arrPFeld[i].Padding = new Padding(0);
-                    arrPFeld[i].Margin = new Padding(1);
-                    arrPFeld[i].Click += PanelOnClick;
-                    arrPFeld[i].Enabled = false;
-                    pnlFeld.Controls.Add(arrPFeld[i]);
+                for (int j = 0; j < 9; j++)
+                {
+                    arrPFeld[i,j] = new Panel();
+                    arrPFeld[i,j].Name = "" + (i + 1)  + (j + 1);
+                    arrPFeld[i,j].Height = 50;
+                    arrPFeld[i,j].Width = 50;
+                    arrPFeld[i,j].BackColor = Color.FromArgb(244, 223, 186);
+                    arrPFeld[i,j].Padding = new Padding(0);
+                    arrPFeld[i,j].Margin = new Padding(1);
+                    arrPFeld[i,j].Click += PanelOnClick;
+                    arrPFeld[i,j].Enabled = true;
+                    pnlFeld.Controls.Add(arrPFeld[i,j]);
+                }
 
             }
 
             lblSpielername.Font = new Font("Book Antiqua", 11);
             lblSpielername.Width = TextRenderer.MeasureText(spAngemeldet.benutzername,lblSpielername.Font).Width;
-            lblSpielername.Location = new Point((125- (TextRenderer.MeasureText(spAngemeldet.benutzername, lblSpielername.Font).Width / 2)), 50);
+            lblSpielername.Location = new Point((125- (TextRenderer.MeasureText(spAngemeldet.benutzername, lblSpielername.Font).Width / 2)), 40);
             lblSpielername.Visible = true;
             lblSpielername.Text = spAngemeldet.benutzername;
             lblSpielername.BackColor = Color.Transparent;
             
 
 
-            bBeenden.Location = new Point(65, 80);
+            bBeenden.Location = new Point(65, 300); // 300
             bBeenden.Width = consbuttonbreite;
             bBeenden.Height = consbuttonhohe;
             bBeenden.BackColor = Color.LightGray;
             bBeenden.Text = "Beenden";
             bBeenden.Click += bBeendenOnClick;
 
-            bEinzel_pause_fort.Location = new Point(65, 135);
+            bEinzel_pause_fort.Location = new Point(65, 80);
             bEinzel_pause_fort.Width = consbuttonbreite;
             bEinzel_pause_fort.Height = consbuttonhohe;
             bEinzel_pause_fort.BackColor = Color.LightGray;
             bEinzel_pause_fort.Text = "Einzel Spiel";
             bEinzel_pause_fort.Click += bEinzel_pause_fortOnClick;
 
-            bCoop_Abbrechen.Location = new Point(65, 190);
+            bCoop_Abbrechen.Location = new Point(65, 135);
             bCoop_Abbrechen.Width = consbuttonbreite;
             bCoop_Abbrechen.Height = consbuttonhohe;
             bCoop_Abbrechen.BackColor = Color.LightGray;
@@ -98,7 +103,7 @@ namespace Shogi
             bStatistik.Text = "Statistik";
             bStatistik.Click += bStatistikOnClick;
 
-            bspeichern_laden.Location = new Point(65, 300);
+            bspeichern_laden.Location = new Point(65, 190);
             bspeichern_laden.Width = consbuttonbreite;
             bspeichern_laden.Height = consbuttonhohe;
             bspeichern_laden.BackColor = Color.LightGray;
@@ -226,6 +231,7 @@ namespace Shogi
             {
                 //laden Methode Datebank klasse
             }
+            zeichneSpielfeldkomplett();
         }
 
         private void ansehenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -264,6 +270,31 @@ namespace Shogi
             
         }
 
+        /// <summary>
+        /// Diese Methode setzt die Steine auf die entsprechenden Panels.
+        /// </summary>
+        //Spielfigur[,] paMatrix
+        public void zeichneSpielfeldkomplett()
+        {
+            int i = 0;
+            int j = 0;
+           foreach (Control c in pnlFeld.Controls)
+           {
+               if (c is Panel)
+               {
+                 
+                  if (j < 9)
+                  {
+                      j = j + 1;
+                  }
+                  else
+                  {
+                      j = 0;
+                      i = i + 1;
+                  }
+               }
+           }
+        }
         
     }
 }

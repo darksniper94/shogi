@@ -36,7 +36,7 @@ namespace Shogi
             lblMeldung.Visible = false;
             bool registrierungkorrekt = false;
             String fehler;
-            Spieler spielerTemp = new Spieler(txtBenutzername.Text, txtPasswort.Text, "0");
+            Spieler spielerTemp = new Spieler(txtBenutzername.Text, txtPasswort.Text, "Bilder1");
 
             //Prüfen der Registrierungsdaten
             fehler = pruefeRegistrierung(spielerTemp, txtPasswortWdh.Text);

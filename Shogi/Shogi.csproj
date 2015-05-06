@@ -85,6 +85,7 @@
     <Compile Include="Befoerderungsmapper.cs" />
     <Compile Include="Bewegungsmuster.cs" />
     <Compile Include="Database.cs" />
+    <Compile Include="Designmapper.cs" />
     <Compile Include="FigurTyp.cs" />
     <Compile Include="Anmeldung.cs">
       <SubType>Form</SubType>
