@@ -7,7 +7,7 @@ namespace Shogi
 {
     class Designmapper
     {
-        private String[] d1Images = {"d1koenig"};
+        private String[,] d1Images = {{"d1koenig","König"}};
         private int[] d1farbe = {170,30,70};
         private static Designmapper inst = null;
         private Designmapper()
@@ -26,7 +26,7 @@ namespace Shogi
                 return inst;
             }
         }
-       // public String[] holeDesignBilder(String Designbilder)
+       // public String holeDesignBild(String Designbilder)
         //{
          //   return;
         //}

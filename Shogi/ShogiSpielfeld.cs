@@ -295,6 +295,19 @@ namespace Shogi
                }
            }
         }
-        
+
+        /// <summary>
+        /// setzt ein Image um 
+        /// </summary>
+        public void zeichneSpielzug(Position posAlt, Position posNeu)
+        {
+            if (posNeu.Spalte == posAlt.Spalte && posNeu.Zeile == posAlt.Zeile)
+            {
+                //beförderung nur das img ersetzen
+            } else
+            {
+                //image auf anderes Panel setzen
+            }
+        }
     }
 }
