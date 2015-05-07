@@ -126,6 +126,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spieler.cs" />
+    <Compile Include="Spielfeld.cs" />
     <Compile Include="Spielfigur.cs" />
     <Compile Include="Statistik.cs" />
     <Compile Include="Testklasse_Logik.cs" />
