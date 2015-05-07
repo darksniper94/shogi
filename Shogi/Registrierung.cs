@@ -21,7 +21,7 @@ namespace Shogi
 
         private void formRegistrierung_Load(object sender, EventArgs e)
         {
-
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
         // Methode bei Betätigung des Abbrechenbuttons

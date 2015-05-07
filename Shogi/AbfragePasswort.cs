@@ -41,5 +41,10 @@ namespace Shogi
             this.Close();
         }
 
+        private void frmPasswortAbfrage_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
+
     }
 }

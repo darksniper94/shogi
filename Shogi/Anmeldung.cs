@@ -68,6 +68,11 @@ namespace Shogi
             frmRegistrieren.ShowDialog();
         }
 
+        private void FormAnmeldung_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
+
      
     }
 }

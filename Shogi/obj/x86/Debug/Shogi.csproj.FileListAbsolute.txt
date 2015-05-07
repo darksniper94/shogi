@@ -102,3 +102,5 @@ C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResour
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
 C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
 C:\Users\DarkSniper\Source\Repos\Shogi\Shogi\obj\x86\Debug\Shogi.ShogiSpielfeld.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources

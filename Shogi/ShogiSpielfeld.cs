@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 
 namespace Shogi
@@ -168,7 +169,7 @@ namespace Shogi
         }
         void bBeendenOnClick(object sender, EventArgs e)
         {
-            beenden();
+            this.Close();
         }
 
         void bEinzel_pause_fortOnClick(object sender, EventArgs e)
@@ -200,7 +201,7 @@ namespace Shogi
 
         private void spielBeendenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            beenden();
+            this.Close();
         }
 
         private void spielLadenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -213,18 +214,9 @@ namespace Shogi
             speichern();
         }
 
-        private void beenden(FormClosingEventArgs e = null)
+        private DialogResult beendenAbfrage()
         {
-            DialogResult result = new DialogResult();
-            result = MessageBox.Show("Möchten Sie das Spiel wirklich beenden?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                Application.Exit();
-            }
-            else if(e!=null)
-            {
-                e.Cancel = true;
-            }
+            return MessageBox.Show("Möchten Sie das Spiel wirklich beenden?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
         }
 
         private void speichern()
@@ -333,7 +325,7 @@ namespace Shogi
 
         private void ShogiSpielfeld_Load(object sender, EventArgs e)
         {
-
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
         private void ShogiSpielfeld_FormClosed(object sender, FormClosedEventArgs e)
@@ -344,6 +336,18 @@ namespace Shogi
         private void ShogiSpielfeld_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Wenn nicht beendet werden soll, wird das Event abgebrochen
+            if(beendenAbfrage() != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String appdir = Path.GetDirectoryName(Application.ExecutablePath);
+            String regelwerk_html = Path.Combine(appdir, "Regelwerk.html");
+            Regelwerk rw = new Regelwerk(regelwerk_html);
+            rw.Show();
         }
 
     }

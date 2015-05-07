@@ -42,13 +42,19 @@
             this.spielLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielBeendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuToolStripMenuItem});
+            this.menuToolStripMenuItem,
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 24);
@@ -60,6 +66,7 @@
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.profilToolStripMenuItem,
             this.statisikToolStripMenuItem,
+            this.toolStripMenuItem3,
             this.spielSpeichernToolStripMenuItem,
             this.spielLadenToolStripMenuItem,
             this.spielBeendenToolStripMenuItem});
@@ -110,14 +117,14 @@
             // ansehenToolStripMenuItem
             // 
             this.ansehenToolStripMenuItem.Name = "ansehenToolStripMenuItem";
-            this.ansehenToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.ansehenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.ansehenToolStripMenuItem.Text = "ansehen";
             this.ansehenToolStripMenuItem.Click += new System.EventHandler(this.ansehenToolStripMenuItem_Click);
             // 
             // zurücksetzenToolStripMenuItem
             // 
             this.zurücksetzenToolStripMenuItem.Name = "zurücksetzenToolStripMenuItem";
-            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.zurücksetzenToolStripMenuItem.Text = "zurücksetzen";
             this.zurücksetzenToolStripMenuItem.Click += new System.EventHandler(this.zurücksetzenToolStripMenuItem_Click);
             // 
@@ -146,6 +153,39 @@
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.infoToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.hilfeToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
+            this.toolStripMenuItem1.Text = "?";
+            // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.infoToolStripMenuItem.Text = "Info";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // hilfeToolStripMenuItem
+            // 
+            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hilfeToolStripMenuItem.Text = "Regelwerk";
+            this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.hilfeToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(150, 6);
             // 
             // ShogiSpielfeld
             // 
@@ -184,6 +224,11 @@
         private System.Windows.Forms.ToolStripMenuItem spielSpeichernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spielLadenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spielBeendenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
 
 
     }
