@@ -126,7 +126,7 @@ namespace Shogi
             picBambus.BackColor = Color.Transparent;
             picBambus.Click += picBambusOnClick;
             picBambus.Image = global::Shogi.Properties.Resources.Bambus;
-       
+
             pnlBasis.Width = this.Width;
             pnlBasis.Height = this.Height;
             pnlBasis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -364,7 +364,14 @@ namespace Shogi
         }
         void picBambusOnClick( object sender, EventArgs e)
         {
-            pnlMenu.Width = 10;
+            if (pnlMenu.Width == 10)
+            { 
+                 pnlMenu.Width = 250; 
+            }
+            else
+            {
+                pnlMenu.Width = 10;
+            }
             pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
             pnlFeld.Location = new Point(((pnlSpielfeld.Width / 2) - pnlFeld.Width / 2), 110);
         }
