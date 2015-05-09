@@ -50,6 +50,7 @@
             // 
             // bAbbrechen
             // 
+            this.bAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bAbbrechen.Location = new System.Drawing.Point(280, 157);
             this.bAbbrechen.Name = "bAbbrechen";
             this.bAbbrechen.Size = new System.Drawing.Size(100, 30);
@@ -121,9 +122,11 @@
             // 
             // FormAnmeldung
             // 
+            this.AcceptButton = this.bAnmelden;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.CancelButton = this.bAbbrechen;
             this.ClientSize = new System.Drawing.Size(453, 208);
             this.Controls.Add(this.lblMeldung);
             this.Controls.Add(this.bRegistrieren);
@@ -139,6 +142,7 @@
             this.Name = "FormAnmeldung";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Text = "Anmeldung";
+            this.Load += new System.EventHandler(this.FormAnmeldung_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

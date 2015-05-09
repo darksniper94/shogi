@@ -19,6 +19,8 @@ namespace Shogi
         public FormAnmeldung()
         {
             InitializeComponent();
+            // Form zentrieren
+            this.CenterToScreen();
         }
 
        
@@ -64,6 +66,11 @@ namespace Shogi
             lblMeldung.Visible = false;
             FormRegistrierung frmRegistrieren = new FormRegistrierung();
             frmRegistrieren.ShowDialog();
+        }
+
+        private void FormAnmeldung_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
      

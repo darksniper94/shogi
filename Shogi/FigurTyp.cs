@@ -5,8 +5,24 @@ using System.Text;
 
 namespace Shogi
 {
+    /// <summary>
+    /// Diese Klasse repräsentiert FigurTypen für ein Shogi-Spiel.
+    /// Die möglichen FigurenTypen sind vorgegeben und es können außerhalb
+    /// der Klasse keine neuen erzeugt werden.
+    /// 
+    /// Mögliche FigurenTypen sind:
+    /// 1. König
+    /// 2. Turm                 --> Drache
+    /// 3. Läufer               --> Pferd
+    /// 4. Goldener General
+    /// 5. Silberner General    --> Goldener General
+    /// 6. Springer             --> Goldener General
+    /// 7. Lanze                --> Goldener General
+    /// 8. Bauer                --> Goldener General
+    /// </summary>
     public class FigurTyp
     {
+        // Erst Bewegunsmuster anlegen.
         private static readonly Bewegungsmuster MUSTERKOENIG = new Bewegungsmuster(new[,] { { -1, -1 }, { 0, -1 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 }, { -1, 0 } });
         private static readonly Bewegungsmuster MUSTERTURM = new Bewegungsmuster(new[,] { { 0, -9 }, { 0, 9 }, { 9, 0 }, { -9, 0 } });
         private static readonly Bewegungsmuster MUSTERLAEUFER = new Bewegungsmuster(new[,] { { -9, -9 }, { -9, 9 }, { 9, 9 }, { 9, -9 } });
@@ -18,6 +34,7 @@ namespace Shogi
         private static readonly Bewegungsmuster MUSTERDRACHE = new Bewegungsmuster(new[,] { { -1, -1 }, { 0, -9 }, { 1, -1 }, { 9, 0 }, { 1, 1 }, { 0, 9 }, { -1, 1 }, { -9, 0 } });
         private static readonly Bewegungsmuster MUSTERPFERD = new Bewegungsmuster(new[,] { { -9, -9 }, { 0, -1 }, { 9, -9 }, { 1, 0 }, { 9, 9 }, { 0, 1 }, { -9, 9 }, { -1, 0 } });
         
+        // Danach die vorgegebenen FigurTypen
         public static readonly FigurTyp KOENIG = new FigurTyp("König", MUSTERKOENIG);
         public static readonly FigurTyp TURM = new FigurTyp("Turm", MUSTERTURM);
         public static readonly FigurTyp LAEUFER = new FigurTyp("Läufer", MUSTERLAEUFER);
