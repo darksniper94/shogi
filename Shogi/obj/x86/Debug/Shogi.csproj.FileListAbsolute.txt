@@ -125,3 +125,4 @@ C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.ShogiSpielfeld.resou
 C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources.resources
 C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.FormRegistrierung.resources
 C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources

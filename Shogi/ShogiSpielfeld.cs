@@ -61,7 +61,7 @@ namespace Shogi
                     arrPFeld[i,j].Padding = new Padding(0);
                     arrPFeld[i,j].Margin = new Padding(1);
                     arrPFeld[i,j].Click += PanelOnClick;
-                    arrPFeld[i,j].Enabled = true;
+                    arrPFeld[i,j].Enabled = false;
                     pnlFeld.Controls.Add(arrPFeld[i,j]);
                 }
 
