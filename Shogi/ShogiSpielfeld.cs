@@ -18,6 +18,9 @@ namespace Shogi
     {
         Spieler spAngemeldet;
         TableLayoutPanel pnlFeld;
+        Panel pnlMenu;
+        Panel pnlSpielfeld;
+        FlowLayoutPanel pnlBasis;
         
         /// <summary>
         /// Konstruktor für das ShogiFenster
@@ -29,9 +32,9 @@ namespace Shogi
             const int consbuttonhohe = 35;
             const int consbuttonbreite = 120;
             InitializeComponent();
-            FlowLayoutPanel pnlBasis = new FlowLayoutPanel();
-            Panel pnlMenu = new Panel();
-            Panel pnlSpielfeld = new Panel();
+            pnlBasis = new FlowLayoutPanel();
+            pnlMenu = new Panel();
+            pnlSpielfeld = new Panel();
             Button bBeenden = new Button();
             Button bEinzel_pause_fort = new Button();
             Button bCoop_Abbrechen = new Button();
@@ -41,7 +44,7 @@ namespace Shogi
             Label lblSpielername = new Label();
             pnlFeld = new TableLayoutPanel();
            
-            pnlFeld.Location = new Point(130, 110);
+            //pnlFeld.Location = new Point(130, 110);
             pnlFeld.ColumnCount = 9;
             pnlFeld.BackColor = Color.FromArgb(170, 130, 70);
             pnlFeld.Width = 470; // (Breite * Anzahl) + ((Anzahl + 1) * (2 * Rand))
@@ -116,6 +119,13 @@ namespace Shogi
             //Logo.Name = "Logo";
             //Logo.Size = new System.Drawing.Size(200, 200);
             //Logo.Image = global::Shogi.Properties.Resources.LogoKlein;
+
+            PictureBox picBambus = new PictureBox();
+            picBambus.Location = new System.Drawing.Point(5, 400);
+            picBambus.Name = "Logo";
+            picBambus.BackColor = Color.Transparent;
+            picBambus.Click += picBambusOnClick;
+            picBambus.Image = global::Shogi.Properties.Resources.Bambus;
        
             pnlBasis.Width = this.Width;
             pnlBasis.Height = this.Height;
@@ -125,6 +135,7 @@ namespace Shogi
             pnlMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlMenu.Height = pnlBasis.Height;
             pnlMenu.Width = 250;
+            //pnlMenu.Width = 10;
             pnlMenu.BackgroundImage = global::Shogi.Properties.Resources.MenuNeu2;
             pnlMenu.Controls.Add(bEinzel_pause_fort);
             pnlMenu.Controls.Add(bCoop_Abbrechen);
@@ -141,7 +152,9 @@ namespace Shogi
             pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
             pnlSpielfeld.BackgroundImage = global::Shogi.Properties.Resources.FeldNeu;
             pnlSpielfeld.BackgroundImageLayout = ImageLayout.Stretch;
+            pnlFeld.Location = new Point(((pnlSpielfeld.Width/2)-pnlFeld.Width/2), 110);
             pnlSpielfeld.Controls.Add(pnlFeld);
+            pnlSpielfeld.Controls.Add(picBambus);
    
             pnlBasis.Controls.Add(pnlMenu);
             pnlBasis.Controls.Add(pnlSpielfeld);
@@ -174,7 +187,7 @@ namespace Shogi
 
         void bEinzel_pause_fortOnClick(object sender, EventArgs e)
         {
-
+            
         }
 
         void bCoop_AbbrechenOnClick(object sender, EventArgs e)
@@ -348,6 +361,12 @@ namespace Shogi
             String regelwerk_html = Path.Combine(appdir, "Regelwerk.html");
             Regelwerk rw = new Regelwerk(regelwerk_html);
             rw.Show();
+        }
+        void picBambusOnClick( object sender, EventArgs e)
+        {
+            pnlMenu.Width = 10;
+            pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
+            pnlFeld.Location = new Point(((pnlSpielfeld.Width / 2) - pnlFeld.Width / 2), 110);
         }
 
     }
