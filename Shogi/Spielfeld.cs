@@ -98,7 +98,7 @@ namespace Shogi
         public Spielfigur[,] GetFeldMatrix()
         {
             Spielfigur[,] feldMatrix = new Spielfigur[this.GetSpalte(), this.GetZeile()];
-            for(int i=0; i<=Feld.Count;i++)
+            for(int i=0; i<Feld.Count;i++)
             {
                 if(Feld.ElementAt(i).IstAktiv)
                 {
