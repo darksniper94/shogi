@@ -29,6 +29,7 @@ namespace Shogi
         public ShogiSpielfeld(Spieler paspAngemeldet)
         {
             spAngemeldet = paspAngemeldet;
+            this.hardClose = false;
             const int consbuttonhohe = 35;
             const int consbuttonbreite = 120;
             InitializeComponent();
@@ -291,6 +292,8 @@ namespace Shogi
             
             if (result == DialogResult.OK)
             {
+                // Schließe Fenster ohne Abfrage
+                this.hardClose = true;
                 this.Close();
             }
             
@@ -346,10 +349,12 @@ namespace Shogi
             
         }
 
+        private Boolean hardClose { get; set; }
+
         private void ShogiSpielfeld_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Wenn nicht beendet werden soll, wird das Event abgebrochen
-            if(beendenAbfrage() != DialogResult.Yes)
+            if(!this.hardClose && beendenAbfrage() != DialogResult.Yes)
             {
                 e.Cancel = true;
             }
