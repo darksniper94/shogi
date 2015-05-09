@@ -8,7 +8,7 @@ namespace Shogi
     /*
      * Logikarme Spielfeldklasse für die generelle Darstellung eines Spielfeldes, mit dynamischer Anpassung an diverse Spiele.
      */
-    class Spielfeld
+    public class Spielfeld
     {
         private List<Spielfigur> feld;
         private Tuple<int, int> dimension;

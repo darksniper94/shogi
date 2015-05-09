@@ -236,11 +236,11 @@ namespace Shogi
         private void speichern()
         {
             DialogResult result = new DialogResult();
-
-            result = MessageBox.Show("Möchten Sie das Spiel speichern?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            result = MessageBox.Show("Möchten Sie das Spiel speichern?", "Spiel Speichern", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 //speichern Methode Datebank klasse
+
             }
         }
 
@@ -354,7 +354,7 @@ namespace Shogi
         private void ShogiSpielfeld_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Wenn nicht beendet werden soll, wird das Event abgebrochen
-            if(!this.hardClose && beendenAbfrage() != DialogResult.Yes)
+            if(!this.hardClose & beendenAbfrage() != DialogResult.Yes)
             {
                 e.Cancel = true;
             }
