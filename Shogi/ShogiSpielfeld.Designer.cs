@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.profilToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.benutzernamenÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.passwortÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,13 +41,20 @@
             this.spielSpeichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielBeendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuToolStripMenuItem});
+            this.menuToolStripMenuItem,
+            this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(984, 24);
@@ -60,17 +66,13 @@
             this.menuToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.profilToolStripMenuItem,
             this.statisikToolStripMenuItem,
+            this.toolStripMenuItem3,
             this.spielSpeichernToolStripMenuItem,
             this.spielLadenToolStripMenuItem,
             this.spielBeendenToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "Menu";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // profilToolStripMenuItem
             // 
@@ -147,17 +149,59 @@
             this.spielBeendenToolStripMenuItem.Text = "Spiel beenden";
             this.spielBeendenToolStripMenuItem.Click += new System.EventHandler(this.spielBeendenToolStripMenuItem_Click);
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.infoToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.hilfeToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(24, 20);
+            this.toolStripMenuItem1.Text = "?";
+            // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.infoToolStripMenuItem.Text = "Info";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            // 
+            // hilfeToolStripMenuItem
+            // 
+            this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hilfeToolStripMenuItem.Text = "Regelwerk";
+            this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.hilfeToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(150, 6);
+            // 
             // ShogiSpielfeld
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
             this.Controls.Add(this.menuStrip1);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "ShogiSpielfeld";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Shogi";
+            this.Text = "Panda Shogi";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ShogiSpielfeld_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ShogiSpielfeld_FormClosed);
+            this.Load += new System.EventHandler(this.ShogiSpielfeld_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -180,6 +224,11 @@
         private System.Windows.Forms.ToolStripMenuItem spielSpeichernToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spielLadenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem spielBeendenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
 
 
     }

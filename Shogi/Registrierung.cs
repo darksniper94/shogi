@@ -21,7 +21,7 @@ namespace Shogi
 
         private void formRegistrierung_Load(object sender, EventArgs e)
         {
-
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
         // Methode bei Betätigung des Abbrechenbuttons
@@ -51,7 +51,6 @@ namespace Shogi
                 
                 // Spieler in db speichern
                 Database.instance.speichereSpieler(spielerTemp);
-                
                 MessageBox.Show("Registrierung erfolgreich abgeschlossen.", "Information",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Information);

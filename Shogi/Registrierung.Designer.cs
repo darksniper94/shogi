@@ -111,6 +111,7 @@
             // 
             // bAbbrechen
             // 
+            this.bAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.bAbbrechen.Location = new System.Drawing.Point(299, 209);
             this.bAbbrechen.Name = "bAbbrechen";
             this.bAbbrechen.Size = new System.Drawing.Size(100, 30);
@@ -131,8 +132,10 @@
             // 
             // FormRegistrierung
             // 
+            this.AcceptButton = this.bRegistrieren;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.bAbbrechen;
             this.ClientSize = new System.Drawing.Size(580, 257);
             this.Controls.Add(this.bAbbrechen);
             this.Controls.Add(this.bRegistrieren);

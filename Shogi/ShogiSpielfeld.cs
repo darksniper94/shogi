@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 
 namespace Shogi
@@ -147,6 +148,19 @@ namespace Shogi
             this.Controls.Add(pnlBasis);
         }
 
+        void statistikAnzeigeBox()
+        {
+            Statistik stat = Database.instance.ladeStatistik(spAngemeldet);
+            if (stat == null)
+            {
+                MessageBox.Show(this, "Keine Statistik vorhanden!", "Warnung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                MessageBox.Show(this, stat.statistikMessage, "Statistik", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
         void PanelOnClick(object sender, EventArgs e)
         {
             Panel pnl = new Panel();
@@ -155,7 +169,7 @@ namespace Shogi
         }
         void bBeendenOnClick(object sender, EventArgs e)
         {
-            beenden();
+            this.Close();
         }
 
         void bEinzel_pause_fortOnClick(object sender, EventArgs e)
@@ -169,7 +183,7 @@ namespace Shogi
         }
         void bStatistikOnClick(object sender, EventArgs e)
         {
-
+            statistikAnzeigeBox();
         }
         void bspeichern_ladenOnClick(object sender, EventArgs e)
         {
@@ -187,7 +201,7 @@ namespace Shogi
 
         private void spielBeendenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            beenden();
+            this.Close();
         }
 
         private void spielLadenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -200,22 +214,16 @@ namespace Shogi
             speichern();
         }
 
-        private void beenden()
+        private DialogResult beendenAbfrage()
         {
-            DialogResult result = new DialogResult();
-
-            result = MessageBox.Show("Möchten Sie das Spiel wirklich beenden?", "Beenden", MessageBoxButtons.YesNoCancel);
-            if (result == DialogResult.Yes)
-            {
-                this.Close();
-            }
+            return MessageBox.Show("Möchten Sie das Spiel wirklich beenden?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
         }
 
         private void speichern()
         {
             DialogResult result = new DialogResult();
 
-            result = MessageBox.Show("Möchten Sie das Spiel speichern?", "Beenden", MessageBoxButtons.YesNoCancel);
+            result = MessageBox.Show("Möchten Sie das Spiel speichern?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 //speichern Methode Datebank klasse
@@ -226,7 +234,7 @@ namespace Shogi
         {
             DialogResult result = new DialogResult();
 
-            result = MessageBox.Show("Möchten Sie das Spiel laden?", "Beenden", MessageBoxButtons.YesNoCancel);
+            result = MessageBox.Show("Möchten Sie das Spiel laden?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 //laden Methode Datebank klasse
@@ -236,12 +244,17 @@ namespace Shogi
 
         private void ansehenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //statistik 
+            statistikAnzeigeBox();
         }
 
         private void zurücksetzenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //statistik zurück setzen Methode der Datenbank klasse
+            DialogResult result = MessageBox.Show(this, "Möchten Sie ihre Statistik zurücksetzten?", "Statistik zurücksetzten", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(result == DialogResult.Yes)
+            {
+                Database.instance.loescheStatistik(spAngemeldet);
+            }
+            
         }
 
         private void benutzernamenÄndernToolStripMenuItem_Click(object sender, EventArgs e)
@@ -309,5 +322,33 @@ namespace Shogi
                 //image auf anderes Panel setzen
             }
         }
+
+        private void ShogiSpielfeld_Load(object sender, EventArgs e)
+        {
+            this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+        }
+
+        private void ShogiSpielfeld_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            
+        }
+
+        private void ShogiSpielfeld_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Wenn nicht beendet werden soll, wird das Event abgebrochen
+            if(beendenAbfrage() != DialogResult.Yes)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            String appdir = Path.GetDirectoryName(Application.ExecutablePath);
+            String regelwerk_html = Path.Combine(appdir, "Regelwerk.html");
+            Regelwerk rw = new Regelwerk(regelwerk_html);
+            rw.Show();
+        }
+
     }
 }

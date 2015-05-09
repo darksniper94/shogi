@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
 [assembly: AssemblyTitle("Shogi")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Japanisches Schachspiel")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("PandaSoft")]
 [assembly: AssemblyProduct("Shogi")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
