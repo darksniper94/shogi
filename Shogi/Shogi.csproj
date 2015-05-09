@@ -128,6 +128,7 @@
     <Compile Include="Spieler.cs" />
     <Compile Include="Spielfeld.cs" />
     <Compile Include="Spielfigur.cs" />
+    <Compile Include="Spielleiter_Spiellogik.cs" />
     <Compile Include="Statistik.cs" />
     <Compile Include="Testklasse_Logik.cs" />
     <EmbeddedResource Include="Anmeldung.resx">
