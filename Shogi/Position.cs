@@ -27,15 +27,31 @@ namespace Shogi
     {
         private Tuple<int, int> koordinaten;
 
+        public Tuple<int, int> Koordinaten
+        {
+            set
+            {
+                if ((value.Item1 == 0 && value.Item2 != 0) || (value.Item2 == 0 && value.Item1 != 0))
+                {
+                    koordinaten = value;
+                }
+                else
+                {
+                    throw new ArgumentException("Ungültige Position!");
+                }
+            }
+            get { return koordinaten; }
+        }
+
         public int Spalte
         {
-            get { return koordinaten.Item1; }
+            get { return Koordinaten.Item1; }
         }
         public int Zeile
         {
-            get { return koordinaten.Item2; }
+            get { return Koordinaten.Item2; }
         }
-        
+
         /// <summary>
         /// Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
         /// </summary>
@@ -43,7 +59,7 @@ namespace Shogi
         /// <param name="zeile">Zeilenwert der Position.</param>
         public Position(int spalte, int zeile)
         {
-            this.koordinaten = new Tuple<int,int>(spalte, zeile);
+            this.Koordinaten = new Tuple<int, int>(spalte, zeile);
         }
 
         /// <summary>
