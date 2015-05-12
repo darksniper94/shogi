@@ -196,20 +196,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
-    <Content Include="Resources\BauerJ.png" />
-    <Content Include="Resources\befoerderteLanzeJ.png" />
-    <Content Include="Resources\befoerderterBauerJ.png" />
-    <Content Include="Resources\befoerderterSilberJ.png" />
-    <Content Include="Resources\befoerderterSpringerJ.png" />
-    <Content Include="Resources\DracheJ.png" />
-    <Content Include="Resources\GoldenerGeneralJ.png" />
-    <Content Include="Resources\KoenigJ.png" />
-    <Content Include="Resources\LaeuferJ.png" />
-    <Content Include="Resources\LanzeJ.png" />
-    <Content Include="Resources\PferdJ.png" />
-    <Content Include="Resources\SilbernerGeneralJ.png" />
-    <Content Include="Resources\SpringerJ.png" />
-    <Content Include="Resources\TurmJ.png" />
+    <None Include="Resources\TurmJ.png" />
+    <None Include="Resources\BauerJ.png" />
+    <None Include="Resources\befoerderteLanzeJ.png" />
+    <None Include="Resources\befoerderterBauerJ.png" />
+    <None Include="Resources\befoerderterSilberJ.png" />
+    <None Include="Resources\befoerderterSpringerJ.png" />
+    <None Include="Resources\DracheJ.png" />
+    <None Include="Resources\GoldenerGeneralJ.png" />
+    <None Include="Resources\KoenigJ.png" />
+    <None Include="Resources\LaeuferJ.png" />
+    <None Include="Resources\LanzeJ.png" />
+    <None Include="Resources\PferdJ.png" />
+    <None Include="Resources\SilbernerGeneralJ.png" />
+    <None Include="Resources\SpringerJ.png" />
     <None Include="Resources\Bambus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

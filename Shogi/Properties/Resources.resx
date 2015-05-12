@@ -121,13 +121,55 @@
   <data name="Bambus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Bambus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BauerJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BauerJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderteLanzeJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderteLanzeJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderterBauerJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderterBauerJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderterSilberJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderterSilberJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderterSpringerJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderterSpringerJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DracheJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DracheJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="FeldNeu" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\FeldNeu.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GoldenerGeneralJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GoldenerGeneralJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KoenigJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KoenigJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LaeuferJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LaeuferJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LanzeJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LanzeJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="LogoKlein" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\LogoKlein.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="MenuNeu2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\MenuNeu2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PferdJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PferdJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SilbernerGeneralJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilbernerGeneralJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SpringerJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpringerJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TurmJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TurmJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

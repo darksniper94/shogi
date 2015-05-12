@@ -67,6 +67,29 @@ namespace Shogi
                     arrPFeld[i,j].Click += PanelOnClick;
                     arrPFeld[i,j].Enabled = false;
                     pnlFeld.Controls.Add(arrPFeld[i,j]);
+                    switch (i)
+                    {
+                        case 1:
+                                
+                            break;
+                        case 2:
+                                break;
+                        case 3:
+                                arrPFeld[i,j].BackgroundImage = global::Shogi.Properties.Resources
+                                break;
+                        case 4:
+                                break;
+                        case 5:
+                                break;
+                        case 6:
+                                break;
+                        case 7:
+                                break;
+                        case 8:
+                                break;
+                        case 9:
+                                break;
+                    }
                 }
 
             }
@@ -380,6 +403,7 @@ namespace Shogi
             pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
             pnlFeld.Location = new Point(((pnlSpielfeld.Width / 2) - pnlFeld.Width / 2), 110);
         }
+        
 
     }
 }
