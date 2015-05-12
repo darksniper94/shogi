@@ -50,8 +50,8 @@ namespace Shogi
             pnlFeld.BackColor = Color.FromArgb(170, 130, 70);
             pnlFeld.Width = 470; // (Breite * Anzahl) + ((Anzahl + 1) * (2 * Rand))
             pnlFeld.Height= 470;
-            pnlFeld.Padding = new Padding(1);
-            pnlFeld.Margin = new Padding(0);
+            //pnlFeld.Padding = new Padding(1);
+            //pnlFeld.Margin = new Padding(0);
           
             for (int i = 0; i < 9;i++ )
             {
@@ -69,26 +69,91 @@ namespace Shogi
                     pnlFeld.Controls.Add(arrPFeld[i,j]);
                     switch (i)
                     {
+                        case 0:   
+                                if (j == 3|| j == 5)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 0 || j == 8)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 4)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.KoenigJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 2 || j == 6)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 1 || j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                break;
                         case 1:
-                                
-                            break;
+                                if (j == 1 )
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                break;
                         case 2:
+                                arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
                                 break;
                         case 3:
-                                arrPFeld[i,j].BackgroundImage = global::Shogi.Properties.Resources
                                 break;
                         case 4:
                                 break;
                         case 5:
                                 break;
                         case 6:
+                                arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
                                 break;
                         case 7:
+                                if (j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
+                                }
+                                if (j == 1)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
+                                }
                                 break;
                         case 8:
+                                if (j == 3 || j == 5)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
+                                }
+                                if (j == 0 || j == 8)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
+                                }
+                                if (j == 4)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.KoenigJ;
+                                }
+                                if (j == 2 || j == 6)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
+                                }
+                                if (j == 1 || j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
+                                }
                                 break;
-                        case 9:
-                                break;
+                                
                     }
                 }
 
@@ -145,9 +210,10 @@ namespace Shogi
             //Logo.Image = global::Shogi.Properties.Resources.LogoKlein;
 
             PictureBox picBambus = new PictureBox();
-            picBambus.Location = new System.Drawing.Point(5, 400);
+            picBambus.Location = new System.Drawing.Point(-5, 0);
             picBambus.Name = "Logo";
             picBambus.BackColor = Color.Transparent;
+            picBambus.Size = new System.Drawing.Size(20, 700);
             picBambus.Click += picBambusOnClick;
             picBambus.Image = global::Shogi.Properties.Resources.Bambus;
 
@@ -156,7 +222,7 @@ namespace Shogi
             pnlBasis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
             pnlMenu.Margin = new Padding(0);
-            pnlMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            //pnlMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlMenu.Height = pnlBasis.Height;
             pnlMenu.Width = 250;
             //pnlMenu.Width = 10;
@@ -171,7 +237,7 @@ namespace Shogi
 
 
             pnlSpielfeld.Margin = new Padding(0);
-            pnlSpielfeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            //pnlSpielfeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             pnlSpielfeld.Height = pnlBasis.Height;
             pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
             pnlSpielfeld.BackgroundImage = global::Shogi.Properties.Resources.FeldNeu;
