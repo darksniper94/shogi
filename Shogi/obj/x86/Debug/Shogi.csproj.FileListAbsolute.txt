@@ -128,3 +128,5 @@ C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResou
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
+C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
+C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources

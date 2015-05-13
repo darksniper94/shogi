@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Shogi
 {
-    class Spielleiter_Spiellogik
+    public class Spielleiter_Spiellogik
     {
         private static Spielleiter_Spiellogik inst = null;
 
