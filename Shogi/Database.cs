@@ -216,5 +216,10 @@ namespace Shogi
             return "";
         }
 
+        public void speichereSpiel(Spielfeld feld)
+        {
+
+        }
+
     }
 }

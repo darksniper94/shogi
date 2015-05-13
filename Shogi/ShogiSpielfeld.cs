@@ -18,6 +18,19 @@ namespace Shogi
     {
         Spieler spAngemeldet;
         TableLayoutPanel pnlFeld;
+        Panel pnlMenu;
+        Panel pnlSpielfeld;
+        FlowLayoutPanel pnlBasis;
+        Spielleiter_Spiellogik spielleiter;
+        Button bBeenden;
+        Button bEinzel_pause_fort;
+        Button bCoop_Abbrechen;
+        Button bStatistik;
+        Button bspeichern_laden;
+        TableLayoutPanel pnlSp1Ers;
+        TableLayoutPanel pnlSp2Ers;
+        int clickCount;
+        
         
         /// <summary>
         /// Konstruktor für das ShogiFenster
@@ -26,45 +39,226 @@ namespace Shogi
         public ShogiSpielfeld(Spieler paspAngemeldet)
         {
             spAngemeldet = paspAngemeldet;
+            this.hardClose = false;
             const int consbuttonhohe = 35;
             const int consbuttonbreite = 120;
             InitializeComponent();
-            FlowLayoutPanel pnlBasis = new FlowLayoutPanel();
-            Panel pnlMenu = new Panel();
-            Panel pnlSpielfeld = new Panel();
-            Button bBeenden = new Button();
-            Button bEinzel_pause_fort = new Button();
-            Button bCoop_Abbrechen = new Button();
-            Button bStatistik = new Button();
-            Button bspeichern_laden = new Button();
-            Panel[,] arrPFeld = new Panel[9,9];
+            pnlBasis = new FlowLayoutPanel();
+            pnlMenu = new Panel();
+            pnlSpielfeld = new Panel();
+            bBeenden = new Button();
+            bEinzel_pause_fort = new Button();
+            bCoop_Abbrechen = new Button();
+            bStatistik = new Button();
+            bspeichern_laden = new Button();
+            Panel[,] arrPFeld = new Panel[11,9];
             Label lblSpielername = new Label();
             pnlFeld = new TableLayoutPanel();
-           
-            pnlFeld.Location = new Point(130, 110);
+            pnlSp1Ers = new TableLayoutPanel();
+            pnlSp2Ers = new TableLayoutPanel();
+            clickCount = 0;
+
+            //pnlFeld.Location = new Point(130, 110);
             pnlFeld.ColumnCount = 9;
             pnlFeld.BackColor = Color.FromArgb(170, 130, 70);
             pnlFeld.Width = 470; // (Breite * Anzahl) + ((Anzahl + 1) * (2 * Rand))
             pnlFeld.Height= 470;
             pnlFeld.Padding = new Padding(1);
-            pnlFeld.Margin = new Padding(0);
-          
-            for (int i = 0; i < 9;i++ )
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    arrPFeld[i,j] = new Panel();
-                    arrPFeld[i,j].Name = "" + (i + 1)  + (j + 1);
-                    arrPFeld[i,j].Height = 50;
-                    arrPFeld[i,j].Width = 50;
-                    arrPFeld[i,j].BackColor = Color.FromArgb(244, 223, 186);
-                    arrPFeld[i,j].Padding = new Padding(0);
-                    arrPFeld[i,j].Margin = new Padding(1);
-                    arrPFeld[i,j].Click += PanelOnClick;
-                    arrPFeld[i,j].Enabled = false;
-                    pnlFeld.Controls.Add(arrPFeld[i,j]);
-                }
+            //pnlFeld.Margin = new Padding(0);
+            pnlSp2Ers.ColumnCount = 9;
+            pnlSp2Ers.BackColor = Color.FromArgb(170, 130, 70);
+            pnlSp2Ers.Width = 470; // (Breite * Anzahl) + ((Anzahl + 1) * (2 * Rand))
+            pnlSp2Ers.Height = 54;
+            pnlSp2Ers.Padding = new Padding(1);
 
+            pnlSp1Ers.ColumnCount = 9;
+            pnlSp1Ers.BackColor = Color.FromArgb(170, 130, 70);
+            pnlSp1Ers.Width = 470; // (Breite * Anzahl) + ((Anzahl + 1) * (2 * Rand))
+            pnlSp1Ers.Height = 54;
+            pnlSp1Ers.Padding = new Padding(1);
+
+          
+            for (int i = 0; i <= 10;i++ )
+            {
+                    for (int j = 0; j < 9; j++)
+                    {
+                        arrPFeld[i, j] = new Panel();
+                        arrPFeld[i, j].Height = 50;
+                        arrPFeld[i, j].Width = 50;
+                        arrPFeld[i, j].BackColor = Color.FromArgb(244, 223, 186);
+                        arrPFeld[i, j].Padding = new Padding(0);
+                        arrPFeld[i, j].Margin = new Padding(1);
+                        arrPFeld[i, j].Click += PanelOnClick;
+                        arrPFeld[i, j].Enabled = false;
+                        if (i == 0 || i == 10)
+                        {
+                            if (i == 0)
+                            {
+                                pnlSp2Ers.Controls.Add(arrPFeld[i, j]);
+                            }else
+                            {
+                                pnlSp1Ers.Controls.Add(arrPFeld[i, j]);
+                            }
+                        }else
+                        {
+                            pnlFeld.Controls.Add(arrPFeld[i, j]);
+                        }
+                        
+                        switch (i)
+                        {
+                            case 0:
+                                if (j == 1)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 2)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 3)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 4)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 5)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 6)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                break;
+                            case 1:
+                                if (j == 3 || j == 5)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 0 || j == 8)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 4)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.KoenigJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 2 || j == 6)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 1 || j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                break;
+                            case 2:
+                                if (j == 1)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                if (j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
+                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                }
+                                break;
+                            case 3:
+                                arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                break;
+                            case 4:
+                                break;
+                            case 5:
+                                break;
+                            case 6:
+                                break;
+                            case 7:
+                                arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
+                                break;
+                            case 8:
+                                if (j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
+                                }
+                                if (j == 1)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
+                                }
+                                break;
+                            case 9:
+                                if (j == 3 || j == 5)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
+                                }
+                                if (j == 0 || j == 8)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
+                                }
+                                if (j == 4)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.KoenigJ;
+                                }
+                                if (j == 2 || j == 6)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
+                                }
+                                if (j == 1 || j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
+                                }
+                                break;
+                            case 10:
+                                if (j == 1)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
+                                }
+                                if (j == 2)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
+                                }
+                                if (j == 3)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
+                                }
+                                if (j == 4)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
+                                }
+                                if (j == 5)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
+                                }
+                                if (j == 6)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
+                                }
+                                if (j == 7)
+                                {
+                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
+                                }
+                                break;
+                        }
+                }
             }
 
             lblSpielername.Font = new Font("Book Antiqua", 11);
@@ -116,15 +310,24 @@ namespace Shogi
             //Logo.Name = "Logo";
             //Logo.Size = new System.Drawing.Size(200, 200);
             //Logo.Image = global::Shogi.Properties.Resources.LogoKlein;
-       
+
+            PictureBox picBambus = new PictureBox();
+            picBambus.Location = new System.Drawing.Point(-5, 0);
+            picBambus.Name = "Logo";
+            picBambus.BackColor = Color.Transparent;
+            picBambus.Size = new System.Drawing.Size(20, 700);
+            picBambus.Click += picBambusOnClick;
+            picBambus.Image = global::Shogi.Properties.Resources.Bambus;
+
             pnlBasis.Width = this.Width;
             pnlBasis.Height = this.Height;
             pnlBasis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
             pnlMenu.Margin = new Padding(0);
-            pnlMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            //pnlMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlMenu.Height = pnlBasis.Height;
             pnlMenu.Width = 250;
+            //pnlMenu.Width = 10;
             pnlMenu.BackgroundImage = global::Shogi.Properties.Resources.MenuNeu2;
             pnlMenu.Controls.Add(bEinzel_pause_fort);
             pnlMenu.Controls.Add(bCoop_Abbrechen);
@@ -136,12 +339,18 @@ namespace Shogi
 
 
             pnlSpielfeld.Margin = new Padding(0);
-            pnlSpielfeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            //pnlSpielfeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             pnlSpielfeld.Height = pnlBasis.Height;
             pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
             pnlSpielfeld.BackgroundImage = global::Shogi.Properties.Resources.FeldNeu;
             pnlSpielfeld.BackgroundImageLayout = ImageLayout.Stretch;
+            pnlFeld.Location = new Point(((pnlSpielfeld.Width/2)-pnlFeld.Width/2), 110);
+            pnlSp2Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp2Ers.Width / 2), 30);
+            pnlSp1Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp1Ers.Width / 2), 130+ pnlFeld.Height);
             pnlSpielfeld.Controls.Add(pnlFeld);
+            pnlSpielfeld.Controls.Add(picBambus);
+            pnlSpielfeld.Controls.Add(pnlSp2Ers);
+            pnlSpielfeld.Controls.Add(pnlSp1Ers);
    
             pnlBasis.Controls.Add(pnlMenu);
             pnlBasis.Controls.Add(pnlSpielfeld);
@@ -163,9 +372,16 @@ namespace Shogi
 
         void PanelOnClick(object sender, EventArgs e)
         {
-            Panel pnl = new Panel();
-            pnl = (Panel)sender;
-            MessageBox.Show(pnl.Tag.ToString());
+            clickCount = clickCount + 1;
+            if (clickCount == 2)
+            {
+                clickCount = 0;
+                Panel tmp;
+                tmp = (Panel)sender;
+
+                MessageBox.Show("" + tmp.Tag);
+            }
+            
         }
         void bBeendenOnClick(object sender, EventArgs e)
         {
@@ -174,12 +390,38 @@ namespace Shogi
 
         void bEinzel_pause_fortOnClick(object sender, EventArgs e)
         {
-
+            Button tmp;
+            tmp = (Button)sender;
+            if (tmp.Text == "Einzel Spiel")
+            {
+                try
+                {
+                    spielleiter = new Spielleiter_Spiellogik();
+                }
+                catch(Exception ex)
+                {
+                    
+                }
+                tmp.Text = "Pause";
+                bCoop_Abbrechen.Text = "Abbrechen";
+                bspeichern_laden.Text = "Speichern";
+            }
+            foreach (Control c in pnlFeld.Controls)
+            {
+                c.Enabled = true;
+            }
+            foreach (Control c in pnlSp1Ers.Controls)
+            {
+                c.Enabled = true;
+            }
+            foreach (Control c in pnlSp2Ers.Controls)
+            {
+                c.Enabled = true;
+            }
         }
 
         void bCoop_AbbrechenOnClick(object sender, EventArgs e)
         {
-
         }
         void bStatistikOnClick(object sender, EventArgs e)
         {
@@ -222,11 +464,11 @@ namespace Shogi
         private void speichern()
         {
             DialogResult result = new DialogResult();
-
-            result = MessageBox.Show("Möchten Sie das Spiel speichern?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+            result = MessageBox.Show("Möchten Sie das Spiel speichern?", "Spiel Speichern", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 //speichern Methode Datebank klasse
+
             }
         }
 
@@ -278,6 +520,8 @@ namespace Shogi
             
             if (result == DialogResult.OK)
             {
+                // Schließe Fenster ohne Abfrage
+                this.hardClose = true;
                 this.Close();
             }
             
@@ -333,10 +577,12 @@ namespace Shogi
             
         }
 
+        private Boolean hardClose { get; set; }
+
         private void ShogiSpielfeld_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Wenn nicht beendet werden soll, wird das Event abgebrochen
-            if(beendenAbfrage() != DialogResult.Yes)
+            if(!this.hardClose & beendenAbfrage() != DialogResult.Yes)
             {
                 e.Cancel = true;
             }
@@ -349,6 +595,22 @@ namespace Shogi
             Regelwerk rw = new Regelwerk(regelwerk_html);
             rw.Show();
         }
+        void picBambusOnClick( object sender, EventArgs e)
+        {
+            if (pnlMenu.Width == 10)
+            { 
+                 pnlMenu.Width = 250; 
+            }
+            else
+            {
+                pnlMenu.Width = 10;
+            }
+            pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
+            pnlFeld.Location = new Point(((pnlSpielfeld.Width / 2) - pnlFeld.Width / 2), 110);
+            pnlSp2Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp2Ers.Width / 2), 10);
+            pnlSp1Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp1Ers.Width / 2), 150 + pnlFeld.Height);
+        }
+        
 
     }
 }
