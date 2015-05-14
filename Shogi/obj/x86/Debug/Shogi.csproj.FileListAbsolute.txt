@@ -126,3 +126,9 @@ C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources
 C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.FormRegistrierung.resources
 C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
+C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
+C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe.config
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe

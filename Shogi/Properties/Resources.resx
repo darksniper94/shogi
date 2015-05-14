@@ -172,4 +172,130 @@
   <data name="TurmJ" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TurmJ.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="BauerB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BauerB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BauerD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BauerD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BauerE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BauerE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderteLanzeB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderteLanzeB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderteLanzeD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderteLanzeD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderteLanzeE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderteLanzeE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderterSilbernerGeneralB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderterSilbernerGeneralB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderterSilbernerGeneralD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderterSilbernerGeneralD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderterSilbernerGeneralE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderterSilbernerGeneralE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderterSpringerB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderterSpringerB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderterSpringerD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderterSpringerD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="befoerderterSpringerE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\befoerderterSpringerE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DracheB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DracheB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DracheD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DracheD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DracheE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DracheE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GoldenerGeneralB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GoldenerGeneralB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GoldenerGeneralD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GoldenerGeneralD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GoldenerGeneralE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GoldenerGeneralE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KoenigB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KoenigB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KoenigD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KoenigD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="KoenigE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\KoenigE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LaeuferB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LaeuferB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LaeuferD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LaeuferD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LaeuferE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LaeuferE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LanzeB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LanzeB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LanzeD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LanzeD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="LanzeE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LanzeE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PferdB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PferdB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PferdD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PferdD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="PferdE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PferdE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SilbernerGeneralB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilbernerGeneralB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SilbernerGeneralD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilbernerGeneralD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SilbernerGeneralE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SilbernerGeneralE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SpringerB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpringerB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SpringerD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpringerD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SpringerE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SpringerE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TokinB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TokinB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TokinD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TokinD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TokinE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TokinE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TurmB" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TurmB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TurmD" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TurmD.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TurmE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TurmE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

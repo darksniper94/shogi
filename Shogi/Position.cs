@@ -82,6 +82,11 @@ namespace Shogi
             //return this.Spalte.ToString() + "" + this.Zeile.ToString();
         }
 
+        public Position clone()
+        {
+            return new Position(this.Spalte, this.Zeile);
+        }
+
         //public char Spalte
         //{
         //    get { return (char)(x + 48); }
