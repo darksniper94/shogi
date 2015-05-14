@@ -130,3 +130,5 @@ C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
 C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
 C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe.config
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe

@@ -167,11 +167,127 @@ namespace Shogi
                 // 4. Ist Spiel beendet
                 beendet = istSpielBeendet();
             }
-            
             throw new NotSupportedException();
         }
 
         private bool istSpielBeendet()
+        {
+            Spielfigur koenig;
+            Boolean istSchachmatt = false;
+            for (int i = 0; i < GetFeld().Feld.Count(); i++)
+            {
+                koenig = GetFeld().Feld.ElementAt(i);
+                if (koenig.Typ.Equals(FigurTyp.KOENIG))
+                {
+                    if (koenig.Besitzer.Equals(InaktiverSpieler))
+                    {
+                        if (istKoenigBewegungsfaehig(koenig) && istSchach(koenig) && istBlockierbar(koenig))
+                        {
+                            istSchachmatt = true;
+                        }
+                    }
+                }
+            }
+            return istSchachmatt;
+        }
+
+        private bool istKoenigBewegungsfaehig(Spielfigur paKoenig)
+        {
+            bool bewegungsfaehig = false;
+            bool eineFigurDecktBewegungsoptionDesKoenigs = false;
+            bool istBewegungsoptionVonKoenigInFelddimension;
+            Position ursprungsPosition, neuePosition;
+            Tuple<int, int> bewegung;
+            //für jedes Bewegungsmuster des Königs überprüfe ob es frei ist, wenn frei setzte bewegungsfähig = true
+            for (int i = 0; i < paKoenig.Typ.getBewegungsmuster().Muster.Count; i++)
+            {
+                //erstelle Positionsklon von König
+                ursprungsPosition = new Position(paKoenig.Position.Spalte, paKoenig.Position.Zeile);
+                bewegung = paKoenig.Typ.getBewegungsmuster().Muster.ElementAt(i);
+                //neue Position zum vereinfachten weiterarbeiten
+                neuePosition = new Position(ursprungsPosition.Spalte + bewegung.Item1, ursprungsPosition.Zeile + bewegung.Item2);
+                eineFigurDecktBewegungsoptionDesKoenigs = false;
+                //if um bool zu setzen Ausdruck in () ist wie ein if(), ist dies false wird der bool auch auf false gesetzt
+                istBewegungsoptionVonKoenigInFelddimension = (neuePosition.Spalte > 0 && neuePosition.Spalte <= GetFeld().Dimension.Item1 && neuePosition.Zeile > 0 && neuePosition.Zeile <= GetFeld().Dimension.Item2) ? true : false;
+                if (istBewegungsoptionVonKoenigInFelddimension)
+                {
+                    //für alle Spielfiguren die dem aktiven Spieler gehören, überprüfen ob sie ein feld belegen auf dem der König bewegen kann
+                    for (int index = 0; index < GetFeld().Feld.Count(); index++)
+                    {
+                        if (GetFeld().Feld.ElementAt(i).Besitzer.Equals(AktiverSpieler))
+                        {
+                            Spielfigur paFigur = GetFeld().Feld.ElementAt(index);
+                            Position ursprungsPositionPaFigur, neuePositionPaFigur;
+                            Tuple<int, int> bewegungPaFigur;
+                            //für alle bewegungsmunster der paFigur
+                            for (int paBewegung = 0; paBewegung < paFigur.Typ.getBewegungsmuster().Muster.Count; paBewegung++)
+                            {
+                                //Positionsklon der paFigur
+                                ursprungsPositionPaFigur = new Position(paFigur.Position.Spalte, paFigur.Position.Zeile);
+                                bewegungPaFigur = paFigur.Typ.getBewegungsmuster().Muster.ElementAt(i);
+                                //neue Position der paFigur
+                                neuePositionPaFigur = new Position(ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1, ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2);
+                                //wenn neue Position des Königs und neue Positon der paFigur übereinstimmen (Feld ist belegt)
+                                if (neuePositionPaFigur.Spalte == neuePosition.Spalte && neuePositionPaFigur.Zeile == neuePosition.Zeile)
+                                {
+                                    eineFigurDecktBewegungsoptionDesKoenigs = true;
+                                }
+                            }
+                        }
+                        else if (GetFeld().Feld.ElementAt(i).Besitzer.Equals(InaktiverSpieler))
+                        {
+                            Spielfigur paFigur = GetFeld().Feld.ElementAt(i);
+                            if (paFigur.Position.Spalte == neuePosition.Spalte && paFigur.Position.Zeile == neuePosition.Zeile)
+                            {
+                                eineFigurDecktBewegungsoptionDesKoenigs = true;
+                            }
+                        }
+                        if (!eineFigurDecktBewegungsoptionDesKoenigs)
+                        {
+                            //goto doublebreak, welches ein label ist, um ein break outer; zu simulieren, da c# dies nicht unterstützt.
+                            bewegungsfaehig = true;
+                            goto doublebreakBewegungsfaehig;
+                        }
+                    }
+                }
+            }
+        doublebreakBewegungsfaehig:
+            return bewegungsfaehig;
+        }
+
+        public bool istSchach(Spielfigur paKoenig)
+        {
+            bool istSchachGesetzt = false;
+            Spielfigur paFigur;
+            Position ursprungsPositionPaFigur, neuePositionPaFigur;
+            Tuple<int, int> bewegungPaFigur;
+            for (int i = 0; i < GetFeld().Feld.Count; i++)
+            {
+                paFigur = GetFeld().Feld.ElementAt(i);
+                if (paFigur.Besitzer.Equals(AktiverSpieler))
+                {
+                    //für alle bewegungsmunster der paFigur
+                    for (int paBewegung = 0; paBewegung < paFigur.Typ.getBewegungsmuster().Muster.Count; paBewegung++)
+                    {
+                        //Positionsklon der paFigur
+                        ursprungsPositionPaFigur = new Position(paFigur.Position.Spalte, paFigur.Position.Zeile);
+                        bewegungPaFigur = paFigur.Typ.getBewegungsmuster().Muster.ElementAt(i);
+                        //neue Position der paFigur
+                        neuePositionPaFigur = new Position(ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1, ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2);
+                        //wenn Position des Königs und neue Positon der paFigur übereinstimmen ist der König im Schach
+                        if (neuePositionPaFigur.Spalte == paKoenig.Position.Spalte && neuePositionPaFigur.Zeile == paKoenig.Position.Zeile)
+                        {
+                            istSchachGesetzt = true;
+                            goto doublebreakSchach;
+                        }
+                    }
+                }
+            }
+        doublebreakSchach:
+            return istSchachGesetzt;
+        }
+
+        private bool istBlockierbar(Spielfigur paKoenig)
         {
             throw new NotSupportedException();
         }
@@ -181,17 +297,16 @@ namespace Shogi
          */
         private void spielerwechsel()
         {
-            if (aktiverSpieler != null && inaktiverSpieler != null)
+            if (this.AktiverSpieler != null && this.InaktiverSpieler != null)
             {
-                Spieler temp = aktiverSpieler;
-                aktiverSpieler = inaktiverSpieler;
-                inaktiverSpieler = temp;
+                Spieler temp = this.AktiverSpieler;
+                this.AktiverSpieler = this.InaktiverSpieler;
+                this.InaktiverSpieler = temp;
             }
             else
             {
                 throw new NullReferenceException("Der aktiver Spieler ist " + aktiverSpieler.benutzername + " der inaktive Spieler ist " + inaktiverSpieler.benutzername);
             }
-            
         }
 
         private bool pruefeZug(Spielfigur paSpielfigur, Position paZielposition)
