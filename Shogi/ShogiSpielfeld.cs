@@ -21,7 +21,6 @@ namespace Shogi
         Panel pnlMenu;
         Panel pnlSpielfeld;
         FlowLayoutPanel pnlBasis;
-        Spielleiter_Spiellogik spielleiter;
         Button bBeenden;
         Button bEinzel_pause_fort;
         Button bCoop_Abbrechen;
@@ -29,6 +28,21 @@ namespace Shogi
         Button bspeichern_laden;
         TableLayoutPanel pnlSp1Ers;
         TableLayoutPanel pnlSp2Ers;
+        Label lblBauerSp1;
+        Label lblGoldenerGeneralSp1;
+        Label lblLaueferSp1;
+        Label lblLanzeSp1;
+        Label lblSilbernerGeneralSp1;
+        Label lblSpringerSp1;
+        Label lblTurmSp1;
+        Label lblBauerSp2;
+        Label lblGoldenerGeneralSp2;
+        Label lblLaueferSp2;
+        Label lblLanzeSp2;
+        Label lblSilbernerGeneralSp2;
+        Label lblSpringerSp2;
+        Label lblTurmSp2;
+
         int clickCount;
         
         
@@ -56,6 +70,20 @@ namespace Shogi
             pnlFeld = new TableLayoutPanel();
             pnlSp1Ers = new TableLayoutPanel();
             pnlSp2Ers = new TableLayoutPanel();
+            lblBauerSp1 = new Label();
+            lblGoldenerGeneralSp1 = new Label();
+            lblLaueferSp1 = new Label();
+            lblLanzeSp1 = new Label();
+            lblSilbernerGeneralSp1 = new Label();
+            lblSpringerSp1 = new Label();
+            lblTurmSp1 = new Label();
+            lblBauerSp2 = new Label();
+            lblGoldenerGeneralSp2 = new Label();
+            lblLaueferSp2 = new Label();
+            lblLanzeSp2 = new Label();
+            lblSilbernerGeneralSp2 = new Label();
+            lblSpringerSp2 = new Label();
+            lblTurmSp2 = new Label();
             clickCount = 0;
 
             //pnlFeld.Location = new Point(130, 110);
@@ -111,36 +139,78 @@ namespace Shogi
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    lblBauerSp2.BackColor = Color.Transparent;
+                                    lblBauerSp2.ForeColor = Color.Red;
+                                    lblBauerSp2.Text = "0";
+                                    lblBauerSp2.Font = new Font("Book Antiqua", 12);
+                                    lblBauerSp2.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblBauerSp2);
                                 }
                                 if (j == 2)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    lblGoldenerGeneralSp2.BackColor = Color.Transparent;
+                                    lblGoldenerGeneralSp2.ForeColor = Color.Red;
+                                    lblGoldenerGeneralSp2.Text = "0";
+                                    lblGoldenerGeneralSp2.Font = new Font("Book Antiqua", 12);
+                                    lblGoldenerGeneralSp2.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblGoldenerGeneralSp2);
                                 }
                                 if (j == 3)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    lblLaueferSp2.BackColor = Color.Transparent;
+                                    lblLaueferSp2.ForeColor = Color.Red;
+                                    lblLaueferSp2.Text = "0";
+                                    lblLaueferSp2.Font = new Font("Book Antiqua", 12);
+                                    lblLaueferSp2.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblLaueferSp2);
                                 }
                                 if (j == 4)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    lblLanzeSp2.BackColor = Color.Transparent;
+                                    lblLanzeSp2.ForeColor = Color.Red;
+                                    lblLanzeSp2.Text = "0";
+                                    lblLanzeSp2.Font = new Font("Book Antiqua", 12);
+                                    lblLanzeSp2.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblLanzeSp2);
                                 }
                                 if (j == 5)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    lblSilbernerGeneralSp2.BackColor = Color.Transparent;
+                                    lblSilbernerGeneralSp2.ForeColor = Color.Red;
+                                    lblSilbernerGeneralSp2.Text = "0";
+                                    lblSilbernerGeneralSp2.Font = new Font("Book Antiqua", 12);
+                                    lblSilbernerGeneralSp2.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblSilbernerGeneralSp2);
                                 }
                                 if (j == 6)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    lblSpringerSp2.BackColor = Color.Transparent;
+                                    lblSpringerSp2.ForeColor = Color.Red;
+                                    lblSpringerSp2.Text = "0";
+                                    lblSpringerSp2.Font = new Font("Book Antiqua", 12);
+                                    lblSpringerSp2.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblSpringerSp2);
                                 }
                                 if (j == 7)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    lblTurmSp2.BackColor = Color.Transparent;
+                                    lblTurmSp2.ForeColor = Color.Red;
+                                    lblTurmSp2.Text = "0";
+                                    lblTurmSp2.Font = new Font("Book Antiqua", 12);
+                                    lblTurmSp2.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblTurmSp2);
                                 }
                                 break;
                             case 1:
@@ -231,35 +301,78 @@ namespace Shogi
                                 if (j == 1)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
+                                    lblBauerSp1.BackColor = Color.Transparent;
+                                    lblBauerSp1.ForeColor = Color.Red;
+                                    lblBauerSp1.Text = "0";
+                                    lblBauerSp1.Font = new Font("Book Antiqua", 12);
+                                    lblBauerSp1.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblBauerSp1);
                                 }
                                 if (j == 2)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
+                                    lblGoldenerGeneralSp1.BackColor = Color.Transparent;
+                                    lblGoldenerGeneralSp1.ForeColor = Color.Red;
+                                    lblGoldenerGeneralSp1.Text = "0";
+                                    lblGoldenerGeneralSp1.Font = new Font("Book Antiqua", 12);
+                                    lblGoldenerGeneralSp1.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblGoldenerGeneralSp1);
                                 }
                                 if (j == 3)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
+                                    lblLaueferSp1.BackColor = Color.Transparent;
+                                    lblLaueferSp1.ForeColor = Color.Red;
+                                    lblLaueferSp1.Text = "0";
+                                    lblLaueferSp1.Font = new Font("Book Antiqua", 12);
+                                    lblLaueferSp1.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblLaueferSp1);
                                 }
                                 if (j == 4)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
+                                    lblLanzeSp1.BackColor = Color.Transparent;
+                                    lblLanzeSp1.ForeColor = Color.Red;
+                                    lblLanzeSp1.Text = "0";
+                                    lblLanzeSp1.Font = new Font("Book Antiqua", 12);
+                                    lblLanzeSp1.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblLanzeSp1);
                                 }
                                 if (j == 5)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
+                                    lblSilbernerGeneralSp1.BackColor = Color.Transparent;
+                                    lblSilbernerGeneralSp1.ForeColor = Color.Red;
+                                    lblSilbernerGeneralSp1.Text = "0";
+                                    lblSilbernerGeneralSp1.Font = new Font("Book Antiqua", 12);
+                                    lblSilbernerGeneralSp1.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblSilbernerGeneralSp1);
                                 }
                                 if (j == 6)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
+                                    lblSpringerSp1.BackColor = Color.Transparent;
+                                    lblSpringerSp1.ForeColor = Color.Red;
+                                    lblSpringerSp1.Text = "0";
+                                    lblSpringerSp1.Font = new Font("Book Antiqua", 12);
+                                    lblSpringerSp1.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblSpringerSp1);
                                 }
                                 if (j == 7)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
+                                    lblTurmSp1.BackColor = Color.Transparent;
+                                    lblTurmSp1.ForeColor = Color.Red;
+                                    lblTurmSp1.Text = "0";
+                                    lblTurmSp1.Font = new Font("Book Antiqua", 12);
+                                    lblTurmSp1.Visible = false;
+                                    arrPFeld[i, j].Controls.Add(lblTurmSp1);
                                 }
                                 break;
                         }
                 }
             }
+
 
             lblSpielername.Font = new Font("Book Antiqua", 11);
             lblSpielername.Width = TextRenderer.MeasureText(spAngemeldet.benutzername,lblSpielername.Font).Width;
@@ -267,8 +380,6 @@ namespace Shogi
             lblSpielername.Visible = true;
             lblSpielername.Text = spAngemeldet.benutzername;
             lblSpielername.BackColor = Color.Transparent;
-            
-
 
             bBeenden.Location = new Point(65, 300); // 300
             bBeenden.Width = consbuttonbreite;
@@ -394,30 +505,14 @@ namespace Shogi
             tmp = (Button)sender;
             if (tmp.Text == "Einzel Spiel")
             {
-                try
-                {
-                    spielleiter = new Spielleiter_Spiellogik();
-                }
-                catch(Exception ex)
-                {
-                    
-                }
+                
+                //Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, spAngemeldetKlon);
                 tmp.Text = "Pause";
                 bCoop_Abbrechen.Text = "Abbrechen";
                 bspeichern_laden.Text = "Speichern";
             }
-            foreach (Control c in pnlFeld.Controls)
-            {
-                c.Enabled = true;
-            }
-            foreach (Control c in pnlSp1Ers.Controls)
-            {
-                c.Enabled = true;
-            }
-            foreach (Control c in pnlSp2Ers.Controls)
-            {
-                c.Enabled = true;
-            }
+            spielfeldUmschalten(true);
+            labelsUmschalten(true);
         }
 
         void bCoop_AbbrechenOnClick(object sender, EventArgs e)
@@ -611,6 +706,37 @@ namespace Shogi
             pnlSp1Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp1Ers.Width / 2), 150 + pnlFeld.Height);
         }
         
-
+        void spielfeldUmschalten(bool paBool)
+        {
+            foreach (Control c in pnlFeld.Controls)
+            {
+                c.Enabled = paBool;
+            }
+            foreach (Control c in pnlSp1Ers.Controls)
+            {
+                c.Enabled = paBool;
+            }
+            foreach (Control c in pnlSp2Ers.Controls)
+            {
+                c.Enabled = paBool;
+            }
+        }
+        void labelsUmschalten(bool paBool)
+        {
+            lblBauerSp1.Visible = paBool;
+            lblBauerSp2.Visible = paBool;
+            lblGoldenerGeneralSp1.Visible = paBool;
+            lblGoldenerGeneralSp2.Visible = paBool;
+            lblLanzeSp1.Visible = paBool;
+            lblLanzeSp2.Visible = paBool;
+            lblLaueferSp1.Visible = paBool;
+            lblLaueferSp2.Visible = paBool;
+            lblSilbernerGeneralSp1.Visible = paBool;
+            lblSilbernerGeneralSp2.Visible = paBool;
+            lblSpringerSp1.Visible = paBool;
+            lblSpringerSp2.Visible = paBool;
+            lblTurmSp1.Visible = paBool;
+            lblTurmSp2.Visible = paBool;
+        }
     }
 }
