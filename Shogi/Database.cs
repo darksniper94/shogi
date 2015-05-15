@@ -197,7 +197,7 @@ namespace Shogi
         /// <param name="?"></param>
         public void loescheSpieler(Spieler spieler)
         {
-            String sql = "DELETE FROM USER WHERE ID = " + getSpielerID(spieler);
+            String sql = "DELETE FROM USER WHERE ID = " + spieler.id;
             this.executeNonQuery(sql);
         }
 
@@ -205,7 +205,7 @@ namespace Shogi
         {
             String sql = @"SELECT SUM(spiel_gewonnen), SUM(spiel_beendet), AVG(zuege), AVG(zeit)
                            FROM STATISTIK
-                           WHERE user_id = " + this.getSpielerID(spieler);
+                           WHERE user_id = " + spieler.id;
 
             LinkedList<Object[]> result = this.executeQuery(sql);
             Object[] data = result.ElementAt(0);
@@ -219,7 +219,7 @@ namespace Shogi
 
         public void loescheStatistik(Spieler spieler)
         {
-            String sql = "DELETE FROM STATISTIK WHERE user_id = " + getSpielerID(spieler);
+            String sql = "DELETE FROM STATISTIK WHERE user_id = " + spieler.id;
             this.executeNonQuery(sql);
         }
 
