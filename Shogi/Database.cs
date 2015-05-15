@@ -81,15 +81,33 @@ namespace Shogi
 
         }
 
+        /// <summary>
+        /// Tabellen für eine neue Datenbank anlegen
+        /// </summary>
+
         private void createTables()
         {
-            String USER_TBL = @"CREATE TABLE USER (
-                                ID INTEGER PRIMARY KEY AUTOINCREMENT,
-                                name VARCHAR(128), 
-                                pass VARCHAR(128)
-                                );";
+            String USER_TBL = @"CREATE TABLE `USER` (
+	                                                    `ID`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	                                                    `name`	VARCHAR(128) NOT NULL UNIQUE,
+	                                                    `pass`	VARCHAR(128) NOT NULL,
+	                                                    `design`	VARCHAR(128) DEFAULT "",
+	                                                    `color`	VARCHAR(128) DEFAULT ""
+                                                    );";
+
+            String STATISTIC_TBL = @"CREATE TABLE `STATISTIK` (
+	                                                            `ID`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	                                                            `user_id`	INTEGER,
+	                                                            `spiel_gewonnen`	INTEGER DEFAULT 0,
+	                                                            `spiel_beendet`	INTEGER DEFAULT 0,
+	                                                            `zuege`	INTEGER DEFAULT 0,
+	                                                            `zeit`	INTEGER DEFAULT 0,
+	                                                            FOREIGN KEY(`user_id`) REFERENCES USER ( ID ) ON DELETE CASCADE
+                                                            );";
+
+
             executeNonQuery(USER_TBL);
-            executeNonQuery("INSERT INTO USER (name, pass) VALUES ('Alex', '123456')");
+            executeNonQuery(STATISTIC_TBL);
         }
 
         public int pruefeSpielerDaten(String benutzername, String passwort)
@@ -134,15 +152,43 @@ namespace Shogi
             else
             {
                 Object[] data = result.ElementAt(0);
-                return new Spieler(Convert.ToString(data[1]), Convert.ToString(data[2]), "");
+                return new Spieler(
+                    Convert.ToInt32(data[0]),   // ID
+                    Convert.ToString(data[1]),  // Name 
+                    Convert.ToString(data[2]),  // Passwort
+                    Convert.ToString(data[3]),  // Design
+                    Convert.ToString(data[4])   // Farbe
+                    );
             }
         }
-
+        /// <summary>
+        /// Speichert einen Spieler in die Datenbank
+        /// Hat der Spieler eine bekannte ID, dann wird 
+        /// </summary>
+        /// <param name="spieler"></param>
         public void speichereSpieler(Spieler spieler)
         {
-            String sql = @"INSERT INTO USER (name, pass)
-                           VALUES ('"+spieler.benutzername+"', '"+spieler.passwort+"')";
+            String sql = "";
+            if(spieler.id == Spieler.NEUER_SPIELER)
+            {
+                // Neuen SPieler erstellen
+                sql = @"INSERT INTO USER (name, pass, design, color) 
+                        VALUES
+                        ('"+spieler.benutzername+"', '"+spieler.passwort+"','"+spieler.design+"','"+spieler.farbe+"');";
+
+                
+            }
+            else
+            {
+                // Spieler aktualisieren
+                sql = @"UPDATE USER SET name="+spieler.benutzername+", "+
+                        "pass = '"+spieler.passwort+"', "+
+                        "design = '"+spieler.design+"', "+
+                        "color = '"+spieler.farbe+"', "+
+                        "WHERE id = "+spieler.id+";";                
+            }
             this.executeNonQuery(sql);
+
         }
 
         /// <summary>
@@ -189,6 +235,7 @@ namespace Shogi
             LinkedList<Object[]> result = this.executeQuery(sql);
             return Convert.ToInt32(result.ElementAt(0)[0]);
         }
+
         /// <summary>
         /// Erstellt einen neuen Statistik Eintrag im der Datenbank
         /// </summary>
