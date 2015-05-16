@@ -27,7 +27,7 @@ namespace Shogi
             result = frmAnmeldung.DialogResult;
             if (result == DialogResult.OK)
             {
-                Application.Run(new ShogiSpielfeld(Database.instance.ladeSpieler(frmAnmeldung.spielerID)));
+                Application.Run(new ShogiSpielfeld(Database.Instance.LadeSpieler(frmAnmeldung.spielerID)));
             }
 
             //---------------------------------------------------------------------------------------------------

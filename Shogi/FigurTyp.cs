@@ -63,5 +63,31 @@ namespace Shogi
         public Bewegungsmuster getBewegungsmuster() {
             return this.bewegungsmuster;
         }
+
+        /// <summary>
+        /// Wandelt den Namen in Spielfigur Objekt um
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+
+        public static FigurTyp FigurtypVomNamen(String name)
+        {
+            switch(name)
+            {
+                case "König": return FigurTyp.KOENIG;
+                case "Turm": return FigurTyp.TURM;
+                case "Läufer": return FigurTyp.LAEUFER;
+                case "Goldener General": return FigurTyp.GOLDGENERAL;
+                case "Silberner General": return FigurTyp.SILBGENERAL;
+                case "Springer": return FigurTyp.SPRINGER;
+                case "Lanze": return FigurTyp.LANZE;
+                case "Bauer": return FigurTyp.BAUER;
+                case "Drache": return FigurTyp.DRACHE;
+                case "Pferd": return FigurTyp.PFERD;
+                default: return null;
+            }
+        }
+
+
     }
 }

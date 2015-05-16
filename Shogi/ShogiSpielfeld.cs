@@ -470,7 +470,7 @@ namespace Shogi
 
         void statistikAnzeigeBox()
         {
-            Statistik stat = Database.instance.ladeStatistik(spAngemeldet);
+            Statistik stat = Database.Instance.LadeStatistik(spAngemeldet);
             if (stat == null)
             {
                 MessageBox.Show(this, "Keine Statistik vorhanden!", "Warnung", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -563,7 +563,10 @@ namespace Shogi
             if (result == DialogResult.Yes)
             {
                 //speichern Methode Datebank klasse
-
+                Database.Instance.SpeichereSpiel(
+                    Spielleiter_Spiellogik.instance.GetFeld(),
+                    spAngemeldet,
+                    spAngemeldet);
             }
         }
 
@@ -589,7 +592,7 @@ namespace Shogi
             DialogResult result = MessageBox.Show(this, "Möchten Sie ihre Statistik zurücksetzten?", "Statistik zurücksetzten", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if(result == DialogResult.Yes)
             {
-                Database.instance.loescheStatistik(spAngemeldet);
+                Database.Instance.LoescheStatistik(spAngemeldet);
             }
             
         }

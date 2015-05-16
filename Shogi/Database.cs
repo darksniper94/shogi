@@ -10,7 +10,7 @@ namespace Shogi
     public class Database
     {
         private SQLiteConnection connection;
-        private const String DBNAME = "data.dat";
+        private readonly String DBNAME = "data.dat";
         private static Database inst = null;
 
         private Database()
@@ -27,12 +27,12 @@ namespace Shogi
             // Create Tables
             if (createFile)
             {
-                createTables();
+                CreateTables();
             }
 
         }
 
-        public static Database instance
+        public static Database Instance
         {
             get
             {
@@ -45,14 +45,14 @@ namespace Shogi
         }
 
         // Methode zum ausführen von update, insert, delete und create
-        public int executeNonQuery(String sql)
+        public int ExecuteNonQuery(String sql)
         {
             SQLiteCommand cmd = new SQLiteCommand(sql, connection);
             return cmd.ExecuteNonQuery();
         }
 
         // Methode für select
-        public LinkedList<Object[]> executeQuery(String sql)
+        public LinkedList<Object[]> ExecuteQuery(String sql)
         {
             try
             {
@@ -85,7 +85,7 @@ namespace Shogi
         /// Tabellen für eine neue Datenbank anlegen
         /// </summary>
 
-        private void createTables()
+        private void CreateTables()
         {
             String USER_TBL = @"CREATE TABLE `USER` (
 	                                                    `ID`	INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -106,14 +106,14 @@ namespace Shogi
                                                             );";
 
 
-            executeNonQuery(USER_TBL);
-            executeNonQuery(STATISTIC_TBL);
+            ExecuteNonQuery(USER_TBL);
+            ExecuteNonQuery(STATISTIC_TBL);
         }
 
-        public int pruefeSpielerDaten(String benutzername, String passwort)
+        public int PruefeSpielerDaten(String benutzername, String passwort)
         {
             String sql = "SELECT ID FROM USER WHERE name='" + benutzername + "' and pass='" + passwort + "'";
-            LinkedList<Object[]> result = executeQuery(sql);
+            LinkedList<Object[]> result = ExecuteQuery(sql);
             if (result.Count() == 0)
             {
                 // Keine Übereinstimmung 
@@ -126,10 +126,10 @@ namespace Shogi
             }
         }
 
-        public bool pruefeBenutzerVorhanden(String benutzername)
+        public bool PruefeBenutzerVorhanden(String benutzername)
         {
             String sql = "SELECT ID FROM USER WHERE name='" + benutzername + "'";
-            LinkedList<Object[]> result = executeQuery(sql);
+            LinkedList<Object[]> result = ExecuteQuery(sql);
             if (result.Count() == 0)
             {
                 // Keine Übereinstimmung 
@@ -141,10 +141,10 @@ namespace Shogi
             }
         }
 
-        public Spieler ladeSpieler(int spielerid)
+        public Spieler LadeSpieler(int spielerid)
         {
             String sql = "SELECT * FROM USER WHERE ID='" + Convert.ToString(spielerid) + "'";
-            LinkedList<Object[]> result = executeQuery(sql);
+            LinkedList<Object[]> result = ExecuteQuery(sql);
             if (result.Count() == 0)
             {
                 return null;
@@ -166,7 +166,7 @@ namespace Shogi
         /// Hat der Spieler eine bekannte ID, dann wird 
         /// </summary>
         /// <param name="spieler"></param>
-        public void speichereSpieler(Spieler spieler)
+        public void SpeichereSpieler(Spieler spieler)
         {
             String sql = "";
             if(spieler.id == Spieler.NEUER_SPIELER)
@@ -187,7 +187,7 @@ namespace Shogi
                         "color = '"+spieler.farbe+"', "+
                         "WHERE id = "+spieler.id+";";                
             }
-            this.executeNonQuery(sql);
+            this.ExecuteNonQuery(sql);
 
         }
 
@@ -198,16 +198,16 @@ namespace Shogi
         public void loescheSpieler(Spieler spieler)
         {
             String sql = "DELETE FROM USER WHERE ID = " + spieler.id;
-            this.executeNonQuery(sql);
+            this.ExecuteNonQuery(sql);
         }
 
-        public Statistik ladeStatistik(Spieler spieler)
+        public Statistik LadeStatistik(Spieler spieler)
         {
             String sql = @"SELECT SUM(spiel_gewonnen), SUM(spiel_beendet), AVG(zuege), AVG(zeit)
                            FROM STATISTIK
                            WHERE user_id = " + spieler.id;
 
-            LinkedList<Object[]> result = this.executeQuery(sql);
+            LinkedList<Object[]> result = this.ExecuteQuery(sql);
             Object[] data = result.ElementAt(0);
             // Check we have any NULL value in result
             foreach(var field in data)
@@ -217,10 +217,10 @@ namespace Shogi
             return new Statistik(Convert.ToInt32(data[0]),Convert.ToInt32(data[1]), Convert.ToDouble(data[2]), Convert.ToDouble(data[3]));
         }
 
-        public void loescheStatistik(Spieler spieler)
+        public void LoescheStatistik(Spieler spieler)
         {
             String sql = "DELETE FROM STATISTIK WHERE user_id = " + spieler.id;
-            this.executeNonQuery(sql);
+            this.ExecuteNonQuery(sql);
         }
 
         /// <summary>
@@ -229,10 +229,10 @@ namespace Shogi
         /// <param name="spieler"></param>
         /// <returns>ID</returns>
 
-        private int getSpielerID(Spieler spieler)
+        private int GetSpielerID(Spieler spieler)
         {
             String sql = "SELECT ID FROM USER WHERE name = '" + spieler.benutzername + "'";
-            LinkedList<Object[]> result = this.executeQuery(sql);
+            LinkedList<Object[]> result = this.ExecuteQuery(sql);
             return Convert.ToInt32(result.ElementAt(0)[0]);
         }
 
@@ -245,16 +245,16 @@ namespace Shogi
         /// <param name="zuege"></param>
         /// <param name="zeit"></param>
 
-        public void statistikErweitern(Spieler spieler, bool gewonnen, bool beendet, int zuege, int zeit)
+        public void StatistikErweitern(Spieler spieler, bool gewonnen, bool beendet, int zuege, int zeit)
         {
             if(gewonnen) beendet = true;
             String sql = @"INSERT INTO STATISTIK (spieler_id, spiel_gewonnen, spiel_beendet, zuege, zeit)
-                           VALUES (" + this.getSpielerID(spieler) + ", "
+                           VALUES (" + this.GetSpielerID(spieler) + ", "
                                     + Convert.ToInt32(gewonnen) + ", "
                                     + Convert.ToInt32(beendet) + ", "
                                     + zuege + ", "
                                     + zeit + ");";
-            this.executeNonQuery(sql);
+            this.ExecuteNonQuery(sql);
                                                         
         }
 
@@ -262,10 +262,58 @@ namespace Shogi
         {
             return "";
         }
-
-        public void speichereSpiel(Spielfeld feld)
+        /// <summary>
+        /// Gibt die ID des letzten eingefügten Datensatzes in der Datenbank zurück
+        /// </summary>
+        /// <returns></returns>
+        private int GetLastInsertId()
         {
+            String sql = "SELECT last_insert_rowid();";
+            SQLiteCommand cmd = new SQLiteCommand(sql, connection);
+            return Convert.ToInt32(cmd.ExecuteScalar());
+        }
 
+        public void SpeichereSpiel(Spielfeld feld, Spieler sp1, Spieler sp2)
+        {
+            // Speichere Spiel
+            int game_id;
+            String sql = @"INSERT INTO GAME (user_1, user_2) 
+                           VALUES
+                           (" + sp1.id + ", " + sp2.id + ");";
+            this.ExecuteNonQuery(sql);
+            game_id = GetLastInsertId();
+
+            // Speichere Spielfiguren
+            foreach(Spielfigur sp in feld.Feld)
+            {
+                int befoerdert = 0;
+                if(sp.IstBefoerdert)
+                {
+                    befoerdert = 1;
+                }
+                
+                String subsql = @"INSERT INTO GAMEDATA (game, figurtyp, befoerdert, x, y)
+                                  VALUES ( "
+                                  + game_id + ", '"
+                                  + sp.Typ.getName() + "', "
+                                  + befoerdert + ", "
+                                  + sp.Position.Zeile + ", "
+                                  + sp.Position.Spalte + ");";
+
+                this.ExecuteNonQuery(subsql);
+            }
+
+        }
+
+        public Spielfeld LadeSpielfeld(int spielid)
+        {
+            String sql = @"SELECT figurtyp, befoerdert, x, y
+                           FROM GAMEDATA
+                           WHERE game = " + spielid + ";";
+            LinkedList<Object[]> result = this.ExecuteQuery(sql);
+            List<Spielfigur> figuren = new List<Spielfigur>();
+
+            return null;
         }
 
     }

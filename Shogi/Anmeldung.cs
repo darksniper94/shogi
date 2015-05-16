@@ -34,7 +34,7 @@ namespace Shogi
         {
             lblMeldung.Visible = false;
             // prüft die Anmeldedaten
-            spielerID = Database.instance.pruefeSpielerDaten(txtBenutzername.Text, txtPasswort.Text);
+            spielerID = Database.Instance.PruefeSpielerDaten(txtBenutzername.Text, txtPasswort.Text);
             //int spielerID = 1;
             if (spielerID == -1)
             {

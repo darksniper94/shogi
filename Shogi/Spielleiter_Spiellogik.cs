@@ -8,11 +8,13 @@ namespace Shogi
     public class Spielleiter_Spiellogik
     {
         private static Spielleiter_Spiellogik inst = null;
-
         private Spieler aktiverSpieler;
         private Spieler inaktiverSpieler;
         private Spielfeld feld;
         private bool beendet;
+
+        public static readonly Tuple<int, int> SHOGI_DIM = new Tuple<int, int>(9, 9);
+        public static readonly int SHOGI_FIGUREN = 40;
 
         /*
          * Der aktive Spieler, ist der Spieler, welcher gerade am Zug ist.
@@ -150,7 +152,7 @@ namespace Shogi
                     }
                 }
             }
-            feld = new Spielfeld(tempSpielfeld, new Tuple<int, int>(9, 9), 40);
+            feld = new Spielfeld(tempSpielfeld, SHOGI_DIM, SHOGI_FIGUREN);
         }
 
         // nicht Spielfigur von, Position nach ?
