@@ -31,7 +31,7 @@ namespace Shogi
         {
             set
             {
-                if ((value.Item1 == 0 && value.Item2 != 0) || (value.Item2 == 0 && value.Item1 != 0) || (value.Item1 > 0 && value.Item2 > 0))
+                if ((value.Item1 == 0 && value.Item2 == 0) || (value.Item1 > 0 && value.Item2 > 0))
                 {
                     koordinaten = value;
                 }
