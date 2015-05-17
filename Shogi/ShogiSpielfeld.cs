@@ -42,6 +42,8 @@ namespace Shogi
         Label lblSilbernerGeneralSp2;
         Label lblSpringerSp2;
         Label lblTurmSp2;
+        int ausgangx;
+        int ausgangy;
 
         int clickCount;
         
@@ -65,7 +67,7 @@ namespace Shogi
             bCoop_Abbrechen = new Button();
             bStatistik = new Button();
             bspeichern_laden = new Button();
-            Panel[,] arrPFeld = new Panel[11,9];
+            Panel[,] arrPFeld = new Panel[11,10];
             Label lblSpielername = new Label();
             pnlFeld = new TableLayoutPanel();
             pnlSp1Ers = new TableLayoutPanel();
@@ -85,6 +87,8 @@ namespace Shogi
             lblSpringerSp2 = new Label();
             lblTurmSp2 = new Label();
             clickCount = 0;
+            ausgangx = 0;
+            ausgangy = 0;
 
             //pnlFeld.Location = new Point(130, 110);
             pnlFeld.ColumnCount = 9;
@@ -108,9 +112,11 @@ namespace Shogi
           
             for (int i = 0; i <= 10;i++ )
             {
-                    for (int j = 0; j < 9; j++)
+                    for (int j = 1; j < 10; j++)
                     {
                         arrPFeld[i, j] = new Panel();
+                        arrPFeld[i, j].Name = "" + i ;
+                        arrPFeld[i, j].Tag = "" + j;
                         arrPFeld[i, j].Height = 50;
                         arrPFeld[i, j].Width = 50;
                         arrPFeld[i, j].BackColor = Color.FromArgb(244, 223, 186);
@@ -135,7 +141,7 @@ namespace Shogi
                         switch (i)
                         {
                             case 0:
-                                if (j == 1)
+                                if (j == 2)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -146,7 +152,7 @@ namespace Shogi
                                     lblBauerSp2.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblBauerSp2);
                                 }
-                                if (j == 2)
+                                if (j == 3)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -157,7 +163,7 @@ namespace Shogi
                                     lblGoldenerGeneralSp2.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblGoldenerGeneralSp2);
                                 }
-                                if (j == 3)
+                                if (j == 4)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -168,7 +174,7 @@ namespace Shogi
                                     lblLaueferSp2.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblLaueferSp2);
                                 }
-                                if (j == 4)
+                                if (j == 5)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -179,7 +185,7 @@ namespace Shogi
                                     lblLanzeSp2.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblLanzeSp2);
                                 }
-                                if (j == 5)
+                                if (j == 6)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -190,7 +196,7 @@ namespace Shogi
                                     lblSilbernerGeneralSp2.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblSilbernerGeneralSp2);
                                 }
-                                if (j == 6)
+                                if (j == 7)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -201,7 +207,7 @@ namespace Shogi
                                     lblSpringerSp2.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblSpringerSp2);
                                 }
-                                if (j == 7)
+                                if (j == 8)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -214,39 +220,39 @@ namespace Shogi
                                 }
                                 break;
                             case 1:
-                                if (j == 3 || j == 5)
+                                if (j == 4 || j == 6)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
                                 }
-                                if (j == 0 || j == 8)
+                                if (j == 1 || j == 9)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
                                 }
-                                if (j == 4)
+                                if (j == 5)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.KoenigJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
                                 }
-                                if (j == 2 || j == 6)
+                                if (j == 3 || j == 7)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
                                 }
-                                if (j == 1 || j == 7)
+                                if (j == 2 || j == 8)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
                                 }
                                 break;
                             case 2:
-                                if (j == 1)
+                                if (j == 2)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
                                 }
-                                if (j == 7)
+                                if (j == 8)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
                                     arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -266,39 +272,39 @@ namespace Shogi
                                 arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
                                 break;
                             case 8:
-                                if (j == 7)
+                                if (j == 8)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
                                 }
-                                if (j == 1)
+                                if (j == 2)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
                                 }
                                 break;
                             case 9:
-                                if (j == 3 || j == 5)
+                                if (j == 4 || j == 6)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
                                 }
-                                if (j == 0 || j == 8)
+                                if (j == 1 || j == 9)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
                                 }
-                                if (j == 4)
+                                if (j == 5)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.KoenigJ;
                                 }
-                                if (j == 2 || j == 6)
+                                if (j == 3 || j == 7)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
                                 }
-                                if (j == 1 || j == 7)
+                                if (j == 2 || j == 8)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
                                 }
                                 break;
                             case 10:
-                                if (j == 1)
+                                if (j == 2)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
                                     lblBauerSp1.BackColor = Color.Transparent;
@@ -308,7 +314,7 @@ namespace Shogi
                                     lblBauerSp1.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblBauerSp1);
                                 }
-                                if (j == 2)
+                                if (j == 3)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
                                     lblGoldenerGeneralSp1.BackColor = Color.Transparent;
@@ -318,7 +324,7 @@ namespace Shogi
                                     lblGoldenerGeneralSp1.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblGoldenerGeneralSp1);
                                 }
-                                if (j == 3)
+                                if (j == 4)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
                                     lblLaueferSp1.BackColor = Color.Transparent;
@@ -328,7 +334,7 @@ namespace Shogi
                                     lblLaueferSp1.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblLaueferSp1);
                                 }
-                                if (j == 4)
+                                if (j == 5)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
                                     lblLanzeSp1.BackColor = Color.Transparent;
@@ -338,7 +344,7 @@ namespace Shogi
                                     lblLanzeSp1.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblLanzeSp1);
                                 }
-                                if (j == 5)
+                                if (j == 6)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
                                     lblSilbernerGeneralSp1.BackColor = Color.Transparent;
@@ -348,7 +354,7 @@ namespace Shogi
                                     lblSilbernerGeneralSp1.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblSilbernerGeneralSp1);
                                 }
-                                if (j == 6)
+                                if (j == 7)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
                                     lblSpringerSp1.BackColor = Color.Transparent;
@@ -358,7 +364,7 @@ namespace Shogi
                                     lblSpringerSp1.Visible = false;
                                     arrPFeld[i, j].Controls.Add(lblSpringerSp1);
                                 }
-                                if (j == 7)
+                                if (j == 8)
                                 {
                                     arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
                                     lblTurmSp1.BackColor = Color.Transparent;
@@ -483,14 +489,20 @@ namespace Shogi
 
         void PanelOnClick(object sender, EventArgs e)
         {
+            Panel tmp;
+            tmp = (Panel)sender;
             clickCount = clickCount + 1;
             if (clickCount == 2)
             {
                 clickCount = 0;
-                Panel tmp;
-                tmp = (Panel)sender;
-
-                MessageBox.Show("" + tmp.Tag);
+                
+                MessageBox.Show("Von: y:"+ausgangy + "/x:"+ausgangx+" Nach: y" + tmp.Name + "/x:" + tmp.Tag);
+                //Spielleiter_Spiellogik.instance.spielZug(new Position(), new Position());
+               
+            } else
+            {
+              ausgangx = Convert.ToInt32(tmp.Tag);
+              ausgangy = Convert.ToInt32(tmp.Name);
             }
             
         }
@@ -506,7 +518,7 @@ namespace Shogi
             if (tmp.Text == "Einzel Spiel")
             {
                 
-                //Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, spAngemeldetKlon);
+                //Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, Database.Instance.LadeSpieler(spAngemeldet.id));
                 tmp.Text = "Pause";
                 bCoop_Abbrechen.Text = "Abbrechen";
                 bspeichern_laden.Text = "Speichern";
@@ -600,11 +612,16 @@ namespace Shogi
         private void benutzernamenÄndernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //benutzernamen ändern Dialog
+            BenutzernameAendern frmBenutzernamenAendern = new BenutzernameAendern();
+            frmBenutzernamenAendern.ShowDialog();
         }
 
         private void passwortÄndernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //passwort ändern Dialog
+            PasswortAendern frmPasswortAendern = new PasswortAendern();
+            frmPasswortAendern.ShowDialog();
+
         }
 
         private void kontoLöschenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -680,9 +697,12 @@ namespace Shogi
         private void ShogiSpielfeld_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Wenn nicht beendet werden soll, wird das Event abgebrochen
-            if(!this.hardClose & beendenAbfrage() != DialogResult.Yes)
+            if (!this.hardClose)
             {
-                e.Cancel = true;
+                if (!this.hardClose & beendenAbfrage() != DialogResult.Yes)
+                {
+                    e.Cancel = true;
+                }
             }
         }
 
@@ -705,8 +725,8 @@ namespace Shogi
             }
             pnlSpielfeld.Width = pnlBasis.Width - pnlMenu.Width - 5;
             pnlFeld.Location = new Point(((pnlSpielfeld.Width / 2) - pnlFeld.Width / 2), 110);
-            pnlSp2Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp2Ers.Width / 2), 10);
-            pnlSp1Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp1Ers.Width / 2), 150 + pnlFeld.Height);
+            pnlSp2Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp2Ers.Width / 2), 30);
+            pnlSp1Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp1Ers.Width / 2), 130 + pnlFeld.Height);
         }
         
         void spielfeldUmschalten(bool paBool)
@@ -740,6 +760,12 @@ namespace Shogi
             lblSpringerSp2.Visible = paBool;
             lblTurmSp1.Visible = paBool;
             lblTurmSp2.Visible = paBool;
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Info info = new Info();
+            info.Show();
         }
     }
 }

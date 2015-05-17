@@ -132,3 +132,6 @@ C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.re
 C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
 C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe.config
 C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Info.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.PasswortAendern.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.BenutzernameAendern.resources

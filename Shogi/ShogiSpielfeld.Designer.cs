@@ -38,15 +38,15 @@
             this.statisikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ansehenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zurücksetzenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
             this.spielSpeichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielBeendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -117,16 +117,21 @@
             // ansehenToolStripMenuItem
             // 
             this.ansehenToolStripMenuItem.Name = "ansehenToolStripMenuItem";
-            this.ansehenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ansehenToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.ansehenToolStripMenuItem.Text = "ansehen";
             this.ansehenToolStripMenuItem.Click += new System.EventHandler(this.ansehenToolStripMenuItem_Click);
             // 
             // zurücksetzenToolStripMenuItem
             // 
             this.zurücksetzenToolStripMenuItem.Name = "zurücksetzenToolStripMenuItem";
-            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.zurücksetzenToolStripMenuItem.Text = "zurücksetzen";
             this.zurücksetzenToolStripMenuItem.Click += new System.EventHandler(this.zurücksetzenToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(150, 6);
             // 
             // spielSpeichernToolStripMenuItem
             // 
@@ -149,11 +154,6 @@
             this.spielBeendenToolStripMenuItem.Text = "Spiel beenden";
             this.spielBeendenToolStripMenuItem.Click += new System.EventHandler(this.spielBeendenToolStripMenuItem_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -169,6 +169,7 @@
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
             this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.infoToolStripMenuItem.Text = "Info";
+            this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
@@ -182,10 +183,10 @@
             this.hilfeToolStripMenuItem.Text = "Regelwerk";
             this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.hilfeToolStripMenuItem_Click);
             // 
-            // toolStripMenuItem3
+            // contextMenuStrip1
             // 
-            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(150, 6);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // ShogiSpielfeld
             // 

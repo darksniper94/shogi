@@ -112,7 +112,7 @@
             // bAbbrechen
             // 
             this.bAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bAbbrechen.Location = new System.Drawing.Point(299, 209);
+            this.bAbbrechen.Location = new System.Drawing.Point(301, 209);
             this.bAbbrechen.Name = "bAbbrechen";
             this.bAbbrechen.Size = new System.Drawing.Size(100, 30);
             this.bAbbrechen.TabIndex = 8;
@@ -122,7 +122,7 @@
             // 
             // bRegistrieren
             // 
-            this.bRegistrieren.Location = new System.Drawing.Point(93, 209);
+            this.bRegistrieren.Location = new System.Drawing.Point(153, 209);
             this.bRegistrieren.Name = "bRegistrieren";
             this.bRegistrieren.Size = new System.Drawing.Size(100, 30);
             this.bRegistrieren.TabIndex = 7;
