@@ -36,7 +36,7 @@ namespace Shogi
             lblMeldung.Visible = false;
             bool registrierungkorrekt = false;
             String fehler;
-            Spieler spielerTemp = new Spieler(txtBenutzername.Text, txtPasswort.Text, "Bilder1");
+            Spieler spielerTemp = new Spieler(txtBenutzername.Text, txtPasswort.Text);
 
             //Prüfen der Registrierungsdaten
             fehler = pruefeRegistrierung(spielerTemp, txtPasswortWdh.Text);
@@ -50,7 +50,7 @@ namespace Shogi
             {
                 
                 // Spieler in db speichern
-                Database.instance.speichereSpieler(spielerTemp);
+                Database.Instance.SpeichereSpieler(spielerTemp);
                 MessageBox.Show("Registrierung erfolgreich abgeschlossen.", "Information",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Information);
@@ -68,7 +68,7 @@ namespace Shogi
         {
             System.Text.RegularExpressions.Regex regEx = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9äöüÄÖÜß]+$");
             //Benutzername schon vorhanden prüfung noch implementieren! (Rücksprache mit Alex)
-            if (Database.instance.pruefeBenutzerVorhanden(paSpielerTemp.benutzername))
+            if (Database.Instance.PruefeBenutzerVorhanden(paSpielerTemp.benutzername))
             {
                 return "Der Benutzername ist bereits vorhanden.";
             }

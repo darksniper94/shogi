@@ -21,7 +21,7 @@ namespace Shogi
         private void bOK_Click(object sender, EventArgs e)
         {
             lblrueckMeldung.Visible = false;
-            int result = Database.instance.pruefeSpielerDaten(spAngemeldet.benutzername, txtPasswort.Text);
+            int result = Database.Instance.PruefeSpielerDaten(spAngemeldet.benutzername, txtPasswort.Text);
             if (result == -1 )
             {
                 lblrueckMeldung.Visible = true;
@@ -29,7 +29,7 @@ namespace Shogi
             else
             {
                 // Konto löschen Methode
-                Database.instance.loescheSpieler(spAngemeldet);
+                Database.Instance.loescheSpieler(spAngemeldet);
                 MessageBox.Show("Ihr Konto wurde erfolgreich gelöscht, Sie werden jetzt abgemeldet.", "Konto löschen", MessageBoxButtons.OK);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
