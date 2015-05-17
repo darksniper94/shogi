@@ -24,15 +24,29 @@ namespace Shogi
     {
         // Erst Bewegunsmuster anlegen.
         private static readonly Bewegungsmuster MUSTERKOENIG = new Bewegungsmuster(new[,] { { -1, -1 }, { 0, -1 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 }, { -1, 0 } });
-        private static readonly Bewegungsmuster MUSTERTURM = new Bewegungsmuster(new[,] { { 0, -9 }, { 0, 9 }, { 9, 0 }, { -9, 0 } });
-        private static readonly Bewegungsmuster MUSTERLAEUFER = new Bewegungsmuster(new[,] { { -9, -9 }, { -9, 9 }, { 9, 9 }, { 9, -9 } });
         private static readonly Bewegungsmuster MUSTERGOLDGENERAL = new Bewegungsmuster(new[,] { { -1, -1 }, { 0, -1 }, { 1, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 } });
         private static readonly Bewegungsmuster MUSTERSILBGENERAL = new Bewegungsmuster(new[,] { { -1, -1 }, { 0, -1 }, { 1, -1 }, { 1, 1 }, { -1, 1 } });
         private static readonly Bewegungsmuster MUSTERSPRINGER = new Bewegungsmuster(new[,] { { -1, -2 }, { 1, -2 } });
-        private static readonly Bewegungsmuster MUSTERLANZE = new Bewegungsmuster(new[,] { { 0, -9 } });
         private static readonly Bewegungsmuster MUSTERBAUER = new Bewegungsmuster(new[,] { { 0, -1 } });
-        private static readonly Bewegungsmuster MUSTERDRACHE = new Bewegungsmuster(new[,] { { -1, -1 }, { 0, -9 }, { 1, -1 }, { 9, 0 }, { 1, 1 }, { 0, 9 }, { -1, 1 }, { -9, 0 } });
-        private static readonly Bewegungsmuster MUSTERPFERD = new Bewegungsmuster(new[,] { { -9, -9 }, { 0, -1 }, { 9, -9 }, { 1, 0 }, { 9, 9 }, { 0, 1 }, { -9, 9 }, { -1, 0 } });
+        private static readonly Bewegungsmuster MUSTERLANZE = new Bewegungsmuster(new[,] { { 0, -1 }, { 0, -2 }, { 0, -3 }, { 0, -4 }, { 0, -5 }, { 0, -6 }, { 0, -7 }, { 0, -8 }, { 0, -9 } });
+        private static readonly Bewegungsmuster MUSTERTURM = new Bewegungsmuster(new[,] { { 0, -1 }, { 0, -2 }, { 0, -3 }, { 0, -4 }, { 0, -5 }, { 0, -6 }, { 0, -7 }, { 0, -8 }, { 0, -9 }, 
+                                                                                          { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 }, { 0, 6 }, { 0, 7 }, { 0, 8 }, { 0, 9 }, 
+                                                                                          { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 5, 0 }, { 6, 0 }, { 7, 0 }, { 8, 0 }, { 9, 0 }, 
+                                                                                          { -1, 0 }, { -2, 0 }, { -3, 0 }, { -4, 0 }, { -5, 0 }, { -6, 0 }, { -7, 0 }, { -8, 0 }, { -9, 0 } });
+        private static readonly Bewegungsmuster MUSTERLAEUFER = new Bewegungsmuster(new[,] { { -1, -1 }, { -2, -2 }, { -3, -3 }, { -4, -4 }, { -5, -5 }, { -6, -6 }, { -7, -7 }, { -8, -8 }, { -9, -9 }, 
+                                                                                             { -1, 1 }, { -2, 2 }, { -3, 3 }, { -4, 4 }, { -5, 5 }, { -6, 6 }, { -7, 7 }, { -8, 8 }, { -9, 9 }, 
+                                                                                             { 1, 1 }, { 2, 2 }, { 3, 3 }, { 4, 4 }, { 5, 5 }, { 6, 6 }, { 7, 7 }, { 8, 8 }, { 9, 9 }, 
+                                                                                             { 1, -1 }, { 2, -2 }, { 3, -3 }, { 4, -4 }, { 5, -5 }, { 6, -6 }, { 7, -7 }, { 8, -8 }, { 9, -9 } });
+        private static readonly Bewegungsmuster MUSTERDRACHE = new Bewegungsmuster(new[,] { { -1, -1 }, { 1, -1 }, { 1, 1 }, { -1, 1 }, 
+                                                                                            { 0, -1 }, { 0, -2 }, { 0, -3 }, { 0, -4 }, { 0, -5 }, { 0, -6 }, { 0, -7 }, { 0, -8 }, { 0, -9 },
+                                                                                            { 0, 1 }, { 0, 2 }, { 0, 3 }, { 0, 4 }, { 0, 5 }, { 0, 6 }, { 0, 7 }, { 0, 8 }, { 0, 9 }, 
+                                                                                            { 1, 0 }, { 2, 0 }, { 3, 0 }, { 4, 0 }, { 5, 0 }, { 6, 0 }, { 7, 0 }, { 8, 0 }, { 9, 0 }, 
+                                                                                            { -1, 0 }, { -2, 0 }, { -3, 0 }, { -4, 0 }, { -5, 0 }, { -6, 0 }, { -7, 0 }, { -8, 0 }, { -9, 0 } });
+        private static readonly Bewegungsmuster MUSTERPFERD = new Bewegungsmuster(new[,] { { 0, -1 }, { 1, 0 }, { 0, 1 }, { -1, 0 },
+                                                                                           { -1, -1 }, { -2, -2 }, { -3, -3 }, { -4, -4 }, { -5, -5 }, { -6, -6 }, { -7, -7 }, { -8, -8 }, { -9, -9 }, 
+                                                                                           { -1, 1 }, { -2, 2 }, { -3, 3 }, { -4, 4 }, { -5, 5 }, { -6, 6 }, { -7, 7 }, { -8, 8 }, { -9, 9 }, 
+                                                                                           { 1, 1 }, { 2, 2 }, { 3, 3 }, { 4, 4 }, { 5, 5 }, { 6, 6 }, { 7, 7 }, { 8, 8 }, { 9, 9 }, 
+                                                                                           { 1, -1 }, { 2, -2 }, { 3, -3 }, { 4, -4 }, { 5, -5 }, { 6, -6 }, { 7, -7 }, { 8, -8 }, { 9, -9 } });
         
         // Danach die vorgegebenen FigurTypen
         public static readonly FigurTyp KOENIG = new FigurTyp("König", MUSTERKOENIG);

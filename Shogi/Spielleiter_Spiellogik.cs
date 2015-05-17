@@ -158,18 +158,30 @@ namespace Shogi
         // nicht Spielfigur von, Position nach ?
         public void spielZug(Spielfigur figurVon, Position positionNach)
         {
-            // 1. Get Figur auf Position von
-
             // 2. Prüfe Zug
             if (pruefeZug(figurVon, positionNach))
             {
+                
                 // 3. Spielzug an Spielfeld übergeben
                 feld.fuehreSpielzugAus(figurVon, positionNach);
+
+                // Falls Gegnerische Figur vorhanden, diese deaktivieren
+                Spielfigur ziel = feld.GetSpielfigurAnPosition(positionNach);
+                if (ziel != null)
+                {
+                    ziel.deaktivieren();
+                    ziel.Besitzer = inaktiverSpieler;
+                }
 
                 // 4. Ist Spiel beendet
                 beendet = istSpielBeendet();
             }
             throw new NotSupportedException();
+        }
+
+        public void spielfigurBefoerdern(Spielfigur figur)
+        {
+            figur.befoerdern();
         }
 
         private bool istSpielBeendet()
@@ -323,10 +335,21 @@ namespace Shogi
                 tempSpalte = figurPos.Spalte + tup.Item1;
                 tempZeile = figurPos.Zeile + tup.Item2;
 
-                posTemp = new Position(tempSpalte, tempZeile);
-                if (paZielposition.Equals(posTemp))
+                if (tempSpalte > 0 && tempSpalte <= 9 && tempZeile > 0 && tempZeile <= 9)
                 {
-                    return true;
+                    posTemp = new Position(tempSpalte, tempZeile);
+                    if (paZielposition.Equals(posTemp))
+                    {
+                        Spielfigur ziel = feld.GetSpielfigurAnPosition(paZielposition);
+                        if (ziel != null && ziel.Besitzer.Equals(aktiverSpieler))
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
 
