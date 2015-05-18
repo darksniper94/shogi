@@ -5,18 +5,21 @@ using System.Text;
 
 namespace Shogi
 {
-    /*
-     * Logikarme Spielfeldklasse für die generelle Darstellung eines Spielfeldes, mit dynamischer Anpassung an diverse Spiele.
-     */
+    /// <summary>
+    /// Die Spielfeldklasse ohne festgeschriebene Spiellogik, diese soll
+    /// ein allgemeines Spielfeld repräsentieren und auf verschiedene Spiele anwendbar ist.
+    /// </summary>
     public class Spielfeld
     {
         private List<Spielfigur> feld;
         private Tuple<int, int> dimension;
         private int maxAnzahlSpielfiguren;
 
-        /*
-         * Das Spielfeld, welches die Spielfiguren beinhaltet.
-         */
+        /// <summary>
+        /// Das Property, welches die Liste aller Spielfiguren beinhaltet und überprüft, ob alle Spielfiguren
+        /// darin in der Spielfelddimension liegen bzw. die maximale Anzahl an Spielfiguren überschritten wird.
+        /// Ansonsten wird eine ArgumentOutOfRangeException geworfen.
+        /// </summary>
         public List<Spielfigur> Feld
         {
             get
@@ -36,10 +39,9 @@ namespace Shogi
             }
         }
 
-        /*
-         * Gibt die Dimension des Spielfeldes an Item1 als X-Koordinate (Spalte) und Item2 als Y-Koordinate(Zeile).
-         * Diese können nur positiv sein und lösen andernfalls eine ArgumentException aus.
-         */
+        /// <summary>
+        /// Das Tupleproperty, welches die Dimension des Spielfeldes einschränkt, wenn einer von beiden Werten unter 0 ist wird eine ArgumentException geworfen.
+        /// </summary>
         public Tuple<int, int> Dimension
         {
             get
@@ -59,9 +61,9 @@ namespace Shogi
             }
         }
 
-        /*
-         * Welche maximale Anzahl an Spielfiguren in die Feldliste "feld" gespeichert werden können.
-         */
+        /// <summary>
+        /// Property für die maximale Anzahl an Spielfiguren, die am Spiel teilnehmen dürfen.
+        /// </summary>
         public int MaxAnzahlSpielfiguren
         {
             get
@@ -81,11 +83,18 @@ namespace Shogi
             }
         }
 
+        /// <summary>
+        /// Gibt die maximale Dimension X (Spalte) zurück.
+        /// </summary>
+        /// <returns>Gibt die maximale Dimension X (Spalte) als int zurück.</returns>
         public int GetSpalte()
         {
             return Dimension.Item1;            
         }
-
+        /// <summary>
+        /// Gibt die maximale Dimension Y (Zeile) zurück.
+        /// </summary>
+        /// <returns>Gibt die maximale Dimension Y (Zeile) als int zurück.</returns>
         public int GetZeile()
         {
             return Dimension.Item2;
@@ -95,6 +104,11 @@ namespace Shogi
          * Gibt eine Matrix zurück, welche der Position der Spielfiguren entspricht. Hierbei werden nur aktive Spielfiguren
          * berrücksichtigt, da nur diese am aktiven Spielbrett teilnehmen.
          */
+        /// <summary>
+        /// Gibt eine Matrix zurück, welche der Position der Spielfiguren entspricht. Hierbei werden nur aktive Spielfiguren 
+        /// berrücksichtigt, da nur diese am aktiven Spielbrett teilnehmen.
+        /// </summary>
+        /// <returns>Gibt ein zweidimensionales Array mit Spielfiguren zurück, welche an den Positionen sind, die sie auch im aktuellen Spielfeld einnehmen.</returns>
         public Spielfigur[,] GetFeldMatrix()
         {
             Spielfigur[,] feldMatrix = new Spielfigur[this.GetSpalte(), this.GetZeile()];
@@ -112,6 +126,12 @@ namespace Shogi
          * Gibt eine Spielfigur aus der Liste zurück, welche die übergebene Position hat. Ist keine Spielfigur auf der übergebenen
          * Position zu finden, wird null zurückgegeben.
          */
+        /// <summary>
+        /// Gibt eine Spielfigur aus der Liste zurück, welche die übergebene Position hat. Ist keine Spielfigur auf der übergebenen
+        /// Position zu finden, wird null zurückgegeben.
+        /// </summary>
+        /// <param name="paPosition">Die Position der Spielfigur, die zurückgegeben werden soll.</param>
+        /// <returns>Gibt eine Spielfigur zurück der übergebenen Positionen.</returns>
         public Spielfigur GetSpielfigurAnPosition(Position paPosition)
         {
             for(int i=0; i<Feld.Count; i++)
@@ -128,12 +148,22 @@ namespace Shogi
          * Konstruktoren zum setzen der verschiedenen Variablen, diese wären für das eigentlich Shogispiel
          * nicht nötig sind, jedoch zur Vollständigkeit drinne, um diese Klasse generel zu halten.
          */
+        /// <summary>
+        /// Der Konstruktor des Spielfeldes in der eine Aufstellung von Spielfiguren und die Dimensionen als Integer übergeben werden.
+        /// </summary>
+        /// <param name="startAufstellung">Die Aufstellung der Spielfiguren auf dem Spielfeld.</param>
+        /// <param name="spaltenanzahl">Die maximale Anzahl der X-Dimension (Spalte) des Spielfeldes.</param>
+        /// <param name="zeilenanzahl">Die maximale Anzahl der Y-Dimension (Zeile) des Spielfeldes.</param>
         public Spielfeld(List<Spielfigur> startAufstellung, int spaltenanzahl, int zeilenanzahl)
             :this(startAufstellung, new Tuple<int,int>(spaltenanzahl, zeilenanzahl), int.MaxValue)
         {
 
         }
-
+        /// <summary>
+        /// Der Konstruktor des Spielfeldes in der eine Aufstellung von Spielfiguren und die Dimensionen als Tuple übergeben werden.
+        /// </summary>
+        /// <param name="startAufstellung">Die Aufstellung der Spielfiguren auf dem Spielfeld.</param>
+        /// <param name="paDimension">Die maximale Anzahl der X-Dimension (Spalte) und der Y-Dimension (Zeile) des Spielfeldes als Tuple.</param>
         public Spielfeld(List<Spielfigur> startAufstellung, Tuple<int,int> paDimension)
             : this(startAufstellung, paDimension, int.MaxValue)
         {
@@ -143,13 +173,27 @@ namespace Shogi
         /*
          * Dieser Konstruktor ist hauptsächlich für unser Shogispiel gedacht.
          */
+        /// <summary>
+        /// Der Konstruktor des Spielfeldes in der eine Aufstellung von Spielfiguren und die Dimensionen als Tuple übergeben werden, sowie die maximale Anzahl an Spielfiguren
+        /// die sich gleichzeitig auf dem Feld befinden dürfen.
+        /// </summary>
+        /// <param name="startAufstellung">Die Aufstellung der Spielfiguren auf dem Spielfeld.</param>
+        /// <param name="paDimension">Die maximale Anzahl der X-Dimension (Spalte) und der Y-Dimension (Zeile) des Spielfeldes als Tuple.</param>
+        /// <param name="paMaxAnzahlSpielfiguren">Die maximale Anzahl der Spielfiguren die an einem aktiven Spiel teilnehmen können.</param>
         public Spielfeld(List<Spielfigur> startAufstellung, Tuple<int,int> paDimension, int paMaxAnzahlSpielfiguren)
         {
             MaxAnzahlSpielfiguren = paMaxAnzahlSpielfiguren;
             Dimension = paDimension;
             Feld = startAufstellung;
         }
-
+        /// <summary>
+        /// Der Konstruktor des Spielfeldes in der eine Aufstellung von Spielfiguren und die Dimensionen als Tuple übergeben werden, sowie die maximale Anzahl an Spielfiguren
+        /// die sich gleichzeitig auf dem Feld befinden dürfen.
+        /// </summary>
+        /// <param name="startAufstellung">Die Aufstellung der Spielfiguren auf dem Spielfeld.</param>
+        /// <param name="spaltenanzahl">Die maximale Anzahl der X-Dimension (Spalte) des Spielfeldes.</param>
+        /// <param name="zeilenanzahl">Die maximale Anzahl der Y-Dimension (Zeile) des Spielfeldes.</param>
+        /// <param name="paMaxAnzahlSpielfiguren">Die maximale Anzahl der Spielfiguren die an einem aktiven Spiel teilnehmen können.</param>
         public Spielfeld(List<Spielfigur> startAufstellung, int spaltenanzahl, int zeilenanzahl, int paMaxAnzahlSpielfiguren)
             : this(startAufstellung, new Tuple<int,int>(spaltenanzahl, zeilenanzahl), paMaxAnzahlSpielfiguren)
         {
@@ -161,6 +205,11 @@ namespace Shogi
          * das Positions-Property des objects der Liste. Der Vergleich ist notwendig, da man sonst die Methode nutzen könnte, um
          * invalide Daten mit new SPielfigur() zu erstellen.
          */
+        /// <summary>
+        /// Setzt eine Spielfigur auf einen neue Position, ohne logische Überprüfung.
+        /// </summary>
+        /// <param name="paFigur">Die Spielfigur die auf eine neue Position gesetzt werden soll.</param>
+        /// <param name="paZielposition">Die Position auf die, die Spielfigur gesetzt werden soll.</param>
         public void fuehreSpielzugAus(Spielfigur paFigur, Position paZielposition)
         {
             if(Feld.Contains(paFigur))
@@ -174,7 +223,11 @@ namespace Shogi
         }
 
         
-
+        /// <summary>
+        /// Überprüft ob alle Spielfiguren in der Liste, in der Spielfelddimension liegen.
+        /// </summary>
+        /// <param name="paFeld">Die Liste von Spielfiguren, die überprüft werden soll.</param>
+        /// <returns>Returns true, wenn alle Spielfiguren in der Spielfelddimension liegen, ansonsten false.</returns>
         private bool SindSpielfigurenInDimension(List<Spielfigur> paFeld)
         {
             int count = 0;
