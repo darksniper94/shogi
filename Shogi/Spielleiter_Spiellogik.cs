@@ -67,9 +67,11 @@ namespace Shogi
             }
         }
 
-        /*
-         * Erstellt ein neues Spiel, welches sämtliche Steine mit ihren Anfangspositionen initialisiert.
-         */
+        /// <summary>
+        /// Erstellt ein neues Spiel, welches sämtliche Steine mit ihren Anfangspositionen für ein Shogispiel initialisiert, sowie sie den jeweiligen Spielern zuweist.
+        /// </summary>
+        /// <param name="spieler1">Der Spieler der die Partie beginnt und somit als Spieler1 bezeichnet wird.</param>
+        /// <param name="spieler2">Der Spieler der die Partie nicht beginnt und somit als Spieler2 bezeichnet wird.</param>
         public void neuesSpiel(Spieler spieler1, Spieler spieler2)
         {
             this.beendet = false;
@@ -159,7 +161,13 @@ namespace Shogi
             feld = new Spielfeld(tempSpielfeld, SHOGI_DIM, SHOGI_FIGUREN);
         }
 
-        // nicht Spielfigur von, Position nach ?
+        /// <summary>
+        /// Die Spielzugprüfung, ob ein Spielstein von Position A auf Position B gesetzt werden kann. return true, wenn der Zug ausführbar ist.
+        /// Diese Methode enthält ebenso die Shogilogik und überprüft daher ob der Zug nach den Regeln valide ist.
+        /// </summary>
+        /// <param name="positionVon">Die Position auf der eine Spielfigur sein muss.</param>
+        /// <param name="positionNach">Die Position auf die, die Spielfigur gesetzt werden soll.</param>
+        /// <returns>Return true, wenn der Zug nach Shogiregeln valide ist, anstonsten return false.</returns>
         public bool spielZug(Position positionVon, Position positionNach)
         {
             // 1. Spielfigur herausfinden
@@ -185,7 +193,7 @@ namespace Shogi
                 beendet = istSpielBeendet();
 
                 // 5. Spielerwechsel
-                //this.spielerwechsel(); noch nicht drinne da bewegungsmuster nur für unteren steine funktioniert
+                this.spielerwechsel();
 
                 return true;
             }
@@ -193,7 +201,11 @@ namespace Shogi
             return false;
             //throw new NotSupportedException();
         }
-
+        /// <summary>
+        /// Befördert eine Spielfigur und gibt einen boolschen Wert zurück.
+        /// </summary>
+        /// <param name="positionFigur">Die Position der zubefördernden Spielfigur</param>
+        /// <returns>returns true, wenn die Beförderung erfolgreich war, ansonsten false.</returns>
         public bool spielfigurBefoerdern(Position positionFigur)
         {
             Spielfigur figur = feld.GetSpielfigurAnPosition(positionFigur);
@@ -206,7 +218,11 @@ namespace Shogi
 
             return false;
         }
-
+        /// <summary>
+        /// Prüft ob die Beförderung nach Shogiregeln valide ist.
+        /// </summary>
+        /// <param name="figur">Die Spielfigur die befördert werden soll.</param>
+        /// <returns>returns true, wenn die Beförderung durchgeführt werden darf, ansonsten false.</returns>
         private bool pruefeBefoerdern(Spielfigur figur)
         {
             if (aktiverSpieler != null && aktiverSpieler.Equals(figur.Besitzer))
@@ -223,7 +239,10 @@ namespace Shogi
 
             return false;
         }
-
+        /// <summary>
+        /// Diese Methode überprüft, ob das Spiel beendet ist und der gegnerische König im Schachmatt ist.
+        /// </summary>
+        /// <returns>Returns true, wenn das Spiel beendet ist und der gegnerische König im Schachmatt ist, anstonsten false.</returns>
         private bool istSpielBeendet()
         {
             Spielfigur koenig;
@@ -235,7 +254,7 @@ namespace Shogi
                 {
                     if (koenig.Besitzer.Equals(InaktiverSpieler))
                     {
-                        if (istKoenigBewegungsfaehig(koenig) && istSchach(koenig) && istBlockierbar(koenig))
+                        if (istKoenigBewegungsfaehig(koenig) && istSchach(koenig) /*&& istBlockierbar(koenig)*/)
                         {
                             istSchachmatt = true;
                         }
@@ -244,7 +263,12 @@ namespace Shogi
             }
             return istSchachmatt;
         }
-
+        /// <summary>
+        /// Üerprüft ob der König bewegungsunfaehig ist, hierfür wird jeder Stein der gegnerischen Seite überprüft, ob seine Bewegungsmuster,
+        /// die des Königs blockieren bzw. eigene Steine das Bewegungsmuster blockieren.
+        /// </summary>
+        /// <param name="paKoenig">Der König für welchen die Bewegungsfähigkeit überprüft werden soll.</param>
+        /// <returns>Returns true, wenn der König sich noch bewegen kann und somit noch nicht im Schachmatt sitzt, ansonsten return false.</returns>
         private bool istKoenigBewegungsfaehig(Spielfigur paKoenig)
         {
             bool bewegungsfaehig = false;
@@ -311,10 +335,14 @@ namespace Shogi
                     }
                 }
             }
-        doublebreakBewegungsfaehig:
+            doublebreakBewegungsfaehig:
             return bewegungsfaehig;
         }
-
+        /// <summary>
+        /// Die Methode zur Überprüfung, ob der übergebene König im Schach sitzt und somit in Gefahr ist.
+        /// </summary>
+        /// <param name="paKoenig">Der König für den überprüft wird, ob er bedroht wird durch Schach.</param>
+        /// <returns>Return true, wenn der übergebene König im Schach ist, ansonsten return false.</returns>
         public bool istSchach(Spielfigur paKoenig)
         {
             bool istSchachGesetzt = false;
@@ -352,14 +380,14 @@ namespace Shogi
             return istSchachGesetzt;
         }
 
-        private bool istBlockierbar(Spielfigur paKoenig)
+        /*private bool istBlockierbar(Spielfigur paKoenig)
         {
             throw new NotSupportedException();
-        }
+        }*/
 
-        /*
-         * Wechselt die beiden Spieler, diese Methode soll am Ende eines erfolgreichen Zuges aufgerufen werden, um einen Spielerwechsel zu vollziehen.
-         */
+        /// <summary>
+        /// Wechselt die beiden Spieler, diese Methode soll am Ende eines erfolgreichen Zuges aufgerufen werden, um einen Spielerwechsel zu vollziehen.
+        /// </summary>
         private void spielerwechsel()
         {
             if (this.AktiverSpieler != null && this.InaktiverSpieler != null)
@@ -374,7 +402,12 @@ namespace Shogi
                 throw new NullReferenceException("Der aktiver Spieler ist " + aktiverSpieler.benutzername + " der inaktive Spieler ist " + inaktiverSpieler.benutzername);
             }
         }
-
+        /// <summary>
+        /// Die Zugprüfung für eine übergebene Spielfigur auf einen übergebene Zielposition.
+        /// </summary>
+        /// <param name="paSpielfigur">Die Spielfigur, welche auf eine neue Position gesetzt werden soll.</param>
+        /// <param name="paZielposition">Die Zielposition der Spielfigur, auf die überprüft werden soll.</param>
+        /// <returns>Returns true, wenn der Zug valide ist, anstonsten false.</returns>
         private bool pruefeZug(Spielfigur paSpielfigur, Position paZielposition)
         {
             List<Tuple<int, int>> muster = paSpielfigur.Typ.getBewegungsmuster().Muster;
@@ -395,7 +428,7 @@ namespace Shogi
                     tempZeile = figurPos.Zeile + tup.Item2;
                 }
 
-                if (tempSpalte > 0 && tempSpalte <= 9 && tempZeile > 0 && tempZeile <= 9)
+                if (tempSpalte > 0 && tempSpalte <= GetFeld().Dimension.Item1 && tempZeile > 0 && tempZeile <= GetFeld().Dimension.Item2)
                 {
                     posTemp = new Position(tempSpalte, tempZeile);
                     if (paZielposition.Equals(posTemp))
