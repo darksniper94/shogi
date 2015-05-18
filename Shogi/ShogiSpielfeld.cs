@@ -491,20 +491,25 @@ namespace Shogi
         {
             Panel tmp;
             tmp = (Panel)sender;
-            clickCount = clickCount + 1;
-            if (clickCount == 2)
+            if (tmp.BackgroundImage == null && clickCount == 0)
             {
-                clickCount = 0;
+         
+            } else {
+                clickCount = clickCount + 1;
+                if (clickCount == 2)
+                {
+                    clickCount = 0;
 
-                MessageBox.Show("Von: y:" + ausgangy + "/x:" + ausgangx + " Nach: y" + pnlFeld.GetPositionFromControl(tmp).Row + "/x:" + pnlFeld.GetPositionFromControl(tmp).Column);
-                //Spielleiter_Spiellogik.instance.spielZug(new Position(), new Position());
-               
-            } else
-            {
-              ausgangx = pnlFeld.GetPositionFromControl(tmp).Column;
-              ausgangy = pnlFeld.GetPositionFromControl(tmp).Row;
+                    MessageBox.Show("Von: y:" + ausgangy + "/x:" + ausgangx + " Nach: y" + pnlFeld.GetPositionFromControl(tmp).Row + "/x:" + pnlFeld.GetPositionFromControl(tmp).Column);
+                    //Spielleiter_Spiellogik.instance.spielZug(new Position(), new Position());
+
+                }
+                else
+                {
+                    ausgangx = pnlFeld.GetPositionFromControl(tmp).Column;
+                    ausgangy = pnlFeld.GetPositionFromControl(tmp).Row;
+                }
             }
-            
         }
         void bBeendenOnClick(object sender, EventArgs e)
         {
@@ -518,7 +523,7 @@ namespace Shogi
             if (tmp.Text == "Einzel Spiel")
             {
                 
-                //Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, Database.Instance.LadeSpieler(spAngemeldet.id));
+                Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, Database.Instance.LadeSpieler(spAngemeldet.id));
                 tmp.Text = "Pause";
                 bCoop_Abbrechen.Text = "Abbrechen";
                 bspeichern_laden.Text = "Speichern";
