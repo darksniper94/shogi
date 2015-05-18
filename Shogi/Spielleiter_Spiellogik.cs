@@ -12,6 +12,7 @@ namespace Shogi
         private Spieler inaktiverSpieler;
         private Spielfeld feld;
         private bool beendet;
+        private bool invertiert;
 
         public static readonly Tuple<int, int> SHOGI_DIM = new Tuple<int, int>(9, 9);
         public static readonly int SHOGI_FIGUREN = 40;
@@ -71,6 +72,9 @@ namespace Shogi
          */
         public void neuesSpiel(Spieler spieler1, Spieler spieler2)
         {
+            this.beendet = false;
+            this.invertiert = false;
+
             this.AktiverSpieler = spieler1;
             this.InaktiverSpieler = spieler2;
             List<Spielfigur> tempSpielfeld = new List<Spielfigur>();
@@ -156,8 +160,11 @@ namespace Shogi
         }
 
         // nicht Spielfigur von, Position nach ?
-        public void spielZug(Spielfigur figurVon, Position positionNach)
+        public bool spielZug(Position positionVon, Position positionNach)
         {
+            // 1. Spielfigur herausfinden
+            Spielfigur figurVon = feld.GetSpielfigurAnPosition(positionVon);
+
             // 2. Prüfe Zug
             if (pruefeZug(figurVon, positionNach))
             {
@@ -179,13 +186,42 @@ namespace Shogi
 
                 // 5. Spielerwechsel
                 //this.spielerwechsel(); noch nicht drinne da bewegungsmuster nur für unteren steine funktioniert
+
+                return true;
             }
+
+            return false;
             //throw new NotSupportedException();
         }
 
-        public void spielfigurBefoerdern(Spielfigur figur)
+        public bool spielfigurBefoerdern(Position positionFigur)
         {
-            figur.befoerdern();
+            Spielfigur figur = feld.GetSpielfigurAnPosition(positionFigur);
+
+            if (pruefeBefoerdern(figur))
+            {
+                figur.befoerdern();
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool pruefeBefoerdern(Spielfigur figur)
+        {
+            if (aktiverSpieler != null && aktiverSpieler.Equals(figur.Besitzer))
+            {
+                if (invertiert)
+                {
+                    return figur.Position.Zeile >= 7;
+                }
+                else
+                {
+                    return figur.Position.Zeile <= 3;
+                }
+            }
+
+            return false;
         }
 
         private bool istSpielBeendet()
@@ -331,6 +367,7 @@ namespace Shogi
                 Spieler temp = this.AktiverSpieler;
                 this.AktiverSpieler = this.InaktiverSpieler;
                 this.InaktiverSpieler = temp;
+                this.invertiert = !this.invertiert;
             }
             else
             {
@@ -347,8 +384,16 @@ namespace Shogi
 
             foreach (Tuple<int, int> tup in muster)
             {
-                tempSpalte = figurPos.Spalte + tup.Item1;
-                tempZeile = figurPos.Zeile + tup.Item2;
+                if (invertiert)
+                {
+                    tempSpalte = figurPos.Spalte - tup.Item1;
+                    tempZeile = figurPos.Zeile - tup.Item2;
+                }
+                else
+                {
+                    tempSpalte = figurPos.Spalte + tup.Item1;
+                    tempZeile = figurPos.Zeile + tup.Item2;
+                }
 
                 if (tempSpalte > 0 && tempSpalte <= 9 && tempZeile > 0 && tempZeile <= 9)
                 {
