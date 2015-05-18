@@ -12,6 +12,7 @@ namespace Shogi
         private Spieler inaktiverSpieler;
         private Spielfeld feld;
         private bool beendet;
+        private bool invertiert;
 
         public static readonly Tuple<int, int> SHOGI_DIM = new Tuple<int, int>(9, 9);
         public static readonly int SHOGI_FIGUREN = 40;
@@ -71,6 +72,9 @@ namespace Shogi
          */
         public void neuesSpiel(Spieler spieler1, Spieler spieler2)
         {
+            this.beendet = false;
+            this.invertiert = false;
+
             this.AktiverSpieler = spieler1;
             this.InaktiverSpieler = spieler2;
             List<Spielfigur> tempSpielfeld = new List<Spielfigur>();
@@ -156,20 +160,68 @@ namespace Shogi
         }
 
         // nicht Spielfigur von, Position nach ?
-        public void spielZug(Spielfigur figurVon, Position positionNach)
+        public bool spielZug(Position positionVon, Position positionNach)
         {
-            // 1. Get Figur auf Position von
+            // 1. Spielfigur herausfinden
+            Spielfigur figurVon = feld.GetSpielfigurAnPosition(positionVon);
 
             // 2. Prüfe Zug
             if (pruefeZug(figurVon, positionNach))
             {
+                // Falls Gegnerische Figur vorhanden, diese deaktivieren
+                Spielfigur ziel = feld.GetSpielfigurAnPosition(positionNach);
+                if (ziel != null && ziel.Besitzer.Equals(InaktiverSpieler))
+                {
+                    ziel.deaktivieren();
+                    ziel.Besitzer = AktiverSpieler;
+                }
+
                 // 3. Spielzug an Spielfeld übergeben
                 feld.fuehreSpielzugAus(figurVon, positionNach);
 
+
+
                 // 4. Ist Spiel beendet
                 beendet = istSpielBeendet();
+
+                // 5. Spielerwechsel
+                //this.spielerwechsel(); noch nicht drinne da bewegungsmuster nur für unteren steine funktioniert
+
+                return true;
             }
-            throw new NotSupportedException();
+
+            return false;
+            //throw new NotSupportedException();
+        }
+
+        public bool spielfigurBefoerdern(Position positionFigur)
+        {
+            Spielfigur figur = feld.GetSpielfigurAnPosition(positionFigur);
+
+            if (pruefeBefoerdern(figur))
+            {
+                figur.befoerdern();
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool pruefeBefoerdern(Spielfigur figur)
+        {
+            if (aktiverSpieler != null && aktiverSpieler.Equals(figur.Besitzer))
+            {
+                if (invertiert)
+                {
+                    return figur.Position.Zeile >= 7;
+                }
+                else
+                {
+                    return figur.Position.Zeile <= 3;
+                }
+            }
+
+            return false;
         }
 
         private bool istSpielBeendet()
@@ -207,12 +259,13 @@ namespace Shogi
                 ursprungsPosition = new Position(paKoenig.Position.Spalte, paKoenig.Position.Zeile);
                 bewegung = paKoenig.Typ.getBewegungsmuster().Muster.ElementAt(i);
                 //neue Position zum vereinfachten weiterarbeiten
-                neuePosition = new Position(ursprungsPosition.Spalte + bewegung.Item1, ursprungsPosition.Zeile + bewegung.Item2);
+
                 eineFigurDecktBewegungsoptionDesKoenigs = false;
                 //if um bool zu setzen Ausdruck in () ist wie ein if(), ist dies false wird der bool auch auf false gesetzt
-                istBewegungsoptionVonKoenigInFelddimension = (neuePosition.Spalte > 0 && neuePosition.Spalte <= GetFeld().Dimension.Item1 && neuePosition.Zeile > 0 && neuePosition.Zeile <= GetFeld().Dimension.Item2) ? true : false;
+                istBewegungsoptionVonKoenigInFelddimension = (ursprungsPosition.Spalte + bewegung.Item1 > 0 && ursprungsPosition.Spalte + bewegung.Item1 <= GetFeld().Dimension.Item1 && ursprungsPosition.Zeile + bewegung.Item2 > 0 && ursprungsPosition.Zeile + bewegung.Item2 <= GetFeld().Dimension.Item2) ? true : false;
                 if (istBewegungsoptionVonKoenigInFelddimension)
                 {
+                    neuePosition = new Position(ursprungsPosition.Spalte + bewegung.Item1, ursprungsPosition.Zeile + bewegung.Item2);
                     //für alle Spielfiguren die dem aktiven Spieler gehören, überprüfen ob sie ein feld belegen auf dem der König bewegen kann
                     for (int index = 0; index < GetFeld().Feld.Count(); index++)
                     {
@@ -221,6 +274,7 @@ namespace Shogi
                             Spielfigur paFigur = GetFeld().Feld.ElementAt(index);
                             Position ursprungsPositionPaFigur, neuePositionPaFigur;
                             Tuple<int, int> bewegungPaFigur;
+                            bool istBewegungsoptionVonPaFigurInFelddimension;
                             //für alle bewegungsmunster der paFigur
                             for (int paBewegung = 0; paBewegung < paFigur.Typ.getBewegungsmuster().Muster.Count; paBewegung++)
                             {
@@ -228,11 +282,15 @@ namespace Shogi
                                 ursprungsPositionPaFigur = new Position(paFigur.Position.Spalte, paFigur.Position.Zeile);
                                 bewegungPaFigur = paFigur.Typ.getBewegungsmuster().Muster.ElementAt(i);
                                 //neue Position der paFigur
-                                neuePositionPaFigur = new Position(ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1, ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2);
-                                //wenn neue Position des Königs und neue Positon der paFigur übereinstimmen (Feld ist belegt)
-                                if (neuePositionPaFigur.Spalte == neuePosition.Spalte && neuePositionPaFigur.Zeile == neuePosition.Zeile)
+                                istBewegungsoptionVonPaFigurInFelddimension = (ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1 > 0 && ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1 <= GetFeld().Dimension.Item1 && ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2 > 0 && ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2 <= GetFeld().Dimension.Item2) ? true : false;
+                                if (istBewegungsoptionVonPaFigurInFelddimension)
                                 {
-                                    eineFigurDecktBewegungsoptionDesKoenigs = true;
+                                    neuePositionPaFigur = new Position(ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1, ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2);
+                                    //wenn neue Position des Königs und neue Positon der paFigur übereinstimmen (Feld ist belegt)
+                                    if (neuePositionPaFigur.Spalte == neuePosition.Spalte && neuePositionPaFigur.Zeile == neuePosition.Zeile)
+                                    {
+                                        eineFigurDecktBewegungsoptionDesKoenigs = true;
+                                    }
                                 }
                             }
                         }
@@ -269,18 +327,23 @@ namespace Shogi
                 if (paFigur.Besitzer.Equals(AktiverSpieler))
                 {
                     //für alle bewegungsmunster der paFigur
+                    bool istBewegungsoptionVonPaFigurInFelddimension;
                     for (int paBewegung = 0; paBewegung < paFigur.Typ.getBewegungsmuster().Muster.Count; paBewegung++)
                     {
                         //Positionsklon der paFigur
                         ursprungsPositionPaFigur = new Position(paFigur.Position.Spalte, paFigur.Position.Zeile);
-                        bewegungPaFigur = paFigur.Typ.getBewegungsmuster().Muster.ElementAt(i);
+                        bewegungPaFigur = paFigur.Typ.getBewegungsmuster().Muster.ElementAt(paBewegung);
                         //neue Position der paFigur
-                        neuePositionPaFigur = new Position(ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1, ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2);
-                        //wenn Position des Königs und neue Positon der paFigur übereinstimmen ist der König im Schach
-                        if (neuePositionPaFigur.Spalte == paKoenig.Position.Spalte && neuePositionPaFigur.Zeile == paKoenig.Position.Zeile)
+                        istBewegungsoptionVonPaFigurInFelddimension = (ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1 > 0 && ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1 <= GetFeld().Dimension.Item1 && ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2 > 0 && ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2 <= GetFeld().Dimension.Item2) ? true : false;
+                        if (istBewegungsoptionVonPaFigurInFelddimension)
                         {
-                            istSchachGesetzt = true;
-                            goto doublebreakSchach;
+                            neuePositionPaFigur = new Position(ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1, ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2);
+                            //wenn Position des Königs und neue Positon der paFigur übereinstimmen ist der König im Schach
+                            if (neuePositionPaFigur.Spalte == paKoenig.Position.Spalte && neuePositionPaFigur.Zeile == paKoenig.Position.Zeile)
+                            {
+                                istSchachGesetzt = true;
+                                goto doublebreakSchach;
+                            }
                         }
                     }
                 }
@@ -304,6 +367,7 @@ namespace Shogi
                 Spieler temp = this.AktiverSpieler;
                 this.AktiverSpieler = this.InaktiverSpieler;
                 this.InaktiverSpieler = temp;
+                this.invertiert = !this.invertiert;
             }
             else
             {
@@ -320,13 +384,32 @@ namespace Shogi
 
             foreach (Tuple<int, int> tup in muster)
             {
-                tempSpalte = figurPos.Spalte + tup.Item1;
-                tempZeile = figurPos.Zeile + tup.Item2;
-
-                posTemp = new Position(tempSpalte, tempZeile);
-                if (paZielposition.Equals(posTemp))
+                if (invertiert)
                 {
-                    return true;
+                    tempSpalte = figurPos.Spalte - tup.Item1;
+                    tempZeile = figurPos.Zeile - tup.Item2;
+                }
+                else
+                {
+                    tempSpalte = figurPos.Spalte + tup.Item1;
+                    tempZeile = figurPos.Zeile + tup.Item2;
+                }
+
+                if (tempSpalte > 0 && tempSpalte <= 9 && tempZeile > 0 && tempZeile <= 9)
+                {
+                    posTemp = new Position(tempSpalte, tempZeile);
+                    if (paZielposition.Equals(posTemp))
+                    {
+                        Spielfigur ziel = feld.GetSpielfigurAnPosition(paZielposition);
+                        if (ziel != null && ziel.Besitzer.Equals(aktiverSpieler))
+                        {
+                            return false;
+                        }
+                        else
+                        {
+                            return true;
+                        }
+                    }
                 }
             }
 

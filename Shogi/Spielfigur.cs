@@ -135,6 +135,7 @@ namespace Shogi
         {
             this.aktiv = false;
             this.position = new Position(0, 0);
+            this.degradieren();
         }
 
         /// <summary>
