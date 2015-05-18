@@ -495,14 +495,14 @@ namespace Shogi
             if (clickCount == 2)
             {
                 clickCount = 0;
-                
-                MessageBox.Show("Von: y:"+ausgangy + "/x:"+ausgangx+" Nach: y" + tmp.Name + "/x:" + tmp.Tag);
+
+                MessageBox.Show("Von: y:" + ausgangy + "/x:" + ausgangx + " Nach: y" + pnlFeld.GetPositionFromControl(tmp).Row + "/x:" + pnlFeld.GetPositionFromControl(tmp).Column);
                 //Spielleiter_Spiellogik.instance.spielZug(new Position(), new Position());
                
             } else
             {
-              ausgangx = Convert.ToInt32(tmp.Tag);
-              ausgangy = Convert.ToInt32(tmp.Name);
+              ausgangx = pnlFeld.GetPositionFromControl(tmp).Column;
+              ausgangy = pnlFeld.GetPositionFromControl(tmp).Row;
             }
             
         }
