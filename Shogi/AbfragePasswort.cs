@@ -12,12 +12,21 @@ namespace Shogi
     public partial class frmPasswortAbfrage : Form
     {
         private Spieler spAngemeldet;
+        /// <summary>
+        /// Fragt das Passwort ab 
+        /// </summary>
+        /// <param name="paspAngemeldet">Der Angemeldete Spieler als Spieler</param>
         public frmPasswortAbfrage(Spieler paspAngemeldet)
         {
             InitializeComponent();
             spAngemeldet = paspAngemeldet;
         }
 
+        /// <summary>
+        /// Eventhandler OK Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void bOK_Click(object sender, EventArgs e)
         {
             lblrueckMeldung.Visible = false;
@@ -36,11 +45,21 @@ namespace Shogi
             }
         }
 
+        /// <summary>
+        /// Eventhandler Abbrechen Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void bAbbrechen_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Eventhandler LoadEvent des PasswortAbfrage Fensters
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void frmPasswortAbfrage_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);

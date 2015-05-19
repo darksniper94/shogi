@@ -32,6 +32,9 @@ namespace Shogi
 
         }
 
+        /// <summary>
+        /// Database singleton
+        /// </summary>
         public static Database Instance
         {
             get
@@ -44,14 +47,22 @@ namespace Shogi
             }
         }
 
-        // Methode zum ausführen von update, insert, delete und create
+        /// <summary>
+        /// Methode zum ausführen von update, insert, delete und create
+        /// </summary>
+        /// <param name="sql">Der SQL Befehl als String</param>
+        /// <returns>Anzahl der betroffenen Zeilen als int</returns>
         public int ExecuteNonQuery(String sql)
         {
             SQLiteCommand cmd = new SQLiteCommand(sql, connection);
             return cmd.ExecuteNonQuery();
         }
 
-        // Methode für select
+        /// <summary>
+        /// Methode für Select
+        /// </summary>
+        /// <param name="sql">Der SQL Befehl als String</param>
+        /// <returns>Eine Liste der Ergebnisse als Linked List</returns>
         public LinkedList<Object[]> ExecuteQuery(String sql)
         {
             try
@@ -110,6 +121,12 @@ namespace Shogi
             ExecuteNonQuery(STATISTIC_TBL);
         }
 
+        /// <summary>
+        /// Prüft die Spielerdaten
+        /// </summary>
+        /// <param name="benutzername">Benutzername als String</param>
+        /// <param name="passwort">Passwort als String</param>
+        /// <returns>Gibt die BenutzerID zurück. // kein Fund = -1</returns>
         public int PruefeSpielerDaten(String benutzername, String passwort)
         {
             String sql = "SELECT ID FROM USER WHERE name='" + benutzername + "' and pass='" + passwort + "'";
@@ -126,6 +143,11 @@ namespace Shogi
             }
         }
 
+        /// <summary>
+        /// Prüft ob ein Benutzername bereits in der Datenbank existiert
+        /// </summary>
+        /// <param name="benutzername">Benutzername als String</param>
+        /// <returns>Bool ob der Benutzer vohanden ist. // true = vorhanden</returns>
         public bool PruefeBenutzerVorhanden(String benutzername)
         {
             String sql = "SELECT ID FROM USER WHERE name='" + benutzername + "'";
@@ -141,6 +163,11 @@ namespace Shogi
             }
         }
 
+        /// <summary>
+        /// Lädt den Spieler
+        /// </summary>
+        /// <param name="spielerid">Die Datenbank ID des Spielers, der geladen werden soll als int</param>
+        /// <returns>Den geladenen Spieler als Spieler</returns>
         public Spieler LadeSpieler(int spielerid)
         {
             String sql = "SELECT * FROM USER WHERE ID='" + Convert.ToString(spielerid) + "'";
@@ -163,9 +190,9 @@ namespace Shogi
         }
         /// <summary>
         /// Speichert einen Spieler in die Datenbank
-        /// Hat der Spieler eine bekannte ID, dann wird 
+        /// Hat der Spieler eine bekannte ID, dann wird ein Update ausgeführt
         /// </summary>
-        /// <param name="spieler"></param>
+        /// <param name="spieler">Der Spieler als Spieler</param>
         public void SpeichereSpieler(Spieler spieler)
         {
             String sql = "";
@@ -190,17 +217,22 @@ namespace Shogi
             this.ExecuteNonQuery(sql);
 
         }
-
+        
         /// <summary>
         /// Löscht den Spieler samt Statistik. Die Statistik wird über on delete cascade realisiert.
         /// </summary>
-        /// <param name="?"></param>
+        /// <param name="spieler">Der Spieler als Spieler</param>
         public void loescheSpieler(Spieler spieler)
         {
             String sql = "DELETE FROM USER WHERE ID = " + spieler.id;
             this.ExecuteNonQuery(sql);
         }
 
+        /// <summary>
+        /// Lädt die Statistik
+        /// </summary>
+        /// <param name="spieler">Spieler als Spieler</param>
+        /// <returns>Gibt die Statistik als Statistik zurück</returns>
         public Statistik LadeStatistik(Spieler spieler)
         {
             String sql = @"SELECT SUM(spiel_gewonnen), SUM(spiel_beendet), AVG(zuege), AVG(zeit)
@@ -217,6 +249,10 @@ namespace Shogi
             return new Statistik(Convert.ToInt32(data[0]),Convert.ToInt32(data[1]), Convert.ToDouble(data[2]), Convert.ToDouble(data[3]));
         }
 
+        /// <summary>
+        /// Löscht die Statistik
+        /// </summary>
+        /// <param name="spieler">Spieler als Spieler</param>
         public void LoescheStatistik(Spieler spieler)
         {
             String sql = "DELETE FROM STATISTIK WHERE user_id = " + spieler.id;
@@ -226,7 +262,7 @@ namespace Shogi
         /// <summary>
         /// Sucht zum Benutzernamen die SpielerID raus
         /// </summary>
-        /// <param name="spieler"></param>
+        /// <param name="spieler">Spieler als Spieler</param>
         /// <returns>ID</returns>
 
         private int GetSpielerID(Spieler spieler)
@@ -239,11 +275,11 @@ namespace Shogi
         /// <summary>
         /// Erstellt einen neuen Statistik Eintrag im der Datenbank
         /// </summary>
-        /// <param name="spieler"></param>
-        /// <param name="gewonnen"></param>
-        /// <param name="beendet"></param>
-        /// <param name="zuege"></param>
-        /// <param name="zeit"></param>
+        /// <param name="spieler">Spieler als Spieler</param>
+        /// <param name="gewonnen">Gewonnen als Bool // True = Spiel gewonnen</param>
+        /// <param name="beendet">Beendet als Bool // True = Beendet</param>
+        /// <param name="zuege">Anzahl der Züge als int</param>
+        /// <param name="zeit">Anzahl der Zeit als int</param>
 
         public void StatistikErweitern(Spieler spieler, bool gewonnen, bool beendet, int zuege, int zeit)
         {
@@ -258,6 +294,10 @@ namespace Shogi
                                                         
         }
 
+        /// <summary>
+        /// Lädt das Regelwerk
+        /// </summary>
+        /// <returns>Gibt das Regelwerk als String zurück</returns>
         public String ladeRegelwerk()
         {
             return "";
@@ -265,7 +305,7 @@ namespace Shogi
         /// <summary>
         /// Gibt die ID des letzten eingefügten Datensatzes in der Datenbank zurück
         /// </summary>
-        /// <returns></returns>
+        /// <returns>ID als int</returns>
         private int GetLastInsertId()
         {
             String sql = "SELECT last_insert_rowid();";
@@ -273,6 +313,12 @@ namespace Shogi
             return Convert.ToInt32(cmd.ExecuteScalar());
         }
 
+        /// <summary>
+        /// Speichert das Spiel
+        /// </summary>
+        /// <param name="feld">Das Spielfeld als Spielfeld</param>
+        /// <param name="sp1">Der erste Spieler als Spieler</param>
+        /// <param name="sp2">Der zweite Spieler als Spieler</param>
         public void SpeichereSpiel(Spielfeld feld, Spieler sp1, Spieler sp2)
         {
             // Speichere Spiel
@@ -305,6 +351,11 @@ namespace Shogi
 
         }
 
+        /// <summary>
+        /// Lädt das Spielfeld
+        /// </summary>
+        /// <param name="spielid">Spielid als int</param>
+        /// <returns>Gibt das Spielfeld zurück</returns>
         public Spielfeld LadeSpielfeld(int spielid)
         {
             String sql = @"SELECT figurtyp, befoerdert, x, y

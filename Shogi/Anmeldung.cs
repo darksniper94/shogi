@@ -10,9 +10,7 @@ using System.Windows.Forms;
 namespace Shogi
 {
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! SQL Injection abfangen implementieren
-     /// <summary>
-    /// Klasse für die AnmeldungFenster, erbt von WindowsForms
-     /// </summary>
+
     public partial class FormAnmeldung : Form
     {
 
@@ -26,10 +24,10 @@ namespace Shogi
        
 
        /// <summary>
-       /// Methode bei Betätigung des Anmeldebuttons
+       /// Eventhandler Button Anmeldern
        /// </summary>
-       /// <param name="sender"></param>
-       /// <param name="e"></param>
+       /// <param name="sender">Sender Objekt</param>
+       /// <param name="e">Das Event</param>
         private void bAnmelden_Click(object sender, EventArgs e)
         {
             lblMeldung.Visible = false;
@@ -47,20 +45,20 @@ namespace Shogi
         }
         
         /// <summary>
-        /// Methode bei Betätigung des Abbrechenbuttons
+        ///Eventhandler Abbrechen Button
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void bAbbrechen_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         /// <summary>
-        /// Methode bei Betätigung des Registrierungsbuttons
+        /// Eventhandler Registrierungsbutton
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void bRegistrieren_Click(object sender, EventArgs e)
         {
             lblMeldung.Visible = false;
@@ -68,6 +66,11 @@ namespace Shogi
             frmRegistrieren.ShowDialog();
         }
 
+        /// <summary>
+        /// Eventhandler LoadEvent des FormAnmeldung Fensters
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void FormAnmeldung_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);

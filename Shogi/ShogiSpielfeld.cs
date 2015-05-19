@@ -11,9 +11,6 @@ using System.IO;
 
 namespace Shogi
 {
-    /// <summary>
-    /// Klasse für das ShogiFenster, erbt von WindowsForms
-    /// </summary>
     public partial class ShogiSpielfeld : Form
     {
         Spieler spAngemeldet;
@@ -51,7 +48,7 @@ namespace Shogi
         /// <summary>
         /// Konstruktor für das ShogiFenster
         /// </summary>
-        /// <param name="spAngemeldet">Der angemeldete Spieler als Spieler</param>
+        /// <param name="paspAngemeldet">Der angemeldete Spieler als Spieler</param>
         public ShogiSpielfeld(Spieler paspAngemeldet)
         {
             spAngemeldet = paspAngemeldet;
@@ -473,7 +470,9 @@ namespace Shogi
             pnlBasis.Controls.Add(pnlSpielfeld);
             this.Controls.Add(pnlBasis);
         }
-
+        /// <summary>
+        /// Öffnet ein seperates Fenster für die Statistik 
+        /// </summary>
         void statistikAnzeigeBox()
         {
             Statistik stat = Database.Instance.LadeStatistik(spAngemeldet);
@@ -487,6 +486,11 @@ namespace Shogi
             }
         }
 
+            /// <summary>
+            /// Der Eventhandler für das klicken auf das Spielfeld
+            /// </summary>
+            /// <param name="sender">Das Panel auf das geklickt wurde als Objekt</param>
+            /// <param name="e">Das Event</param>
         void PanelOnClick(object sender, EventArgs e)
         {
             Panel tmp;
@@ -511,11 +515,21 @@ namespace Shogi
                 }
             }
         }
+        /// <summary>
+        /// Eventhandler Beendenbutton
+        /// </summary>
+        /// <param name="sender">Button als Objekt</param>
+        /// <param name="e">Das Event</param>
         void bBeendenOnClick(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Eventhandler für den Einzel//Pause//Fortsetzen Button
+        /// </summary>
+        /// <param name="sender">Button als Objekt</param>
+        /// <param name="e">Das Event</param>
         void bEinzel_pause_fortOnClick(object sender, EventArgs e)
         {
             Button tmp;
@@ -531,14 +545,28 @@ namespace Shogi
             spielfeldUmschalten(true);
             labelsUmschalten(true);
         }
-
+        /// <summary>
+        /// Eventhandler Coop//Abbrechen Button
+        /// </summary>
+        /// <param name="sender">Button als Objekt</param>
+        /// <param name="e">Das Event</param>
         void bCoop_AbbrechenOnClick(object sender, EventArgs e)
         {
         }
+        /// <summary>
+        /// Eventhandler
+        /// </summary>
+        /// <param name="sender">Button als Objekt</param>
+        /// <param name="e">Das Event</param>
         void bStatistikOnClick(object sender, EventArgs e)
         {
             statistikAnzeigeBox();
         }
+        /// <summary>
+        /// Eventhandler Speichern//Laden Button
+        /// </summary>
+        /// <param name="sender">Button als Objekt</param>
+        /// <param name="e">Das Event</param>
         void bspeichern_ladenOnClick(object sender, EventArgs e)
         {
             Button paButton = new Button();
@@ -553,26 +581,46 @@ namespace Shogi
 
         }
 
+        /// <summary>
+        /// Eventhandler Toolstrip Beenden
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void spielBeendenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Eventhandler Toolstrip Laden
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void spielLadenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             laden();
         }
-
+        /// <summary>
+        /// Eventhandler Toolstrip speichern
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void spielSpeichernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             speichern();
         }
-
+        /// <summary>
+        /// Zeigt eine MessageBox zur Bestätigung ob das Spiel wirklich beendet werden soll an 
+        /// </summary>
+        /// <returns>Dialog Result</returns>
         private DialogResult beendenAbfrage()
         {
             return MessageBox.Show("Möchten Sie das Spiel wirklich beenden?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
         }
 
+        /// <summary>
+        /// Speichert das Spiel
+        /// </summary>
         private void speichern()
         {
             DialogResult result = new DialogResult();
@@ -587,6 +635,9 @@ namespace Shogi
             }
         }
 
+        /// <summary>
+        /// Lädt das Spiel
+        /// </summary>
         private void laden()
         {
             DialogResult result = new DialogResult();
@@ -599,11 +650,20 @@ namespace Shogi
             zeichneSpielfeldkomplett();
         }
 
+        /// <summary>
+        /// Eventhandler Toolstrip Statistik anzeigen
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void ansehenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             statistikAnzeigeBox();
         }
-
+        /// <summary>
+        /// Eventhandler Toolstrip zurücksetzen
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void zurücksetzenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(this, "Möchten Sie ihre Statistik zurücksetzten?", "Statistik zurücksetzten", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -614,6 +674,11 @@ namespace Shogi
             
         }
 
+        /// <summary>
+        /// Eventhandler Toolstrip benutzername ändern
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void benutzernamenÄndernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //benutzernamen ändern Dialog
@@ -621,6 +686,11 @@ namespace Shogi
             frmBenutzernamenAendern.ShowDialog();
         }
 
+        /// <summary>
+        /// Eventhandler Toolstrip passwort ändern
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void passwortÄndernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //passwort ändern Dialog
@@ -629,6 +699,11 @@ namespace Shogi
 
         }
 
+        /// <summary>
+        /// Eventhandler Toolstrip Konto löschen
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void kontoLöschenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             
@@ -650,7 +725,6 @@ namespace Shogi
         /// <summary>
         /// Diese Methode setzt die Steine auf die entsprechenden Panels.
         /// </summary>
-        //Spielfigur[,] paMatrix
         public void zeichneSpielfeldkomplett()
         {
             int i = 0;
@@ -673,9 +747,11 @@ namespace Shogi
            }
         }
 
-        /// <summary>
-        /// setzt ein Image um 
-        /// </summary>
+       /// <summary>
+       /// Setzt ein Image von einer Position auf eine andere.
+       /// </summary>
+       /// <param name="posAlt">Alte Position</param>
+       /// <param name="posNeu">Neue Position</param>
         public void zeichneSpielzug(Position posAlt, Position posNeu)
         {
             if (posNeu.Spalte == posAlt.Spalte && posNeu.Zeile == posAlt.Zeile)
@@ -687,11 +763,21 @@ namespace Shogi
             }
         }
 
+        /// <summary>
+        /// Eventhandler LoadEvent des ShogiSpielfeld Fensters
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void ShogiSpielfeld_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
+        /// <summary>
+        /// Eventhandler CloseEvent des ShogiSpielfeld Fensters
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void ShogiSpielfeld_FormClosed(object sender, FormClosedEventArgs e)
         {
             
@@ -699,6 +785,11 @@ namespace Shogi
 
         private Boolean hardClose { get; set; }
 
+        /// <summary>
+        /// Eventhandler FormCLosingEvent des ShogiSpielfeld Fensters
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void ShogiSpielfeld_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Wenn nicht beendet werden soll, wird das Event abgebrochen
@@ -711,6 +802,11 @@ namespace Shogi
             }
         }
 
+        /// <summary>
+        /// Eventhandler Toolstrip Hilfe
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void hilfeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             String appdir = Path.GetDirectoryName(Application.ExecutablePath);
@@ -718,6 +814,11 @@ namespace Shogi
             Regelwerk rw = new Regelwerk(regelwerk_html);
             rw.Show();
         }
+        /// <summary>
+        /// Eventhandler für das Klicken auf das Bambusbild (Trennstreifen)
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         void picBambusOnClick( object sender, EventArgs e)
         {
             if (pnlMenu.Width == 10)
@@ -734,6 +835,10 @@ namespace Shogi
             pnlSp1Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp1Ers.Width / 2), 130 + pnlFeld.Height);
         }
         
+        /// <summary>
+        /// Schaltet die Controls im Spielfeld benutzbar oder unbenutzbar. 
+        /// </summary>
+        /// <param name="paBool">Bool ob die Controls benuztbar oder unbenutzbar sein sollen. // True = benutzbar</param>
         void spielfeldUmschalten(bool paBool)
         {
             foreach (Control c in pnlFeld.Controls)
@@ -749,6 +854,10 @@ namespace Shogi
                 c.Enabled = paBool;
             }
         }
+        /// <summary>
+        /// Schaltet die Label, die Anzeigen wie viele Spielfigur welchen Types man auf der Ersatzbank hat sichtbar oder unsichtbar.
+        /// </summary>
+        /// <param name="paBool">Bool ob sie sichtbar oder unsichtbar sein sollen. // True = sichtbar</param>
         void labelsUmschalten(bool paBool)
         {
             lblBauerSp1.Visible = paBool;
@@ -766,7 +875,11 @@ namespace Shogi
             lblTurmSp1.Visible = paBool;
             lblTurmSp2.Visible = paBool;
         }
-
+        /// <summary>
+        /// Eventhandler Toolstrip Info
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Info info = new Info();

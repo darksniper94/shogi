@@ -17,11 +17,21 @@ namespace Shogi
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
+        /// <summary>
+        /// Eventhandler Ok Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void btnOK_Click(object sender, EventArgs e)
         {
             
         }
 
+        /// <summary>
+        /// Eventhandler Abbrechen Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();

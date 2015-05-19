@@ -15,6 +15,9 @@ namespace Shogi
             // Design laden methode DB
         }
 
+        /// <summary>
+        /// Designmapper singleton
+        /// </summary>
         public static Designmapper instance
         {
             get

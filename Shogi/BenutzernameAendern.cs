@@ -11,17 +11,30 @@ namespace Shogi
 {
     public partial class BenutzernameAendern : Form
     {
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
         public BenutzernameAendern()
         {
             InitializeComponent();
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
+        /// <summary>
+        /// Eventhandler Ok Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void btnOk_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// Eventhandler Cancel Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();

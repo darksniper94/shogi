@@ -24,13 +24,21 @@ namespace Shogi
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
-        // Methode bei Betätigung des Abbrechenbuttons
+        /// <summary>
+        /// Eventhandler Abbrechen Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void bAbbrechen_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        // Methode bei Betätigung des Registrierungsbuttons
+        /// <summary>
+        /// Eventhandler Registrierungs Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void bRegistrieren_Click(object sender, EventArgs e)
         {
             lblMeldung.Visible = false;
@@ -64,6 +72,12 @@ namespace Shogi
             }
             
         }
+        /// <summary>
+        /// Prüft, ob die Registrierung den Kriterien entspricht.
+        /// </summary>
+        /// <param name="paSpielerTemp">Der Spieler, der Angemeldet werden soll als Spieler</param>
+        /// <param name="paPasswortwhd">Das Passwort aus der wiederholungsspalte, zur gegenprüfung als String</param>
+        /// <returns></returns>
         private String pruefeRegistrierung(Spieler paSpielerTemp, String paPasswortwhd)
         {
             System.Text.RegularExpressions.Regex regEx = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9äöüÄÖÜß]+$");

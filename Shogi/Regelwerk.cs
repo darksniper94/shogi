@@ -14,6 +14,10 @@ namespace Shogi
     {
         private WebBrowser Browser;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="path">Pfad zum Regelwerk als String</param>
         public Regelwerk(String path)
         {
             InitializeComponent();
@@ -47,6 +51,11 @@ namespace Shogi
 
         }
 
+        /// <summary>
+        /// Eventhandler LoadEvent des Regelwerk Fensters
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void Regelwerk_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
