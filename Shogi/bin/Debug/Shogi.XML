@@ -1,0 +1,1316 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Shogi</name>
+    </assembly>
+    <members>
+        <member name="T:Shogi.Befoerderungsmapper">
+            <summary>
+            Diese Klasse dient dem Zweck herauszufinden welchen Figurtyp eine Spielfigur
+            bekommt, wenn diese befoerdert wird.
+            
+            Figuren werden zu folgenden Typen befördert:
+            1. König
+            2. Turm                 --> Drache
+            3. Läufer               --> Pferd
+            4. Goldener General
+            5. Silberner General    --> Goldener General
+            6. Springer             --> Goldener General
+            7. Lanze                --> Goldener General
+            8. Bauer                --> Goldener General
+            </summary>
+        </member>
+        <member name="M:Shogi.BenutzernameAendern.#ctor">
+            <summary>
+            Konstruktor
+            </summary>
+        </member>
+        <member name="M:Shogi.BenutzernameAendern.btnOk_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Ok Button
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.BenutzernameAendern.btnCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Cancel Button
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="F:Shogi.BenutzernameAendern.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Shogi.BenutzernameAendern.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Shogi.BenutzernameAendern.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Shogi.Bewegungsmuster">
+            <summary>
+            Diese Klasse repräsentiert die Art und Weise, auf die sich eine Spielfigur bewegen kann.
+            Das Muster besteht aus einer Liste von möglichen Bewegungen.
+            Diese Bewegungen geben die relative Veränderung der Koordinaten der Spielfigur an.
+            Bsp: {-1, 2} --> Spielfigur bewegt sich ein Feld nach links und zwei nach unten.
+            </summary>
+        </member>
+        <member name="M:Shogi.Bewegungsmuster.#ctor(System.Int32[0:,0:])">
+            <summary>
+            Erstellt ein Bewegungsmuster anhand des übergebenen zweidimensionalen Arrays.
+            Dabei werden die ersten beiden Werte der inneren Arrays als Koordinaten interpretiert.
+            Bsp: { {x0, y0}, {x1, y1}, {x2, y2} }
+            </summary>
+            <param name="muster"></param>
+        </member>
+        <member name="M:Shogi.Bewegungsmuster.erstelleListe(System.Int32[0:,0:])">
+            <summary>
+            Wandelt das übergebene Array in eine Liste aus Koordinaten um.
+            Dabei werden die ersten beiden Werte der inneren Arrays als Koordinaten interpretiert
+            und als Tupel in der Liste gespeichert.
+            Bsp: { {x0, y0}, {x1, y1}, {x2, y2} }
+            </summary>
+            <param name="muster">Ein Array, das als Muster interpretiert werden kann.</param>
+            <returns>Eine Liste von Koordinaten-Tupeln</returns>
+        </member>
+        <member name="P:Shogi.Bewegungsmuster.Muster">
+            <summary>
+            Gibt die Liste mit möglichen Bewegungen zurück.
+            </summary>
+        </member>
+        <member name="M:Shogi.Database.ExecuteNonQuery(System.String)">
+            <summary>
+            Methode zum ausführen von update, insert, delete und create
+            </summary>
+            <param name="sql">Der SQL Befehl als String</param>
+            <returns>Anzahl der betroffenen Zeilen als int</returns>
+        </member>
+        <member name="M:Shogi.Database.ExecuteQuery(System.String)">
+            <summary>
+            Methode für Select
+            </summary>
+            <param name="sql">Der SQL Befehl als String</param>
+            <returns>Eine Liste der Ergebnisse als Linked List</returns>
+        </member>
+        <member name="M:Shogi.Database.CreateTables">
+            <summary>
+            Tabellen für eine neue Datenbank anlegen
+            </summary>
+        </member>
+        <member name="M:Shogi.Database.PruefeSpielerDaten(System.String,System.String)">
+            <summary>
+            Prüft die Spielerdaten
+            </summary>
+            <param name="benutzername">Benutzername als String</param>
+            <param name="passwort">Passwort als String</param>
+            <returns>Gibt die BenutzerID zurück. // kein Fund = -1</returns>
+        </member>
+        <member name="M:Shogi.Database.PruefeBenutzerVorhanden(System.String)">
+            <summary>
+            Prüft ob ein Benutzername bereits in der Datenbank existiert
+            </summary>
+            <param name="benutzername">Benutzername als String</param>
+            <returns>Bool ob der Benutzer vohanden ist. // true = vorhanden</returns>
+        </member>
+        <member name="M:Shogi.Database.LadeSpieler(System.Int32)">
+            <summary>
+            Lädt den Spieler
+            </summary>
+            <param name="spielerid">Die Datenbank ID des Spielers, der geladen werden soll als int</param>
+            <returns>Den geladenen Spieler als Spieler</returns>
+        </member>
+        <member name="M:Shogi.Database.SpeichereSpieler(Shogi.Spieler)">
+            <summary>
+            Speichert einen Spieler in die Datenbank
+            Hat der Spieler eine bekannte ID, dann wird ein Update ausgeführt
+            </summary>
+            <param name="spieler">Der Spieler als Spieler</param>
+        </member>
+        <member name="M:Shogi.Database.loescheSpieler(Shogi.Spieler)">
+            <summary>
+            Löscht den Spieler samt Statistik. Die Statistik wird über on delete cascade realisiert.
+            </summary>
+            <param name="spieler">Der Spieler als Spieler</param>
+        </member>
+        <member name="M:Shogi.Database.LadeStatistik(Shogi.Spieler)">
+            <summary>
+            Lädt die Statistik
+            </summary>
+            <param name="spieler">Spieler als Spieler</param>
+            <returns>Gibt die Statistik als Statistik zurück</returns>
+        </member>
+        <member name="M:Shogi.Database.LoescheStatistik(Shogi.Spieler)">
+            <summary>
+            Löscht die Statistik
+            </summary>
+            <param name="spieler">Spieler als Spieler</param>
+        </member>
+        <member name="M:Shogi.Database.GetSpielerID(Shogi.Spieler)">
+            <summary>
+            Sucht zum Benutzernamen die SpielerID raus
+            </summary>
+            <param name="spieler">Spieler als Spieler</param>
+            <returns>ID</returns>
+        </member>
+        <member name="M:Shogi.Database.StatistikErweitern(Shogi.Spieler,System.Boolean,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Erstellt einen neuen Statistik Eintrag im der Datenbank
+            </summary>
+            <param name="spieler">Spieler als Spieler</param>
+            <param name="gewonnen">Gewonnen als Bool // True = Spiel gewonnen</param>
+            <param name="beendet">Beendet als Bool // True = Beendet</param>
+            <param name="zuege">Anzahl der Züge als int</param>
+            <param name="zeit">Anzahl der Zeit als int</param>
+        </member>
+        <member name="M:Shogi.Database.ladeRegelwerk">
+            <summary>
+            Lädt das Regelwerk
+            </summary>
+            <returns>Gibt das Regelwerk als String zurück</returns>
+        </member>
+        <member name="M:Shogi.Database.GetLastInsertId">
+            <summary>
+            Gibt die ID des letzten eingefügten Datensatzes in der Datenbank zurück
+            </summary>
+            <returns>ID als int</returns>
+        </member>
+        <member name="M:Shogi.Database.SpeichereSpiel(Shogi.Spielfeld,Shogi.Spieler,Shogi.Spieler)">
+            <summary>
+            Speichert das Spiel
+            </summary>
+            <param name="feld">Das Spielfeld als Spielfeld</param>
+            <param name="sp1">Der erste Spieler als Spieler</param>
+            <param name="sp2">Der zweite Spieler als Spieler</param>
+        </member>
+        <member name="M:Shogi.Database.LadeSpielfeld(System.Int32)">
+            <summary>
+            Lädt das Spielfeld
+            </summary>
+            <param name="spielid">Spielid als int</param>
+            <returns>Gibt das Spielfeld zurück</returns>
+        </member>
+        <member name="P:Shogi.Database.Instance">
+            <summary>
+            Database singleton
+            </summary>
+        </member>
+        <member name="P:Shogi.Designmapper.instance">
+            <summary>
+            Designmapper singleton
+            </summary>
+        </member>
+        <member name="T:Shogi.FigurTyp">
+            <summary>
+            Diese Klasse repräsentiert FigurTypen für ein Shogi-Spiel.
+            Die möglichen FigurenTypen sind vorgegeben und es können außerhalb
+            der Klasse keine neuen erzeugt werden.
+            
+            Mögliche FigurenTypen sind:
+            1. König
+            2. Turm                 --> Drache
+            3. Läufer               --> Pferd
+            4. Goldener General
+            5. Silberner General    --> Goldener General
+            6. Springer             --> Goldener General
+            7. Lanze                --> Goldener General
+            8. Bauer                --> Goldener General
+            </summary>
+        </member>
+        <member name="M:Shogi.FigurTyp.FigurtypVomNamen(System.String)">
+            <summary>
+            Wandelt den Namen in Spielfigur Objekt um
+            </summary>
+            <param name="name"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Shogi.FormAnmeldung.bAnmelden_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Button Anmeldern
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.FormAnmeldung.bAbbrechen_Click(System.Object,System.EventArgs)">
+             <summary>
+            Eventhandler Abbrechen Button
+             </summary>
+             <param name="sender">Sender Objekt</param>
+             <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.FormAnmeldung.bRegistrieren_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Registrierungsbutton
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.FormAnmeldung.FormAnmeldung_Load(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler LoadEvent des FormAnmeldung Fensters
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="F:Shogi.FormAnmeldung.components">
+            <summary>
+            Erforderliche Designervariable.
+            </summary>
+        </member>
+        <member name="M:Shogi.FormAnmeldung.Dispose(System.Boolean)">
+            <summary>
+            Verwendete Ressourcen bereinigen.
+            </summary>
+            <param name="disposing">True, wenn verwaltete Ressourcen gelöscht werden sollen; andernfalls False.</param>
+        </member>
+        <member name="M:Shogi.FormAnmeldung.InitializeComponent">
+            <summary>
+            Erforderliche Methode für die Designerunterstützung.
+            Der Inhalt der Methode darf nicht mit dem Code-Editor geändert werden.
+            </summary>
+        </member>
+        <member name="M:Shogi.FormAnmeldung.getBenutzername">
+            <summary>
+            "Getter" für den Benutzernamen
+            </summary>
+            <returns> String mit dem eingegebenen Benutzernamen</returns>
+        </member>
+        <member name="P:Shogi.FormAnmeldung.spielerID">
+            <summary>
+            Property für die SpielerID 
+            </summary>
+        </member>
+        <member name="M:Shogi.frmPasswortAbfrage.#ctor(Shogi.Spieler)">
+            <summary>
+            Fragt das Passwort ab 
+            </summary>
+            <param name="paspAngemeldet">Der Angemeldete Spieler als Spieler</param>
+        </member>
+        <member name="M:Shogi.frmPasswortAbfrage.bOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler OK Button
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.frmPasswortAbfrage.bAbbrechen_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Abbrechen Button
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.frmPasswortAbfrage.frmPasswortAbfrage_Load(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler LoadEvent des PasswortAbfrage Fensters
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="F:Shogi.frmPasswortAbfrage.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Shogi.frmPasswortAbfrage.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Shogi.frmPasswortAbfrage.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Shogi.Info.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Shogi.Info.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Shogi.Info.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Shogi.PasswortAendern.btnOK_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Ok Button
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.PasswortAendern.btnCancel_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Abbrechen Button
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="F:Shogi.PasswortAendern.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Shogi.PasswortAendern.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Shogi.PasswortAendern.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Shogi.Properties.Resources">
+            <summary>
+              Eine stark typisierte Ressourcenklasse zum Suchen von lokalisierten Zeichenfolgen usw.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.ResourceManager">
+            <summary>
+              Gibt die zwischengespeicherte ResourceManager-Instanz zurück, die von dieser Klasse verwendet wird.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.Culture">
+            <summary>
+              Überschreibt die CurrentUICulture-Eigenschaft des aktuellen Threads für alle
+              Ressourcenzuordnungen, die diese stark typisierte Ressourcenklasse verwenden.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.Bambus">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.BauerB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.BauerD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.BauerE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.BauerJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderteLanzeB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderteLanzeD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderteLanzeE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderteLanzeJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterBauerJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterSilberJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterSilbernerGeneralB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterSilbernerGeneralD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterSilbernerGeneralE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterSpringerB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterSpringerD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterSpringerE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterSpringerJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.DracheB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.DracheD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.DracheE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.DracheJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.FeldNeu">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.GoldenerGeneralB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.GoldenerGeneralD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.GoldenerGeneralE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.GoldenerGeneralJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.KoenigB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.KoenigD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.KoenigE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.KoenigJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.LaeuferB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.LaeuferD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.LaeuferE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.LaeuferJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.LanzeB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.LanzeD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.LanzeE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.LanzeJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.LogoKlein">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.MenuNeu2">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.PferdB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.PferdD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.PferdE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.PferdJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.SilbernerGeneralB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.SilbernerGeneralD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.SilbernerGeneralE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.SilbernerGeneralJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.SpringerB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.SpringerD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.SpringerE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.SpringerJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.TokinB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.TokinD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.TokinE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.TurmB">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.TurmD">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.TurmE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.TurmJ">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="M:Shogi.Regelwerk.#ctor(System.String)">
+            <summary>
+            Konstruktor
+            </summary>
+            <param name="path">Pfad zum Regelwerk als String</param>
+        </member>
+        <member name="M:Shogi.Regelwerk.Regelwerk_Load(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler LoadEvent des Regelwerk Fensters
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.#ctor(Shogi.Spieler)">
+            <summary>
+            Konstruktor für das ShogiFenster
+            </summary>
+            <param name="paspAngemeldet">Der angemeldete Spieler als Spieler</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.statistikAnzeigeBox">
+            <summary>
+            Öffnet ein seperates Fenster für die Statistik 
+            </summary>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.PanelOnClick(System.Object,System.EventArgs)">
+            <summary>
+            Der Eventhandler für das klicken auf das Spielfeld
+            </summary>
+            <param name="sender">Das Panel auf das geklickt wurde als Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.bBeendenOnClick(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Beendenbutton
+            </summary>
+            <param name="sender">Button als Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.bEinzel_pause_fortOnClick(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler für den Einzel//Pause//Fortsetzen Button
+            </summary>
+            <param name="sender">Button als Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.bCoop_AbbrechenOnClick(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Coop//Abbrechen Button
+            </summary>
+            <param name="sender">Button als Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.bStatistikOnClick(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler
+            </summary>
+            <param name="sender">Button als Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.bspeichern_ladenOnClick(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Speichern//Laden Button
+            </summary>
+            <param name="sender">Button als Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.spielBeendenToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip Beenden
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.spielLadenToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip Laden
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.spielSpeichernToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip speichern
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.beendenAbfrage">
+            <summary>
+            Zeigt eine MessageBox zur Bestätigung ob das Spiel wirklich beendet werden soll an 
+            </summary>
+            <returns>Dialog Result</returns>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.speichern">
+            <summary>
+            Speichert das Spiel
+            </summary>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.laden">
+            <summary>
+            Lädt das Spiel
+            </summary>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.ansehenToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip Statistik anzeigen
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.zurücksetzenToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip zurücksetzen
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.benutzernamenÄndernToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip benutzername ändern
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.passwortÄndernToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip passwort ändern
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.kontoLöschenToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip Konto löschen
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.zeichneSpielfeldkomplett">
+            <summary>
+            Diese Methode setzt die Steine auf die entsprechenden Panels.
+            </summary>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.zeichneSpielzug(Shogi.Position,Shogi.Position)">
+            <summary>
+            Setzt ein Image von einer Position auf eine andere.
+            </summary>
+            <param name="posAlt">Alte Position</param>
+            <param name="posNeu">Neue Position</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.ShogiSpielfeld_Load(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler LoadEvent des ShogiSpielfeld Fensters
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.ShogiSpielfeld_FormClosed(System.Object,System.Windows.Forms.FormClosedEventArgs)">
+            <summary>
+            Eventhandler CloseEvent des ShogiSpielfeld Fensters
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.ShogiSpielfeld_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Eventhandler FormCLosingEvent des ShogiSpielfeld Fensters
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.hilfeToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip Hilfe
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.picBambusOnClick(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler für das Klicken auf das Bambusbild (Trennstreifen)
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.spielfeldUmschalten(System.Boolean)">
+            <summary>
+            Schaltet die Controls im Spielfeld benutzbar oder unbenutzbar. 
+            </summary>
+            <param name="paBool">Bool ob die Controls benuztbar oder unbenutzbar sein sollen. // True = benutzbar</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.labelsUmschalten(System.Boolean)">
+            <summary>
+            Schaltet die Label, die Anzeigen wie viele Spielfigur welchen Types man auf der Ersatzbank hat sichtbar oder unsichtbar.
+            </summary>
+            <param name="paBool">Bool ob sie sichtbar oder unsichtbar sein sollen. // True = sichtbar</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.infoToolStripMenuItem_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Toolstrip Info
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="F:Shogi.ShogiSpielfeld.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Shogi.ShogiSpielfeld.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Shogi.FormRegistrierung.bAbbrechen_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Abbrechen Button
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.FormRegistrierung.bRegistrieren_Click(System.Object,System.EventArgs)">
+            <summary>
+            Eventhandler Registrierungs Button
+            </summary>
+            <param name="sender">Sender Objekt</param>
+            <param name="e">Das Event</param>
+        </member>
+        <member name="M:Shogi.FormRegistrierung.pruefeRegistrierung(Shogi.Spieler,System.String)">
+            <summary>
+            Prüft, ob die Registrierung den Kriterien entspricht.
+            </summary>
+            <param name="paSpielerTemp">Der Spieler, der Angemeldet werden soll als Spieler</param>
+            <param name="paPasswortwhd">Das Passwort aus der wiederholungsspalte, zur gegenprüfung als String</param>
+            <returns></returns>
+        </member>
+        <member name="F:Shogi.FormRegistrierung.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Shogi.FormRegistrierung.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Shogi.FormRegistrierung.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Shogi.Position">
+            <summary>
+            Diese Klasse repräsentiert die Position auf einem Shogi-Brett.
+            
+            Position wird auf beiden Koordinaten als Integer gespeichert, und muss später für die Darstellung 
+            auf die korrekte Shogi-Darstellung gemappt werden.
+            
+            In der Notation werden die Spalten mit Ziffern und die Zeilen mit Buchstaben angegeben.
+            So ist das Feld links oben z.B. 9a, das Feld rechts unten ist 1i;
+            (Quelle: http://de.wikipedia.org/wiki/Sh%C5%8Dgi#Notation)
+            
+            Die Position ist in dieser Klasse erstmal nicht entsprechend dem Shogi-Brett begrenzt. 
+            Für die Spalten gibt es Ziffern von 0-9 und für die Zeilen A-Z bzw. a-z.
+            Die Werte der Zeilen können entsprechend in Zahlen dargestellt werden (A=1, B=2, ..., Z=26).
+            
+            Als Position außerhalb des Spielfeldes gilt die Position(0, 0) was den Chars ('0','@') entspricht.
+            
+            </summary>
+        </member>
+        <member name="M:Shogi.Position.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Erstellt eine neue Position anhand der übergebenen Werte für Spalte und Zeile.
+            </summary>
+            <param name="spalte">Spaltenwert der Position.</param>
+            <param name="zeile">Zeilenwert der Position.</param>
+        </member>
+        <member name="M:Shogi.Position.Equals(Shogi.Position)">
+            <summary>
+            Vergleicht diese Position mit der übergebenen Position.
+            </summary>
+            <param name="pos">Position die mit dieser Position verglichen werden soll.</param>
+            <returns>True, wenn die beiden Positionen gleich sind, sonst false.</returns>
+        </member>
+        <member name="M:Shogi.Position.ToString">
+            <summary>
+            Gibt einen String zurück, der die Position repräsentiert.
+            </summary>
+            <returns>Position als String.</returns>
+        </member>
+        <member name="M:Shogi.Program.Main">
+            <summary>
+            Der Haupteinstiegspunkt für die Anwendung.
+            </summary>
+        </member>
+        <member name="M:Shogi.Spieler.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Erstell einen neuen Spieler, welcher noch nicht in der Datenbank exsistiert
+            </summary>
+            <param name="name">Spielername</param>
+            <param name="passwort">Spielerpasswort</param>
+            <param name="design">Desgin ist</param>
+            <param name="farbe">Spielfeldfarbe</param>
+        </member>
+        <member name="M:Shogi.Spieler.#ctor(System.Int32,System.String,System.String,System.String,System.String)">
+            <summary>
+            Instanziert ein Spieler, der schon in der Datenbank exisitiert. 
+            </summary>
+            <param name="id">Spieler ID</param>
+            <param name="name">Spielername</param>
+            <param name="passwort">Spielerpasswort</param>
+            <param name="design">Desgin ist</param>
+            <param name="farbe">Spielfeldfarbe</param>
+        </member>
+        <member name="T:Shogi.Spielfeld">
+            <summary>
+            Die Spielfeldklasse ohne festgeschriebene Spiellogik, diese soll
+            ein allgemeines Spielfeld repräsentieren und auf verschiedene Spiele anwendbar ist.
+            </summary>
+        </member>
+        <member name="M:Shogi.Spielfeld.GetSpalte">
+            <summary>
+            Gibt die maximale Dimension X (Spalte) zurück.
+            </summary>
+            <returns>Gibt die maximale Dimension X (Spalte) als int zurück.</returns>
+        </member>
+        <member name="M:Shogi.Spielfeld.GetZeile">
+            <summary>
+            Gibt die maximale Dimension Y (Zeile) zurück.
+            </summary>
+            <returns>Gibt die maximale Dimension Y (Zeile) als int zurück.</returns>
+        </member>
+        <member name="M:Shogi.Spielfeld.GetFeldMatrix">
+            <summary>
+            Gibt eine Matrix zurück, welche der Position der Spielfiguren entspricht. Hierbei werden nur aktive Spielfiguren 
+            berrücksichtigt, da nur diese am aktiven Spielbrett teilnehmen.
+            </summary>
+            <returns>Gibt ein zweidimensionales Array mit Spielfiguren zurück, welche an den Positionen sind, die sie auch im aktuellen Spielfeld einnehmen.</returns>
+        </member>
+        <member name="M:Shogi.Spielfeld.GetSpielfigurAnPosition(Shogi.Position)">
+            <summary>
+            Gibt eine Spielfigur aus der Liste zurück, welche die übergebene Position hat. Ist keine Spielfigur auf der übergebenen
+            Position zu finden, wird null zurückgegeben.
+            </summary>
+            <param name="paPosition">Die Position der Spielfigur, die zurückgegeben werden soll.</param>
+            <returns>Gibt eine Spielfigur zurück der übergebenen Positionen.</returns>
+        </member>
+        <member name="M:Shogi.Spielfeld.#ctor(System.Collections.Generic.List{Shogi.Spielfigur},System.Int32,System.Int32)">
+            <summary>
+            Der Konstruktor des Spielfeldes in der eine Aufstellung von Spielfiguren und die Dimensionen als Integer übergeben werden.
+            </summary>
+            <param name="startAufstellung">Die Aufstellung der Spielfiguren auf dem Spielfeld.</param>
+            <param name="spaltenanzahl">Die maximale Anzahl der X-Dimension (Spalte) des Spielfeldes.</param>
+            <param name="zeilenanzahl">Die maximale Anzahl der Y-Dimension (Zeile) des Spielfeldes.</param>
+        </member>
+        <member name="M:Shogi.Spielfeld.#ctor(System.Collections.Generic.List{Shogi.Spielfigur},System.Tuple{System.Int32,System.Int32})">
+            <summary>
+            Der Konstruktor des Spielfeldes in der eine Aufstellung von Spielfiguren und die Dimensionen als Tuple übergeben werden.
+            </summary>
+            <param name="startAufstellung">Die Aufstellung der Spielfiguren auf dem Spielfeld.</param>
+            <param name="paDimension">Die maximale Anzahl der X-Dimension (Spalte) und der Y-Dimension (Zeile) des Spielfeldes als Tuple.</param>
+        </member>
+        <member name="M:Shogi.Spielfeld.#ctor(System.Collections.Generic.List{Shogi.Spielfigur},System.Tuple{System.Int32,System.Int32},System.Int32)">
+            <summary>
+            Der Konstruktor des Spielfeldes in der eine Aufstellung von Spielfiguren und die Dimensionen als Tuple übergeben werden, sowie die maximale Anzahl an Spielfiguren
+            die sich gleichzeitig auf dem Feld befinden dürfen.
+            </summary>
+            <param name="startAufstellung">Die Aufstellung der Spielfiguren auf dem Spielfeld.</param>
+            <param name="paDimension">Die maximale Anzahl der X-Dimension (Spalte) und der Y-Dimension (Zeile) des Spielfeldes als Tuple.</param>
+            <param name="paMaxAnzahlSpielfiguren">Die maximale Anzahl der Spielfiguren die an einem aktiven Spiel teilnehmen können.</param>
+        </member>
+        <member name="M:Shogi.Spielfeld.#ctor(System.Collections.Generic.List{Shogi.Spielfigur},System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Der Konstruktor des Spielfeldes in der eine Aufstellung von Spielfiguren und die Dimensionen als Tuple übergeben werden, sowie die maximale Anzahl an Spielfiguren
+            die sich gleichzeitig auf dem Feld befinden dürfen.
+            </summary>
+            <param name="startAufstellung">Die Aufstellung der Spielfiguren auf dem Spielfeld.</param>
+            <param name="spaltenanzahl">Die maximale Anzahl der X-Dimension (Spalte) des Spielfeldes.</param>
+            <param name="zeilenanzahl">Die maximale Anzahl der Y-Dimension (Zeile) des Spielfeldes.</param>
+            <param name="paMaxAnzahlSpielfiguren">Die maximale Anzahl der Spielfiguren die an einem aktiven Spiel teilnehmen können.</param>
+        </member>
+        <member name="M:Shogi.Spielfeld.fuehreSpielzugAus(Shogi.Spielfigur,Shogi.Position)">
+            <summary>
+            Setzt eine Spielfigur auf einen neue Position, ohne logische Überprüfung.
+            </summary>
+            <param name="paFigur">Die Spielfigur die auf eine neue Position gesetzt werden soll.</param>
+            <param name="paZielposition">Die Position auf die, die Spielfigur gesetzt werden soll.</param>
+        </member>
+        <member name="M:Shogi.Spielfeld.SindSpielfigurenInDimension(System.Collections.Generic.List{Shogi.Spielfigur})">
+            <summary>
+            Überprüft ob alle Spielfiguren in der Liste, in der Spielfelddimension liegen.
+            </summary>
+            <param name="paFeld">Die Liste von Spielfiguren, die überprüft werden soll.</param>
+            <returns>Returns true, wenn alle Spielfiguren in der Spielfelddimension liegen, ansonsten false.</returns>
+        </member>
+        <member name="P:Shogi.Spielfeld.Feld">
+            <summary>
+            Das Property, welches die Liste aller Spielfiguren beinhaltet und überprüft, ob alle Spielfiguren
+            darin in der Spielfelddimension liegen bzw. die maximale Anzahl an Spielfiguren überschritten wird.
+            Ansonsten wird eine ArgumentOutOfRangeException geworfen.
+            </summary>
+        </member>
+        <member name="P:Shogi.Spielfeld.Dimension">
+            <summary>
+            Das Tupleproperty, welches die Dimension des Spielfeldes einschränkt, wenn einer von beiden Werten unter 0 ist wird eine ArgumentException geworfen.
+            </summary>
+        </member>
+        <member name="P:Shogi.Spielfeld.MaxAnzahlSpielfiguren">
+            <summary>
+            Property für die maximale Anzahl an Spielfiguren, die am Spiel teilnehmen dürfen.
+            </summary>
+        </member>
+        <member name="T:Shogi.Spielfigur">
+            <summary>
+            Diese Klasse repräsentiert eine Spielfigur für das japanische Schach, Shogi.
+            Für solch eine Spielfigur muss man wissen wo sie sich auf dem Spielbrett befindet (Position),
+            um was für eine Figur es sich handelt (Figurtyp) und welchem Spieler die Figur gehört (Besitzer).
+            Zudem kann eine Shogi-Spielfigur aktiv oder inaktiv sein, je nachdem ob sie geschlagen wurde und 
+            nun außerhalb des Spielfeldes ist oder nicht. Außerdem ist es möglich Spielfiguren zu befördern.
+            </summary>
+        </member>
+        <member name="M:Shogi.Spielfigur.#ctor(Shogi.FigurTyp,Shogi.Spieler,Shogi.Position)">
+            <summary>
+            Erstellt eine Spielfigur des übergebenen Figurtyps. Die erstellte Figur gehört dem übergenem Spieler
+            und wird auf der übergebenen Position auf dem Spielbrett platziert.
+            Frisch erstellte Figuren sind immer aktiv und noch nicht befoerdert.
+            </summary>
+            <param name="typ">Der Typ den die Spielfigur haben soll.</param>
+            <param name="spieler">Der Spieler dem die Spielfigur gehören soll.</param>
+            <param name="position">Die Position auf der die Spielfigur platziert werden soll.</param>
+        </member>
+        <member name="M:Shogi.Spielfigur.getBefoerdertenTyp(Shogi.FigurTyp)">
+            <summary>
+            Findet heraus, zu welchem FigurTyp der übergebene typ befoerdert wird und gibt desen zurück.
+            </summary>
+            <param name="typ">FigurTyp der befoerdert werden soll.</param>
+            <returns>Den befoerderten FigurTyp.</returns>
+        </member>
+        <member name="M:Shogi.Spielfigur.aktivieren(Shogi.Position)">
+            <summary>
+            Aktiviert die Spielfigur, sofern diese nicht schon aktiv ist.
+            Ist die Figur inaktiv, wird sie auf aktiv gesetzt und sie wird auf die übergebene Position gestellt.
+            Ist die Figur bereits aktiv, wird sie gelassen wo sie ist und der übergebene Wert wird ignoriert.
+            Zudem wird eine Exception geworfen um der aufrufenden Instanz zu signalisieren, dass es einen Fehler gab.
+            </summary>
+            <param name="pos">Die Position auf der die Spielfigur neu aufs Spielbrett gesetzt werden soll.</param>
+        </member>
+        <member name="M:Shogi.Spielfigur.deaktivieren">
+            <summary>
+            Deaktiviert die Spielfigur.
+            Die Figur wird auf inaktiv gesetzt und sie wird außerhalb dees Spielbretts platziert (Position(0, 0)).
+            Ist die Figur bereits inaktiv, wird sie erneut deaktiviert, was keinerlei Auswirkung auf ihre Position hat.
+            </summary>
+        </member>
+        <member name="M:Shogi.Spielfigur.befoerdern">
+            <summary>
+            Befoerdert die Spielfigur. D.h. das Feld "befoerdert" wird auf True gesetzt.
+            </summary>
+        </member>
+        <member name="M:Shogi.Spielfigur.degradieren">
+            <summary>
+            Degradiert die Spielfigur. D.h. das Feld "befoerdert" wird auf False gesetzt.
+            </summary>
+        </member>
+        <member name="M:Shogi.Spielfigur.Equals(Shogi.Spielfigur)">
+            <summary>
+            Vergleicht diese Spielfigur mit der übergebenen Spielfigur.
+            </summary>
+            <param name="figur">Figur die mit dieser Spielfigur verglichen werden soll.</param>
+            <returns>True, wenn die beiden Spielfiguren gleich sind, sonst false.</returns>
+        </member>
+        <member name="M:Shogi.Spielfigur.ToString">
+            <summary>
+            Gibt einen String zurück, der die Spielfigur repräsentiert.
+            </summary>
+            <returns>Spielfigur als String.</returns>
+        </member>
+        <member name="P:Shogi.Spielfigur.Position">
+            <summary>
+            Setzt bzw. gibt die Position der Spielfigur auf dem Spielbrett zurück.
+            </summary>
+        </member>
+        <member name="P:Shogi.Spielfigur.IstAktiv">
+            <summary>
+            Gibt zurück ob die Spielfigur aktiv (imSpielfeld) oder inaktiv (außerhalb) ist.
+            </summary>
+        </member>
+        <member name="P:Shogi.Spielfigur.IstBefoerdert">
+            <summary>
+            Gibt zurück ob die Spielfigur berfoerdert ist oder nicht.
+            </summary>
+        </member>
+        <member name="P:Shogi.Spielfigur.Typ">
+            <summary>
+            Gibt den FigurTyp der Spielfigur zurück. Abhängig davon, ob die Figur befoerdert ist
+            oder nicht, wird der entsprechende Figurtyp ausgegeben.
+            </summary>
+        </member>
+        <member name="P:Shogi.Spielfigur.Besitzer">
+            <summary>
+            Setzt bzw. gibt den Besitzer der Spielfigur zurück.
+            </summary>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.neuesSpiel(Shogi.Spieler,Shogi.Spieler)">
+            <summary>
+            Erstellt ein neues Spiel, welches sämtliche Steine mit ihren Anfangspositionen für ein Shogispiel initialisiert, sowie sie den jeweiligen Spielern zuweist.
+            </summary>
+            <param name="spieler1">Der Spieler der die Partie beginnt und somit als Spieler1 bezeichnet wird.</param>
+            <param name="spieler2">Der Spieler der die Partie nicht beginnt und somit als Spieler2 bezeichnet wird.</param>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.spielZug(Shogi.Position,Shogi.Position)">
+            <summary>
+            Die Spielzugprüfung, ob ein Spielstein von Position A auf Position B gesetzt werden kann. return true, wenn der Zug ausführbar ist.
+            Diese Methode enthält ebenso die Shogilogik und überprüft daher ob der Zug nach den Regeln valide ist.
+            </summary>
+            <param name="positionVon">Die Position auf der eine Spielfigur sein muss.</param>
+            <param name="positionNach">Die Position auf die, die Spielfigur gesetzt werden soll.</param>
+            <returns>Return true, wenn der Zug nach Shogiregeln valide ist, anstonsten return false.</returns>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.spielfigurBefoerdern(Shogi.Position)">
+            <summary>
+            Befördert eine Spielfigur und gibt einen boolschen Wert zurück.
+            </summary>
+            <param name="positionFigur">Die Position der zubefördernden Spielfigur</param>
+            <returns>returns true, wenn die Beförderung erfolgreich war, ansonsten false.</returns>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.pruefeBefoerdern(Shogi.Spielfigur)">
+            <summary>
+            Prüft ob die Beförderung nach Shogiregeln valide ist.
+            </summary>
+            <param name="figur">Die Spielfigur die befördert werden soll.</param>
+            <returns>returns true, wenn die Beförderung durchgeführt werden darf, ansonsten false.</returns>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.istSpielBeendet">
+            <summary>
+            Diese Methode überprüft, ob das Spiel beendet ist und der gegnerische König im Schachmatt ist.
+            </summary>
+            <returns>Returns true, wenn das Spiel beendet ist und der gegnerische König im Schachmatt ist, anstonsten false.</returns>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.istKoenigBewegungsfaehig(Shogi.Spielfigur)">
+            <summary>
+            Üerprüft ob der König bewegungsunfaehig ist, hierfür wird jeder Stein der gegnerischen Seite überprüft, ob seine Bewegungsmuster,
+            die des Königs blockieren bzw. eigene Steine das Bewegungsmuster blockieren.
+            </summary>
+            <param name="paKoenig">Der König für welchen die Bewegungsfähigkeit überprüft werden soll.</param>
+            <returns>Returns true, wenn der König sich noch bewegen kann und somit noch nicht im Schachmatt sitzt, ansonsten return false.</returns>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.istSchach(Shogi.Spielfigur)">
+            <summary>
+            Die Methode zur Überprüfung, ob der übergebene König im Schach sitzt und somit in Gefahr ist.
+            </summary>
+            <param name="paKoenig">Der König für den überprüft wird, ob er bedroht wird durch Schach.</param>
+            <returns>Return true, wenn der übergebene König im Schach ist, ansonsten return false.</returns>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.spielerwechsel">
+            <summary>
+            Wechselt die beiden Spieler, diese Methode soll am Ende eines erfolgreichen Zuges aufgerufen werden, um einen Spielerwechsel zu vollziehen.
+            </summary>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.pruefeZug(Shogi.Spielfigur,Shogi.Position)">
+            <summary>
+            Die Zugprüfung für eine übergebene Spielfigur auf einen übergebene Zielposition.
+            </summary>
+            <param name="paSpielfigur">Die Spielfigur, welche auf eine neue Position gesetzt werden soll.</param>
+            <param name="paZielposition">Die Zielposition der Spielfigur, auf die überprüft werden soll.</param>
+            <returns>Returns true, wenn der Zug valide ist, anstonsten false.</returns>
+        </member>
+        <member name="T:Shogi.Statistik">
+            <summary>
+            Die Statistikklasse gibt eine Statistik über die gewonnenen und beendeten Spiele,
+            sowie die durchschnittliche Anzahl der Zuege und Zeit für das abschließen eines Spieles des Spielers zurück.
+            </summary>
+        </member>
+        <member name="M:Shogi.Statistik.#ctor(System.Int32,System.Int32,System.Double,System.Double)">
+            <summary>
+            Der Konstruktor der Statistikklasse, dieser übernimmt vier Parameter um danach durchschnittliche Werte an den Spieler zurückzugeben.
+            </summary>
+            <param name="spiele_gewonnen">Die Anzahl der gewonnenen Spiele des Spielers</param>
+            <param name="spiele_beendet">Die Anzahl der beendeten Spiele des Spielers</param>
+            <param name="zuege">Die Anzahl der Züge, welche der Spieler durchschnittlich braucht, um ein Spiel zu beenden.</param>
+            <param name="zeit">Die durchschnittliche Zeit die der Spieler bennötigt ein Spiel zu beenden.</param>
+        </member>
+        <member name="P:Shogi.Statistik.statistikMessage">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Shogi.Statistik.GewonneSpiele">
+            <summary>
+            Das Property für gewonnene Spiele eines Spielers, ist diese unter 0 wird eine ArgumentException geworfen.
+            </summary>
+        </member>
+        <member name="P:Shogi.Statistik.BeendeteSpiele">
+            <summary>
+            Das Property für beendete Spiele eines Spielers ist diese unter 0 wird eine ArgumentException geworfen.
+            </summary>
+        </member>
+        <member name="P:Shogi.Statistik.Zuege">
+            <summary>
+            Das Property für die durchschnittliche Anzahl der Zuege, ist diese unter 0 wird eine ArgumentException geworfen.
+            </summary>
+        </member>
+        <member name="P:Shogi.Statistik.Zeit">
+            <summary>
+            Das Property für die durchschnittliche Zeit für ein Spiel, ist diese unter 0 wird eine ArgumentException geworfen.
+            </summary>
+        </member>
+    </members>
+</doc>
