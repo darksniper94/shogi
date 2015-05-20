@@ -680,11 +680,12 @@ namespace Shogi
         private void laden()
         {
             DialogResult result = new DialogResult();
-
+            
             result = MessageBox.Show("Möchten Sie das Spiel laden?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 //laden Methode Datebank klasse
+                Database.Instance.LadeLetztesEinzelSpiel(spAngemeldet);
             }
             zeichneSpielfeldkomplett();
         }
@@ -923,6 +924,12 @@ namespace Shogi
         {
             Info info = new Info();
             info.Show();
+        }
+
+        private void steineÄndernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Steinwaehlen frmSteinWaehlen = new Steinwaehlen(spAngemeldet);
+            frmSteinWaehlen.ShowDialog();
         }
     }
 }

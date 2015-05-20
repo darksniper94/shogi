@@ -7,8 +7,12 @@ namespace Shogi
 {
     class Designmapper
     {
-        private String[,] d1Images = {{"d1koenig","König"}};
+        private String[,] Images = { { "KoenigJ.png", "König" }, { "KoenigJ.png", "König" } };
         private int[] d1farbe = {170,30,70};
+        private int[] d2farbe = {46, 143, 255};
+        private int[] d3farbe = {39, 181, 0};
+        private int[] d4farbe = {255, 255, 255};
+        private int[] d5farbe = {140, 140, 140};
         private static Designmapper inst = null;
         private Designmapper()
         {
