@@ -323,7 +323,7 @@ namespace Shogi
         {
             // Speichere Spiel
             int game_id;
-            String sql = @"INSERT INTO GAME (user_1, user_2) 
+            String sql = @"INSERT INTO GAME (user_a, user_b) 
                            VALUES
                            (" + sp1.id + ", " + sp2.id + ");";
             this.ExecuteNonQuery(sql);
@@ -333,16 +333,23 @@ namespace Shogi
             foreach(Spielfigur sp in feld.Feld)
             {
                 int befoerdert = 0;
+                int spieler = 0;
                 if(sp.IstBefoerdert)
                 {
                     befoerdert = 1;
                 }
+                if (sp.Besitzer == sp2)
+                {
+                    spieler = 1;
+                }
                 
-                String subsql = @"INSERT INTO GAMEDATA (game, figurtyp, befoerdert, x, y)
+                //Build SQL
+                String subsql = @"INSERT INTO GAMEDATA (game, figurtyp, befoerdert, spieler, x, y)
                                   VALUES ( "
                                   + game_id + ", '"
                                   + sp.Typ.getName() + "', "
                                   + befoerdert + ", "
+                                  + spieler + ", "
                                   + sp.Position.Zeile + ", "
                                   + sp.Position.Spalte + ");";
 
@@ -356,15 +363,43 @@ namespace Shogi
         /// </summary>
         /// <param name="spielid">Spielid als int</param>
         /// <returns>Gibt das Spielfeld zurück</returns>
-        public Spielfeld LadeSpielfeld(int spielid)
+        public Spielfeld LadeSpielfeldEinzelSpiel(int spielid)
         {
-            String sql = @"SELECT figurtyp, befoerdert, x, y
+            String figsql = @"SELECT figurtyp, befoerdert, spieler, x, y
                            FROM GAMEDATA
                            WHERE game = " + spielid + ";";
-            LinkedList<Object[]> result = this.ExecuteQuery(sql);
-            List<Spielfigur> figuren = new List<Spielfigur>();
+            LinkedList<Object[]> resfiguren = this.ExecuteQuery(figsql);
 
-            return null;
+            // Spieler abfragen
+            String datasql = @"SELECT user_a, user_b FROM GAME WHERE ID="+spielid;
+            LinkedList<Object[]> users = this.ExecuteQuery(datasql);
+            int spieler1_id = Convert.ToInt32(users.ElementAt(0)[0]);
+            int spieler2_id = Convert.ToInt32(users.ElementAt(0)[1]);     
+            
+            // Spieler instanzieren
+            Spieler sp1 = this.LadeSpieler(spieler1_id);
+            Spieler sp2 = this.LadeSpieler(spieler2_id);
+
+            // Reinstanziere Spielfiguren
+            List<Spielfigur> figuren = new List<Spielfigur>();
+            foreach(var figur in resfiguren)
+            {
+                Spieler owner = sp1;
+                if(Convert.ToInt32(figur[2]) == 1)
+                {
+                    owner = sp2;
+                }
+
+                Spielfigur tmpFigur = new Spielfigur(
+                                                     FigurTyp.FigurtypVomNamen(figur[0].ToString()), 
+                                                     owner, 
+                                                     new Position(Convert.ToInt32(figur[3]), Convert.ToInt32(figur[4])));
+
+                figuren.Add(tmpFigur);
+            }
+
+            Spielfeld tmpFeld = new Spielfeld(figuren, Spielleiter_Spiellogik.SHOGI_DIM);
+            return tmpFeld;
         }
 
     }
