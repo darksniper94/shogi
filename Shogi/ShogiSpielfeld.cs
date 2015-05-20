@@ -470,6 +470,7 @@ namespace Shogi
             pnlBasis.Controls.Add(pnlMenu);
             pnlBasis.Controls.Add(pnlSpielfeld);
             this.Controls.Add(pnlBasis);
+            spielfeldFarbe();
         }
         /// <summary>
         /// Öffnet ein seperates Fenster für die Statistik 
@@ -500,19 +501,26 @@ namespace Shogi
             {
          
             } else {
-                clickCount = clickCount + 1;
-                if (clickCount == 2)
-                {
-                    clickCount = 0;
+                    clickCount = clickCount + 1;
+                    if (clickCount == 2)
+                    {
+                        clickCount = 0;
 
-                    MessageBox.Show("Von: y:" + ausgangy + "/x:" + ausgangx + " Nach: y" + pnlFeld.GetPositionFromControl(tmp).Row + "/x:" + pnlFeld.GetPositionFromControl(tmp).Column);
-                    //Spielleiter_Spiellogik.instance.spielZug(new Position(), new Position());
+                        MessageBox.Show("Von: y:" + ausgangy + "/x:" + ausgangx + " Nach: y" + pnlFeld.GetPositionFromControl(tmp).Row + "/x:" + pnlFeld.GetPositionFromControl(tmp).Column);
+                        //Spielleiter_Spiellogik.instance.spielZug(new Position(), new Position());
 
-                }
-                else
-                {
-                    ausgangx = pnlFeld.GetPositionFromControl(tmp).Column;
-                    ausgangy = pnlFeld.GetPositionFromControl(tmp).Row;
+                    }
+                    else
+                    {
+                        if ((tmp.BackgroundImage.Flags == 2 && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet) || (tmp.BackgroundImage.Flags == 77872 && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet2))
+                        {
+                            ausgangx = pnlFeld.GetPositionFromControl(tmp).Column;
+                            ausgangy = pnlFeld.GetPositionFromControl(tmp).Row;
+                        }
+                        else
+                        {
+                            clickCount = 0;
+                        }
                 }
             }
         }
@@ -537,8 +545,8 @@ namespace Shogi
             tmp = (Button)sender;
             if (tmp.Text == "Einzel Spiel")
             {
-                
-                Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, Database.Instance.LadeSpieler(spAngemeldet.id));
+                spAngemeldet2 = Database.Instance.LadeSpieler(spAngemeldet.id);   
+                Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, spAngemeldet2);
                 tmp.Text = "Pause";
                 bCoop_Abbrechen.Text = "Abbrechen";
                 bspeichern_laden.Text = "Speichern";
@@ -941,6 +949,23 @@ namespace Shogi
         {
             Farbewaehlen frmFarbeWaehlen = new Farbewaehlen(spAngemeldet);
             frmFarbeWaehlen.ShowDialog();
+            spielfeldFarbe();
+        }
+
+        private void spielfeldFarbe()
+        {
+            foreach (Control c in pnlFeld.Controls)
+            {
+                c.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
+            }
+            foreach (Control c in pnlSp1Ers.Controls)
+            {
+                c.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
+            }
+            foreach (Control c in pnlSp2Ers.Controls)
+            {
+                c.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
+            }
         }
     }
 }
