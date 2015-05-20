@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
 namespace Shogi
 {
@@ -13,11 +14,11 @@ namespace Shogi
         public static readonly String ENGLISH = "E";
         public static readonly String JAPANISCH = "J";
         public String AktuellesDesign {get; set;}
-        private int[] d1farbe = {170,30,70};
-        private int[] d2farbe = {46, 143, 255};
-        private int[] d3farbe = {39, 181, 0};
-        private int[] d4farbe = {255, 255, 255};
-        private int[] d5farbe = {140, 140, 140};
+        public static readonly Color cStandard = Color.FromArgb(244, 223, 186);
+        public static readonly Color cHellBlau = Color.FromArgb(46, 143, 255);
+        public static readonly Color cHellgruen = Color.FromArgb(39, 181, 0);
+        public static readonly Color cWeiss = Color.FromArgb(255, 255, 255);
+        public static readonly Color cGrau = Color.FromArgb(140, 140, 140);
         private static Designmapper inst = null;
 
 
@@ -46,30 +47,29 @@ namespace Shogi
             Object res = global::Shogi.Properties.Resources.ResourceManager.GetObject(path);
             return (System.Drawing.Bitmap)res;
         }
-        //public int[] holeDesignRGB(String Designfarbe){
-         //   switch (Design)
-           //     {
-             //       case "DesignFarbe1":
-               //         return d1farbe;
-                 //   case "DesignFarbe2":
-                   //     return d2farbe;
-                 //   case "DesignFarbe3":
-                   //     return d2farbe;
-                   // case "DesignFarbe4":
-                    //    return d2farbe;
-                    //case "DesignFarbe5":
-                     //   return d2farbe;
-                   // case "DesignFarbe6":
-                    //    return d2farbe;
-                    //case "DesignFarbe7":
-                     //   return d2farbe;
-                    //default:
-                      //  Console.WriteLine("Default case");
-                       // break;
-                //}
-
-
-
-      //  }
+        public Color holeDesignRGB(String Designfarbe){
+            switch (Designfarbe)
+                {
+                case "Standard":
+                        return cStandard;
+                        break;
+                case "Weiss":
+                        return cWeiss;
+                        break;
+                case "Hellblau":
+                        return cHellBlau;
+                        break;
+                case "Hellgruen":
+                        return cHellgruen;
+                        break;
+                case "Grau":
+                        return cGrau;
+                        break;
+                default:
+                        return cStandard;
+                        break;
+                    
+                }
+        }
     }
 }

@@ -29,7 +29,7 @@ namespace Shogi
             for (int i = 0; i < 4; i++)
             {
                 pnl[i] = new Panel();
-                pnl[i].BackColor = Color.FromArgb(244, 223, 186);
+                pnl[i].BackColor = Designmapper.cStandard;
                 pnl[i].Size = new Size(50, 50);
                 pnlTmp.Controls.Add(pnl[i]);
             }
@@ -41,23 +41,23 @@ namespace Shogi
         {
             if (rBtnGrau.Checked)
             {
-                spAngemeldet.farbe = "G";
+                spAngemeldet.farbe = "Grau";
             }
             if (rBtnHellblau.Checked)
             {
-                spAngemeldet.farbe = "B";
+                spAngemeldet.farbe = "Hellblau";
             }
             if (rBtnHellgruen.Checked)
             {
-                spAngemeldet.farbe = "H";
+                spAngemeldet.farbe = "Hellgruen";
             }
             if (rBtnStandard.Checked)
             {
-                spAngemeldet.farbe = "S";
+                spAngemeldet.farbe = "Standard";
             }
             if (rBtnWeiss.Checked)
             {
-                spAngemeldet.farbe = "W";
+                spAngemeldet.farbe = "Weiss";
             }
 
             this.Close();
@@ -67,7 +67,7 @@ namespace Shogi
         {
             foreach (Control c in pnlTmp.Controls)
             {
-                c.BackColor = Color.FromArgb(244, 223, 186);
+                c.BackColor = Designmapper.cStandard;
 
             }
         }
@@ -76,7 +76,7 @@ namespace Shogi
         {
             foreach (Control c in pnlTmp.Controls)
             {
-                c.BackColor = Color.FromArgb(46, 143, 255);
+                c.BackColor = Designmapper.cHellBlau;
 
             }
         }
