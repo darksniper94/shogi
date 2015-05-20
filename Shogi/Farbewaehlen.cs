@@ -12,18 +12,22 @@ namespace Shogi
     public partial class Farbewaehlen : Form
     {
         Spieler spAngemeldet;
+        Panel[] pnl;
+        TableLayoutPanel pnlTmp; 
+
         public Farbewaehlen(Spieler paSpAngmeldet)
         {
             InitializeComponent();
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             spAngemeldet = paSpAngmeldet;
-            TableLayoutPanel pnlTmp = new TableLayoutPanel();
+            pnlTmp = new TableLayoutPanel();
             pnlTmp.RowCount = 2;
             pnlTmp.ColumnCount = 2;
             pnlTmp.Padding = new Padding(1);
             pnlTmp.BackColor =  Color.FromArgb(170, 130, 70);
-            pnlTmp.Location = new Point(220, 50);
-            Panel[] pnl = new Panel[4];
+            pnlTmp.Location = new Point(180, 50);
+            pnlTmp.Size = new Size(114,114);
+            pnl = new Panel[4];
             for (int i = 0; i < 4; i++)
             {
                 pnl[i] = new Panel();
@@ -33,6 +37,7 @@ namespace Shogi
             }
 
             this.Controls.Add(pnlTmp);
+            rBtnStandard.Checked = true;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -57,6 +62,34 @@ namespace Shogi
             {
                 spAngemeldet.farbe = "W";
             }
+
+        }
+
+        private void rBtnStandard_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (Control c in pnlTmp.Controls)
+            {
+                c.BackColor = Color.FromArgb(244, 223, 186);
+            }
+        }
+
+        private void rBtnHellblau_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rBtnHellgruen_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rBtnWeiss_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rBtnGrau_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
     }

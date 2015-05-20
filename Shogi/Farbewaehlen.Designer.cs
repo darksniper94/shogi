@@ -67,6 +67,7 @@
             this.rBtnStandard.TabStop = true;
             this.rBtnStandard.Text = "Standard";
             this.rBtnStandard.UseVisualStyleBackColor = true;
+            this.rBtnStandard.CheckedChanged += new System.EventHandler(this.rBtnStandard_CheckedChanged);
             // 
             // rBtnHellblau
             // 
@@ -79,6 +80,7 @@
             this.rBtnHellblau.TabStop = true;
             this.rBtnHellblau.Text = "Hellblau";
             this.rBtnHellblau.UseVisualStyleBackColor = true;
+            this.rBtnHellblau.CheckedChanged += new System.EventHandler(this.rBtnHellblau_CheckedChanged);
             // 
             // rBtnHellgruen
             // 
@@ -91,6 +93,7 @@
             this.rBtnHellgruen.TabStop = true;
             this.rBtnHellgruen.Text = "Hellgrün";
             this.rBtnHellgruen.UseVisualStyleBackColor = true;
+            this.rBtnHellgruen.CheckedChanged += new System.EventHandler(this.rBtnHellgruen_CheckedChanged);
             // 
             // rBtnWeiss
             // 
@@ -103,6 +106,7 @@
             this.rBtnWeiss.TabStop = true;
             this.rBtnWeiss.Text = "Weiß";
             this.rBtnWeiss.UseVisualStyleBackColor = true;
+            this.rBtnWeiss.CheckedChanged += new System.EventHandler(this.rBtnWeiss_CheckedChanged);
             // 
             // rBtnGrau
             // 
@@ -115,8 +119,9 @@
             this.rBtnGrau.TabStop = true;
             this.rBtnGrau.Text = "Grau";
             this.rBtnGrau.UseVisualStyleBackColor = true;
+            this.rBtnGrau.CheckedChanged += new System.EventHandler(this.rBtnGrau_CheckedChanged);
             // 
-            // Farbewählen
+            // Farbewaehlen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -128,7 +133,7 @@
             this.Controls.Add(this.rBtnStandard);
             this.Controls.Add(this.btnAbbrechen);
             this.Controls.Add(this.btnOK);
-            this.Name = "Farbewählen";
+            this.Name = "Farbewaehlen";
             this.Text = "Farbewählen";
             this.ResumeLayout(false);
             this.PerformLayout();
