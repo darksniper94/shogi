@@ -931,5 +931,16 @@ namespace Shogi
             Steinwaehlen frmSteinWaehlen = new Steinwaehlen(spAngemeldet);
             frmSteinWaehlen.ShowDialog();
         }
+
+        private void desingÄndernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void feldfarbeÄndernToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Farbewaehlen frmFarbeWaehlen = new Farbewaehlen(spAngemeldet);
+            frmFarbeWaehlen.ShowDialog();
+        }
     }
 }
