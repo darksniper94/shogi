@@ -463,11 +463,6 @@
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
             </summary>
         </member>
-        <member name="P:Shogi.Properties.Resources.befoerderterSilberJ">
-            <summary>
-              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-            </summary>
-        </member>
         <member name="P:Shogi.Properties.Resources.befoerderterSilbernerGeneralB">
             <summary>
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
@@ -479,6 +474,11 @@
             </summary>
         </member>
         <member name="P:Shogi.Properties.Resources.befoerderterSilbernerGeneralE">
+            <summary>
+              Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:Shogi.Properties.Resources.befoerderterSilbernerGeneralJ">
             <summary>
               Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
             </summary>
