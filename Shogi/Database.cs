@@ -363,7 +363,7 @@ namespace Shogi
         /// </summary>
         /// <param name="spielid">Spielid als int</param>
         /// <returns>Gibt das Spielfeld zurück</returns>
-        public Spielfeld LadeSpielfeldEinzelSpiel(int spielid)
+        private Spielfeld LadeSpielfeld(int spielid)
         {
             String figsql = @"SELECT figurtyp, befoerdert, spieler, x, y
                            FROM GAMEDATA
@@ -397,9 +397,25 @@ namespace Shogi
 
                 figuren.Add(tmpFigur);
             }
-
             Spielfeld tmpFeld = new Spielfeld(figuren, Spielleiter_Spiellogik.SHOGI_DIM);
             return tmpFeld;
+        }
+
+        public Spielfeld LadeLetztesEinzelSpiel(Spieler sp)
+        {
+            String sql = @"SELECT ID FROM GAME " +
+                           "WHERE user_a = "+ sp.id +
+                           " ORDER BY ID DESC " +
+                           " LIMIT 1 ";
+
+            LinkedList<Object[]> result = this.ExecuteQuery(sql);
+            if(result.Count == 0)
+            {
+                return null;
+            }
+            int game_id = Convert.ToInt32(result.ElementAt(0)[0]);
+            return LadeSpielfeld(game_id);
+
         }
 
     }
