@@ -7,13 +7,20 @@ namespace Shogi
 {
     class Designmapper
     {
-        private String[,] Images = { { "KoenigJ.png", "König" }, { "KoenigJ.png", "König" } };
+        
+        public static readonly String BEWEGUNG = "B";
+        public static readonly String DEUTSCH = "D";
+        public static readonly String ENGLISH = "E";
+        public static readonly String JAPANISCH = "J";
+        public String AktuellesDesign {get; set;}
         private int[] d1farbe = {170,30,70};
         private int[] d2farbe = {46, 143, 255};
         private int[] d3farbe = {39, 181, 0};
         private int[] d4farbe = {255, 255, 255};
         private int[] d5farbe = {140, 140, 140};
         private static Designmapper inst = null;
+
+
         private Designmapper()
         {
             // Design laden methode DB
@@ -33,10 +40,12 @@ namespace Shogi
                 return inst;
             }
         }
-       // public String holeDesignBild(String Designbilder)
-        //{
-         //   return;
-        //}
+        public System.Drawing.Bitmap holeDesignBild(String Designbilder)
+        {
+            String path = Designbilder + this.AktuellesDesign+".png";
+            Object res = global::Shogi.Properties.Resources.ResourceManager.GetObject(path);
+            return (System.Drawing.Bitmap)res;
+        }
         //public int[] holeDesignRGB(String Designfarbe){
          //   switch (Design)
            //     {
