@@ -224,6 +224,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <None Include="Resources\befoerderterSilbernerGeneralJ.png" />
+    <Content Include="Resources\TokinJ.png" />
     <None Include="Resources\befoerderterSpringerE.png" />
     <None Include="Resources\befoerderterSilbernerGeneralE.png" />
     <None Include="Resources\befoerderteLanzeE.png" />
@@ -269,8 +271,6 @@
     <None Include="Resources\TurmJ.png" />
     <None Include="Resources\BauerJ.png" />
     <None Include="Resources\befoerderteLanzeJ.png" />
-    <None Include="Resources\befoerderterBauerJ.png" />
-    <None Include="Resources\befoerderterSilberJ.png" />
     <None Include="Resources\befoerderterSpringerJ.png" />
     <None Include="Resources\DracheJ.png" />
     <None Include="Resources\GoldenerGeneralJ.png" />

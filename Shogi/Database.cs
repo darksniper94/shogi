@@ -414,6 +414,7 @@ namespace Shogi
                 return null;
             }
             int game_id = Convert.ToInt32(result.ElementAt(0)[0]);
+            
             return LadeSpielfeld(game_id);
 
         }
