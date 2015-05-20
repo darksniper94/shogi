@@ -14,6 +14,7 @@ namespace Shogi
     public partial class ShogiSpielfeld : Form
     {
         Spieler spAngemeldet;
+        Spieler spAngemeldet2;
         TableLayoutPanel pnlFeld;
         Panel pnlMenu;
         Panel pnlSpielfeld;
@@ -541,9 +542,18 @@ namespace Shogi
                 tmp.Text = "Pause";
                 bCoop_Abbrechen.Text = "Abbrechen";
                 bspeichern_laden.Text = "Speichern";
+                spielfeldUmschalten(true);
+                labelsUmschalten(true);
+            } else if (tmp.Text == "Pause")
+            {
+                tmp.Text = "Fortsetzen";
+                spielfeldUmschalten(false);
+            } else
+            {
+                tmp.Text = "Pause";
+                spielfeldUmschalten(true);
             }
-            spielfeldUmschalten(true);
-            labelsUmschalten(true);
+            
         }
         /// <summary>
         /// Eventhandler Coop//Abbrechen Button
@@ -552,6 +562,35 @@ namespace Shogi
         /// <param name="e">Das Event</param>
         void bCoop_AbbrechenOnClick(object sender, EventArgs e)
         {
+            Button tmp;
+            tmp = (Button)sender;
+
+            if (tmp.Text == "Abbrechen")
+            {
+                spAngemeldet2 = null;
+                tmp.Text = "Koorperatives Spiel";
+                bEinzel_pause_fort.Text = "Einzel Spiel";
+                bspeichern_laden.Text = "Spiel laden";
+                spielfeldUmschalten(false);
+                labelsUmschalten(false);
+
+            }else
+            {
+                FormAnmeldung frmAnmeldung2 = new FormAnmeldung();
+                DialogResult result;
+                frmAnmeldung2.ShowDialog();
+                result = frmAnmeldung2.DialogResult;
+                if (result == System.Windows.Forms.DialogResult.OK)
+                {
+                    spAngemeldet2 = Database.Instance.LadeSpieler(frmAnmeldung2.spielerID);
+                    Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, spAngemeldet2);
+                    tmp.Text = "Abbrechen";
+                    bEinzel_pause_fort.Text = "Pause";
+                    bspeichern_laden.Text = "Speichern";
+                    spielfeldUmschalten(true);
+                    labelsUmschalten(true);
+                }
+            }
         }
         /// <summary>
         /// Eventhandler
