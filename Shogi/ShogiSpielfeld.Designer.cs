@@ -39,6 +39,7 @@
             this.ansehenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zurücksetzenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.spielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielSpeichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielBeendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,6 +48,9 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.desingÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.steineÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.feldfarbeÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,6 +58,7 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuToolStripMenuItem,
+            this.spielToolStripMenuItem,
             this.toolStripMenuItem1});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -67,9 +72,7 @@
             this.profilToolStripMenuItem,
             this.statisikToolStripMenuItem,
             this.toolStripMenuItem3,
-            this.spielSpeichernToolStripMenuItem,
-            this.spielLadenToolStripMenuItem,
-            this.spielBeendenToolStripMenuItem});
+            this.desingÄndernToolStripMenuItem});
             this.menuToolStripMenuItem.Name = "menuToolStripMenuItem";
             this.menuToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.menuToolStripMenuItem.Text = "Menu";
@@ -81,7 +84,7 @@
             this.passwortÄndernToolStripMenuItem,
             this.kontoLöschenToolStripMenuItem});
             this.profilToolStripMenuItem.Name = "profilToolStripMenuItem";
-            this.profilToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.profilToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.profilToolStripMenuItem.Text = "Profil";
             // 
             // benutzernamenÄndernToolStripMenuItem
@@ -111,7 +114,7 @@
             this.ansehenToolStripMenuItem,
             this.zurücksetzenToolStripMenuItem});
             this.statisikToolStripMenuItem.Name = "statisikToolStripMenuItem";
-            this.statisikToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.statisikToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.statisikToolStripMenuItem.Text = "Statisik";
             // 
             // ansehenToolStripMenuItem
@@ -131,7 +134,17 @@
             // toolStripMenuItem3
             // 
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
-            this.toolStripMenuItem3.Size = new System.Drawing.Size(150, 6);
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
+            // 
+            // spielToolStripMenuItem
+            // 
+            this.spielToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.spielSpeichernToolStripMenuItem,
+            this.spielLadenToolStripMenuItem,
+            this.spielBeendenToolStripMenuItem});
+            this.spielToolStripMenuItem.Name = "spielToolStripMenuItem";
+            this.spielToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.spielToolStripMenuItem.Text = "Spiel";
             // 
             // spielSpeichernToolStripMenuItem
             // 
@@ -188,6 +201,28 @@
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
+            // desingÄndernToolStripMenuItem
+            // 
+            this.desingÄndernToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.steineÄndernToolStripMenuItem,
+            this.feldfarbeÄndernToolStripMenuItem});
+            this.desingÄndernToolStripMenuItem.Name = "desingÄndernToolStripMenuItem";
+            this.desingÄndernToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.desingÄndernToolStripMenuItem.Text = "Desing ändern";
+            // 
+            // steineÄndernToolStripMenuItem
+            // 
+            this.steineÄndernToolStripMenuItem.Name = "steineÄndernToolStripMenuItem";
+            this.steineÄndernToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.steineÄndernToolStripMenuItem.Text = "Steine ändern";
+            this.steineÄndernToolStripMenuItem.Click += new System.EventHandler(this.steineÄndernToolStripMenuItem_Click);
+            // 
+            // feldfarbeÄndernToolStripMenuItem
+            // 
+            this.feldfarbeÄndernToolStripMenuItem.Name = "feldfarbeÄndernToolStripMenuItem";
+            this.feldfarbeÄndernToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.feldfarbeÄndernToolStripMenuItem.Text = "Feldfarbe ändern";
+            // 
             // ShogiSpielfeld
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -222,14 +257,18 @@
         private System.Windows.Forms.ToolStripMenuItem statisikToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ansehenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem zurücksetzenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem spielSpeichernToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem spielLadenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem spielBeendenToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem hilfeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spielToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spielSpeichernToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spielLadenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem spielBeendenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem desingÄndernToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem steineÄndernToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem feldfarbeÄndernToolStripMenuItem;
 
 
     }

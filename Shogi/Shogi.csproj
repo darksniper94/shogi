@@ -149,6 +149,12 @@
     <Compile Include="Spielfigur.cs" />
     <Compile Include="Spielleiter_Spiellogik.cs" />
     <Compile Include="Statistik.cs" />
+    <Compile Include="Steinwaehlen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Steinwaehlen.Designer.cs">
+      <DependentUpon>Steinwaehlen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Testklasse_Logik.cs" />
     <EmbeddedResource Include="Anmeldung.resx">
       <DependentUpon>Anmeldung.cs</DependentUpon>
@@ -178,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registrierung.resx">
       <DependentUpon>Registrierung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Steinwaehlen.resx">
+      <DependentUpon>Steinwaehlen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
