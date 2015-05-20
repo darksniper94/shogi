@@ -96,6 +96,12 @@
     <Compile Include="Bewegungsmuster.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Designmapper.cs" />
+    <Compile Include="Farbewaehlen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Farbewaehlen.Designer.cs">
+      <DependentUpon>Farbewaehlen.cs</DependentUpon>
+    </Compile>
     <Compile Include="FigurTyp.cs" />
     <Compile Include="Anmeldung.cs">
       <SubType>Form</SubType>
@@ -164,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BenutzernameAendern.resx">
       <DependentUpon>BenutzernameAendern.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Farbewaehlen.resx">
+      <DependentUpon>Farbewaehlen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Info.resx">
       <DependentUpon>Info.cs</DependentUpon>

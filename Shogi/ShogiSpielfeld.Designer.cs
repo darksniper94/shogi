@@ -39,6 +39,9 @@
             this.ansehenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.zurücksetzenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripSeparator();
+            this.desingÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.steineÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.feldfarbeÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielSpeichernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.spielLadenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,9 +51,6 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
             this.hilfeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.desingÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.steineÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.feldfarbeÄndernToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -136,6 +136,30 @@
             this.toolStripMenuItem3.Name = "toolStripMenuItem3";
             this.toolStripMenuItem3.Size = new System.Drawing.Size(149, 6);
             // 
+            // desingÄndernToolStripMenuItem
+            // 
+            this.desingÄndernToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.steineÄndernToolStripMenuItem,
+            this.feldfarbeÄndernToolStripMenuItem});
+            this.desingÄndernToolStripMenuItem.Name = "desingÄndernToolStripMenuItem";
+            this.desingÄndernToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.desingÄndernToolStripMenuItem.Text = "Design ändern";
+            this.desingÄndernToolStripMenuItem.Click += new System.EventHandler(this.desingÄndernToolStripMenuItem_Click);
+            // 
+            // steineÄndernToolStripMenuItem
+            // 
+            this.steineÄndernToolStripMenuItem.Name = "steineÄndernToolStripMenuItem";
+            this.steineÄndernToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.steineÄndernToolStripMenuItem.Text = "Steine ändern";
+            this.steineÄndernToolStripMenuItem.Click += new System.EventHandler(this.steineÄndernToolStripMenuItem_Click);
+            // 
+            // feldfarbeÄndernToolStripMenuItem
+            // 
+            this.feldfarbeÄndernToolStripMenuItem.Name = "feldfarbeÄndernToolStripMenuItem";
+            this.feldfarbeÄndernToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.feldfarbeÄndernToolStripMenuItem.Text = "Feldfarbe ändern";
+            this.feldfarbeÄndernToolStripMenuItem.Click += new System.EventHandler(this.feldfarbeÄndernToolStripMenuItem_Click);
+            // 
             // spielToolStripMenuItem
             // 
             this.spielToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -180,19 +204,19 @@
             // infoToolStripMenuItem
             // 
             this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
-            this.infoToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.infoToolStripMenuItem.Text = "Info";
             this.infoToolStripMenuItem.Click += new System.EventHandler(this.infoToolStripMenuItem_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(125, 6);
             // 
             // hilfeToolStripMenuItem
             // 
             this.hilfeToolStripMenuItem.Name = "hilfeToolStripMenuItem";
-            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.hilfeToolStripMenuItem.Size = new System.Drawing.Size(128, 22);
             this.hilfeToolStripMenuItem.Text = "Regelwerk";
             this.hilfeToolStripMenuItem.Click += new System.EventHandler(this.hilfeToolStripMenuItem_Click);
             // 
@@ -200,28 +224,6 @@
             // 
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
-            // desingÄndernToolStripMenuItem
-            // 
-            this.desingÄndernToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.steineÄndernToolStripMenuItem,
-            this.feldfarbeÄndernToolStripMenuItem});
-            this.desingÄndernToolStripMenuItem.Name = "desingÄndernToolStripMenuItem";
-            this.desingÄndernToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.desingÄndernToolStripMenuItem.Text = "Desing ändern";
-            // 
-            // steineÄndernToolStripMenuItem
-            // 
-            this.steineÄndernToolStripMenuItem.Name = "steineÄndernToolStripMenuItem";
-            this.steineÄndernToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.steineÄndernToolStripMenuItem.Text = "Steine ändern";
-            this.steineÄndernToolStripMenuItem.Click += new System.EventHandler(this.steineÄndernToolStripMenuItem_Click);
-            // 
-            // feldfarbeÄndernToolStripMenuItem
-            // 
-            this.feldfarbeÄndernToolStripMenuItem.Name = "feldfarbeÄndernToolStripMenuItem";
-            this.feldfarbeÄndernToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
-            this.feldfarbeÄndernToolStripMenuItem.Text = "Feldfarbe ändern";
             // 
             // ShogiSpielfeld
             // 
