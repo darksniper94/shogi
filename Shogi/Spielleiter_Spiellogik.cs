@@ -298,9 +298,12 @@ namespace Shogi
                 {
                     if (koenig.Besitzer.Equals(InaktiverSpieler))
                     {
-                        if (istKoenigBewegungsfaehig(koenig) && istSchach(koenig) /*&& istBlockierbar(koenig)*/)
+                        if (istSchach(koenig))
                         {
-                            istSchachmatt = true;
+                            if (!istKoenigBewegungsfaehig(koenig)/*&& istSchach(koenig) /*&& istBlockierbar(koenig)*/)
+                            {
+                                istSchachmatt = true;
+                            }
                         }
                     }
                 }
