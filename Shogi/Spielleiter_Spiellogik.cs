@@ -540,12 +540,9 @@ namespace Shogi
                 i += iIterator;
                 j += jIterator;
 
-                // Falls Figur auf PositionNach steht, muss diese auch ignoriert werden. Dies wird in Zugprüfung später abgefangen.
-                iMax -= iIterator;
-                jMax -= jIterator;
-
                 // Gehe durch alle Positionen, falls dort eine Figur steht, return true 
-                while (i != iMax && j != jMax)
+                // Letzte Position wird ignoriert. Dies wird in Zugprüfung später abgefangen.
+                while (i != iMax || j != jMax)
                 {
                     if (feld.GetSpielfigurAnPosition(new Position(i, j)) != null)
                     {
