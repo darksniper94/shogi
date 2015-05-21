@@ -120,15 +120,15 @@
             // ansehenToolStripMenuItem
             // 
             this.ansehenToolStripMenuItem.Name = "ansehenToolStripMenuItem";
-            this.ansehenToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.ansehenToolStripMenuItem.Text = "ansehen";
+            this.ansehenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.ansehenToolStripMenuItem.Text = "Ansehen";
             this.ansehenToolStripMenuItem.Click += new System.EventHandler(this.ansehenToolStripMenuItem_Click);
             // 
             // zurücksetzenToolStripMenuItem
             // 
             this.zurücksetzenToolStripMenuItem.Name = "zurücksetzenToolStripMenuItem";
-            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
-            this.zurücksetzenToolStripMenuItem.Text = "zurücksetzen";
+            this.zurücksetzenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.zurücksetzenToolStripMenuItem.Text = "Zurücksetzen";
             this.zurücksetzenToolStripMenuItem.Click += new System.EventHandler(this.zurücksetzenToolStripMenuItem_Click);
             // 
             // toolStripMenuItem3
