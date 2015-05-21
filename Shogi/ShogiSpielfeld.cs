@@ -46,6 +46,7 @@ namespace Shogi
         Label lblTurmSp2;
         Label lblSpielername;
         Panel[,] arrPFeld;
+        Panel ausgang;
         int ausgangx;
         int ausgangy;
         int endx;
@@ -92,6 +93,7 @@ namespace Shogi
             lblSilbernerGeneralSp2 = new Label();
             lblSpringerSp2 = new Label();
             lblTurmSp2 = new Label();
+            ausgang = new Panel();
             clickCount = 0;
             ausgangx = 0;
             ausgangy = 0;
@@ -264,21 +266,23 @@ namespace Shogi
             /// <param name="e">Das Event</param>
         void PanelOnClick(object sender, EventArgs e)
         {
-            
-            
+             
             Panel tmp;
             tmp = (Panel)sender;
-           
             if (tmp.BackgroundImage == null && clickCount == 0)
             {
          
             } else {
+                tmp.BackColor = Color.FromArgb(140, Designmapper.instance.holeDesignRGB(spAngemeldet.farbe));
+                    ///tmp.BackColor = Color.FromArgb((Designmapper.instance.holeDesignRGB(spAngemeldet.farbe).R + 20), (Designmapper.instance.holeDesignRGB(spAngemeldet.farbe).G + 20), (Designmapper.instance.holeDesignRGB(spAngemeldet.farbe).B + 20));
                     clickCount = clickCount + 1;
                     if (clickCount == 2)
                     {
                         clickCount = 0;
                         // Von welchem panel kommt der klick???
                         // Feld
+                        ausgang.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
+                        tmp.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
                         if(tmp.Parent.Equals(pnlFeld))
                         {
                             string strtmp;
@@ -343,6 +347,7 @@ namespace Shogi
                                 ausgangx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
                                 ausgangy = 0;        
                             }
+                            ausgang = tmp;
                         }
                         else
                         {
@@ -380,6 +385,7 @@ namespace Shogi
                 bspeichern_laden.Text = "Speichern";
                 spielfeldUmschalten(true);
                 labelsUmschalten(true);
+                spielfeldFarbe();
             } else if (tmp.Text == "Pause")
             {
                 tmp.Text = "Fortsetzen";
@@ -389,7 +395,7 @@ namespace Shogi
                 tmp.Text = "Pause";
                 spielfeldUmschalten(true);
             }
-            
+           
         }
         /// <summary>
         /// Eventhandler Coop//Abbrechen Button
@@ -428,7 +434,7 @@ namespace Shogi
                     labelsUmschalten(true);
                 }
             }
-
+            spielfeldFarbe();
         }
         /// <summary>
         /// Eventhandler
@@ -1156,6 +1162,7 @@ namespace Shogi
             lblBauerSp2.Text = "0";
             lblBauerSp2.Font = new Font("Book Antiqua", 12);
             lblBauerSp2.Visible = false;
+            lblBauerSp2.Location = new Point(0, 30);
 
             lblTurmSp1.BackColor = Color.Transparent;
             lblTurmSp1.ForeColor = Color.Red;
@@ -1168,6 +1175,7 @@ namespace Shogi
             lblTurmSp2.Text = "0";
             lblTurmSp2.Font = new Font("Book Antiqua", 12);
             lblTurmSp2.Visible = false;
+            lblTurmSp2.Location = new Point(0, 30);
 
             lblSpringerSp1.BackColor = Color.Transparent;
             lblSpringerSp1.ForeColor = Color.Red;
@@ -1180,6 +1188,7 @@ namespace Shogi
             lblSpringerSp2.Text = "0";
             lblSpringerSp2.Font = new Font("Book Antiqua", 12);
             lblSpringerSp2.Visible = false;
+            lblSpringerSp2.Location = new Point(0, 30);
 
             lblSilbernerGeneralSp1.BackColor = Color.Transparent;
             lblSilbernerGeneralSp1.ForeColor = Color.Red;
@@ -1192,6 +1201,7 @@ namespace Shogi
             lblSilbernerGeneralSp2.Text = "0";
             lblSilbernerGeneralSp2.Font = new Font("Book Antiqua", 12);
             lblSilbernerGeneralSp2.Visible = false;
+            lblSilbernerGeneralSp2.Location = new Point(0, 30);
 
             lblLanzeSp1.BackColor = Color.Transparent;
             lblLanzeSp1.ForeColor = Color.Red;
@@ -1204,6 +1214,7 @@ namespace Shogi
             lblLanzeSp2.Text = "0";
             lblLanzeSp2.Font = new Font("Book Antiqua", 12);
             lblLanzeSp2.Visible = false;
+            lblLanzeSp2.Location = new Point(0, 30);
 
             lblLaueferSp1.BackColor = Color.Transparent;
             lblLaueferSp1.ForeColor = Color.Red;
@@ -1216,6 +1227,7 @@ namespace Shogi
             lblLaueferSp2.Text = "0";
             lblLaueferSp2.Font = new Font("Book Antiqua", 12);
             lblLaueferSp2.Visible = false;
+            lblLaueferSp2.Location = new Point(0, 30);
 
             lblGoldenerGeneralSp1.BackColor = Color.Transparent;
             lblGoldenerGeneralSp1.ForeColor = Color.Red;
@@ -1228,6 +1240,7 @@ namespace Shogi
             lblGoldenerGeneralSp2.Text = "0";
             lblGoldenerGeneralSp2.Font = new Font("Book Antiqua", 12);
             lblGoldenerGeneralSp2.Visible = false;
+            lblGoldenerGeneralSp2.Location = new Point(0, 30);
 
             lblBauerSp1.BackColor = Color.Transparent;
             lblBauerSp1.ForeColor = Color.Red;

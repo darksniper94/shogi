@@ -1077,6 +1077,15 @@
             <param name="paPosition">Die Position der Spielfigur, die zurückgegeben werden soll.</param>
             <returns>Gibt eine Spielfigur zurück der übergebenen Positionen.</returns>
         </member>
+        <member name="M:Shogi.Spielfeld.getInaktiveFigurVon(System.String,Shogi.Spieler)">
+            <summary>
+            Gibt die erstbeste inaktive Figur zurück, die dem übergebenem Spieler gehört und vom übergebenem FigutTyp ist.
+            </summary>
+            <param name="figurTyp">Typ von dem die Figur sein soll.</param>
+            <param name="aktiverSpieler">Spieler, dessen Figur zurückgegeben werden soll.</param>
+            <returns>Eine inaktive Figur vom übergebnem Typ, die dem übergebenem Spieler gehört. 
+            Null wenn keine entsprechende Figur gefunden wurde.</returns>
+        </member>
         <member name="M:Shogi.Spielfeld.#ctor(System.Collections.Generic.List{Shogi.Spielfigur},System.Int32,System.Int32)">
             <summary>
             Der Konstruktor des Spielfeldes in der eine Aufstellung von Spielfiguren und die Dimensionen als Integer übergeben werden.
@@ -1248,6 +1257,17 @@
             <param name="positionVon">Die Position auf der eine Spielfigur sein muss.</param>
             <param name="positionNach">Die Position auf die, die Spielfigur gesetzt werden soll.</param>
             <returns>Return true, wenn der Zug nach Shogiregeln valide ist, anstonsten return false.</returns>
+        </member>
+        <member name="M:Shogi.Spielleiter_Spiellogik.figurEinsetzen(System.String,Shogi.Position)">
+            <summary>
+            Diese Methode dient dazu, eine inaktive Figur wieder auf das Spielfeld zu setzen.
+            Dafür wird der Figurtyp benötigt, damit man eine passende Figur einsetzen kann. 
+            Außerdem braucht man die Position an der die Figur eingesetzt werden soll.
+            </summary>
+            <param name="figurTyp">Typ der Figur, die eingesetzt werden soll.</param>
+            <param name="positionNach">Position an welche die Figur eingesetzt werden soll.</param>
+            <returns>True, wenn die Figur eingesetzt wurde. False, wenn die Figur nicht eingesetzt werden konnte.
+            Dies tritt ein, wenn es keine entsprechende Figur gibt oder eine Figur auf der übergebenen Position steht.</returns>
         </member>
         <member name="M:Shogi.Spielleiter_Spiellogik.spielfigurBefoerdern(Shogi.Position)">
             <summary>
