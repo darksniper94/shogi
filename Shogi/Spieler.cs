@@ -23,7 +23,15 @@ namespace Shogi
         /// <param name="passwort">Spielerpasswort</param>
         /// <param name="design">Desgin ist</param>
         /// <param name="farbe">Spielfeldfarbe</param>
-        public Spieler(String name, String passwort, String design = "", String farbe = "blau")
+        public Spieler(String name, String passwort)
+        {
+            this.benutzername = name;
+            this.passwort = passwort;
+            this.design = Designmapper.JAPANISCH;
+            this.farbe = "Standard";
+            this.id = NEUER_SPIELER; // Das zeigt an der Spieler neu angelegt werden muss.
+        }
+        public Spieler(String name, String passwort, String design , String farbe )
         {
             this.benutzername = name;
             this.passwort = passwort;

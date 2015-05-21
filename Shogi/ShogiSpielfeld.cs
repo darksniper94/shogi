@@ -53,6 +53,10 @@ namespace Shogi
         int ausgangy;
         int endx;
         int endy;
+        int zuegeSp1;
+        int zuegeSp2;
+        Stoppuhr uhr;
+        bool boolEinzelspiel;
 
         int clickCount;
         
@@ -101,6 +105,8 @@ namespace Shogi
             clickCount = 0;
             ausgangx = 0;
             ausgangy = 0;
+            zuegeSp1 = 0;
+            zuegeSp2 = 0;
 
             //pnlFeld.Location = new Point(130, 110);
             pnlFeld.ColumnCount = 9;
@@ -322,18 +328,27 @@ namespace Shogi
                             if(zugOk)
                             { 
                                 // Spielzug OK
-                                zeichneSpielzug(strtmp);
-
-                            }
-                            else
-                            {
-                                if (ausgangx == endx && ausgangy == endy)
+                                zeichneSpielzug(strtmp, false);
+                                if (spAngemeldet.Equals(Spielleiter_Spiellogik.instance.AktiverSpieler))
                                 {
-                                    if (Spielleiter_Spiellogik.instance.spielfigurBefoerdern(new Position(endx, endy)))
+                                    zuegeSp1++;
+                                } else
+                                {
+                                    zuegeSp2++;
+                                }
+                                if (!Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).IstBefoerdert)
+                                {
+                                    if (Spielleiter_Spiellogik.instance.pruefeBefoerdern(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy))))
                                     {
-                                        zeichneSpielzug(strtmp);
+                                        DialogResult result = MessageBox.Show(this, "Möchten Sie den Spielstein befördern?", "Befördern", MessageBoxButtons.YesNo);
+                                        if (result == DialogResult.Yes)
+                                        {
+                                            Spielleiter_Spiellogik.instance.spielfigurBefoerdern(new Position(endx, endy));
+                                            zeichneSpielzug(strtmp,true);
+                                        }
                                     }
                                 }
+                                Spielleiter_Spiellogik.instance.spielerwechsel(); 
                             }
                         }
 
@@ -382,10 +397,20 @@ namespace Shogi
             if (Spielleiter_Spiellogik.instance.GetBeendet())
             {
                 MessageBox.Show(this, "Schachmatt", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                bool tmpBool;
+                if (Spielleiter_Spiellogik.instance.InaktiverSpieler.Equals(spAngemeldet))
+                {
+                    tmpBool = true;
+                }
+                else
+                {
+                    tmpBool = false;
+                }
+                spielBeenden(true,boolEinzelspiel,tmpBool);
+                MessageBox.Show("" + uhr.Zeit);
             }
             else
             {
-
                 if (Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
                 {
                     lblSP1.ForeColor = Color.Red;
@@ -420,6 +445,7 @@ namespace Shogi
             tmp = (Button)sender;
             if (tmp.Text == "Einzel Spiel")
             {
+                uhr = new Stoppuhr();
                 spAngemeldet2 = Database.Instance.LadeSpieler(spAngemeldet.id);   
                 Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, spAngemeldet2);
                 tmp.Text = "Pause";
@@ -433,8 +459,13 @@ namespace Shogi
                 spielfeldFarbe();
                 lblSP1.Text = spAngemeldet.benutzername;
                 lblSp2.Text = spAngemeldet2.benutzername + "_2";
+                zuegeSp1 = 0;
+                zuegeSp2 = 0;
+                uhr.start();
+
             } else if (tmp.Text == "Pause")
             {
+                uhr.pause();
                 tmp.Text = "Fortsetzen";
                 spielfeldUmschalten(false);
                 lblSP1.Enabled = false;
@@ -445,6 +476,7 @@ namespace Shogi
                 spielfeldUmschalten(true);
                 lblSP1.Enabled = true;
                 lblSp2.Enabled = true;
+                uhr.start();
             }
            
         }
@@ -460,20 +492,10 @@ namespace Shogi
 
             if (tmp.Text == "Abbrechen")
             {
-                spAngemeldet2 = null;
-                tmp.Text = "Koorperatives Spiel";
-                bEinzel_pause_fort.Text = "Einzel Spiel";
-                bspeichern_laden.Text = "Spiel laden";
-                spielfeldUmschalten(false);
-                labelsUmschalten(false);
-                lblSP1.Visible = false;
-                lblSp2.Visible = false;
-                lblSp2.Text = "Spieler 2";
-                lblSP1.Text = "Spieler 1";
-                erstelleStart();
-
+                spielBeenden(false, false, false);
             }else
             {
+                uhr = new Stoppuhr();
                 FormAnmeldung frmAnmeldung2 = new FormAnmeldung(spAngemeldet);
                 DialogResult result;
                 frmAnmeldung2.ShowDialog();
@@ -492,6 +514,9 @@ namespace Shogi
                     lblSP1.ForeColor = Color.Red;
                     lblSP1.Text = spAngemeldet.benutzername;
                     lblSp2.Text = spAngemeldet2.benutzername;
+                    zuegeSp2 = 0;
+                    zuegeSp1 = 0;
+                    uhr.start();
                 }
             }
             spielfeldFarbe();
@@ -704,15 +729,15 @@ namespace Shogi
        /// </summary>
        /// <param name="posAlt">Alte Position</param>
        /// <param name="posNeu">Neue Position</param>
-        public void zeichneSpielzug(string spielsteinEnd)
+        public void zeichneSpielzug(string spielsteinEnd,bool befoerdern)
         {
             int ix;
 
-            if (ausgangx == endx && ausgangy == endy)
+            if (befoerdern)
             {
                 //beförderung nur das img ersetzen
                 arrPFeld[endy, endx].BackgroundImage = Designmapper.instance.holeDesignBild(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).Typ.getName(), spAngemeldet);
-                if(!Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
+                if(Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
                 {
                     arrPFeld[endy, endx].BackgroundImage.Tag = STEIN_UNTEN;
                 }
@@ -1307,6 +1332,42 @@ namespace Shogi
             lblBauerSp1.Text = "0";
             lblBauerSp1.Font = new Font("Book Antiqua", 12);
             lblBauerSp1.Visible = false;
+        }
+        private void spielBeenden(bool statistik, bool einzelspiel, bool sp1gewonnen)
+        {
+            uhr.stop();
+            bool sp2gewonnen;
+            if (sp1gewonnen)
+            {
+                sp2gewonnen = false;
+            }else
+            {
+                sp2gewonnen = true;
+            }
+            spAngemeldet2 = null;
+            bCoop_Abbrechen.Text = "Koorperatives Spiel";
+            bEinzel_pause_fort.Text = "Einzel Spiel";
+            bspeichern_laden.Text = "Spiel laden";
+            spielfeldUmschalten(false);
+            labelsUmschalten(false);
+            lblSP1.Visible = false;
+            lblSp2.Visible = false;
+            lblSp2.Text = "Spieler 2";
+            lblSP1.Text = "Spieler 1";
+            erstelleStart();
+            if (statistik)
+            {
+                if(einzelspiel)
+                {
+                    Database.Instance.StatistikErweitern(spAngemeldet, sp1gewonnen, true, zuegeSp1, uhr.Zeit);
+                }else
+                {
+                    Database.Instance.StatistikErweitern(spAngemeldet, sp1gewonnen, true, zuegeSp1, uhr.Zeit);
+                    Database.Instance.StatistikErweitern(spAngemeldet2, sp2gewonnen, true, zuegeSp2, uhr.Zeit);
+                }
+            }
+            zuegeSp1 = 0;
+            zuegeSp2 = 0;
         }
     }
 }

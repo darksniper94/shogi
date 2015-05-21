@@ -161,6 +161,7 @@
     <Compile Include="Steinwaehlen.Designer.cs">
       <DependentUpon>Steinwaehlen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Stoppuhr.cs" />
     <Compile Include="Testklasse_Logik.cs" />
     <EmbeddedResource Include="Anmeldung.resx">
       <DependentUpon>Anmeldung.cs</DependentUpon>

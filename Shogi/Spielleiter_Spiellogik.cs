@@ -204,9 +204,6 @@ namespace Shogi
                 // 4. Ist Spiel beendet
                 beendet = istSpielBeendet();
 
-                // 5. Spielerwechsel
-                this.spielerwechsel();
-
                 return true;
             }
             return false;
@@ -235,9 +232,6 @@ namespace Shogi
                 // 4. Ist Spiel beendet
                 beendet = istSpielBeendet();
 
-                // 5. Spielerwechsel
-                this.spielerwechsel();
-
                 return true;
             }
 
@@ -256,7 +250,6 @@ namespace Shogi
             if (pruefeBefoerdern(figur))
             {
                 figur.befoerdern();
-                this.spielerwechsel();
                 return true;
             }
 
@@ -267,7 +260,7 @@ namespace Shogi
         /// </summary>
         /// <param name="figur">Die Spielfigur die befördert werden soll.</param>
         /// <returns>returns true, wenn die Beförderung durchgeführt werden darf, ansonsten false.</returns>
-        private bool pruefeBefoerdern(Spielfigur figur)
+        public bool pruefeBefoerdern(Spielfigur figur)
         {
             if (aktiverSpieler != null && aktiverSpieler.Equals(figur.Besitzer))
             {
@@ -432,7 +425,7 @@ namespace Shogi
         /// <summary>
         /// Wechselt die beiden Spieler, diese Methode soll am Ende eines erfolgreichen Zuges aufgerufen werden, um einen Spielerwechsel zu vollziehen.
         /// </summary>
-        private void spielerwechsel()
+        public void spielerwechsel()
         {
             if (this.AktiverSpieler != null && this.InaktiverSpieler != null)
             {

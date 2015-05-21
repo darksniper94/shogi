@@ -171,3 +171,4 @@ C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Info.resources
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.PasswortAendern.resources
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csprojResolveAssemblyReference.cache

@@ -864,7 +864,7 @@
             Diese Methode setzt die Steine auf die entsprechenden Panels.
             </summary>
         </member>
-        <member name="M:Shogi.ShogiSpielfeld.zeichneSpielzug(System.String)">
+        <member name="M:Shogi.ShogiSpielfeld.zeichneSpielzug(System.String,System.Boolean)">
             <summary>
             Setzt ein Image von einer Position auf eine andere.
             </summary>
@@ -1025,7 +1025,7 @@
             Der Haupteinstiegspunkt für die Anwendung.
             </summary>
         </member>
-        <member name="M:Shogi.Spieler.#ctor(System.String,System.String,System.String,System.String)">
+        <member name="M:Shogi.Spieler.#ctor(System.String,System.String)">
             <summary>
             Erstell einen neuen Spieler, welcher noch nicht in der Datenbank exsistiert
             </summary>
@@ -1372,6 +1372,41 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Shogi.Stoppuhr">
+            <summary>
+            Stoppuhr Klass für Shogi
+            </summary>
+        </member>
+        <member name="M:Shogi.Stoppuhr.#ctor">
+            <summary>
+            Konstruktor
+            </summary>
+        </member>
+        <member name="M:Shogi.Stoppuhr.pause">
+            <summary>
+            Pausiert die Stoppuhr
+            </summary>
+        </member>
+        <member name="M:Shogi.Stoppuhr.start">
+            <summary>
+            Startet die Stoppuhr
+            </summary>
+        </member>
+        <member name="M:Shogi.Stoppuhr.stop">
+            <summary>
+            Stoppt die Stoppuhr engültig
+            </summary>
+        </member>
+        <member name="M:Shogi.Stoppuhr.run">
+            <summary>
+            Die Methode, welche vom Thread ausgeführt wird
+            </summary>
+        </member>
+        <member name="P:Shogi.Stoppuhr.Zeit">
+            <summary>
+            Gestoppte Zeit in Sekunden
             </summary>
         </member>
     </members>
