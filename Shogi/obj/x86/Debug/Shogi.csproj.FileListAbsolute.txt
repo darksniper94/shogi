@@ -167,3 +167,8 @@ C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resou
 C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
 C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\Shogi.XML
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.BenutzernameAendern.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Info.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.PasswortAendern.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
