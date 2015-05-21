@@ -349,49 +349,50 @@ namespace Shogi
                             }
                             else
                             {
-                                string strtmp;
+                            string strtmp;
                                 endx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
                                 endy = pnlFeld.GetPositionFromControl(tmp).Row + 1;
-                                if (arrPFeld[endy, endx].BackgroundImage != null)
-                                {
-                                    strtmp = Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).TypNichtBefoerdert.getName();
-                                }
-                                else
-                                {
-                                    strtmp = "default";
-                                }
-                                bool zugOk = Spielleiter_Spiellogik.instance.spielZug(new Position(ausgangx, ausgangy), new Position(endx, endy));
-
-
-                                //MessageBox.Show(zugOk.ToString() + "   " + Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet));
-
+                            if (arrPFeld[endy, endx].BackgroundImage != null)
+                            {
+                                strtmp = Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).TypNichtBefoerdert.getName();
+                            }
+                            else
+                            {
+                                strtmp = "default";
+                            }
+                            
+                            bool zugOk = Spielleiter_Spiellogik.instance.spielZug(new Position(ausgangx, ausgangy), new Position(endx, endy));
+                            
+                            
+                            //MessageBox.Show(zugOk.ToString() + "   " + Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet));
+                        
                                 if (zugOk)
+                            { 
+                                // Spielzug OK
+                                zeichneSpielzug(strtmp, false);
+                                if (spAngemeldet.Equals(Spielleiter_Spiellogik.instance.AktiverSpieler))
                                 {
-                                    // Spielzug OK
-                                    zeichneSpielzug(strtmp, false);
-                                    if (spAngemeldet.Equals(Spielleiter_Spiellogik.instance.AktiverSpieler))
-                                    {
-                                        zuegeSp1++;
+                                    zuegeSp1++;
                                     }
                                     else
+                                {
+                                    zuegeSp2++;
+                                }
+                                if (!Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).IstBefoerdert)
+                                {
+                                    if (Spielleiter_Spiellogik.instance.pruefeBefoerdern(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy))))
                                     {
-                                        zuegeSp2++;
-                                    }
-                                    if (!Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).IstBefoerdert)
-                                    {
-                                        if (Spielleiter_Spiellogik.instance.pruefeBefoerdern(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy))))
+                                        DialogResult result = MessageBox.Show(this, "Möchten Sie den Spielstein befördern?", "Befördern", MessageBoxButtons.YesNo);
+                                        if (result == DialogResult.Yes)
                                         {
-                                            DialogResult result = MessageBox.Show(this, "Möchten Sie den Spielstein befördern?", "Befördern", MessageBoxButtons.YesNo);
-                                            if (result == DialogResult.Yes)
-                                            {
-                                                Spielleiter_Spiellogik.instance.spielfigurBefoerdern(new Position(endx, endy));
+                                            Spielleiter_Spiellogik.instance.spielfigurBefoerdern(new Position(endx, endy));
                                                 zeichneSpielzug(strtmp, true);
-                                            }
                                         }
                                     }
-                                    Spielleiter_Spiellogik.instance.spielerwechsel();
                                 }
+                                Spielleiter_Spiellogik.instance.spielerwechsel(); 
                             }
+                        }
                         }
                     }
                     else
@@ -739,10 +740,113 @@ namespace Shogi
             
         }
 
+
+        public void zeichneSpielfeld()
+        {
+            Spielfeld sp = Spielleiter_Spiellogik.instance.GetFeld();
+            foreach(Spielfigur figur in sp.Feld)
+            {
+                if(figur.Position.Zeile == 0 && figur.Position.Spalte == 0)
+                {
+                    switch (figur.Typ.getName())
+                    {
+                        case "Turm":
+                            if (figur.Besitzer.Equals(spAngemeldet))
+                            {
+                                lblTurmSp1.Text = "" + (Convert.ToInt32(lblTurmSp1.Text) + 1);
+                            }
+                            else
+                            {
+                                lblTurmSp2.Text = "" + (Convert.ToInt32(lblTurmSp2.Text) + 1);
+                            }
+                            break;
+                        case "Läufer":
+                            if (figur.Besitzer.Equals(spAngemeldet))
+                            {
+                                lblLaueferSp1.Text = "" + (Convert.ToInt32(lblLaueferSp1.Text) + 1);
+                            }
+                            else
+                            {
+                                lblLaueferSp2.Text = "" + (Convert.ToInt32(lblLaueferSp2.Text) + 1);
+                            }
+                            break;
+                        case "Goldener General":
+                            if (figur.Besitzer.Equals(spAngemeldet))
+                            {
+                                lblGoldenerGeneralSp1.Text = "" + (Convert.ToInt32(lblGoldenerGeneralSp1.Text) + 1);
+                            }
+                            else
+                            {
+                                lblGoldenerGeneralSp2.Text = "" + (Convert.ToInt32(lblGoldenerGeneralSp2.Text) + 1);
+                            }
+                            break;
+                        case "Silberner General":
+                            if (figur.Besitzer.Equals(spAngemeldet))
+                            {
+                                lblSilbernerGeneralSp1.Text = "" + (Convert.ToInt32(lblSilbernerGeneralSp1.Text) + 1);
+                            }
+                            else
+                            {
+                                lblSilbernerGeneralSp2.Text = "" + (Convert.ToInt32(lblSilbernerGeneralSp2.Text) + 1);
+                            }
+                            break;
+                        case "Springer":
+                            if (figur.Besitzer.Equals(spAngemeldet))
+                            {
+                                lblSpringerSp1.Text = "" + (Convert.ToInt32(lblSpringerSp1.Text) + 1);
+                            }
+                            else
+                            {
+                                lblSpringerSp2.Text = "" + (Convert.ToInt32(lblSpringerSp2.Text) + 1);
+                            }
+                            break;
+                        case "Lanze":
+                            if (figur.Besitzer.Equals(spAngemeldet))
+                            {
+                                lblLanzeSp1.Text = "" + (Convert.ToInt32(lblLanzeSp1.Text) + 1);
+                            }
+                            else
+                            {
+                                lblLanzeSp2.Text = "" + (Convert.ToInt32(lblLanzeSp2.Text) + 1);
+                            }
+                            break;
+                        case "Bauer":
+                            if (figur.Besitzer.Equals(spAngemeldet))
+                            {
+                                lblBauerSp1.Text = "" + (Convert.ToInt32(lblBauerSp1.Text) + 1);
+                            }
+                            else
+                            {
+                                lblBauerSp2.Text = "" + (Convert.ToInt32(lblBauerSp2.Text) + 1);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    arrPFeld[figur.Position.Spalte, figur.Position.Zeile].BackgroundImage = Designmapper.instance.holeDesignBild(figur.Typ.getName(), spAngemeldet);
+                    if (figur.Besitzer.Equals(spAngemeldet))
+                    {
+                        arrPFeld[figur.Position.Spalte, figur.Position.Zeile].BackgroundImage.Tag = STEIN_UNTEN;
+                    }
+                    else
+                    {
+                        arrPFeld[figur.Position.Spalte, figur.Position.Zeile].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                        arrPFeld[figur.Position.Spalte, figur.Position.Zeile].BackgroundImage.Tag = STEIN_OBEN;
+            
+        }
+                }
+            }
+        }
+
+      
+
         /// <summary>
         /// Diese Methode setzt die Steine auf die entsprechenden Panels.
         /// </summary>
-        public void zeichneSpielfeldkomplett()
+        public void aktulisiereDesing()
         {
             if(Spielleiter_Spiellogik.instance.GetFeld() != null)
             {
@@ -754,7 +858,8 @@ namespace Shogi
                         if (arrPFeld[i, j].BackgroundImage != null)
                         {
                             object tag = arrPFeld[i, j].BackgroundImage.Tag;
-                            arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(j, i)).Typ.getName(), spAngemeldet);
+                            arrPFeld[i, j].BackgroundImage = 
+                            Designmapper.instance.holeDesignBild(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(j, i)).Typ.getName(), spAngemeldet);
                             if (tag.ToString() == STEIN_OBEN)
                             {
                                 arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
@@ -805,7 +910,7 @@ namespace Shogi
                 else
                 {
                     
-                    if (!Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
+                    if (Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
                     {
                          switch (spielsteinEnd)
                         {
@@ -1001,7 +1106,7 @@ namespace Shogi
             frmSteinWaehlen.ShowDialog();
             // DB Update
             Database.Instance.DesignAktualisieren(spAngemeldet);
-            zeichneSpielfeldkomplett();
+            aktulisiereDesing();
         }
 
         private void desingÄndernToolStripMenuItem_Click(object sender, EventArgs e)
