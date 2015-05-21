@@ -387,22 +387,13 @@ namespace Shogi
         /// </summary>
         /// <param name="spielid">Spielid als int</param>
         /// <returns>Gibt das Spielfeld zurück</returns>
-        private Spielfeld LadeSpielfeld(int spielid)
+        private Spielfeld LadeSpielfeld(int spielid, Spieler sp1, Spieler sp2)
         {
             String figsql = @"SELECT figurtyp, befoerdert, spieler, x, y
-                           FROM GAMEDATA
-                           WHERE game = " + spielid + ";";
-            LinkedList<Object[]> resfiguren = this.ExecuteQuery(figsql);
+                              FROM GAMEDATA
+                              WHERE game = " + spielid + ";";
 
-            // Spieler abfragen
-            String datasql = @"SELECT user_a, user_b FROM GAME WHERE ID="+spielid;
-            LinkedList<Object[]> users = this.ExecuteQuery(datasql);
-            int spieler1_id = Convert.ToInt32(users.ElementAt(0)[0]);
-            int spieler2_id = Convert.ToInt32(users.ElementAt(0)[1]);     
-            
-            // Spieler instanzieren
-            Spieler sp1 = this.LadeSpieler(spieler1_id);
-            Spieler sp2 = this.LadeSpieler(spieler2_id);
+            LinkedList<Object[]> resfiguren = this.ExecuteQuery(figsql);
 
             // Reinstanziere Spielfiguren
             List<Spielfigur> figuren = new List<Spielfigur>();
@@ -421,20 +412,21 @@ namespace Shogi
 
                 figuren.Add(tmpFigur);
             }
-            Spielfeld tmpFeld = new Spielfeld(figuren, Spielleiter_Spiellogik.SHOGI_DIM);
-            return tmpFeld;
+
+
+            return new Spielfeld(figuren, Spielleiter_Spiellogik.SHOGI_DIM);
         }
         /// <summary>
         /// Lädt die letzte 
         /// </summary>
         /// <param name="sp"></param>
         /// <returns></returns>
-        public Spielfeld LadeLetztesEinzelSpiel(Spieler sp)
+        public Spielfeld LadeLetztesEinzelSpiel(Spieler sp1, Spieler sp2)
         {
             String sql = @"SELECT ID FROM GAME " +
-                           "WHERE user_a = "+ sp.id +
+                           "WHERE user_a = "+ sp1.id +
                            " ORDER BY ID DESC " +
-                           " LIMIT 1 ";
+                           " LIMIT 1";
 
             LinkedList<Object[]> result = this.ExecuteQuery(sql);
             if(result.Count == 0)
@@ -442,8 +434,8 @@ namespace Shogi
                 return null;
             }
             int game_id = Convert.ToInt32(result.ElementAt(0)[0]);
-            
-            return LadeSpielfeld(game_id);
+
+            return LadeSpielfeld(game_id, sp1, sp2);
 
         }
 
