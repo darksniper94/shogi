@@ -47,6 +47,8 @@ namespace Shogi
         Label lblSpielername;
         Panel[,] arrPFeld;
         Panel ausgang;
+        Label lblSP1;
+        Label lblSp2;
         int ausgangx;
         int ausgangy;
         int endx;
@@ -94,6 +96,8 @@ namespace Shogi
             lblSpringerSp2 = new Label();
             lblTurmSp2 = new Label();
             ausgang = new Panel();
+            lblSP1 = new Label();
+            lblSp2 = new Label();
             clickCount = 0;
             ausgangx = 0;
             ausgangy = 0;
@@ -149,6 +153,18 @@ namespace Shogi
             }
 
             erstelleStart();
+
+            lblSP1.Text = "Spieler 1";
+            lblSP1.Visible = false;
+            lblSP1.Font = new Font("Book Antiqua", 11);
+            lblSP1.Width = TextRenderer.MeasureText(lblSP1.Text, lblSP1.Font).Width;
+            lblSP1.BackColor = Color.Transparent;
+
+            lblSp2.Text = "Spieler 2";
+            lblSp2.Visible = false;
+            lblSp2.Font = new Font("Book Antiqua", 11);
+            lblSp2.Width = TextRenderer.MeasureText(lblSp2.Text, lblSp2.Font).Width;
+            lblSp2.BackColor = Color.Transparent;
 
             lblSpielername.Font = new Font("Book Antiqua", 11);
             spielerNameZentrieren();
@@ -233,10 +249,14 @@ namespace Shogi
             pnlFeld.Location = new Point(((pnlSpielfeld.Width/2)-pnlFeld.Width/2), 110);
             pnlSp2Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp2Ers.Width / 2), 30);
             pnlSp1Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp1Ers.Width / 2), 130+ pnlFeld.Height);
+            lblSp2.Location = new Point(((pnlSpielfeld.Width / 2) - lblSp2.Width / 2), 85);
+            lblSP1.Location = new Point(((pnlSpielfeld.Width / 2) - lblSP1.Width / 2), 110 + pnlFeld.Height);
             pnlSpielfeld.Controls.Add(pnlFeld);
             pnlSpielfeld.Controls.Add(picBambus);
             pnlSpielfeld.Controls.Add(pnlSp2Ers);
             pnlSpielfeld.Controls.Add(pnlSp1Ers);
+            pnlSpielfeld.Controls.Add(lblSP1);
+            pnlSpielfeld.Controls.Add(lblSp2);
    
             pnlBasis.Controls.Add(pnlMenu);
             pnlBasis.Controls.Add(pnlSpielfeld);
@@ -273,16 +293,14 @@ namespace Shogi
             {
          
             } else {
-                tmp.BackColor = Color.FromArgb(140, Designmapper.instance.holeDesignRGB(spAngemeldet.farbe));
-                    ///tmp.BackColor = Color.FromArgb((Designmapper.instance.holeDesignRGB(spAngemeldet.farbe).R + 20), (Designmapper.instance.holeDesignRGB(spAngemeldet.farbe).G + 20), (Designmapper.instance.holeDesignRGB(spAngemeldet.farbe).B + 20));
                     clickCount = clickCount + 1;
+                        ausgang.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
+                        tmp.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
                     if (clickCount == 2)
                     {
                         clickCount = 0;
                         // Von welchem panel kommt der klick???
                         // Feld
-                        ausgang.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
-                        tmp.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
                         if(tmp.Parent.Equals(pnlFeld))
                         {
                             string strtmp;
@@ -326,6 +344,7 @@ namespace Shogi
                         if ((tmp.BackgroundImage.Tag.ToString() == STEIN_OBEN && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet2) || 
                             (tmp.BackgroundImage.Tag.ToString() == STEIN_UNTEN && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet))
                         {
+                            tmp.BackColor = Color.FromArgb(140, Designmapper.instance.holeDesignRGB(spAngemeldet.farbe));
                             // Setzte x und y beim ersten click
                             // Feld
                             if (tmp.Parent.Equals(pnlFeld))
@@ -353,6 +372,29 @@ namespace Shogi
                         {
                             clickCount = 0;
                         }
+                }
+            }
+            if(Spielleiter_Spiellogik.instance.GetIstSchachGesetzt())
+            {
+                MessageBox.Show(this, "Schach", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            if (Spielleiter_Spiellogik.instance.GetBeendet())
+            {
+                MessageBox.Show(this, "Schachmatt", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+
+                if (Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
+                {
+                    lblSP1.ForeColor = Color.Red;
+                    lblSp2.ForeColor = Color.Black;
+                }
+                else
+                {
+                    lblSp2.ForeColor = Color.Red;
+                    lblSP1.ForeColor = Color.Black;
                 }
             }
             //MessageBox.Show("Von: y:" + ausgangy + "/x:" + ausgangx + " Nach: y" + endy + "/x:" + endx);
@@ -385,15 +427,24 @@ namespace Shogi
                 bspeichern_laden.Text = "Speichern";
                 spielfeldUmschalten(true);
                 labelsUmschalten(true);
+                lblSP1.Visible = true;
+                lblSp2.Visible = true;
+                lblSP1.ForeColor = Color.Red;
                 spielfeldFarbe();
+                lblSP1.Text = spAngemeldet.benutzername;
+                lblSp2.Text = spAngemeldet2.benutzername + "_2";
             } else if (tmp.Text == "Pause")
             {
                 tmp.Text = "Fortsetzen";
                 spielfeldUmschalten(false);
+                lblSP1.Enabled = false;
+                lblSp2.Enabled = false;
             } else
             {
                 tmp.Text = "Pause";
                 spielfeldUmschalten(true);
+                lblSP1.Enabled = true;
+                lblSp2.Enabled = true;
             }
            
         }
@@ -415,11 +466,15 @@ namespace Shogi
                 bspeichern_laden.Text = "Spiel laden";
                 spielfeldUmschalten(false);
                 labelsUmschalten(false);
+                lblSP1.Visible = false;
+                lblSp2.Visible = false;
+                lblSp2.Text = "Spieler 2";
+                lblSP1.Text = "Spieler 1";
                 erstelleStart();
 
             }else
             {
-                FormAnmeldung frmAnmeldung2 = new FormAnmeldung();
+                FormAnmeldung frmAnmeldung2 = new FormAnmeldung(spAngemeldet);
                 DialogResult result;
                 frmAnmeldung2.ShowDialog();
                 result = frmAnmeldung2.DialogResult;
@@ -432,6 +487,11 @@ namespace Shogi
                     bspeichern_laden.Text = "Speichern";
                     spielfeldUmschalten(true);
                     labelsUmschalten(true);
+                    lblSP1.Visible = true;
+                    lblSp2.Visible = true;
+                    lblSP1.ForeColor = Color.Red;
+                    lblSP1.Text = spAngemeldet.benutzername;
+                    lblSp2.Text = spAngemeldet2.benutzername;
                 }
             }
             spielfeldFarbe();

@@ -13,12 +13,21 @@ namespace Shogi
 
     public partial class FormAnmeldung : Form
     {
+        Spieler spAngemeldet;
 
         public FormAnmeldung()
         {
             InitializeComponent();
             // Form zentrieren
             this.CenterToScreen();
+            spAngemeldet = null;
+        }
+        public FormAnmeldung(Spieler spieler)
+        {
+            InitializeComponent();
+            // Form zentrieren
+            this.CenterToScreen();
+            spAngemeldet = spieler;
         }
 
        
@@ -37,10 +46,25 @@ namespace Shogi
             if (spielerID == -1)
             {
                 lblMeldung.Visible = true;
+                lblMeldung.Text = "Benutzername oder Passwort ist falsch.";
             }
             else
             {
-                DialogResult = DialogResult.OK;
+                if (spAngemeldet == null)
+                {
+                    DialogResult = DialogResult.OK;
+                } else
+                {
+                    if(spAngemeldet.benutzername == txtBenutzername.Text)
+                    {
+                        lblMeldung.Visible = true;
+                        lblMeldung.Text = "Sie sind bereits als Spieler 1 angemeldet";
+                    }
+                    else
+                    {
+                        DialogResult = DialogResult.OK;
+                    }
+                }
             }
         }
         
