@@ -291,9 +291,12 @@ namespace Shogi
                 {
                     if (koenig.Besitzer.Equals(InaktiverSpieler))
                     {
-                        if (istKoenigBewegungsfaehig(koenig) && istSchach(koenig) /*&& istBlockierbar(koenig)*/)
+                        if (istSchach(koenig))
                         {
-                            istSchachmatt = true;
+                            if (!istKoenigBewegungsfaehig(koenig)/*&& istSchach(koenig) /*&& istBlockierbar(koenig)*/)
+                            {
+                                istSchachmatt = true;
+                            }
                         }
                     }
                 }
@@ -404,16 +407,19 @@ namespace Shogi
                         {
                             neuePositionPaFigur = new Position(ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1, ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2);
                             //wenn Position des Königs und neue Positon der paFigur übereinstimmen ist der König im Schach
-                            if (neuePositionPaFigur.Spalte == paKoenig.Position.Spalte && neuePositionPaFigur.Zeile == paKoenig.Position.Zeile)
+                            if (!figurImWeg(paFigur, neuePositionPaFigur))
                             {
-                                istSchachGesetzt = true;
-                                goto doublebreakSchach;
+                                if (neuePositionPaFigur.Spalte == paKoenig.Position.Spalte && neuePositionPaFigur.Zeile == paKoenig.Position.Zeile)
+                                {
+                                    istSchachGesetzt = true;
+                                    goto doublebreakSchach;
+                                }
                             }
                         }
                     }
                 }
             }
-        doublebreakSchach:
+            doublebreakSchach:
             return istSchachGesetzt;
         }
 
