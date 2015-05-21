@@ -143,6 +143,60 @@ namespace Shogi
             }
             return null;
         }
+
+        /// <summary>
+        /// Gibt die erstbeste inaktive Figur zurück, die dem übergebenem Spieler gehört und vom übergebenem FigutTyp ist.
+        /// </summary>
+        /// <param name="figurTyp">Typ von dem die Figur sein soll.</param>
+        /// <param name="aktiverSpieler">Spieler, dessen Figur zurückgegeben werden soll.</param>
+        /// <returns>Eine inaktive Figur vom übergebnem Typ, die dem übergebenem Spieler gehört. 
+        /// Null wenn keine entsprechende Figur gefunden wurde.</returns>
+        public Spielfigur getInaktiveFigurVon(String figurTyp, Spieler aktiverSpieler)
+        {
+            if (aktiverSpieler == null || figurTyp == null || figurTyp.Equals(""))
+            {
+                throw new ArgumentException("Parameter dürfen nicht null sein!");
+            }
+
+            List<Spielfigur> inaktiveFiguren = new List<Spielfigur>();
+            foreach (Spielfigur figur in Feld)
+            {
+                if (figur.IstAktiv == false && figur.Besitzer.Equals(aktiverSpieler) && figur.Typ.Equals(figurTyp))
+                {
+                    return figur;
+                }
+            }
+
+            return null;
+
+            //List<Spielfigur> inaktiveFiguren = new List<Spielfigur>();
+            //foreach (Spielfigur figur in Feld)
+            //{
+            //    if (figur.IstAktiv == false)
+            //    {
+            //        inaktiveFiguren.Add(figur);
+            //    }
+            //}
+
+            //List<Spielfigur> figurenVonAktiv = new List<Spielfigur>();
+            //foreach (Spielfigur figur in inaktiveFiguren)
+            //{
+            //    if (figur.Besitzer.Equals(aktiverSpieler))
+            //    {
+            //        figurenVonAktiv.Add(figur);
+            //    }
+            //}
+
+            //foreach (Spielfigur figur in figurenVonAktiv)
+            //{
+            //    if (figur.Typ.Equals(figurTyp))
+            //    {
+            //        return figur;
+            //    }
+            //}
+
+            //return null;
+        }
         
         /*
          * Konstruktoren zum setzen der verschiedenen Variablen, diese wären für das eigentlich Shogispiel

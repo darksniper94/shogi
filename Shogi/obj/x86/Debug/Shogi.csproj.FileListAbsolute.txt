@@ -166,3 +166,4 @@ C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resou
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
 C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
 C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\Shogi.XML
