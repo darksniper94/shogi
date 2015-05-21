@@ -12,7 +12,8 @@ namespace Shogi
         private Spieler aktiverSpieler;
         private Spieler inaktiverSpieler;
         private Spielfeld feld;
-        private bool beendet;
+        private bool istSchachGesetzt = false;
+        private bool beendet = false;
         private bool invertiert;
 
         public static readonly Tuple<int, int> SHOGI_DIM = new Tuple<int, int>(9, 9);
@@ -46,6 +47,17 @@ namespace Shogi
                 this.inaktiverSpieler = value;
             }
         }
+
+        public bool GetBeendet()
+        {
+            return this.beendet;
+        }
+
+        public bool GetIstSchachGesetzt()
+        {
+            return this.istSchachGesetzt;
+        }
+
         /*
          * Gibt die Spielfeldklasse zurück, welche die Steine beinhaltet.
          */
@@ -76,6 +88,7 @@ namespace Shogi
         public void neuesSpiel(Spieler spieler1, Spieler spieler2)
         {
             this.beendet = false;
+            this.istSchachGesetzt = false;
             this.invertiert = false;
 
             this.AktiverSpieler = spieler1;
@@ -174,7 +187,6 @@ namespace Shogi
             // 1. Spielfigur herausfinden
             Spielfigur figurVon = feld.GetSpielfigurAnPosition(positionVon);
             
-
             // 2. Prüfe Zug
             if (pruefeZug(figurVon, positionNach))
             {
@@ -189,7 +201,36 @@ namespace Shogi
                 // 3. Spielzug an Spielfeld übergeben
                 feld.fuehreSpielzugAus(figurVon, positionNach);
 
+                // 4. Ist Spiel beendet
+                beendet = istSpielBeendet();
 
+                // 5. Spielerwechsel
+                this.spielerwechsel();
+
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Diese Methode dient dazu, eine inaktive Figur wieder auf das Spielfeld zu setzen.
+        /// Dafür wird der Figurtyp benötigt, damit man eine passende Figur einsetzen kann. 
+        /// Außerdem braucht man die Position an der die Figur eingesetzt werden soll.
+        /// </summary>
+        /// <param name="figurTyp">Typ der Figur, die eingesetzt werden soll.</param>
+        /// <param name="positionNach">Position an welche die Figur eingesetzt werden soll.</param>
+        /// <returns>True, wenn die Figur eingesetzt wurde. False, wenn die Figur nicht eingesetzt werden konnte.
+        /// Dies tritt ein, wenn es keine entsprechende Figur gibt oder eine Figur auf der übergebenen Position steht.</returns>
+        public bool figurEinsetzen(String figurTyp, Position positionNach)
+        {
+            //1. Spielfigur herausfinden
+            Spielfigur figur = feld.getInaktiveFigurVon("figurTyp", aktiverSpieler);
+
+            //2. Prüfe ob Feld frei
+            if (figur != null && feld.GetSpielfigurAnPosition(positionNach) == null)
+            {
+                //3. Spielzug an Spielfeld übergeben
+                feld.fuehreSpielzugAus(figur, positionNach);
 
                 // 4. Ist Spiel beendet
                 beendet = istSpielBeendet();
@@ -201,8 +242,8 @@ namespace Shogi
             }
 
             return false;
-            //throw new NotSupportedException();
         }
+
         /// <summary>
         /// Befördert eine Spielfigur und gibt einen boolschen Wert zurück.
         /// </summary>
@@ -348,7 +389,7 @@ namespace Shogi
         /// <returns>Return true, wenn der übergebene König im Schach ist, ansonsten return false.</returns>
         public bool istSchach(Spielfigur paKoenig)
         {
-            bool istSchachGesetzt = false;
+            istSchachGesetzt = false;
             Spielfigur paFigur;
             Position ursprungsPositionPaFigur, neuePositionPaFigur;
             Tuple<int, int> bewegungPaFigur;
@@ -434,7 +475,7 @@ namespace Shogi
                 if (tempSpalte > 0 && tempSpalte <= GetFeld().Dimension.Item1 && tempZeile > 0 && tempZeile <= GetFeld().Dimension.Item2)
                 {
                     posTemp = new Position(tempSpalte, tempZeile);
-                    if(paZielposition.Equals(posTemp))
+                    if(paZielposition.Equals(posTemp) && figurImWeg(paSpielfigur, paZielposition) == false)
                     {
                         Spielfigur ziel = feld.GetSpielfigurAnPosition(paZielposition);
                         if (ziel != null && ziel.Besitzer.Equals(aktiverSpieler))
@@ -449,6 +490,74 @@ namespace Shogi
                 }
             }
 
+            return false;
+        }
+
+        private bool figurImWeg(Spielfigur figur, Position positionNach)
+        {
+            if (figur.Typ.Equals(FigurTyp.SPRINGER) == false)
+            {
+                Position positionVon = figur.Position;
+                // Koordinaten von wo aus geprüft wird initialisieren.
+                int i = positionVon.Spalte;
+                int j = positionVon.Zeile;
+                // Koordinaten bis wohin geprüft wird initialisieren.
+                int iMax = positionNach.Spalte;
+                int jMax = positionNach.Zeile;
+
+                // Iteratoren initialisieren. Da unbekannt ist, ob die Figur vor oder zurück bewegt wird, muss jeweils berechnet werden
+                // ob die Iteratoren positiv oder negativ sind.
+                int iIterator;
+                int jIterator;
+
+                if (iMax < i)
+                {
+                    iIterator = -1;
+                }
+                else if (iMax > i)
+                {
+                    iIterator = 1;
+                }
+                else
+                {
+                    iIterator = 0;
+                }
+
+                if (jMax < j)
+                {
+                    jIterator = -1;
+                }
+                else if (jMax > j)
+                {
+                    jIterator = 1;
+                }
+                else
+                {
+                    jIterator = 0;
+                }
+
+                // Auf PositionVon steht eine Figur, diese muss ignoriert werden.
+                i += iIterator;
+                j += jIterator;
+
+                // Falls Figur auf PositionNach steht, muss diese auch ignoriert werden. Dies wird in Zugprüfung später abgefangen.
+                iMax -= iIterator;
+                jMax -= jIterator;
+
+                // Gehe durch alle Positionen, falls dort eine Figur steht, return true 
+                while (i != iMax && j != jMax)
+                {
+                    if (feld.GetSpielfigurAnPosition(new Position(i, j)) != null)
+                    {
+                        return true;
+                    }
+
+                    i += iIterator;
+                    j += jIterator;
+                }
+            }
+
+            // Tritt ein, falls keine Figur im Weg steht oder Figur ein Springer ist.
             return false;
         }
 
