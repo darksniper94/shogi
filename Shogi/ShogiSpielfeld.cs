@@ -13,6 +13,10 @@ namespace Shogi
 {
     public partial class ShogiSpielfeld : Form
     {
+        readonly string STEIN_UNTEN = "UNTEN";
+        readonly string STEIN_OBEN = "OBEN";
+        public static readonly System.Text.RegularExpressions.Regex BenutzerregEx = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9äöüÄÖÜß]+$");
+        
         Spieler spAngemeldet;
         Spieler spAngemeldet2;
         TableLayoutPanel pnlFeld;
@@ -40,8 +44,12 @@ namespace Shogi
         Label lblSilbernerGeneralSp2;
         Label lblSpringerSp2;
         Label lblTurmSp2;
+        Label lblSpielername;
+        Panel[,] arrPFeld;
         int ausgangx;
         int ausgangy;
+        int endx;
+        int endy;
 
         int clickCount;
         
@@ -65,8 +73,8 @@ namespace Shogi
             bCoop_Abbrechen = new Button();
             bStatistik = new Button();
             bspeichern_laden = new Button();
-            Panel[,] arrPFeld = new Panel[11,10];
-            Label lblSpielername = new Label();
+            arrPFeld = new Panel[11,10];
+            lblSpielername = new Label();
             pnlFeld = new TableLayoutPanel();
             pnlSp1Ers = new TableLayoutPanel();
             pnlSp2Ers = new TableLayoutPanel();
@@ -113,8 +121,6 @@ namespace Shogi
                     for (int j = 1; j < 10; j++)
                     {
                         arrPFeld[i, j] = new Panel();
-                        arrPFeld[i, j].Name = "" + i ;
-                        arrPFeld[i, j].Tag = "" + j;
                         arrPFeld[i, j].Height = 50;
                         arrPFeld[i, j].Width = 50;
                         arrPFeld[i, j].BackColor = Color.FromArgb(244, 223, 186);
@@ -136,251 +142,14 @@ namespace Shogi
                             pnlFeld.Controls.Add(arrPFeld[i, j]);
                         }
                         
-                        switch (i)
-                        {
-                            case 0:
-                                if (j == 2)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                    lblBauerSp2.BackColor = Color.Transparent;
-                                    lblBauerSp2.ForeColor = Color.Red;
-                                    lblBauerSp2.Text = "0";
-                                    lblBauerSp2.Font = new Font("Book Antiqua", 12);
-                                    lblBauerSp2.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblBauerSp2);
-                                }
-                                if (j == 3)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                    lblGoldenerGeneralSp2.BackColor = Color.Transparent;
-                                    lblGoldenerGeneralSp2.ForeColor = Color.Red;
-                                    lblGoldenerGeneralSp2.Text = "0";
-                                    lblGoldenerGeneralSp2.Font = new Font("Book Antiqua", 12);
-                                    lblGoldenerGeneralSp2.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblGoldenerGeneralSp2);
-                                }
-                                if (j == 4)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                    lblLaueferSp2.BackColor = Color.Transparent;
-                                    lblLaueferSp2.ForeColor = Color.Red;
-                                    lblLaueferSp2.Text = "0";
-                                    lblLaueferSp2.Font = new Font("Book Antiqua", 12);
-                                    lblLaueferSp2.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblLaueferSp2);
-                                }
-                                if (j == 5)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                    lblLanzeSp2.BackColor = Color.Transparent;
-                                    lblLanzeSp2.ForeColor = Color.Red;
-                                    lblLanzeSp2.Text = "0";
-                                    lblLanzeSp2.Font = new Font("Book Antiqua", 12);
-                                    lblLanzeSp2.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblLanzeSp2);
-                                }
-                                if (j == 6)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                    lblSilbernerGeneralSp2.BackColor = Color.Transparent;
-                                    lblSilbernerGeneralSp2.ForeColor = Color.Red;
-                                    lblSilbernerGeneralSp2.Text = "0";
-                                    lblSilbernerGeneralSp2.Font = new Font("Book Antiqua", 12);
-                                    lblSilbernerGeneralSp2.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblSilbernerGeneralSp2);
-                                }
-                                if (j == 7)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                    lblSpringerSp2.BackColor = Color.Transparent;
-                                    lblSpringerSp2.ForeColor = Color.Red;
-                                    lblSpringerSp2.Text = "0";
-                                    lblSpringerSp2.Font = new Font("Book Antiqua", 12);
-                                    lblSpringerSp2.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblSpringerSp2);
-                                }
-                                if (j == 8)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                    lblTurmSp2.BackColor = Color.Transparent;
-                                    lblTurmSp2.ForeColor = Color.Red;
-                                    lblTurmSp2.Text = "0";
-                                    lblTurmSp2.Font = new Font("Book Antiqua", 12);
-                                    lblTurmSp2.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblTurmSp2);
-                                }
-                                break;
-                            case 1:
-                                if (j == 4 || j == 6)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                }
-                                if (j == 1 || j == 9)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                }
-                                if (j == 5)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.KoenigJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                }
-                                if (j == 3 || j == 7)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                }
-                                if (j == 2 || j == 8)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                }
-                                break;
-                            case 2:
-                                if (j == 2)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                }
-                                if (j == 8)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
-                                    arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                }
-                                break;
-                            case 3:
-                                arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
-                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                                break;
-                            case 4:
-                                break;
-                            case 5:
-                                break;
-                            case 6:
-                                break;
-                            case 7:
-                                arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
-                                break;
-                            case 8:
-                                if (j == 8)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
-                                }
-                                if (j == 2)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
-                                }
-                                break;
-                            case 9:
-                                if (j == 4 || j == 6)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
-                                }
-                                if (j == 1 || j == 9)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
-                                }
-                                if (j == 5)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.KoenigJ;
-                                }
-                                if (j == 3 || j == 7)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
-                                }
-                                if (j == 2 || j == 8)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
-                                }
-                                break;
-                            case 10:
-                                if (j == 2)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.BauerJ;
-                                    lblBauerSp1.BackColor = Color.Transparent;
-                                    lblBauerSp1.ForeColor = Color.Red;
-                                    lblBauerSp1.Text = "0";
-                                    lblBauerSp1.Font = new Font("Book Antiqua", 12);
-                                    lblBauerSp1.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblBauerSp1);
-                                }
-                                if (j == 3)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.GoldenerGeneralJ;
-                                    lblGoldenerGeneralSp1.BackColor = Color.Transparent;
-                                    lblGoldenerGeneralSp1.ForeColor = Color.Red;
-                                    lblGoldenerGeneralSp1.Text = "0";
-                                    lblGoldenerGeneralSp1.Font = new Font("Book Antiqua", 12);
-                                    lblGoldenerGeneralSp1.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblGoldenerGeneralSp1);
-                                }
-                                if (j == 4)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LaeuferJ;
-                                    lblLaueferSp1.BackColor = Color.Transparent;
-                                    lblLaueferSp1.ForeColor = Color.Red;
-                                    lblLaueferSp1.Text = "0";
-                                    lblLaueferSp1.Font = new Font("Book Antiqua", 12);
-                                    lblLaueferSp1.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblLaueferSp1);
-                                }
-                                if (j == 5)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.LanzeJ;
-                                    lblLanzeSp1.BackColor = Color.Transparent;
-                                    lblLanzeSp1.ForeColor = Color.Red;
-                                    lblLanzeSp1.Text = "0";
-                                    lblLanzeSp1.Font = new Font("Book Antiqua", 12);
-                                    lblLanzeSp1.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblLanzeSp1);
-                                }
-                                if (j == 6)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SilbernerGeneralJ;
-                                    lblSilbernerGeneralSp1.BackColor = Color.Transparent;
-                                    lblSilbernerGeneralSp1.ForeColor = Color.Red;
-                                    lblSilbernerGeneralSp1.Text = "0";
-                                    lblSilbernerGeneralSp1.Font = new Font("Book Antiqua", 12);
-                                    lblSilbernerGeneralSp1.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblSilbernerGeneralSp1);
-                                }
-                                if (j == 7)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.SpringerJ;
-                                    lblSpringerSp1.BackColor = Color.Transparent;
-                                    lblSpringerSp1.ForeColor = Color.Red;
-                                    lblSpringerSp1.Text = "0";
-                                    lblSpringerSp1.Font = new Font("Book Antiqua", 12);
-                                    lblSpringerSp1.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblSpringerSp1);
-                                }
-                                if (j == 8)
-                                {
-                                    arrPFeld[i, j].BackgroundImage = global::Shogi.Properties.Resources.TurmJ;
-                                    lblTurmSp1.BackColor = Color.Transparent;
-                                    lblTurmSp1.ForeColor = Color.Red;
-                                    lblTurmSp1.Text = "0";
-                                    lblTurmSp1.Font = new Font("Book Antiqua", 12);
-                                    lblTurmSp1.Visible = false;
-                                    arrPFeld[i, j].Controls.Add(lblTurmSp1);
-                                }
-                                break;
-                        }
+                        
                 }
             }
 
+            erstelleStart();
 
             lblSpielername.Font = new Font("Book Antiqua", 11);
-            lblSpielername.Width = TextRenderer.MeasureText(spAngemeldet.benutzername,lblSpielername.Font).Width;
-            lblSpielername.Location = new Point((125- (TextRenderer.MeasureText(spAngemeldet.benutzername, lblSpielername.Font).Width / 2)), 40);
+            spielerNameZentrieren();
             lblSpielername.Visible = true;
             lblSpielername.Text = spAngemeldet.benutzername;
             lblSpielername.BackColor = Color.Transparent;
@@ -495,8 +264,11 @@ namespace Shogi
             /// <param name="e">Das Event</param>
         void PanelOnClick(object sender, EventArgs e)
         {
+            
+            
             Panel tmp;
             tmp = (Panel)sender;
+           
             if (tmp.BackgroundImage == null && clickCount == 0)
             {
          
@@ -505,17 +277,72 @@ namespace Shogi
                     if (clickCount == 2)
                     {
                         clickCount = 0;
+                        // Von welchem panel kommt der klick???
+                        // Feld
+                        if(tmp.Parent.Equals(pnlFeld))
+                        {
+                            string strtmp;
+                            endx = pnlFeld.GetPositionFromControl(tmp).Column+1;
+                            endy = pnlFeld.GetPositionFromControl(tmp).Row+1;
+                            if (arrPFeld[endy, endx].BackgroundImage != null)
+                            {
+                                strtmp = Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).TypNichtBefoerdert.getName();
+                            }
+                            else
+                            {
+                                strtmp = "default";
+                            }
+                            bool zugOk = Spielleiter_Spiellogik.instance.spielZug(new Position(ausgangx, ausgangy), new Position(endx, endy));
+                            
+                            
+                            //MessageBox.Show(zugOk.ToString() + "   " + Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet));
+                        
+                            if(zugOk)
+                            { 
+                                // Spielzug OK
+                                zeichneSpielzug(strtmp);
 
-                        MessageBox.Show("Von: y:" + ausgangy + "/x:" + ausgangx + " Nach: y" + pnlFeld.GetPositionFromControl(tmp).Row + "/x:" + pnlFeld.GetPositionFromControl(tmp).Column);
-                        //Spielleiter_Spiellogik.instance.spielZug(new Position(), new Position());
+                            }
+                            else
+                            {
+                                if (ausgangx == endx && ausgangy == endy)
+                                {
+                                    if (Spielleiter_Spiellogik.instance.spielfigurBefoerdern(new Position(endx, endy)))
+                                    {
+                                        zeichneSpielzug(strtmp);
+                                    }
+                                }
+                            }
+                        }
+
 
                     }
                     else
                     {
-                        if ((tmp.BackgroundImage.Flags == 2 && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet) || (tmp.BackgroundImage.Flags == 77872 && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet2))
+                        if ((tmp.BackgroundImage.Tag.ToString() == STEIN_OBEN && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet2) || 
+                            (tmp.BackgroundImage.Tag.ToString() == STEIN_UNTEN && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet))
                         {
-                            ausgangx = pnlFeld.GetPositionFromControl(tmp).Column;
-                            ausgangy = pnlFeld.GetPositionFromControl(tmp).Row;
+                            // Setzte x und y beim ersten click
+                            // Feld
+                            if (tmp.Parent.Equals(pnlFeld))
+                            {
+                                ausgangx = pnlFeld.GetPositionFromControl(tmp).Column+1;
+                                ausgangy = pnlFeld.GetPositionFromControl(tmp).Row+1;
+                            }
+                            // SP1 
+                            else if(Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet) && tmp.Parent.Equals(pnlSp1Ers))
+                            {
+                                // Vanny cords
+                                ausgangx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
+                                ausgangy = 10;
+                            }
+                            // SP2
+                            else if(Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet2) && tmp.Parent.Equals(pnlSp2Ers))
+                            {
+                                // Vanny cords
+                                ausgangx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
+                                ausgangy = 0;        
+                            }
                         }
                         else
                         {
@@ -523,6 +350,7 @@ namespace Shogi
                         }
                 }
             }
+            //MessageBox.Show("Von: y:" + ausgangy + "/x:" + ausgangx + " Nach: y" + endy + "/x:" + endx);
         }
         /// <summary>
         /// Eventhandler Beendenbutton
@@ -581,6 +409,7 @@ namespace Shogi
                 bspeichern_laden.Text = "Spiel laden";
                 spielfeldUmschalten(false);
                 labelsUmschalten(false);
+                erstelleStart();
 
             }else
             {
@@ -599,6 +428,7 @@ namespace Shogi
                     labelsUmschalten(true);
                 }
             }
+
         }
         /// <summary>
         /// Eventhandler
@@ -618,7 +448,7 @@ namespace Shogi
         {
             Button paButton = new Button();
             paButton = (Button)sender;
-            if (paButton.Text == "Spiel speichern")
+            if (paButton.Text == "Speichern")
             {
                 speichern();
             } else if(paButton.Text == "Spiel laden")
@@ -695,7 +525,7 @@ namespace Shogi
                 //laden Methode Datebank klasse
                 Database.Instance.LadeLetztesEinzelSpiel(spAngemeldet);
             }
-            zeichneSpielfeldkomplett();
+            //zeichneSpielfeldkomplett();
         }
 
         /// <summary>
@@ -730,8 +560,10 @@ namespace Shogi
         private void benutzernamenÄndernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //benutzernamen ändern Dialog
-            BenutzernameAendern frmBenutzernamenAendern = new BenutzernameAendern();
+            BenutzernameAendern frmBenutzernamenAendern = new BenutzernameAendern(spAngemeldet);
             frmBenutzernamenAendern.ShowDialog();
+            lblSpielername.Text = spAngemeldet.benutzername;
+            spielerNameZentrieren();
         }
 
         /// <summary>
@@ -742,7 +574,7 @@ namespace Shogi
         private void passwortÄndernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             //passwort ändern Dialog
-            PasswortAendern frmPasswortAendern = new PasswortAendern();
+            PasswortAendern frmPasswortAendern = new PasswortAendern(spAngemeldet);
             frmPasswortAendern.ShowDialog();
 
         }
@@ -775,24 +607,30 @@ namespace Shogi
         /// </summary>
         public void zeichneSpielfeldkomplett()
         {
-            int i = 0;
-            int j = 0;
-           foreach (Control c in pnlFeld.Controls)
-           {
-               if (c is Panel)
-               {
-                 
-                  if (j < 9)
-                  {
-                      j = j + 1;
-                  }
-                  else
-                  {
-                      j = 0;
-                      i = i + 1;
-                  }
-               }
-           }
+            if(Spielleiter_Spiellogik.instance.GetFeld() != null)
+            {
+                // Laufe das array durch
+                for (int i = 1; i < 10; i++)
+                {
+                    for (int j = 1; j < 10; j++)
+                    {
+                        if (arrPFeld[i, j].BackgroundImage != null)
+                        {
+                            object tag = arrPFeld[i, j].BackgroundImage.Tag;
+                            arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(j, i)).Typ.getName(), spAngemeldet);
+                            if (tag.ToString() == STEIN_OBEN)
+                            {
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                            }
+                            arrPFeld[i, j].BackgroundImage.Tag = tag;
+                        }
+                    }
+                }
+                erstelleErsatzbank();
+            } else
+            {
+                erstelleStart();
+            }
         }
 
        /// <summary>
@@ -800,15 +638,101 @@ namespace Shogi
        /// </summary>
        /// <param name="posAlt">Alte Position</param>
        /// <param name="posNeu">Neue Position</param>
-        public void zeichneSpielzug(Position posAlt, Position posNeu)
+        public void zeichneSpielzug(string spielsteinEnd)
         {
-            if (posNeu.Spalte == posAlt.Spalte && posNeu.Zeile == posAlt.Zeile)
+            int ix;
+
+            if (ausgangx == endx && ausgangy == endy)
             {
                 //beförderung nur das img ersetzen
-            } else
+                arrPFeld[endy, endx].BackgroundImage = Designmapper.instance.holeDesignBild(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).Typ.getName(), spAngemeldet);
+                if(!Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
+                {
+                    arrPFeld[endy, endx].BackgroundImage.Tag = STEIN_UNTEN;
+                }
+                else
+                {
+                    arrPFeld[endy, endx].BackgroundImage.Tag = STEIN_OBEN;
+                    arrPFeld[endy, endx].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                }
+            } 
+            else
             {
                 //image auf anderes Panel setzen
+                Bitmap tmp = new Bitmap(arrPFeld[ausgangy, ausgangx].BackgroundImage);
+                tmp.Tag = Convert.ToString(arrPFeld[ausgangy, ausgangx].BackgroundImage.Tag);
+                if (arrPFeld[endy, endx].BackgroundImage == null)
+                {
+
+                }
+                else
+                {
+                    
+                    if (!Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
+                    {
+                         switch (spielsteinEnd)
+                        {
+                             case "Turm":
+                                lblTurmSp1.Text = "" + (Convert.ToInt32(lblTurmSp1.Text) + 1);
+                                 break;
+                             case "Läufer": 
+                                 lblLaueferSp1.Text = "" + (Convert.ToInt32(lblLaueferSp1.Text) + 1);
+                                 break;
+                             case "Goldener General":
+                                 lblGoldenerGeneralSp1.Text = "" + (Convert.ToInt32(lblGoldenerGeneralSp1.Text) + 1);
+                                 break;
+                             case "Silberner General": 
+                                 lblSilbernerGeneralSp1.Text = "" + (Convert.ToInt32(lblSilbernerGeneralSp1.Text) + 1);
+                                 break;
+                             case "Springer": 
+                                 lblSpringerSp1.Text = "" + (Convert.ToInt32(lblSpringerSp1.Text) + 1);
+                                 break;
+                             case "Lanze": 
+                                 lblLanzeSp1.Text = "" + (Convert.ToInt32(lblLanzeSp1.Text) + 1);
+                                 break;
+                             case "Bauer": 
+                                 lblBauerSp1.Text = "" + (Convert.ToInt32(lblBauerSp1.Text) + 1);
+                                 break;
+                             default:
+                                 break;
+                        }
+                    }else{
+                        switch (spielsteinEnd)
+                        {
+                             case "Turm":
+                                lblTurmSp2.Text = "" + (Convert.ToInt32(lblTurmSp2.Text) + 1);
+                                 break;
+                             case "Läufer": 
+                                 lblLaueferSp2.Text = "" + (Convert.ToInt32(lblLaueferSp2.Text) + 1);
+                                 break;
+                             case "Goldener General":
+                                 lblGoldenerGeneralSp2.Text = "" + (Convert.ToInt32(lblGoldenerGeneralSp2.Text) + 1);
+                                 break;
+                             case "Silberner General": 
+                                 lblSilbernerGeneralSp2.Text = "" + (Convert.ToInt32(lblSilbernerGeneralSp2.Text) + 1);
+                                 break;
+                             case "Springer": 
+                                 lblSpringerSp2.Text = "" + (Convert.ToInt32(lblSpringerSp2.Text) + 1);
+                                 break;
+                             case "Lanze": 
+                                 lblLanzeSp2.Text = "" + (Convert.ToInt32( lblLanzeSp2.Text) + 1);
+                                 break;
+                             case "Bauer": 
+                                 lblBauerSp2.Text = "" + (Convert.ToInt32(lblBauerSp2.Text) + 1);
+                                 break;
+                             default:
+                                 break;
+                        }
+                    }
+                }
+                arrPFeld[endy, endx].BackgroundImage = tmp;
+                arrPFeld[ausgangy, ausgangx].BackgroundImage = null;
+                
+                
+
             }
+            pnlFeld.Update();
+            
         }
 
         /// <summary>
@@ -938,6 +862,9 @@ namespace Shogi
         {
             Steinwaehlen frmSteinWaehlen = new Steinwaehlen(spAngemeldet);
             frmSteinWaehlen.ShowDialog();
+            // DB Update
+            Database.Instance.DesignAktualisieren(spAngemeldet);
+            zeichneSpielfeldkomplett();
         }
 
         private void desingÄndernToolStripMenuItem_Click(object sender, EventArgs e)
@@ -950,6 +877,8 @@ namespace Shogi
             Farbewaehlen frmFarbeWaehlen = new Farbewaehlen(spAngemeldet);
             frmFarbeWaehlen.ShowDialog();
             spielfeldFarbe();
+            // DB Update
+            Database.Instance.FarbeAktualisieren(spAngemeldet);
         }
 
         private void spielfeldFarbe()
@@ -966,6 +895,345 @@ namespace Shogi
             {
                 c.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
             }
+        }
+
+        private void spielerNameZentrieren()
+        {
+            lblSpielername.Width = TextRenderer.MeasureText(spAngemeldet.benutzername, lblSpielername.Font).Width;
+            lblSpielername.Location = new Point((125 - (TextRenderer.MeasureText(spAngemeldet.benutzername, lblSpielername.Font).Width / 2)), 40);
+        }
+        private void erstelleStart()
+        {
+            for (int i = 0; i <= 10; i++)
+            {
+                for (int j = 1; j < 10; j++)
+                {
+                    arrPFeld[i, j].BackgroundImage = null;
+                    switch (i)
+                    {
+                        case 1:
+                            if (j == 4 || j == 6)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("GoldenerGeneral", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_OBEN;
+                            }
+                            if (j == 1 || j == 9)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Lanze", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_OBEN;
+                            }
+                            if (j == 5)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Koenig", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_OBEN;
+                            }
+                            if (j == 3 || j == 7)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("SilbernerGeneral", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_OBEN;
+                            }
+                            if (j == 2 || j == 8)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Springer", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_OBEN;
+                            }
+                            break;
+                        case 2:
+                            if (j == 2)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Laeufer", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_OBEN;
+                            }
+                            if (j == 8)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Turm", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_OBEN;
+                            }
+                            break;
+                        case 3:
+                            arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Bauer", spAngemeldet);
+                            arrPFeld[i, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                            arrPFeld[i, j].BackgroundImage.Tag = STEIN_OBEN;
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            break;
+                        case 7:
+                            arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Bauer", spAngemeldet);
+                            arrPFeld[i, j].BackgroundImage.Tag = STEIN_UNTEN;
+                            break;
+                        case 8:
+                            if (j == 8)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Laeufer", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_UNTEN;
+                            }
+                            if (j == 2)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Turm", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_UNTEN;
+                            }
+                            break;
+                        case 9:
+                            if (j == 4 || j == 6)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("GoldenerGeneral", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_UNTEN;
+                            }
+                            if (j == 1 || j == 9)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Lanze", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_UNTEN;
+                            }
+                            if (j == 5)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Koenig", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_UNTEN;
+                            }
+                            if (j == 3 || j == 7)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("SilbernerGeneral", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_UNTEN;
+                            }
+                            if (j == 2 || j == 8)
+                            {
+                                arrPFeld[i, j].BackgroundImage = Designmapper.instance.holeDesignBild("Springer", spAngemeldet);
+                                arrPFeld[i, j].BackgroundImage.Tag = STEIN_UNTEN;
+                            }
+                            break;
+                    }
+                    erstelleLabels();
+                    erstelleErsatzbank();
+                }
+            }
+        }
+        private void erstelleErsatzbank()
+        {
+            int spalte = 0;
+            for (int i = 0; i <2 ; i++)
+            {
+                if (i == 0)
+                {
+                    spalte = 0;
+                } else
+                {
+                    spalte = 10;
+                }
+                for(int j= 2; j<9;j++)
+                {
+                    switch(j)
+                    {
+                        case 2:
+                                arrPFeld[spalte, j].BackgroundImage = Designmapper.instance.holeDesignBild("Bauer", spAngemeldet);
+
+                                if (spalte == 0)
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_OBEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblBauerSp2);
+                                }
+                                else
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_UNTEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblBauerSp1);
+                                }
+                                
+                            break;
+                        case 3:
+                                arrPFeld[spalte, j].BackgroundImage = Designmapper.instance.holeDesignBild("GoldenerGeneral", spAngemeldet);
+
+                                if (spalte == 0)
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_OBEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblGoldenerGeneralSp2);
+                                }
+                                else
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_UNTEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblGoldenerGeneralSp1);
+                                }
+                                
+                                
+                            break;
+                        case 4:
+                            arrPFeld[spalte, j].BackgroundImage = Designmapper.instance.holeDesignBild("Laeufer", spAngemeldet);
+
+                            if (spalte == 0)
+                            {
+                                arrPFeld[spalte, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_OBEN;
+                                arrPFeld[spalte, j].Controls.Add(lblLaueferSp2);
+                            }
+                            else
+                            {
+                                arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_UNTEN;
+                                arrPFeld[spalte, j].Controls.Add(lblLaueferSp1);
+                            }            
+                                
+                            break;
+                        case 5:
+                                arrPFeld[spalte, j].BackgroundImage = Designmapper.instance.holeDesignBild("Lanze", spAngemeldet);
+
+                                if (spalte == 0)
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_OBEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblLanzeSp2);
+                                }
+                                else
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_UNTEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblLanzeSp1);
+                                } 
+                                
+                            break;
+                        case 6:
+                                arrPFeld[spalte, j].BackgroundImage = Designmapper.instance.holeDesignBild("SilbernerGeneral", spAngemeldet);
+
+                                if (spalte == 0)
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_OBEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblSilbernerGeneralSp2);
+                                }
+                                else
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_UNTEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblSilbernerGeneralSp1);
+                                } 
+                                
+                            break;
+                        case 7:
+                                arrPFeld[spalte, j].BackgroundImage = Designmapper.instance.holeDesignBild("Springer", spAngemeldet);
+                                if (spalte == 0)
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_OBEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblSpringerSp2);
+                                }
+                                else
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_UNTEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblSpringerSp1);
+                                } 
+                                
+                            break;
+                        case 8:
+                                arrPFeld[spalte, j].BackgroundImage = Designmapper.instance.holeDesignBild("Turm", spAngemeldet);
+                                if (spalte == 0)
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_OBEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblTurmSp2);
+                                }
+                                else
+                                {
+                                    arrPFeld[spalte, j].BackgroundImage.Tag = STEIN_UNTEN;
+                                    arrPFeld[spalte, j].Controls.Add(lblTurmSp1);
+                                } 
+                                
+                            break;
+                    }
+                   
+                }
+            }
+        }
+        private void erstelleLabels()
+        {
+            lblBauerSp2.BackColor = Color.Transparent;
+            lblBauerSp2.ForeColor = Color.Red;
+            lblBauerSp2.Text = "0";
+            lblBauerSp2.Font = new Font("Book Antiqua", 12);
+            lblBauerSp2.Visible = false;
+
+            lblTurmSp1.BackColor = Color.Transparent;
+            lblTurmSp1.ForeColor = Color.Red;
+            lblTurmSp1.Text = "0";
+            lblTurmSp1.Font = new Font("Book Antiqua", 12);
+            lblTurmSp1.Visible = false;
+
+            lblTurmSp2.BackColor = Color.Transparent;
+            lblTurmSp2.ForeColor = Color.Red;
+            lblTurmSp2.Text = "0";
+            lblTurmSp2.Font = new Font("Book Antiqua", 12);
+            lblTurmSp2.Visible = false;
+
+            lblSpringerSp1.BackColor = Color.Transparent;
+            lblSpringerSp1.ForeColor = Color.Red;
+            lblSpringerSp1.Text = "0";
+            lblSpringerSp1.Font = new Font("Book Antiqua", 12);
+            lblSpringerSp1.Visible = false;
+
+            lblSpringerSp2.BackColor = Color.Transparent;
+            lblSpringerSp2.ForeColor = Color.Red;
+            lblSpringerSp2.Text = "0";
+            lblSpringerSp2.Font = new Font("Book Antiqua", 12);
+            lblSpringerSp2.Visible = false;
+
+            lblSilbernerGeneralSp1.BackColor = Color.Transparent;
+            lblSilbernerGeneralSp1.ForeColor = Color.Red;
+            lblSilbernerGeneralSp1.Text = "0";
+            lblSilbernerGeneralSp1.Font = new Font("Book Antiqua", 12);
+            lblSilbernerGeneralSp1.Visible = false;
+
+            lblSilbernerGeneralSp2.BackColor = Color.Transparent;
+            lblSilbernerGeneralSp2.ForeColor = Color.Red;
+            lblSilbernerGeneralSp2.Text = "0";
+            lblSilbernerGeneralSp2.Font = new Font("Book Antiqua", 12);
+            lblSilbernerGeneralSp2.Visible = false;
+
+            lblLanzeSp1.BackColor = Color.Transparent;
+            lblLanzeSp1.ForeColor = Color.Red;
+            lblLanzeSp1.Text = "0";
+            lblLanzeSp1.Font = new Font("Book Antiqua", 12);
+            lblLanzeSp1.Visible = false;
+
+            lblLanzeSp2.BackColor = Color.Transparent;
+            lblLanzeSp2.ForeColor = Color.Red;
+            lblLanzeSp2.Text = "0";
+            lblLanzeSp2.Font = new Font("Book Antiqua", 12);
+            lblLanzeSp2.Visible = false;
+
+            lblLaueferSp1.BackColor = Color.Transparent;
+            lblLaueferSp1.ForeColor = Color.Red;
+            lblLaueferSp1.Text = "0";
+            lblLaueferSp1.Font = new Font("Book Antiqua", 12);
+            lblLaueferSp1.Visible = false;
+
+            lblLaueferSp2.BackColor = Color.Transparent;
+            lblLaueferSp2.ForeColor = Color.Red;
+            lblLaueferSp2.Text = "0";
+            lblLaueferSp2.Font = new Font("Book Antiqua", 12);
+            lblLaueferSp2.Visible = false;
+
+            lblGoldenerGeneralSp1.BackColor = Color.Transparent;
+            lblGoldenerGeneralSp1.ForeColor = Color.Red;
+            lblGoldenerGeneralSp1.Text = "0";
+            lblGoldenerGeneralSp1.Font = new Font("Book Antiqua", 12);
+            lblGoldenerGeneralSp1.Visible = false;
+
+            lblGoldenerGeneralSp2.BackColor = Color.Transparent;
+            lblGoldenerGeneralSp2.ForeColor = Color.Red;
+            lblGoldenerGeneralSp2.Text = "0";
+            lblGoldenerGeneralSp2.Font = new Font("Book Antiqua", 12);
+            lblGoldenerGeneralSp2.Visible = false;
+
+            lblBauerSp1.BackColor = Color.Transparent;
+            lblBauerSp1.ForeColor = Color.Red;
+            lblBauerSp1.Text = "0";
+            lblBauerSp1.Font = new Font("Book Antiqua", 12);
+            lblBauerSp1.Visible = false;
         }
     }
 }

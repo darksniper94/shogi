@@ -22,20 +22,7 @@ namespace Shogi
     /// </summary>
     public class FigurTyp
     {
-        public static readonly String[] FIGURENNAMEN = {"Koenig",
-                                                        "Springer",
-                                                        "Lanze",
-                                                        "Turm",
-                                                        "GoldenerGeneral",
-                                                        "befoerderterSpringer",
-                                                        "befoerderterSilbernerGeneral",
-                                                        "Tokin",
-                                                        "Pferd",
-                                                        "SilbernerGeneral",
-                                                        "Bauer",
-                                                        "Drache",
-                                                        "befoerderteLanze",
-                                                        "Laeufer"};
+
         
         // Erst Bewegunsmuster anlegen.
         private static readonly Bewegungsmuster MUSTERKOENIG = new Bewegungsmuster(new[,] { { -1, -1 }, { 0, -1 }, { 1, -1 }, { 1, 0 }, { 1, 1 }, { 0, 1 }, { -1, 1 }, { -1, 0 } });

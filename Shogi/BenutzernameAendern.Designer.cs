@@ -34,6 +34,7 @@
             this.txtPasswort = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.lblMeldung = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblBenutzername
@@ -50,7 +51,7 @@
             // 
             this.lblPasswort.AutoSize = true;
             this.lblPasswort.Font = new System.Drawing.Font("Book Antiqua", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPasswort.Location = new System.Drawing.Point(27, 58);
+            this.lblPasswort.Location = new System.Drawing.Point(24, 58);
             this.lblPasswort.Name = "lblPasswort";
             this.lblPasswort.Size = new System.Drawing.Size(70, 20);
             this.lblPasswort.TabIndex = 1;
@@ -75,7 +76,7 @@
             // 
             // btnOk
             // 
-            this.btnOk.Location = new System.Drawing.Point(113, 107);
+            this.btnOk.Location = new System.Drawing.Point(113, 115);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(100, 30);
             this.btnOk.TabIndex = 4;
@@ -85,7 +86,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(269, 107);
+            this.btnCancel.Location = new System.Drawing.Point(269, 115);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 30);
             this.btnCancel.TabIndex = 5;
@@ -93,11 +94,24 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // lblMeldung
+            // 
+            this.lblMeldung.AutoSize = true;
+            this.lblMeldung.Font = new System.Drawing.Font("Book Antiqua", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMeldung.ForeColor = System.Drawing.Color.Red;
+            this.lblMeldung.Location = new System.Drawing.Point(161, 85);
+            this.lblMeldung.Name = "lblMeldung";
+            this.lblMeldung.Size = new System.Drawing.Size(157, 18);
+            this.lblMeldung.TabIndex = 6;
+            this.lblMeldung.Text = "Passwort nicht korrekt.";
+            this.lblMeldung.Visible = false;
+            // 
             // BenutzernameAendern
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(465, 155);
+            this.ClientSize = new System.Drawing.Size(465, 165);
+            this.Controls.Add(this.lblMeldung);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtPasswort);
@@ -119,5 +133,6 @@
         private System.Windows.Forms.TextBox txtPasswort;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Label lblMeldung;
     }
 }

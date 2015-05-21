@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+
 namespace Shogi
 {
     public class Spielleiter_Spiellogik
@@ -172,6 +173,7 @@ namespace Shogi
         {
             // 1. Spielfigur herausfinden
             Spielfigur figurVon = feld.GetSpielfigurAnPosition(positionVon);
+            
 
             // 2. Prüfe Zug
             if (pruefeZug(figurVon, positionNach))
@@ -213,6 +215,7 @@ namespace Shogi
             if (pruefeBefoerdern(figur))
             {
                 figur.befoerdern();
+                this.spielerwechsel();
                 return true;
             }
 
@@ -431,7 +434,7 @@ namespace Shogi
                 if (tempSpalte > 0 && tempSpalte <= GetFeld().Dimension.Item1 && tempZeile > 0 && tempZeile <= GetFeld().Dimension.Item2)
                 {
                     posTemp = new Position(tempSpalte, tempZeile);
-                    if (paZielposition.Equals(posTemp))
+                    if(paZielposition.Equals(posTemp))
                     {
                         Spielfigur ziel = feld.GetSpielfigurAnPosition(paZielposition);
                         if (ziel != null && ziel.Besitzer.Equals(aktiverSpieler))
