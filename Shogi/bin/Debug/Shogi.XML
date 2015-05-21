@@ -20,10 +20,11 @@
             8. Bauer                --> Goldener General
             </summary>
         </member>
-        <member name="M:Shogi.BenutzernameAendern.#ctor">
+        <member name="F:Shogi.BenutzernameAendern.spAngemeldet">
             <summary>
             Konstruktor
             </summary>
+            
         </member>
         <member name="M:Shogi.BenutzernameAendern.btnOk_Click(System.Object,System.EventArgs)">
             <summary>
@@ -197,6 +198,13 @@
             </summary>
             <param name="spielid">Spielid als int</param>
             <returns>Gibt das Spielfeld zurück</returns>
+        </member>
+        <member name="M:Shogi.Database.LadeLetztesEinzelSpiel(Shogi.Spieler)">
+            <summary>
+            Lädt die letzte 
+            </summary>
+            <param name="sp"></param>
+            <returns></returns>
         </member>
         <member name="P:Shogi.Database.Instance">
             <summary>
@@ -856,7 +864,7 @@
             Diese Methode setzt die Steine auf die entsprechenden Panels.
             </summary>
         </member>
-        <member name="M:Shogi.ShogiSpielfeld.zeichneSpielzug(Shogi.Position,Shogi.Position)">
+        <member name="M:Shogi.ShogiSpielfeld.zeichneSpielzug(System.String)">
             <summary>
             Setzt ein Image von einer Position auf eine andere.
             </summary>

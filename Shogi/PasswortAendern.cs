@@ -11,10 +11,12 @@ namespace Shogi
 {
     public partial class PasswortAendern : Form
     {
-        public PasswortAendern()
+        private Spieler spAngemeldet;
+        public PasswortAendern(Spieler spieler)
         {
             InitializeComponent();
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
+            spAngemeldet = spieler;
         }
 
         /// <summary>
@@ -24,7 +26,37 @@ namespace Shogi
         /// <param name="e">Das Event</param>
         private void btnOK_Click(object sender, EventArgs e)
         {
-            
+
+            //lblMeldung.Visible = false;
+            if(txtNeuesPasswort.Text == txtNeuesPasswortwdh.Text)
+            {
+                if(txtAltesPasswort.Text == spAngemeldet.passwort)
+                {
+
+                    if (txtNeuesPasswort.Text.Length >= 6)
+                    {
+                        spAngemeldet.passwort = txtNeuesPasswort.Text;
+                        Database.Instance.PasswortAktualisieren(spAngemeldet);
+                        MessageBox.Show(this, "Passwort erfolgreich geändert.", "Info", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                        this.Close();
+                    }
+                    else
+                    {
+                        //lblMeldung.Visible = true;
+                        //lblMeldung.Text = "Das Passwort muss mindestens 6 Zeichen lang sein.";
+                    }
+                }
+                else
+                {
+                    //lblMeldung.Visible = true;
+                    //lblMeldung.Text = "Passwort nicht korrekt.";
+                }
+            }
+            else
+            {
+                //lblMeldung.Visible = true;
+                //lblMeldung.Text = "Passwörter stimmen nicht überein.";
+            }
         }
 
         /// <summary>

@@ -87,6 +87,16 @@ namespace Shogi
             }
         }
 
+        public FigurTyp TypBefoerdert
+        {
+            get { return typBefoerdert; }
+        }
+
+        public FigurTyp TypNichtBefoerdert
+        {
+            get { return typNichtBefoerdert; }
+        }
+
         /// <summary>
         /// Setzt bzw. gibt den Besitzer der Spielfigur zurück.
         /// </summary>

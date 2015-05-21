@@ -57,19 +57,19 @@ namespace Shogi
         {
            if (rBtnBewegung.Checked)
            {
-               spAngemeldet.design = "B";
+               spAngemeldet.design = Designmapper.BEWEGUNG;
            }
            if (rBtnDE.Checked)
            {
-               spAngemeldet.design = "D";
+               spAngemeldet.design = Designmapper.DEUTSCH;
            }
            if (rBtnEN.Checked)
            {
-               spAngemeldet.design = "E";
+               spAngemeldet.design = Designmapper.ENGLISH;
            }
            if (rBtnJA.Checked)
            {
-               spAngemeldet.design = "J";
+               spAngemeldet.design = Designmapper.JAPANISCH;
            }
            this.Close();
         }

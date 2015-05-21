@@ -272,6 +272,30 @@ namespace Shogi
             return Convert.ToInt32(result.ElementAt(0)[0]);
         }
 
+        public void DesignAktualisieren(Spieler spieler)
+        {
+            string sql = "UPDATE USER SET design = '" + spieler.design + "' WHERE ID=" + spieler.id;
+            this.ExecuteNonQuery(sql);
+        }
+
+        public void FarbeAktualisieren(Spieler spieler)
+        {
+            string sql = "UPDATE USER SET color = '" + spieler.farbe + "' WHERE ID=" + spieler.id;
+            this.ExecuteNonQuery(sql);
+        }
+
+        public void BenutzernameAktualisieren(Spieler spieler)
+        {
+            string sql = "UPDATE USER SET name = '" + spieler.benutzername + "' WHERE ID=" + spieler.id;
+            this.ExecuteNonQuery(sql);
+        }
+
+        public void PasswortAktualisieren(Spieler spieler)
+        {
+            string sql = "UPDATE USER SET pass = '" + spieler.passwort + "' WHERE ID=" + spieler.id;
+            this.ExecuteNonQuery(sql);
+        }
+
         /// <summary>
         /// Erstellt einen neuen Statistik Eintrag im der Datenbank
         /// </summary>
@@ -400,7 +424,11 @@ namespace Shogi
             Spielfeld tmpFeld = new Spielfeld(figuren, Spielleiter_Spiellogik.SHOGI_DIM);
             return tmpFeld;
         }
-
+        /// <summary>
+        /// Lädt die letzte 
+        /// </summary>
+        /// <param name="sp"></param>
+        /// <returns></returns>
         public Spielfeld LadeLetztesEinzelSpiel(Spieler sp)
         {
             String sql = @"SELECT ID FROM GAME " +

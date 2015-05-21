@@ -164,3 +164,5 @@ C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.PasswortAendern.
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csprojResolveAssemblyReference.cache
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
