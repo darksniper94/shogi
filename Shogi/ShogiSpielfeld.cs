@@ -944,7 +944,7 @@ namespace Shogi
         {
 
         }
-
+        
         private void feldfarbeÄndernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Farbewaehlen frmFarbeWaehlen = new Farbewaehlen(spAngemeldet);
