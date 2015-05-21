@@ -175,6 +175,17 @@ namespace Shogi
             feld = new Spielfeld(tempSpielfeld, SHOGI_DIM, SHOGI_FIGUREN);
         }
 
+        public void neuesSpiel(Spieler spieler1, Spieler spieler2, Spielfeld paFeld)
+        {
+            this.beendet = false;
+            this.istSchachGesetzt = false;
+            this.invertiert = false;
+
+            this.AktiverSpieler = spieler1;
+            this.InaktiverSpieler = spieler2;
+            feld = paFeld;
+        }
+
         /// <summary>
         /// Die Spielzugprüfung, ob ein Spielstein von Position A auf Position B gesetzt werden kann. return true, wenn der Zug ausführbar ist.
         /// Diese Methode enthält ebenso die Shogilogik und überprüft daher ob der Zug nach den Regeln valide ist.
@@ -221,7 +232,7 @@ namespace Shogi
         public bool figurEinsetzen(String figurTyp, Position positionNach)
         {
             //1. Spielfigur herausfinden
-            Spielfigur figur = feld.getInaktiveFigurVon("figurTyp", aktiverSpieler);
+            Spielfigur figur = feld.getInaktiveFigurVon(figurTyp, aktiverSpieler);
 
             //2. Prüfe ob Feld frei
             if (figur != null && feld.GetSpielfigurAnPosition(positionNach) == null)

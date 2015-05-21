@@ -309,50 +309,90 @@ namespace Shogi
                         // Feld
                         if(tmp.Parent.Equals(pnlFeld))
                         {
-                            string strtmp;
-                            endx = pnlFeld.GetPositionFromControl(tmp).Column+1;
-                            endy = pnlFeld.GetPositionFromControl(tmp).Row+1;
-                            if (arrPFeld[endy, endx].BackgroundImage != null)
+                            if (ausgangy == 0 || ausgangy == 10)
                             {
-                                strtmp = Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).TypNichtBefoerdert.getName();
+                                endx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
+                                endy = pnlFeld.GetPositionFromControl(tmp).Row + 1;
+                                string typ;
+                                switch (ausgangx)
+                                {
+                                    case 2:
+                                        typ = "Bauer";
+                                        break;
+                                    case 3:
+                                        typ = "Goldener General";
+                                        break;
+                                    case 4:
+                                        typ = "Läufer";
+                                        break;
+                                    case 5:
+                                        typ = "Lanze";
+                                        break;
+                                    case 6:
+                                        typ = "Silberner General";
+                                        break;
+                                    case 7:
+                                        typ = "Springer";
+                                        break;
+                                    case 8:
+                                        typ = "Turm";
+                                        break;
+                                    default:
+                                        typ = "";
+                                        break;
+                                }
+                                if (Spielleiter_Spiellogik.instance.figurEinsetzen(typ, new Position(endy, endx)))
+                                {
+                                    zeichneEinsetzen();
+                                    Spielleiter_Spiellogik.instance.spielerwechsel();
+                                }
                             }
                             else
                             {
-                                strtmp = "default";
-                            }
-                            bool zugOk = Spielleiter_Spiellogik.instance.spielZug(new Position(ausgangx, ausgangy), new Position(endx, endy));
-                            
-                            
-                            //MessageBox.Show(zugOk.ToString() + "   " + Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet));
-                        
-                            if(zugOk)
-                            { 
-                                // Spielzug OK
-                                zeichneSpielzug(strtmp, false);
-                                if (spAngemeldet.Equals(Spielleiter_Spiellogik.instance.AktiverSpieler))
+                                string strtmp;
+                                endx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
+                                endy = pnlFeld.GetPositionFromControl(tmp).Row + 1;
+                                if (arrPFeld[endy, endx].BackgroundImage != null)
                                 {
-                                    zuegeSp1++;
-                                } else
-                                {
-                                    zuegeSp2++;
+                                    strtmp = Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).TypNichtBefoerdert.getName();
                                 }
-                                if (!Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).IstBefoerdert)
+                                else
                                 {
-                                    if (Spielleiter_Spiellogik.instance.pruefeBefoerdern(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy))))
+                                    strtmp = "default";
+                                }
+                                bool zugOk = Spielleiter_Spiellogik.instance.spielZug(new Position(ausgangx, ausgangy), new Position(endx, endy));
+
+
+                                //MessageBox.Show(zugOk.ToString() + "   " + Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet));
+
+                                if (zugOk)
+                                {
+                                    // Spielzug OK
+                                    zeichneSpielzug(strtmp, false);
+                                    if (spAngemeldet.Equals(Spielleiter_Spiellogik.instance.AktiverSpieler))
                                     {
-                                        DialogResult result = MessageBox.Show(this, "Möchten Sie den Spielstein befördern?", "Befördern", MessageBoxButtons.YesNo);
-                                        if (result == DialogResult.Yes)
+                                        zuegeSp1++;
+                                    }
+                                    else
+                                    {
+                                        zuegeSp2++;
+                                    }
+                                    if (!Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).IstBefoerdert)
+                                    {
+                                        if (Spielleiter_Spiellogik.instance.pruefeBefoerdern(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy))))
                                         {
-                                            Spielleiter_Spiellogik.instance.spielfigurBefoerdern(new Position(endx, endy));
-                                            zeichneSpielzug(strtmp,true);
+                                            DialogResult result = MessageBox.Show(this, "Möchten Sie den Spielstein befördern?", "Befördern", MessageBoxButtons.YesNo);
+                                            if (result == DialogResult.Yes)
+                                            {
+                                                Spielleiter_Spiellogik.instance.spielfigurBefoerdern(new Position(endx, endy));
+                                                zeichneSpielzug(strtmp, true);
+                                            }
                                         }
                                     }
+                                    Spielleiter_Spiellogik.instance.spielerwechsel();
                                 }
-                                Spielleiter_Spiellogik.instance.spielerwechsel(); 
                             }
                         }
-
-
                     }
                     else
                     {
@@ -613,10 +653,16 @@ namespace Shogi
             result = MessageBox.Show("Möchten Sie das Spiel laden?", "Beenden", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                //laden Methode Datebank klasse
-                Database.Instance.LadeLetztesEinzelSpiel(spAngemeldet);
+                Spieler spieleraktiv;
+                Spieler spielerpassiv;
+
+                //spieleraktiv = Database.Instance.
+
+                //spAngemeldet2 = Database.Instance.LadeSpieler(spAngemeldet.id);
+                //Spielleiter_Spiellogik.instance.neuesSpiel(spieleraktiv,spielerpassiv,Database.Instance.LadeLetztesEinzelSpiel(spAngemeldet,spAngemeldet2));
+                //zeichneSpielfeld();
             }
-            //zeichneSpielfeldkomplett();
+            //zeichneSpielfeld();
         }
 
         /// <summary>
@@ -1368,6 +1414,28 @@ namespace Shogi
             }
             zuegeSp1 = 0;
             zuegeSp2 = 0;
+        }
+        private void zeichneEinsetzen()
+        {
+            foreach (Control c in arrPFeld[ausgangx,ausgangy].Controls)
+            {
+                if (c.GetType() == typeof(Label))
+                {
+                    Label lbltmp;
+                    lbltmp = (Label)c;
+
+                    lbltmp.Text = "" + (Convert.ToInt32(lbltmp.Text) + 1);
+                }
+            }
+            arrPFeld[endx, endy].BackgroundImage = Designmapper.instance.holeDesignBild(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).GetType().Name, Spielleiter_Spiellogik.instance.AktiverSpieler);
+            if(!Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
+            {
+                arrPFeld[endx, endy].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                arrPFeld[endx, endy].Tag = STEIN_OBEN;
+            } else
+            {
+                arrPFeld[endx, endy].Tag = STEIN_UNTEN;
+            }
         }
     }
 }
