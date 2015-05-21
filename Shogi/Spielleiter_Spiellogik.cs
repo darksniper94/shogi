@@ -66,6 +66,11 @@ namespace Shogi
             return this.feld;
         }
 
+        public void SetFeld(Spielfeld feld)
+        {
+            this.feld = feld;
+        }
+
         private Spielleiter_Spiellogik() { }
 
         public static Spielleiter_Spiellogik instance

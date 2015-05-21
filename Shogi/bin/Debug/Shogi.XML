@@ -859,7 +859,7 @@
             <param name="sender">Sender Objekt</param>
             <param name="e">Das Event</param>
         </member>
-        <member name="M:Shogi.ShogiSpielfeld.zeichneSpielfeldkomplett">
+        <member name="M:Shogi.ShogiSpielfeld.aktulisiereDesing">
             <summary>
             Diese Methode setzt die Steine auf die entsprechenden Panels.
             </summary>

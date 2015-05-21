@@ -116,9 +116,30 @@ namespace Shogi
 	                                                            FOREIGN KEY(`user_id`) REFERENCES USER ( ID ) ON DELETE CASCADE
                                                             );";
 
+            String GAMEDATA_TBL = @"CREATE TABLE `GAMEDATA` (
+	                                                        `ID`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	                                                        `game`	INTEGER,
+	                                                        `figurtyp`	TEXT NOT NULL,
+	                                                        `befoerdert`	INTEGER NOT NULL,
+	                                                        `spieler`	INTEGER,
+	                                                        `x`	INTEGER NOT NULL,
+	                                                        `y`	INTEGER NOT NULL,
+	                                                        FOREIGN KEY(`game`) REFERENCES GAME ( ID ) ON DELETE CASCADE
+                                                        );";
+
+            String GAME_TBL = @"CREATE TABLE `GAME` (
+	                                                    `ID`	INTEGER PRIMARY KEY AUTOINCREMENT,
+	                                                    `user_a`	INTEGER NOT NULL,
+	                                                    `user_b`	INTEGER NOT NULL,
+	                                                    `user_active`	INTEGER,
+	                                                    FOREIGN KEY(`user_a`) REFERENCES USER ( ID ),
+	                                                    FOREIGN KEY(`user_b`) REFERENCES USER ( ID )
+                                                    );";
 
             ExecuteNonQuery(USER_TBL);
             ExecuteNonQuery(STATISTIC_TBL);
+            ExecuteNonQuery(GAME_TBL);
+            ExecuteNonQuery(GAMEDATA_TBL);
         }
 
         /// <summary>
@@ -347,9 +368,15 @@ namespace Shogi
         {
             // Speichere Spiel
             int game_id;
-            String sql = @"INSERT INTO GAME (user_a, user_b) 
+            int spieler = 0;
+            if (Spielleiter_Spiellogik.instance.AktiverSpieler == sp2)
+            {
+                spieler = 1;
+            }
+
+            String sql = @"INSERT INTO GAME (user_a, user_b, user_active) 
                            VALUES
-                           (" + sp1.id + ", " + sp2.id + ");";
+                           (" + sp1.id + ", " + sp2.id + ", "+ spieler+");";
             this.ExecuteNonQuery(sql);
             game_id = GetLastInsertId();
 
@@ -357,7 +384,7 @@ namespace Shogi
             foreach(Spielfigur sp in feld.Feld)
             {
                 int befoerdert = 0;
-                int spieler = 0;
+                spieler = 0;
                 if(sp.IstBefoerdert)
                 {
                     befoerdert = 1;
@@ -438,6 +465,37 @@ namespace Shogi
             return LadeSpielfeld(game_id, sp1, sp2);
 
         }
+
+        /// <summary>
+        /// Gibt den aktiven Spieler aus dem letzten geladenen Spiel zurück
+        /// </summary>
+        /// <param name="sp1">spAngemeldet</param>
+        /// <param name="sp2">spAngemeldet2</param>
+        /// <returns></returns>
+        public Spieler LadeAktivenSpielerLeztesSpiel(Spieler sp1, Spieler sp2)
+        {
+            String sql = @"SELECT ID FROM GAME " +
+               "WHERE user_a = " + sp1.id + " AND " +
+               " user_b = " +sp2.id +
+               " ORDER BY ID DESC " +
+               " LIMIT 1";
+
+            LinkedList<Object[]> result = this.ExecuteQuery(sql);
+            if (result.Count == 0)
+            {
+                return null;
+            }
+            int aktiver = Convert.ToInt32(result.ElementAt(0)[0]);
+            if(aktiver == 0)
+            {
+                return sp1;
+            }
+            else
+            {
+                return sp2;
+            }
+        }
+
 
     }
 }
