@@ -86,6 +86,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Location = new System.Drawing.Point(269, 115);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(100, 30);
@@ -108,8 +109,10 @@
             // 
             // BenutzernameAendern
             // 
+            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(465, 165);
             this.Controls.Add(this.lblMeldung);
             this.Controls.Add(this.btnCancel);
@@ -118,7 +121,10 @@
             this.Controls.Add(this.txtBenutzer);
             this.Controls.Add(this.lblPasswort);
             this.Controls.Add(this.lblBenutzername);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "BenutzernameAendern";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Benutzername Ändern";
             this.ResumeLayout(false);
             this.PerformLayout();

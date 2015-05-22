@@ -113,6 +113,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmPasswortAbfrage";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Konto löschen";
             this.Load += new System.EventHandler(this.frmPasswortAbfrage_Load);
             this.ResumeLayout(false);
