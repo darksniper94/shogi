@@ -206,6 +206,14 @@
             <param name="sp"></param>
             <returns></returns>
         </member>
+        <member name="M:Shogi.Database.LadeAktivenSpielerLeztesSpiel(Shogi.Spieler,Shogi.Spieler)">
+            <summary>
+            Gibt den aktiven Spieler aus dem letzten geladenen Spiel zurück
+            </summary>
+            <param name="sp1">spAngemeldet</param>
+            <param name="sp2">spAngemeldet2</param>
+            <returns></returns>
+        </member>
         <member name="P:Shogi.Database.Instance">
             <summary>
             Database singleton
