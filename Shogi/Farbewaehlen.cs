@@ -85,7 +85,7 @@ namespace Shogi
         {
             foreach (Control c in pnlTmp.Controls)
             {
-                c.BackColor = Color.FromArgb(39, 181, 0);
+                c.BackColor = Designmapper.cHellgruen;
             }
         }
 
@@ -93,7 +93,7 @@ namespace Shogi
         {
             foreach (Control c in pnlTmp.Controls)
             {
-                c.BackColor = Color.FromArgb(255, 255, 255);
+                c.BackColor = Designmapper.cWeiss;
             }
         }
 
@@ -101,7 +101,7 @@ namespace Shogi
         {
             foreach (Control c in pnlTmp.Controls)
             {
-                c.BackColor = Color.FromArgb(140, 140, 140);
+                c.BackColor = Designmapper.cGrau;
             }
         }
 
