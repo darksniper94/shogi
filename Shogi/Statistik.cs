@@ -39,7 +39,7 @@ namespace Shogi
                 String stat_str = "Gewonnen Spiele:\t\t\t" + GewonneSpiele + "\n" +
                 "Beendete Spiele:\t\t\t" + BeendeteSpiele + "\n" +
                 "Durchnitt Züge:\t\t\t" + Zuege + "\n" +
-                "Durchnitt Zeit:\t\t\t" + Zeit + " Minuten\n";
+                "Durchnitt Zeit:\t\t\t" + Zeit / 60 + " Minuten\n";
                 return stat_str;
             }
         }

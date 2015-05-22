@@ -401,8 +401,8 @@ namespace Shogi
                                   + sp.Typ.getName() + "', "
                                   + befoerdert + ", "
                                   + spieler + ", "
-                                  + sp.Position.Zeile + ", "
-                                  + sp.Position.Spalte + ");";
+                                  + sp.Position.Spalte + ", "
+                                  + sp.Position.Zeile + ");";
 
                 this.ExecuteNonQuery(subsql);
             }
@@ -426,14 +426,14 @@ namespace Shogi
             List<Spielfigur> figuren = new List<Spielfigur>();
             foreach(var figur in resfiguren)
             {
-                Spieler owner = sp1;
+                Spieler owner = sp2;
                 if(Convert.ToInt32(figur[2]) == 1)
                 {
-                    owner = sp2;
+                    owner = sp1;
                 }
 
                 Spielfigur tmpFigur = new Spielfigur(
-                                                     FigurTyp.FigurtypVomNamen(figur[0].ToString()), 
+                                                     FigurTyp.FigurtypVomNamen(Convert.ToString(figur[0])), 
                                                      owner, 
                                                      new Position(Convert.ToInt32(figur[3]), Convert.ToInt32(figur[4])));
 
@@ -441,7 +441,7 @@ namespace Shogi
             }
 
 
-            return new Spielfeld(figuren, Spielleiter_Spiellogik.SHOGI_DIM);
+            return new Spielfeld(figuren, Spielleiter_Spiellogik.SHOGI_DIM, Spielleiter_Spiellogik.SHOGI_FIGUREN);
         }
         /// <summary>
         /// Lädt die letzte 
@@ -474,7 +474,7 @@ namespace Shogi
         /// <returns></returns>
         public Spieler LadeAktivenSpielerLeztesSpiel(Spieler sp1, Spieler sp2)
         {
-            String sql = @"SELECT ID FROM GAME " +
+            String sql = @"SELECT user_active FROM GAME " +
                "WHERE user_a = " + sp1.id + " AND " +
                " user_b = " +sp2.id +
                " ORDER BY ID DESC " +
@@ -486,7 +486,7 @@ namespace Shogi
                 return null;
             }
             int aktiver = Convert.ToInt32(result.ElementAt(0)[0]);
-            if(aktiver == 0)
+            if(aktiver == 1)
             {
                 return sp1;
             }
