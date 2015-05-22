@@ -242,6 +242,7 @@ namespace Shogi
             //2. Prüfe ob Feld frei
             if (figur != null && feld.GetSpielfigurAnPosition(positionNach) == null)
             {
+
                 //3. Spielzug an Spielfeld übergeben
                 feld.fuehreSpielzugAus(figur, positionNach);
 

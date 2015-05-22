@@ -161,7 +161,7 @@ namespace Shogi
             List<Spielfigur> inaktiveFiguren = new List<Spielfigur>();
             foreach (Spielfigur figur in Feld)
             {
-                if (figur.IstAktiv == false && figur.Besitzer.Equals(aktiverSpieler) && figur.Typ.Equals(figurTyp))
+                if (figur.IstAktiv == false && figur.Besitzer.Equals(aktiverSpieler) && figur.Typ.getName() == figurTyp)
                 {
                     return figur;
                 }

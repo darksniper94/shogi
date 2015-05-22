@@ -72,6 +72,7 @@ namespace Shogi
             const int consbuttonhohe = 35;
             const int consbuttonbreite = 120;
             InitializeComponent();
+            uhr = new Stoppuhr();
             pnlBasis = new FlowLayoutPanel();
             pnlMenu = new Panel();
             pnlSpielfeld = new Panel();
@@ -255,8 +256,6 @@ namespace Shogi
             pnlFeld.Location = new Point(((pnlSpielfeld.Width/2)-pnlFeld.Width/2), 110);
             pnlSp2Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp2Ers.Width / 2), 30);
             pnlSp1Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp1Ers.Width / 2), 130+ pnlFeld.Height);
-            lblSp2.Location = new Point(((pnlSpielfeld.Width / 2) - lblSp2.Width / 2), 85);
-            lblSP1.Location = new Point(((pnlSpielfeld.Width / 2) - lblSP1.Width / 2), 110 + pnlFeld.Height);
             pnlSpielfeld.Controls.Add(pnlFeld);
             pnlSpielfeld.Controls.Add(picBambus);
             pnlSpielfeld.Controls.Add(pnlSp2Ers);
@@ -341,10 +340,30 @@ namespace Shogi
                                         typ = "";
                                         break;
                                 }
-                                if (Spielleiter_Spiellogik.instance.figurEinsetzen(typ, new Position(endy, endx)))
+                                if (Spielleiter_Spiellogik.instance.figurEinsetzen(typ, new Position(endx, endy)))
                                 {
                                     zeichneEinsetzen();
-                                    Spielleiter_Spiellogik.instance.spielerwechsel();
+                                    if (spAngemeldet.Equals(Spielleiter_Spiellogik.instance.AktiverSpieler))
+                                    {
+                                        zuegeSp1++;
+                                    }
+                                    else
+                                    {
+                                        zuegeSp2++;
+                                    }
+                                    if (!Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).IstBefoerdert)
+                                    {
+                                        if (Spielleiter_Spiellogik.instance.pruefeBefoerdern(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy))))
+                                        {
+                                            DialogResult result = MessageBox.Show(this, "Möchten Sie den Spielstein befördern?", "Befördern", MessageBoxButtons.YesNo);
+                                            if (result == DialogResult.Yes)
+                                            {
+                                                Spielleiter_Spiellogik.instance.spielfigurBefoerdern(new Position(endx, endy));
+                                                zeichneSpielzug("default", true);
+                                            }
+                                        }
+                                        Spielleiter_Spiellogik.instance.spielerwechsel();
+                                    }
                                 }
                             }
                             else
@@ -394,6 +413,10 @@ namespace Shogi
                             }
                         }
                         }
+                   if (Spielleiter_Spiellogik.instance.GetIstSchachGesetzt())
+                        {
+                            MessageBox.Show(this, "Schach", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
                     }
                     else
                     {
@@ -429,10 +452,6 @@ namespace Shogi
                             clickCount = 0;
                         }
                 }
-            }
-            if(Spielleiter_Spiellogik.instance.GetIstSchachGesetzt())
-            {
-                MessageBox.Show(this, "Schach", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             if (Spielleiter_Spiellogik.instance.GetBeendet())
@@ -494,12 +513,8 @@ namespace Shogi
                 bspeichern_laden.Text = "Speichern";
                 spielfeldUmschalten(true);
                 labelsUmschalten(true);
-                lblSP1.Visible = true;
-                lblSp2.Visible = true;
-                lblSP1.ForeColor = Color.Red;
+                spielerLblAktivieren(Spielleiter_Spiellogik.instance.AktiverSpieler, true);
                 spielfeldFarbe();
-                lblSP1.Text = spAngemeldet.benutzername;
-                lblSp2.Text = spAngemeldet2.benutzername + "_2";
                 zuegeSp1 = 0;
                 zuegeSp2 = 0;
                 uhr.start();
@@ -550,11 +565,7 @@ namespace Shogi
                     bspeichern_laden.Text = "Speichern";
                     spielfeldUmschalten(true);
                     labelsUmschalten(true);
-                    lblSP1.Visible = true;
-                    lblSp2.Visible = true;
-                    lblSP1.ForeColor = Color.Red;
-                    lblSP1.Text = spAngemeldet.benutzername;
-                    lblSp2.Text = spAngemeldet2.benutzername;
+                    spielerLblAktivieren(Spielleiter_Spiellogik.instance.AktiverSpieler, false);
                     zuegeSp2 = 0;
                     zuegeSp1 = 0;
                     uhr.start();
@@ -655,13 +666,24 @@ namespace Shogi
             if (result == DialogResult.Yes)
             {
                 Spieler spieleraktiv;
-                Spieler spielerpassiv;
+                spAngemeldet2 = Database.Instance.LadeSpieler(spAngemeldet.id);
+                spieleraktiv = Database.Instance.LadeAktivenSpielerLeztesSpiel(spAngemeldet, spAngemeldet2);
 
-                //spieleraktiv = Database.Instance.
+                Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet,spAngemeldet2,Database.Instance.LadeLetztesEinzelSpiel(spAngemeldet,spAngemeldet2));
+                zeichneSpielfeld();
 
-                //spAngemeldet2 = Database.Instance.LadeSpieler(spAngemeldet.id);
-                //Spielleiter_Spiellogik.instance.neuesSpiel(spieleraktiv,spielerpassiv,Database.Instance.LadeLetztesEinzelSpiel(spAngemeldet,spAngemeldet2));
-                //zeichneSpielfeld();
+                if (spAngemeldet.Equals(spieleraktiv))
+                {
+
+                }
+                else
+                {
+                    Spielleiter_Spiellogik.instance.spielerwechsel();
+                }
+                spielerLblAktivieren(Spielleiter_Spiellogik.instance.AktiverSpieler, true);
+                bEinzel_pause_fort.Text = "Pause";
+                bCoop_Abbrechen.Text = "Abbrechen";
+                bspeichern_laden.Text = "Speichern";
             }
             //zeichneSpielfeld();
         }
@@ -744,6 +766,19 @@ namespace Shogi
         public void zeichneSpielfeld()
         {
             Spielfeld sp = Spielleiter_Spiellogik.instance.GetFeld();
+
+            // Leere feld
+            for (int i = 0; i <= 10; i++ )
+            {
+                for(int j=1; j<10; j++)
+                {
+                    arrPFeld[i, j].BackgroundImage = null;
+                }
+            }
+            erstelleErsatzbank();
+            labelsUmschalten(true);
+            spielfeldUmschalten(true);
+
             foreach(Spielfigur figur in sp.Feld)
             {
                 if(figur.Position.Zeile == 0 && figur.Position.Spalte == 0)
@@ -826,15 +861,15 @@ namespace Shogi
                 }
                 else
                 {
-                    arrPFeld[figur.Position.Spalte, figur.Position.Zeile].BackgroundImage = Designmapper.instance.holeDesignBild(figur.Typ.getName(), spAngemeldet);
+                    arrPFeld[figur.Position.Zeile, figur.Position.Spalte].BackgroundImage = Designmapper.instance.holeDesignBild(figur.Typ.getName(), spAngemeldet);
                     if (figur.Besitzer.Equals(spAngemeldet))
                     {
-                        arrPFeld[figur.Position.Spalte, figur.Position.Zeile].BackgroundImage.Tag = STEIN_UNTEN;
+                        arrPFeld[figur.Position.Zeile, figur.Position.Spalte].BackgroundImage.Tag = STEIN_UNTEN;
                     }
                     else
                     {
-                        arrPFeld[figur.Position.Spalte, figur.Position.Zeile].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                        arrPFeld[figur.Position.Spalte, figur.Position.Zeile].BackgroundImage.Tag = STEIN_OBEN;
+                        arrPFeld[figur.Position.Zeile, figur.Position.Spalte].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                        arrPFeld[figur.Position.Zeile, figur.Position.Spalte].BackgroundImage.Tag = STEIN_OBEN;
             
         }
                 }
@@ -1014,6 +1049,7 @@ namespace Shogi
                     e.Cancel = true;
                 }
             }
+            uhr.stop();
         }
 
         /// <summary>
@@ -1047,6 +1083,8 @@ namespace Shogi
             pnlFeld.Location = new Point(((pnlSpielfeld.Width / 2) - pnlFeld.Width / 2), 110);
             pnlSp2Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp2Ers.Width / 2), 30);
             pnlSp1Ers.Location = new Point(((pnlSpielfeld.Width / 2) - pnlSp1Ers.Width / 2), 130 + pnlFeld.Height);
+            lblSp2.Location = new Point(((pnlSpielfeld.Width / 2) - lblSp2.Width / 2), 85);
+            lblSP1.Location = new Point(((pnlSpielfeld.Width / 2) - lblSP1.Width / 2), 110 + pnlFeld.Height);
         }
         
         /// <summary>
@@ -1522,25 +1560,52 @@ namespace Shogi
         }
         private void zeichneEinsetzen()
         {
-            foreach (Control c in arrPFeld[ausgangx,ausgangy].Controls)
+            foreach (Control c in arrPFeld[ausgangy,ausgangx].Controls)
             {
                 if (c.GetType() == typeof(Label))
                 {
                     Label lbltmp;
                     lbltmp = (Label)c;
 
-                    lbltmp.Text = "" + (Convert.ToInt32(lbltmp.Text) + 1);
+                    lbltmp.Text = "" + (Convert.ToInt32(lbltmp.Text) - 1);
                 }
             }
-            arrPFeld[endx, endy].BackgroundImage = Designmapper.instance.holeDesignBild(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).GetType().Name, Spielleiter_Spiellogik.instance.AktiverSpieler);
+            arrPFeld[endy, endx].BackgroundImage = Designmapper.instance.holeDesignBild(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).Typ.getName(), Spielleiter_Spiellogik.instance.AktiverSpieler);
             if(!Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
             {
-                arrPFeld[endx, endy].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
-                arrPFeld[endx, endy].Tag = STEIN_OBEN;
+                arrPFeld[endy, endx].BackgroundImage.RotateFlip(RotateFlipType.RotateNoneFlipY);
+                arrPFeld[endy, endx].BackgroundImage.Tag = STEIN_OBEN;
             } else
             {
-                arrPFeld[endx, endy].Tag = STEIN_UNTEN;
+                arrPFeld[endy, endx].BackgroundImage.Tag = STEIN_UNTEN;
             }
+        }
+        private void spielerLblAktivieren(Spieler spAktiv, bool einzel)
+        {
+            lblSP1.Visible = true;
+            lblSp2.Visible = true;
+            if(spAktiv.Equals(spAngemeldet))
+            {
+                lblSP1.ForeColor = Color.Red;
+                lblSp2.ForeColor = Color.Black;
+            }
+            else
+            {
+                lblSp2.ForeColor = Color.Red;
+                lblSP1.ForeColor = Color.Black;
+            }
+            lblSP1.Text = spAngemeldet.benutzername;
+            if (einzel)
+            {
+                lblSp2.Text = spAngemeldet2.benutzername + "_2";
+            }
+            else
+            {
+                lblSp2.Text = spAngemeldet2.benutzername;
+            }
+            
+            lblSp2.Location = new Point(((pnlSpielfeld.Width / 2) - lblSp2.Width / 2), 85);
+            lblSP1.Location = new Point(((pnlSpielfeld.Width / 2) - lblSP1.Width / 2), 110 + pnlFeld.Height);
         }
     }
 }
