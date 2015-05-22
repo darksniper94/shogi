@@ -118,10 +118,11 @@
             // 
             // lblMeldung
             // 
+            this.lblMeldung.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMeldung.AutoSize = true;
             this.lblMeldung.Font = new System.Drawing.Font("Book Antiqua", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMeldung.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblMeldung.Location = new System.Drawing.Point(74, 127);
+            this.lblMeldung.Location = new System.Drawing.Point(47, 127);
             this.lblMeldung.Name = "lblMeldung";
             this.lblMeldung.Size = new System.Drawing.Size(254, 18);
             this.lblMeldung.TabIndex = 8;

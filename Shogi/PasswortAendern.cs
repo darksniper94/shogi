@@ -27,7 +27,7 @@ namespace Shogi
         private void btnOK_Click(object sender, EventArgs e)
         {
 
-            //lblMeldung.Visible = false;
+            lblMeldung.Visible = false;
             if(txtNeuesPasswort.Text == txtNeuesPasswortwdh.Text)
             {
                 if(txtAltesPasswort.Text == spAngemeldet.passwort)
@@ -42,20 +42,20 @@ namespace Shogi
                     }
                     else
                     {
-                        //lblMeldung.Visible = true;
-                        //lblMeldung.Text = "Das Passwort muss mindestens 6 Zeichen lang sein.";
+                        lblMeldung.Visible = true;
+                        lblMeldung.Text = "Das Passwort muss mindestens 6 Zeichen lang sein.";
                     }
                 }
                 else
                 {
-                    //lblMeldung.Visible = true;
-                    //lblMeldung.Text = "Passwort nicht korrekt.";
+                    lblMeldung.Visible = true;
+                    lblMeldung.Text = "Passwort nicht korrekt.";
                 }
             }
             else
             {
-                //lblMeldung.Visible = true;
-                //lblMeldung.Text = "Passwörter stimmen nicht überein.";
+                lblMeldung.Visible = true;
+                lblMeldung.Text = "Passwörter stimmen nicht überein.";
             }
         }
 
