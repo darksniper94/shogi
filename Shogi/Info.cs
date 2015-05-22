@@ -34,5 +34,10 @@ namespace Shogi
         {
 
         }
+
+        private void Info_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

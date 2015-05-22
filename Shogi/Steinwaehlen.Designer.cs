@@ -96,6 +96,7 @@
             // 
             // btnAbbrechen
             // 
+            this.btnAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAbbrechen.Location = new System.Drawing.Point(173, 226);
             this.btnAbbrechen.Name = "btnAbbrechen";
             this.btnAbbrechen.Size = new System.Drawing.Size(100, 30);
@@ -104,10 +105,12 @@
             this.btnAbbrechen.UseVisualStyleBackColor = true;
             this.btnAbbrechen.Click += new System.EventHandler(this.btnAbbrechen_Click);
             // 
-            // Steinwählen
+            // Steinwaehlen
             // 
+            this.AcceptButton = this.btnOk;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnAbbrechen;
             this.ClientSize = new System.Drawing.Size(315, 270);
             this.Controls.Add(this.btnAbbrechen);
             this.Controls.Add(this.btnOk);
@@ -115,7 +118,10 @@
             this.Controls.Add(this.rBtnEN);
             this.Controls.Add(this.rBtnDE);
             this.Controls.Add(this.rBtnBewegung);
-            this.Name = "Steinwählen";
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "Steinwaehlen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Steinwählen";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -131,8 +131,10 @@
             // 
             // PasswortAendern
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(474, 193);
             this.Controls.Add(this.lblMeldung);
             this.Controls.Add(this.txtAltesPasswort);
@@ -144,7 +146,9 @@
             this.Controls.Add(this.lblNeuesPasswortwdh);
             this.Controls.Add(this.lblNeuesPasswort);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "PasswortAendern";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Passwort Ändern";
             this.ResumeLayout(false);
             this.PerformLayout();

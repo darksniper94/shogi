@@ -49,6 +49,7 @@
             // 
             // btnAbbrechen
             // 
+            this.btnAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnAbbrechen.Location = new System.Drawing.Point(176, 213);
             this.btnAbbrechen.Name = "btnAbbrechen";
             this.btnAbbrechen.Size = new System.Drawing.Size(100, 30);
@@ -124,8 +125,10 @@
             // 
             // Farbewaehlen
             // 
+            this.AcceptButton = this.btnOK;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnAbbrechen;
             this.ClientSize = new System.Drawing.Size(353, 261);
             this.Controls.Add(this.rBtnGrau);
             this.Controls.Add(this.rBtnWeiss);
@@ -134,7 +137,10 @@
             this.Controls.Add(this.rBtnStandard);
             this.Controls.Add(this.btnAbbrechen);
             this.Controls.Add(this.btnOK);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Farbewaehlen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Farbewählen";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -157,8 +157,12 @@
             this.Controls.Add(this.lblFirma);
             this.Controls.Add(this.lblVersiontxt);
             this.Controls.Add(this.lblVersion);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "Info";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Info";
+            this.Load += new System.EventHandler(this.Info_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
