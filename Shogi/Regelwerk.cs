@@ -36,13 +36,13 @@ namespace Shogi
             this.Browser.Location = new System.Drawing.Point(0, 0);
             this.Browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.Browser.Name = "Browser";
-            this.Browser.Size = new System.Drawing.Size(737, 296);
+            this.Browser.Size = new System.Drawing.Size(737, 606);
             this.Browser.TabIndex = 0;
             this.Browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.Browser_DocumentCompleted);
             // 
             // Regelwerk
             // 
-            this.ClientSize = new System.Drawing.Size(737, 296);
+            this.ClientSize = new System.Drawing.Size(737, 606);
             this.Controls.Add(this.Browser);
             this.Name = "Regelwerk";
             this.Text = "Shogi Regelwerk";
