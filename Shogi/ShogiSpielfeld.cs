@@ -668,22 +668,31 @@ namespace Shogi
                 Spieler spieleraktiv;
                 spAngemeldet2 = Database.Instance.LadeSpieler(spAngemeldet.id);
                 spieleraktiv = Database.Instance.LadeAktivenSpielerLeztesSpiel(spAngemeldet, spAngemeldet2);
-
-                Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet,spAngemeldet2,Database.Instance.LadeLetztesEinzelSpiel(spAngemeldet,spAngemeldet2));
-                zeichneSpielfeld();
-
-                if (spAngemeldet.Equals(spieleraktiv))
+                Spielfeld sp;
+                sp = Database.Instance.LadeLetztesEinzelSpiel(spAngemeldet,spAngemeldet2);
+                if (sp != null)
                 {
+                    Spielleiter_Spiellogik.instance.neuesSpiel(spAngemeldet, spAngemeldet2, sp);
 
+                    zeichneSpielfeld();
+
+                    if (spAngemeldet.Equals(spieleraktiv))
+                    {
+
+                    }
+                    else
+                    {
+                        Spielleiter_Spiellogik.instance.spielerwechsel();
+                    }
+                    spielerLblAktivieren(Spielleiter_Spiellogik.instance.AktiverSpieler, true);
+                    bEinzel_pause_fort.Text = "Pause";
+                    bCoop_Abbrechen.Text = "Abbrechen";
+                    bspeichern_laden.Text = "Speichern";
                 }
                 else
                 {
-                    Spielleiter_Spiellogik.instance.spielerwechsel();
+                    MessageBox.Show(this, "Sie haben kein gespeichertes Spiel", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                spielerLblAktivieren(Spielleiter_Spiellogik.instance.AktiverSpieler, true);
-                bEinzel_pause_fort.Text = "Pause";
-                bCoop_Abbrechen.Text = "Abbrechen";
-                bspeichern_laden.Text = "Speichern";
             }
             //zeichneSpielfeld();
         }
@@ -1584,6 +1593,8 @@ namespace Shogi
         {
             lblSP1.Visible = true;
             lblSp2.Visible = true;
+            lblSP1.Enabled = true;
+            lblSp2.Enabled = true;
             if(spAktiv.Equals(spAngemeldet))
             {
                 lblSP1.ForeColor = Color.Red;
