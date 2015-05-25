@@ -13,12 +13,20 @@ namespace Shogi
     //Windows Form für die Registrierung
     public partial class FormRegistrierung : Form
     {
+        /// <summary>
+        /// Standard Konstruktor
+        /// </summary>
         public FormRegistrierung()
         {
             InitializeComponent();
             lblMeldung.Visible = false;
         }
 
+        /// <summary>
+        /// Eventhandler Load Event
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void formRegistrierung_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);

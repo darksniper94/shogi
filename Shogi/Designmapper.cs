@@ -9,6 +9,8 @@ namespace Shogi
     class Designmapper
     {
         
+        // SINGLETON PATTERN!
+
         public static readonly String BEWEGUNG = "B";
         public static readonly String DEUTSCH = "D";
         public static readonly String ENGLISH = "E";
@@ -40,6 +42,12 @@ namespace Shogi
                 return inst;
             }
         }
+        /// <summary>
+        /// Gibt eine Bitmap mit dem aktuellen Design eines Steins zurück.
+        /// </summary>
+        /// <param name="figurName"> Typ des Steins.</param>
+        /// <param name="spieler">Angemeldeter Spieler.</param>
+        /// <returns>Bitmap des Steins im aktuellen Design.</returns>
         public System.Drawing.Bitmap holeDesignBild(String figurName, Spieler spieler)
         {
             string pic = "";
@@ -67,6 +75,11 @@ namespace Shogi
             return (System.Drawing.Bitmap)res;
         }
 
+        /// <summary>
+        /// Gibt die aktuelle Designfarbe zurück.
+        /// </summary>
+        /// <param name="Designfarbe">Designfarbe als String.</param>
+        /// <returns>Farbe (Color) des aktuellen Designs.</returns>
         public Color holeDesignRGB(String Designfarbe){
             switch (Designfarbe)
                 {

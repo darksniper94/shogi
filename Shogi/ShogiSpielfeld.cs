@@ -129,6 +129,7 @@ namespace Shogi
             pnlSp1Ers.Padding = new Padding(1);
 
           
+            // Panel für das Spielfeld erstellen
             for (int i = 0; i <= 10;i++ )
             {
                     for (int j = 1; j < 10; j++)
@@ -159,14 +160,17 @@ namespace Shogi
                 }
             }
 
+            // Startaufstellung
             erstelleStart();
 
+            //Spielerlabel Spieler1
             lblSP1.Text = "Spieler 1";
             lblSP1.Visible = false;
             lblSP1.Font = new Font("Book Antiqua", 11);
             lblSP1.Width = TextRenderer.MeasureText(lblSP1.Text, lblSP1.Font).Width;
             lblSP1.BackColor = Color.Transparent;
 
+            //Spielerlabel Spieler2
             lblSp2.Text = "Spieler 2";
             lblSp2.Visible = false;
             lblSp2.Font = new Font("Book Antiqua", 11);
@@ -174,11 +178,13 @@ namespace Shogi
             lblSp2.BackColor = Color.Transparent;
 
             lblSpielername.Font = new Font("Book Antiqua", 11);
+            // Spielername Menu zentrieren
             spielerNameZentrieren();
             lblSpielername.Visible = true;
             lblSpielername.Text = spAngemeldet.benutzername;
             lblSpielername.BackColor = Color.Transparent;
 
+            //Buttons einrichten
             bBeenden.Location = new Point(65, 300); // 300
             bBeenden.Width = consbuttonbreite;
             bBeenden.Height = consbuttonhohe;
@@ -220,6 +226,7 @@ namespace Shogi
             //Logo.Size = new System.Drawing.Size(200, 200);
             //Logo.Image = global::Shogi.Properties.Resources.LogoKlein;
 
+            //Trennbild "Bambus" einrichten
             PictureBox picBambus = new PictureBox();
             picBambus.Location = new System.Drawing.Point(-5, 0);
             picBambus.Name = "Logo";
@@ -228,10 +235,12 @@ namespace Shogi
             picBambus.Click += picBambusOnClick;
             picBambus.Image = global::Shogi.Properties.Resources.Bambus;
 
+            // Basis Panel einrichten
             pnlBasis.Width = this.Width;
             pnlBasis.Height = this.Height;
             pnlBasis.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 
+            // Menu Panel einrichten
             pnlMenu.Margin = new Padding(0);
             //pnlMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             pnlMenu.Height = pnlBasis.Height;
@@ -246,7 +255,7 @@ namespace Shogi
             pnlMenu.Controls.Add(lblSpielername);
             //pnlMenu.Controls.Add(Logo);
 
-
+            //Spielfeld Panel einrichten
             pnlSpielfeld.Margin = new Padding(0);
             //pnlSpielfeld.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             pnlSpielfeld.Height = pnlBasis.Height;
@@ -266,8 +275,10 @@ namespace Shogi
             pnlBasis.Controls.Add(pnlMenu);
             pnlBasis.Controls.Add(pnlSpielfeld);
             this.Controls.Add(pnlBasis);
+            //Spielfeld einfärben
             spielfeldFarbe();
         }
+
         /// <summary>
         /// Öffnet ein seperates Fenster für die Statistik 
         /// </summary>
@@ -294,6 +305,7 @@ namespace Shogi
              
             Panel tmp;
             tmp = (Panel)sender;
+            //Der erste Klick muss auf ein Feld mit Image erfolgen
             if (tmp.BackgroundImage == null && clickCount == 0)
             {
          
@@ -301,18 +313,22 @@ namespace Shogi
                     clickCount = clickCount + 1;
                         ausgang.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
                         tmp.BackColor = Designmapper.instance.holeDesignRGB(spAngemeldet.farbe);
+
+                //Unterscheiden ob ANfangs- oder Endklick
                     if (clickCount == 2)
                     {
                         clickCount = 0;
-                        // Von welchem panel kommt der klick???
-                        // Feld
+                        //Von welchem Panel (Ersatzbank || Spielfeld) kam der erste Klick ? 
                         if(tmp.Parent.Equals(pnlFeld))
                         {
+                            //Von der Ersatzbank
                             if (ausgangy == 0 || ausgangy == 10)
                             {
+                                //Koordinaten anpassen
                                 endx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
                                 endy = pnlFeld.GetPositionFromControl(tmp).Row + 1;
                                 string typ;
+                                // Welcher Typ soll eingesetzt werden ? 
                                 switch (ausgangx)
                                 {
                                     case 2:
@@ -340,9 +356,12 @@ namespace Shogi
                                         typ = "";
                                         break;
                                 }
+                                //Einsetzen wenn Spielzug möglich
                                 if (Spielleiter_Spiellogik.instance.figurEinsetzen(typ, new Position(endx, endy)))
                                 {
+                                    //Einsetzen zeichnen
                                     zeichneEinsetzen();
+                                    //Zuege hochzählen für Statistik
                                     if (spAngemeldet.Equals(Spielleiter_Spiellogik.instance.AktiverSpieler))
                                     {
                                         zuegeSp1++;
@@ -351,6 +370,7 @@ namespace Shogi
                                     {
                                         zuegeSp2++;
                                     }
+                                    // Befördern prüfen
                                     if (!Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).IstBefoerdert)
                                     {
                                         if (Spielleiter_Spiellogik.instance.pruefeBefoerdern(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy))))
@@ -366,11 +386,13 @@ namespace Shogi
                                     }
                                 }
                             }
-                            else
+                            else // Klick kommt vom Spielfeld Panel
                             {
                             string strtmp;
+                                //Koordinaten anpassen
                                 endx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
                                 endy = pnlFeld.GetPositionFromControl(tmp).Row + 1;
+                            // wird geschlagen ? 
                             if (arrPFeld[endy, endx].BackgroundImage != null)
                             {
                                 strtmp = Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).TypNichtBefoerdert.getName();
@@ -380,15 +402,17 @@ namespace Shogi
                                 strtmp = "default";
                             }
                             
+                                // Zug prüfen
                             bool zugOk = Spielleiter_Spiellogik.instance.spielZug(new Position(ausgangx, ausgangy), new Position(endx, endy));
                             
-                            
+                            //Testzwecke
                             //MessageBox.Show(zugOk.ToString() + "   " + Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet));
                         
                                 if (zugOk)
                             { 
                                 // Spielzug OK
                                 zeichneSpielzug(strtmp, false);
+                                    //Züge hochzählen für Statistik
                                 if (spAngemeldet.Equals(Spielleiter_Spiellogik.instance.AktiverSpieler))
                                 {
                                     zuegeSp1++;
@@ -397,10 +421,12 @@ namespace Shogi
                                 {
                                     zuegeSp2++;
                                 }
+                                    //Beförderung prüfen
                                 if (!Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy)).IstBefoerdert)
                                 {
                                     if (Spielleiter_Spiellogik.instance.pruefeBefoerdern(Spielleiter_Spiellogik.instance.GetFeld().GetSpielfigurAnPosition(new Position(endx, endy))))
                                     {
+                                        // Befördern?
                                         DialogResult result = MessageBox.Show(this, "Möchten Sie den Spielstein befördern?", "Befördern", MessageBoxButtons.YesNo);
                                         if (result == DialogResult.Yes)
                                         {
@@ -410,38 +436,41 @@ namespace Shogi
                                     }
                                 }
                                 Spielleiter_Spiellogik.instance.spielerwechsel(); 
-                            }
+                             }
+                          }
                         }
-                        }
-                   if (Spielleiter_Spiellogik.instance.GetIstSchachGesetzt())
+                        //Schach?
+                        if (Spielleiter_Spiellogik.instance.GetIstSchachGesetzt())
                         {
                             MessageBox.Show(this, "Schach", "Info", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
-                    else
+                    else // klickcount != 2
                     {
+                        // Prüfen ob Stein dem aktiven Spieler gehört
                         if ((tmp.BackgroundImage.Tag.ToString() == STEIN_OBEN && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet2) || 
                             (tmp.BackgroundImage.Tag.ToString() == STEIN_UNTEN && Spielleiter_Spiellogik.instance.AktiverSpieler == spAngemeldet))
                         {
+                            //Hintergrund leicht verändern // "Ausgewählt"
                             tmp.BackColor = Color.FromArgb(140, Designmapper.instance.holeDesignRGB(spAngemeldet.farbe));
-                            // Setzte x und y beim ersten click
-                            // Feld
+                            //Spielfeld
                             if (tmp.Parent.Equals(pnlFeld))
                             {
+                                // Augangskoordinaten setzen & anpassen
                                 ausgangx = pnlFeld.GetPositionFromControl(tmp).Column+1;
                                 ausgangy = pnlFeld.GetPositionFromControl(tmp).Row+1;
                             }
-                            // SP1 
+                            // Ersatzbank Spieler1 
                             else if(Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet) && tmp.Parent.Equals(pnlSp1Ers))
                             {
-                                // Vanny cords
+                                // Koordinaten anpassen
                                 ausgangx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
                                 ausgangy = 10;
                             }
-                            // SP2
+                            // Ersatzbank Spieler2
                             else if(Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet2) && tmp.Parent.Equals(pnlSp2Ers))
                             {
-                                // Vanny cords
+                                // Koordinaten anpassen
                                 ausgangx = pnlFeld.GetPositionFromControl(tmp).Column + 1;
                                 ausgangy = 0;        
                             }
@@ -449,15 +478,18 @@ namespace Shogi
                         }
                         else
                         {
+                            // Klicks zurück setzen
                             clickCount = 0;
                         }
                 }
             }
-
+            // prüfen ob das SPiel beendet ist 
             if (Spielleiter_Spiellogik.instance.GetBeendet())
             {
+                // Spiel beendet
                 MessageBox.Show(this, "Schachmatt", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 bool tmpBool;
+                // Gewinner bestimmen
                 if (Spielleiter_Spiellogik.instance.InaktiverSpieler.Equals(spAngemeldet))
                 {
                     tmpBool = true;
@@ -466,10 +498,12 @@ namespace Shogi
                 {
                     tmpBool = false;
                 }
+                // Statistik erstellen und Spiel beenden
                 spielBeenden(true,boolEinzelspiel,tmpBool);
             }
             else
             {
+                // aktiven Spieler rot hervorheben
                 if (Spielleiter_Spiellogik.instance.AktiverSpieler.Equals(spAngemeldet))
                 {
                     lblSP1.ForeColor = Color.Red;
@@ -481,6 +515,7 @@ namespace Shogi
                     lblSP1.ForeColor = Color.Black;
                 }
             }
+            //Test
             //MessageBox.Show("Von: y:" + ausgangy + "/x:" + ausgangx + " Nach: y" + endy + "/x:" + endx);
         }
         /// <summary>
@@ -502,6 +537,7 @@ namespace Shogi
         {
             Button tmp;
             tmp = (Button)sender;
+            //Spiel starten & Buttons umsetzen
             if (tmp.Text == "Einzel Spiel")
             {
                 uhr = new Stoppuhr();
@@ -518,14 +554,14 @@ namespace Shogi
                 zuegeSp2 = 0;
                 uhr.start();
 
-            } else if (tmp.Text == "Pause")
+            } else if (tmp.Text == "Pause") // Buttons umsetzen, Spiel pausieren
             {
                 uhr.pause();
                 tmp.Text = "Fortsetzen";
                 spielfeldUmschalten(false);
                 lblSP1.Enabled = false;
                 lblSp2.Enabled = false;
-            } else
+            } else // Buttons umsetzen, Spiel fortsetzen
             {
                 tmp.Text = "Pause";
                 spielfeldUmschalten(true);
@@ -545,12 +581,14 @@ namespace Shogi
             Button tmp;
             tmp = (Button)sender;
 
+            //Spiel Abbrechen
             if (tmp.Text == "Abbrechen")
             {
                 spielBeenden(false, false, false);
-            }else
+            }else // Buttons umsetze & Coop starten
             {
                 uhr = new Stoppuhr();
+                // 2ten Spieler anmelden
                 FormAnmeldung frmAnmeldung2 = new FormAnmeldung(spAngemeldet);
                 DialogResult result;
                 frmAnmeldung2.ShowDialog();
@@ -570,6 +608,7 @@ namespace Shogi
                     uhr.start();
                 }
             }
+            //Spielfeld einfärben
             spielfeldFarbe();
         }
         /// <summary>
@@ -770,7 +809,9 @@ namespace Shogi
             
         }
 
-
+        /// <summary>
+        /// Zeichnet das Spielfeld komplett
+        /// </summary>
         public void zeichneSpielfeld()
         {
             Spielfeld sp = Spielleiter_Spiellogik.instance.GetFeld();
@@ -787,6 +828,7 @@ namespace Shogi
             labelsUmschalten(true);
             spielfeldUmschalten(true);
 
+            //ersatzbank füllen
             foreach(Spielfigur figur in sp.Feld)
             {
                 if(figur.Position.Zeile == 0 && figur.Position.Spalte == 0)
@@ -925,7 +967,6 @@ namespace Shogi
        /// <param name="posNeu">Neue Position</param>
         public void zeichneSpielzug(string spielsteinEnd,bool befoerdern)
         {
-            int ix;
 
             if (befoerdern)
             {
@@ -1146,6 +1187,11 @@ namespace Shogi
             info.Show();
         }
 
+        /// <summary>
+        /// Eventhandler Toolstrip Steine ändern
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void steineÄndernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Steinwaehlen frmSteinWaehlen = new Steinwaehlen(spAngemeldet);
@@ -1160,6 +1206,11 @@ namespace Shogi
 
         }
         
+        /// <summary>
+        /// Eventhandler Toolstrip Farbe ändern
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void feldfarbeÄndernToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Farbewaehlen frmFarbeWaehlen = new Farbewaehlen(spAngemeldet);
@@ -1169,6 +1220,9 @@ namespace Shogi
             Database.Instance.FarbeAktualisieren(spAngemeldet);
         }
 
+        /// <summary>
+        ///  Ändert die Spielfeld farbe anhand des gespeicherten Designs
+        /// </summary>
         private void spielfeldFarbe()
         {
             foreach (Control c in pnlFeld.Controls)
@@ -1185,11 +1239,18 @@ namespace Shogi
             }
         }
 
+        /// <summary>
+        /// Zentriert den Spielernamen
+        /// </summary>
         private void spielerNameZentrieren()
         {
             lblSpielername.Width = TextRenderer.MeasureText(spAngemeldet.benutzername, lblSpielername.Font).Width;
             lblSpielername.Location = new Point((125 - (TextRenderer.MeasureText(spAngemeldet.benutzername, lblSpielername.Font).Width / 2)), 40);
         }
+
+        /// <summary>
+        /// Erstellt die Startaufstellung
+        /// </summary>
         private void erstelleStart()
         {
             for (int i = 0; i <= 10; i++)
@@ -1305,6 +1366,10 @@ namespace Shogi
                 }
             }
         }
+
+        /// <summary>
+        /// Erstellt die Ersatzbank
+        /// </summary>
         private void erstelleErsatzbank()
         {
             int spalte = 0;
@@ -1437,6 +1502,10 @@ namespace Shogi
                 }
             }
         }
+
+        /// <summary>
+        ///  Erstellt die Ersatzbank labels ("Zähler")
+        /// </summary>
         private void erstelleLabels()
         {
             lblBauerSp2.BackColor = Color.Transparent;
@@ -1544,6 +1613,13 @@ namespace Shogi
             lblBauerSp1.Visible = false;
             lblBauerSp1.Width = TextRenderer.MeasureText("9", lblBauerSp1.Font).Width;
         }
+
+        /// <summary>
+        /// Beendet ein SPiel
+        /// </summary>
+        /// <param name="statistik">Bool ob eine Statistik erstellt werden soll.</param>
+        /// <param name="einzelspiel">Bool ob es ein Einzelspiel war.</param>
+        /// <param name="sp1gewonnen">Bool ob Spieler1 gewonnen hat.</param>
         private void spielBeenden(bool statistik, bool einzelspiel, bool sp1gewonnen)
         {
             uhr.stop();
@@ -1579,6 +1655,10 @@ namespace Shogi
             zuegeSp1 = 0;
             zuegeSp2 = 0;
         }
+
+        /// <summary>
+        /// Zeichnet das Einsetzen eines Spielsteins
+        /// </summary>
         private void zeichneEinsetzen()
         {
             foreach (Control c in arrPFeld[ausgangy,ausgangx].Controls)
@@ -1601,6 +1681,12 @@ namespace Shogi
                 arrPFeld[endy, endx].BackgroundImage.Tag = STEIN_UNTEN;
             }
         }
+
+        /// <summary>
+        /// Spieler label aktivieren & aktiven Spieler hervorheben
+        /// </summary>
+        /// <param name="spAktiv">Aktiver Spieler</param>
+        /// <param name="einzel">Bool ob es sich um ein Einzelspiel handelt.</param>
         private void spielerLblAktivieren(Spieler spAktiv, bool einzel)
         {
             lblSP1.Visible = true;

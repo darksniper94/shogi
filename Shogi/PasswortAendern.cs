@@ -12,6 +12,11 @@ namespace Shogi
     public partial class PasswortAendern : Form
     {
         private Spieler spAngemeldet;
+
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="spieler">Angemeldeter Spieler</param>
         public PasswortAendern(Spieler spieler)
         {
             InitializeComponent();

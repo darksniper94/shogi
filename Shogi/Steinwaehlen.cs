@@ -13,6 +13,10 @@ namespace Shogi
     {
         Spieler spAngemeldet;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="paSpAngmeldet">Angemeldeter Spieler</param>
         public Steinwaehlen(Spieler paSpAngmeldet)
         {
             InitializeComponent();
@@ -48,11 +52,21 @@ namespace Shogi
             
         }
 
+        /// <summary>
+        /// Eventhandler Abbrechen
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void btnAbbrechen_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Eventhandler OK
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void btnOk_Click(object sender, EventArgs e)
         {
            if (rBtnBewegung.Checked)

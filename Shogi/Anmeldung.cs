@@ -15,6 +15,9 @@ namespace Shogi
     {
         Spieler spAngemeldet;
 
+        /// <summary>
+        /// Standardkonstruktor
+        /// </summary>
         public FormAnmeldung()
         {
             InitializeComponent();
@@ -22,6 +25,11 @@ namespace Shogi
             this.CenterToScreen();
             spAngemeldet = null;
         }
+
+        /// <summary>
+        /// Konstruktor, bereits angemeldeter SPieler kann mitgegeben werden um doppelanmeldung zu verhindern.
+        /// </summary>
+        /// <param name="spieler">Angemeldeter Spieler</param>
         public FormAnmeldung(Spieler spieler)
         {
             InitializeComponent();

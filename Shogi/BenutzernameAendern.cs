@@ -17,6 +17,10 @@ namespace Shogi
         /// 
         private Spieler spAngemeldet;
 
+        /// <summary>
+        /// Konstruktor
+        /// </summary>
+        /// <param name="spieler">Spieler</param>
         public BenutzernameAendern(Spieler spieler)
         {
             InitializeComponent();

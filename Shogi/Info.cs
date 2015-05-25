@@ -11,6 +11,9 @@ namespace Shogi
 {
     public partial class Info : Form
     {
+        /// <summary>
+        /// Standard Konstruktor
+        /// </summary>
         public Info()
         {
             InitializeComponent();
