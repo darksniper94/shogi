@@ -329,7 +329,7 @@ namespace Shogi
         public void StatistikErweitern(Spieler spieler, bool gewonnen, bool beendet, int zuege, int zeit)
         {
             if(gewonnen) beendet = true;
-            String sql = @"INSERT INTO STATISTIK (spieler_id, spiel_gewonnen, spiel_beendet, zuege, zeit)
+            String sql = @"INSERT INTO STATISTIK (user_id, spiel_gewonnen, spiel_beendet, zuege, zeit)
                            VALUES (" + this.GetSpielerID(spieler) + ", "
                                     + Convert.ToInt32(gewonnen) + ", "
                                     + Convert.ToInt32(beendet) + ", "

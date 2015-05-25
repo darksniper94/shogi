@@ -347,47 +347,50 @@ namespace Shogi
                 if (istBewegungsoptionVonKoenigInFelddimension)
                 {
                     neuePosition = new Position(ursprungsPosition.Spalte + bewegung.Item1, ursprungsPosition.Zeile + bewegung.Item2);
-                    //für alle Spielfiguren die dem aktiven Spieler gehören, überprüfen ob sie ein feld belegen auf dem der König bewegen kann
-                    for (int index = 0; index < GetFeld().Feld.Count(); index++)
+                    if (GetFeld().GetSpielfigurAnPosition(neuePosition) != null && !GetFeld().GetSpielfigurAnPosition(neuePosition).Besitzer.Equals(InaktiverSpieler))
                     {
-                        if (GetFeld().Feld.ElementAt(i).Besitzer.Equals(AktiverSpieler))
+                        //für alle Spielfiguren die dem aktiven Spieler gehören, überprüfen ob sie ein feld belegen auf dem der König bewegen kann
+                        for (int index = 0; index < GetFeld().Feld.Count(); index++)
                         {
-                            Spielfigur paFigur = GetFeld().Feld.ElementAt(index);
-                            Position ursprungsPositionPaFigur, neuePositionPaFigur;
-                            Tuple<int, int> bewegungPaFigur;
-                            bool istBewegungsoptionVonPaFigurInFelddimension;
-                            //für alle bewegungsmunster der paFigur
-                            for (int paBewegung = 0; paBewegung < paFigur.Typ.getBewegungsmuster().Muster.Count; paBewegung++)
+                            if (GetFeld().Feld.ElementAt(i).Besitzer.Equals(AktiverSpieler))
                             {
-                                //Positionsklon der paFigur
-                                ursprungsPositionPaFigur = new Position(paFigur.Position.Spalte, paFigur.Position.Zeile);
-                                bewegungPaFigur = paFigur.Typ.getBewegungsmuster().Muster.ElementAt(i);
-                                //neue Position der paFigur
-                                istBewegungsoptionVonPaFigurInFelddimension = (ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1 > 0 && ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1 <= GetFeld().Dimension.Item1 && ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2 > 0 && ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2 <= GetFeld().Dimension.Item2) ? true : false;
-                                if (istBewegungsoptionVonPaFigurInFelddimension)
+                                Spielfigur paFigur = GetFeld().Feld.ElementAt(index);
+                                Position ursprungsPositionPaFigur, neuePositionPaFigur;
+                                Tuple<int, int> bewegungPaFigur;
+                                bool istBewegungsoptionVonPaFigurInFelddimension;
+                                //für alle bewegungsmunster der paFigur
+                                for (int paBewegung = 0; paBewegung < paFigur.Typ.getBewegungsmuster().Muster.Count; paBewegung++)
                                 {
-                                    neuePositionPaFigur = new Position(ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1, ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2);
-                                    //wenn neue Position des Königs und neue Positon der paFigur übereinstimmen (Feld ist belegt)
-                                    if (neuePositionPaFigur.Spalte == neuePosition.Spalte && neuePositionPaFigur.Zeile == neuePosition.Zeile)
+                                    //Positionsklon der paFigur
+                                    ursprungsPositionPaFigur = new Position(paFigur.Position.Spalte, paFigur.Position.Zeile);
+                                    bewegungPaFigur = paFigur.Typ.getBewegungsmuster().Muster.ElementAt(i);
+                                    //neue Position der paFigur
+                                    istBewegungsoptionVonPaFigurInFelddimension = (ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1 > 0 && ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1 <= GetFeld().Dimension.Item1 && ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2 > 0 && ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2 <= GetFeld().Dimension.Item2) ? true : false;
+                                    if (istBewegungsoptionVonPaFigurInFelddimension)
                                     {
-                                        eineFigurDecktBewegungsoptionDesKoenigs = true;
+                                        neuePositionPaFigur = new Position(ursprungsPositionPaFigur.Spalte + bewegungPaFigur.Item1, ursprungsPositionPaFigur.Zeile + bewegungPaFigur.Item2);
+                                        //wenn neue Position des Königs und neue Positon der paFigur übereinstimmen (Feld ist belegt)
+                                        if (neuePositionPaFigur.Spalte == neuePosition.Spalte && neuePositionPaFigur.Zeile == neuePosition.Zeile)
+                                        {
+                                            eineFigurDecktBewegungsoptionDesKoenigs = true;
+                                        }
                                     }
                                 }
                             }
-                        }
-                        else if (GetFeld().Feld.ElementAt(i).Besitzer.Equals(InaktiverSpieler))
-                        {
-                            Spielfigur paFigur = GetFeld().Feld.ElementAt(i);
-                            if (paFigur.Position.Spalte == neuePosition.Spalte && paFigur.Position.Zeile == neuePosition.Zeile)
+                            else if (GetFeld().Feld.ElementAt(i).Besitzer.Equals(InaktiverSpieler))
                             {
-                                eineFigurDecktBewegungsoptionDesKoenigs = true;
+                                Spielfigur paFigur = GetFeld().Feld.ElementAt(i);
+                                if (paFigur.Position.Spalte == neuePosition.Spalte && paFigur.Position.Zeile == neuePosition.Zeile)
+                                {
+                                    eineFigurDecktBewegungsoptionDesKoenigs = true;
+                                }
                             }
-                        }
-                        if (!eineFigurDecktBewegungsoptionDesKoenigs)
-                        {
-                            //goto doublebreak, welches ein label ist, um ein break outer; zu simulieren, da c# dies nicht unterstützt.
-                            bewegungsfaehig = true;
-                            goto doublebreakBewegungsfaehig;
+                            if (!eineFigurDecktBewegungsoptionDesKoenigs)
+                            {
+                                //goto doublebreak, welches ein label ist, um ein break outer; zu simulieren, da c# dies nicht unterstützt.
+                                bewegungsfaehig = true;
+                                goto doublebreakBewegungsfaehig;
+                            }
                         }
                     }
                 }
