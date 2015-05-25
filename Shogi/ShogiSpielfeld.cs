@@ -1445,12 +1445,14 @@ namespace Shogi
             lblBauerSp2.Font = new Font("Book Antiqua", 12);
             lblBauerSp2.Visible = false;
             lblBauerSp2.Location = new Point(0, 30);
+            lblBauerSp2.Width = TextRenderer.MeasureText("9",lblBauerSp2.Font).Width;
 
             lblTurmSp1.BackColor = Color.Transparent;
             lblTurmSp1.ForeColor = Color.Red;
             lblTurmSp1.Text = "0";
             lblTurmSp1.Font = new Font("Book Antiqua", 12);
             lblTurmSp1.Visible = false;
+            lblTurmSp1.Width = TextRenderer.MeasureText("9", lblTurmSp1.Font).Width;
 
             lblTurmSp2.BackColor = Color.Transparent;
             lblTurmSp2.ForeColor = Color.Red;
@@ -1458,12 +1460,14 @@ namespace Shogi
             lblTurmSp2.Font = new Font("Book Antiqua", 12);
             lblTurmSp2.Visible = false;
             lblTurmSp2.Location = new Point(0, 30);
+            lblTurmSp2.Width = TextRenderer.MeasureText("9", lblTurmSp2.Font).Width;
 
             lblSpringerSp1.BackColor = Color.Transparent;
             lblSpringerSp1.ForeColor = Color.Red;
             lblSpringerSp1.Text = "0";
             lblSpringerSp1.Font = new Font("Book Antiqua", 12);
             lblSpringerSp1.Visible = false;
+            lblSpringerSp1.Width = TextRenderer.MeasureText("9", lblSpringerSp2.Font).Width;
 
             lblSpringerSp2.BackColor = Color.Transparent;
             lblSpringerSp2.ForeColor = Color.Red;
@@ -1471,12 +1475,14 @@ namespace Shogi
             lblSpringerSp2.Font = new Font("Book Antiqua", 12);
             lblSpringerSp2.Visible = false;
             lblSpringerSp2.Location = new Point(0, 30);
+            lblSpringerSp2.Width = TextRenderer.MeasureText("9", lblSpringerSp2.Font).Width;
 
             lblSilbernerGeneralSp1.BackColor = Color.Transparent;
             lblSilbernerGeneralSp1.ForeColor = Color.Red;
             lblSilbernerGeneralSp1.Text = "0";
             lblSilbernerGeneralSp1.Font = new Font("Book Antiqua", 12);
             lblSilbernerGeneralSp1.Visible = false;
+            lblSilbernerGeneralSp1.Width = TextRenderer.MeasureText("9", lblSilbernerGeneralSp1.Font).Width;
 
             lblSilbernerGeneralSp2.BackColor = Color.Transparent;
             lblSilbernerGeneralSp2.ForeColor = Color.Red;
@@ -1484,12 +1490,14 @@ namespace Shogi
             lblSilbernerGeneralSp2.Font = new Font("Book Antiqua", 12);
             lblSilbernerGeneralSp2.Visible = false;
             lblSilbernerGeneralSp2.Location = new Point(0, 30);
+            lblSilbernerGeneralSp2.Width = TextRenderer.MeasureText("9", lblSilbernerGeneralSp2.Font).Width;
 
             lblLanzeSp1.BackColor = Color.Transparent;
             lblLanzeSp1.ForeColor = Color.Red;
             lblLanzeSp1.Text = "0";
             lblLanzeSp1.Font = new Font("Book Antiqua", 12);
             lblLanzeSp1.Visible = false;
+            lblLanzeSp1.Width = TextRenderer.MeasureText("9", lblLanzeSp1.Font).Width;
 
             lblLanzeSp2.BackColor = Color.Transparent;
             lblLanzeSp2.ForeColor = Color.Red;
@@ -1497,12 +1505,14 @@ namespace Shogi
             lblLanzeSp2.Font = new Font("Book Antiqua", 12);
             lblLanzeSp2.Visible = false;
             lblLanzeSp2.Location = new Point(0, 30);
+            lblLanzeSp2.Width = TextRenderer.MeasureText("9", lblLanzeSp2.Font).Width;
 
             lblLaueferSp1.BackColor = Color.Transparent;
             lblLaueferSp1.ForeColor = Color.Red;
             lblLaueferSp1.Text = "0";
             lblLaueferSp1.Font = new Font("Book Antiqua", 12);
             lblLaueferSp1.Visible = false;
+            lblLaueferSp1.Width = TextRenderer.MeasureText("9", lblLaueferSp1.Font).Width;
 
             lblLaueferSp2.BackColor = Color.Transparent;
             lblLaueferSp2.ForeColor = Color.Red;
@@ -1510,12 +1520,14 @@ namespace Shogi
             lblLaueferSp2.Font = new Font("Book Antiqua", 12);
             lblLaueferSp2.Visible = false;
             lblLaueferSp2.Location = new Point(0, 30);
+            lblLaueferSp2.Width = TextRenderer.MeasureText("9", lblLaueferSp2.Font).Width;
 
             lblGoldenerGeneralSp1.BackColor = Color.Transparent;
             lblGoldenerGeneralSp1.ForeColor = Color.Red;
             lblGoldenerGeneralSp1.Text = "0";
             lblGoldenerGeneralSp1.Font = new Font("Book Antiqua", 12);
             lblGoldenerGeneralSp1.Visible = false;
+            lblGoldenerGeneralSp1.Width = TextRenderer.MeasureText("9", lblGoldenerGeneralSp1.Font).Width;
 
             lblGoldenerGeneralSp2.BackColor = Color.Transparent;
             lblGoldenerGeneralSp2.ForeColor = Color.Red;
@@ -1523,12 +1535,14 @@ namespace Shogi
             lblGoldenerGeneralSp2.Font = new Font("Book Antiqua", 12);
             lblGoldenerGeneralSp2.Visible = false;
             lblGoldenerGeneralSp2.Location = new Point(0, 30);
+            lblGoldenerGeneralSp2.Width = TextRenderer.MeasureText("9", lblGoldenerGeneralSp2.Font).Width;
 
             lblBauerSp1.BackColor = Color.Transparent;
             lblBauerSp1.ForeColor = Color.Red;
             lblBauerSp1.Text = "0";
             lblBauerSp1.Font = new Font("Book Antiqua", 12);
             lblBauerSp1.Visible = false;
+            lblBauerSp1.Width = TextRenderer.MeasureText("9", lblBauerSp1.Font).Width;
         }
         private void spielBeenden(bool statistik, bool einzelspiel, bool sp1gewonnen)
         {
