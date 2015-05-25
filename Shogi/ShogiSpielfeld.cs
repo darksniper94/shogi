@@ -1542,7 +1542,6 @@ namespace Shogi
             {
                 sp2gewonnen = true;
             }
-            spAngemeldet2 = null;
             bCoop_Abbrechen.Text = "Koorperatives Spiel";
             bEinzel_pause_fort.Text = "Einzel Spiel";
             bspeichern_laden.Text = "Spiel laden";
