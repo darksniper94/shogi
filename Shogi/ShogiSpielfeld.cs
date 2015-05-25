@@ -467,7 +467,6 @@ namespace Shogi
                     tmpBool = false;
                 }
                 spielBeenden(true,boolEinzelspiel,tmpBool);
-                MessageBox.Show("" + uhr.Zeit);
             }
             else
             {
