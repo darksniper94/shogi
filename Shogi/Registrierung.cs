@@ -81,11 +81,12 @@ namespace Shogi
         private String pruefeRegistrierung(Spieler paSpielerTemp, String paPasswortwhd)
         {
             
-            //Benutzername schon vorhanden prüfung noch implementieren! (Rücksprache mit Alex)
+            //Benutzername schon vorhanden prüfung 
             if (Database.Instance.PruefeBenutzerVorhanden(paSpielerTemp.benutzername))
             {
                 return "Der Benutzername ist bereits vorhanden.";
             }
+            //public static readonly System.Text.RegularExpressions.Regex BenutzerregEx = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9äöüÄÖÜß]+$");
             //Benutzernamen auf [A-Z,Ä,Ö,Ü], [a-z,ä,ö,ü,ß], [0-9] einschränken
             if (!ShogiSpielfeld.BenutzerregEx.IsMatch(paSpielerTemp.benutzername))
             {
