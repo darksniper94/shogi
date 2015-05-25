@@ -467,7 +467,6 @@ namespace Shogi
                     tmpBool = false;
                 }
                 spielBeenden(true,boolEinzelspiel,tmpBool);
-                MessageBox.Show("" + uhr.Zeit);
             }
             else
             {
@@ -1542,7 +1541,6 @@ namespace Shogi
             {
                 sp2gewonnen = true;
             }
-            spAngemeldet2 = null;
             bCoop_Abbrechen.Text = "Koorperatives Spiel";
             bEinzel_pause_fort.Text = "Einzel Spiel";
             bspeichern_laden.Text = "Spiel laden";

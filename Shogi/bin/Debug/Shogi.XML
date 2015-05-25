@@ -88,6 +88,20 @@
             Gibt die Liste mit möglichen Bewegungen zurück.
             </summary>
         </member>
+        <member name="T:Shogi.Database">
+            <summary>
+            Diese Klasse realisiert die Datenhaltung von PandaShogi
+            Folgende Daten werden verwaltet:
+            Benutzer
+            Statistik
+            Spieldaten pro Benutzer
+            </summary>
+        </member>
+        <member name="M:Shogi.Database.#ctor">
+            <summary>
+            Privater Konstruktor für Singelton
+            </summary>
+        </member>
         <member name="M:Shogi.Database.ExecuteNonQuery(System.String)">
             <summary>
             Methode zum ausführen von update, insert, delete und create
@@ -136,7 +150,7 @@
             </summary>
             <param name="spieler">Der Spieler als Spieler</param>
         </member>
-        <member name="M:Shogi.Database.loescheSpieler(Shogi.Spieler)">
+        <member name="M:Shogi.Database.LoescheSpieler(Shogi.Spieler)">
             <summary>
             Löscht den Spieler samt Statistik. Die Statistik wird über on delete cascade realisiert.
             </summary>
@@ -162,6 +176,30 @@
             <param name="spieler">Spieler als Spieler</param>
             <returns>ID</returns>
         </member>
+        <member name="M:Shogi.Database.DesignAktualisieren(Shogi.Spieler)">
+            <summary>
+            Aktualisiert das Design des Spielers
+            </summary>
+            <param name="spieler">Spieler</param>
+        </member>
+        <member name="M:Shogi.Database.FarbeAktualisieren(Shogi.Spieler)">
+            <summary>
+            Aktualisiert das die Farbe des Spielfeldes vom Spielers
+            </summary>
+            <param name="spieler">Spieler</param>
+        </member>
+        <member name="M:Shogi.Database.BenutzernameAktualisieren(Shogi.Spieler)">
+            <summary>
+            Aktualisiert den Benutzernamen des Spielers
+            </summary>
+            <param name="spieler">Spieler</param>
+        </member>
+        <member name="M:Shogi.Database.PasswortAktualisieren(Shogi.Spieler)">
+            <summary>
+            Aktualisiert das Passwort des Spielers
+            </summary>
+            <param name="spieler">Spieler</param>
+        </member>
         <member name="M:Shogi.Database.StatistikErweitern(Shogi.Spieler,System.Boolean,System.Boolean,System.Int32,System.Int32)">
             <summary>
             Erstellt einen neuen Statistik Eintrag im der Datenbank
@@ -171,12 +209,6 @@
             <param name="beendet">Beendet als Bool // True = Beendet</param>
             <param name="zuege">Anzahl der Züge als int</param>
             <param name="zeit">Anzahl der Zeit als int</param>
-        </member>
-        <member name="M:Shogi.Database.ladeRegelwerk">
-            <summary>
-            Lädt das Regelwerk
-            </summary>
-            <returns>Gibt das Regelwerk als String zurück</returns>
         </member>
         <member name="M:Shogi.Database.GetLastInsertId">
             <summary>
@@ -201,7 +233,7 @@
         </member>
         <member name="M:Shogi.Database.LadeLetztesEinzelSpiel(Shogi.Spieler,Shogi.Spieler)">
             <summary>
-            Lädt die letzte 
+            Lädt das letzte vom Benutzer gespeicherte Einzelspiel
             </summary>
             <param name="sp"></param>
             <returns></returns>
