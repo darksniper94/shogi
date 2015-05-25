@@ -38,7 +38,7 @@ namespace Shogi
             else
             {
                 // Konto löschen Methode
-                Database.Instance.loescheSpieler(spAngemeldet);
+                Database.Instance.LoescheSpieler(spAngemeldet);
                 MessageBox.Show("Ihr Konto wurde erfolgreich gelöscht, Sie werden jetzt abgemeldet.", "Konto löschen", MessageBoxButtons.OK);
                 this.DialogResult = DialogResult.OK;
                 this.Close();

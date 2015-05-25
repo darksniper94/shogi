@@ -7,12 +7,22 @@ using System.IO;
 
 namespace Shogi
 {
+    /// <summary>
+    /// Diese Klasse realisiert die Datenhaltung von PandaShogi
+    /// Folgende Daten werden verwaltet:
+    /// Benutzer
+    /// Statistik
+    /// Spieldaten pro Benutzer
+    /// </summary>
     public class Database
     {
         private SQLiteConnection connection;
         private readonly String DBNAME = "data.dat";
         private static Database inst = null;
 
+        /// <summary>
+        /// Privater Konstruktor für Singelton
+        /// </summary>
         private Database()
         {
             // Create of Open Database
@@ -243,7 +253,7 @@ namespace Shogi
         /// Löscht den Spieler samt Statistik. Die Statistik wird über on delete cascade realisiert.
         /// </summary>
         /// <param name="spieler">Der Spieler als Spieler</param>
-        public void loescheSpieler(Spieler spieler)
+        public void LoescheSpieler(Spieler spieler)
         {
             String sql = "DELETE FROM USER WHERE ID = " + spieler.id;
             this.ExecuteNonQuery(sql);
@@ -293,23 +303,41 @@ namespace Shogi
             return Convert.ToInt32(result.ElementAt(0)[0]);
         }
 
+        /// <summary>
+        /// Aktualisiert das Design des Spielers
+        /// </summary>
+        /// <param name="spieler">Spieler</param>
+
         public void DesignAktualisieren(Spieler spieler)
         {
             string sql = "UPDATE USER SET design = '" + spieler.design + "' WHERE ID=" + spieler.id;
             this.ExecuteNonQuery(sql);
         }
 
+        /// <summary>
+        /// Aktualisiert das die Farbe des Spielfeldes vom Spielers
+        /// </summary>
+        /// <param name="spieler">Spieler</param>
+
         public void FarbeAktualisieren(Spieler spieler)
         {
             string sql = "UPDATE USER SET color = '" + spieler.farbe + "' WHERE ID=" + spieler.id;
             this.ExecuteNonQuery(sql);
         }
+        /// <summary>
+        /// Aktualisiert den Benutzernamen des Spielers
+        /// </summary>
+        /// <param name="spieler">Spieler</param>
 
         public void BenutzernameAktualisieren(Spieler spieler)
         {
             string sql = "UPDATE USER SET name = '" + spieler.benutzername + "' WHERE ID=" + spieler.id;
             this.ExecuteNonQuery(sql);
         }
+        /// <summary>
+        /// Aktualisiert das Passwort des Spielers
+        /// </summary>
+        /// <param name="spieler">Spieler</param>
 
         public void PasswortAktualisieren(Spieler spieler)
         {
@@ -330,7 +358,7 @@ namespace Shogi
         {
             if(gewonnen) beendet = true;
             String sql = @"INSERT INTO STATISTIK (user_id, spiel_gewonnen, spiel_beendet, zuege, zeit)
-                           VALUES (" + this.GetSpielerID(spieler) + ", "
+                           VALUES (" + spieler.id + ", "
                                     + Convert.ToInt32(gewonnen) + ", "
                                     + Convert.ToInt32(beendet) + ", "
                                     + zuege + ", "
@@ -339,14 +367,6 @@ namespace Shogi
                                                         
         }
 
-        /// <summary>
-        /// Lädt das Regelwerk
-        /// </summary>
-        /// <returns>Gibt das Regelwerk als String zurück</returns>
-        public String ladeRegelwerk()
-        {
-            return "";
-        }
         /// <summary>
         /// Gibt die ID des letzten eingefügten Datensatzes in der Datenbank zurück
         /// </summary>
@@ -444,7 +464,7 @@ namespace Shogi
             return new Spielfeld(figuren, Spielleiter_Spiellogik.SHOGI_DIM, Spielleiter_Spiellogik.SHOGI_FIGUREN);
         }
         /// <summary>
-        /// Lädt die letzte 
+        /// Lädt das letzte vom Benutzer gespeicherte Einzelspiel
         /// </summary>
         /// <param name="sp"></param>
         /// <returns></returns>
