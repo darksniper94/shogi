@@ -163,16 +163,6 @@ namespace Shogi.Properties {
         /// <summary>
         ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap befoerderterSilberJ {
-            get {
-                object obj = ResourceManager.GetObject("befoerderterSilberJ", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap befoerderterSilbernerGeneralB {
             get {
                 object obj = ResourceManager.GetObject("befoerderterSilbernerGeneralB", resourceCulture);
@@ -196,6 +186,16 @@ namespace Shogi.Properties {
         internal static System.Drawing.Bitmap befoerderterSilbernerGeneralE {
             get {
                 object obj = ResourceManager.GetObject("befoerderterSilbernerGeneralE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap befoerderterSilbernerGeneralJ {
+            get {
+                object obj = ResourceManager.GetObject("befoerderterSilbernerGeneralJ", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

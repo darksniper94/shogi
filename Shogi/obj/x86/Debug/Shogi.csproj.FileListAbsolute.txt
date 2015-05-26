@@ -8,7 +8,6 @@ C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Shogi\Shogi\obj\x86\Debug\Sho
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.pdb
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\Shogi.pdb
-C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csprojResolveAssemblyReference.cache
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources.resources
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
 C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe
@@ -130,3 +129,53 @@ C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\
 C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
 C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
 C:\Users\Tina\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe.config
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.exe
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Info.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.PasswortAendern.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.BenutzernameAendern.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.pdb
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\Shogi.exe
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\Shogi.pdb
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\EntityFramework.dll
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\System.Data.SQLite.dll
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\EntityFramework.xml
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Rene\Source\Repos\shogi\Shogi\bin\Debug\System.Data.SQLite.xml
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csprojResolveAssemblyReference.cache
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.FormAnmeldung.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.frmPasswortAbfrage.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.BenutzernameAendern.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Info.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.PasswortAendern.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Regelwerk.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.ShogiSpielfeld.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Properties.Resources.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.FormRegistrierung.resources
+C:\Users\Rene\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csproj.GenerateResource.Cache
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\bin\Debug\Shogi.XML
+C:\Users\Alexander\Source\Repos\shogi\Shogi\bin\Debug\Shogi.XML
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.BenutzernameAendern.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Info.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.PasswortAendern.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
+C:\Users\Alexander\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\bin\Debug\Shogi.XML
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.BenutzernameAendern.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Info.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.PasswortAendern.resources
+C:\Users\SchusterT.SDEHW0000\Projekte\Schulprojekt\Neuer Ordner\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
+C:\Users\Clief\Source\Repos\shogi\Shogi\bin\Debug\Shogi.XML
+C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.BenutzernameAendern.resources
+C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Farbewaehlen.resources
+C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Info.resources
+C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.PasswortAendern.resources
+C:\Users\Clief\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.Steinwaehlen.resources
+C:\Users\Vanessa\Source\Repos\shogi\Shogi\obj\x86\Debug\Shogi.csprojResolveAssemblyReference.cache
+C:\Users\Tina\Source\Repos\shogi\Shogi\bin\Debug\Shogi.XML

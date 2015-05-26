@@ -13,30 +13,46 @@ namespace Shogi
     //Windows Form für die Registrierung
     public partial class FormRegistrierung : Form
     {
+        /// <summary>
+        /// Standard Konstruktor
+        /// </summary>
         public FormRegistrierung()
         {
             InitializeComponent();
             lblMeldung.Visible = false;
         }
 
+        /// <summary>
+        /// Eventhandler Load Event
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void formRegistrierung_Load(object sender, EventArgs e)
         {
             this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         }
 
-        // Methode bei Betätigung des Abbrechenbuttons
+        /// <summary>
+        /// Eventhandler Abbrechen Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void bAbbrechen_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        // Methode bei Betätigung des Registrierungsbuttons
+        /// <summary>
+        /// Eventhandler Registrierungs Button
+        /// </summary>
+        /// <param name="sender">Sender Objekt</param>
+        /// <param name="e">Das Event</param>
         private void bRegistrieren_Click(object sender, EventArgs e)
         {
             lblMeldung.Visible = false;
             bool registrierungkorrekt = false;
             String fehler;
-            Spieler spielerTemp = new Spieler(txtBenutzername.Text, txtPasswort.Text, "Bilder1");
+            Spieler spielerTemp = new Spieler(txtBenutzername.Text, txtPasswort.Text);
 
             //Prüfen der Registrierungsdaten
             fehler = pruefeRegistrierung(spielerTemp, txtPasswortWdh.Text);
@@ -50,7 +66,7 @@ namespace Shogi
             {
                 
                 // Spieler in db speichern
-                Database.instance.speichereSpieler(spielerTemp);
+                Database.Instance.SpeichereSpieler(spielerTemp);
                 MessageBox.Show("Registrierung erfolgreich abgeschlossen.", "Information",
                                  MessageBoxButtons.OK,
                                  MessageBoxIcon.Information);
@@ -64,16 +80,24 @@ namespace Shogi
             }
             
         }
+        /// <summary>
+        /// Prüft, ob die Registrierung den Kriterien entspricht.
+        /// </summary>
+        /// <param name="paSpielerTemp">Der Spieler, der Angemeldet werden soll als Spieler</param>
+        /// <param name="paPasswortwhd">Das Passwort aus der wiederholungsspalte, zur gegenprüfung als String</param>
+        /// <returns></returns>
         private String pruefeRegistrierung(Spieler paSpielerTemp, String paPasswortwhd)
         {
-            System.Text.RegularExpressions.Regex regEx = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9äöüÄÖÜß]+$");
-            //Benutzername schon vorhanden prüfung noch implementieren! (Rücksprache mit Alex)
-            if (Database.instance.pruefeBenutzerVorhanden(paSpielerTemp.benutzername))
+            
+            //Benutzername schon vorhanden prüfung 
+            if (Database.Instance.PruefeBenutzerVorhanden(paSpielerTemp.benutzername))
             {
                 return "Der Benutzername ist bereits vorhanden.";
             }
+            //public static readonly System.Text.RegularExpressions.Regex BenutzerregEx = new System.Text.RegularExpressions.Regex(@"^[A-Za-z0-9äöüÄÖÜß]+$");
             //Benutzernamen auf [A-Z,Ä,Ö,Ü], [a-z,ä,ö,ü,ß], [0-9] einschränken
-             if (!regEx.IsMatch(paSpielerTemp.benutzername)) {
+            if (!ShogiSpielfeld.BenutzerregEx.IsMatch(paSpielerTemp.benutzername))
+            {
                 return "Der Benutzername darf nur Buchstaben und Ziffern zwischen 0 und 9 enthalten.";
             }
             //Passwort auf Mindestlänge prüfen

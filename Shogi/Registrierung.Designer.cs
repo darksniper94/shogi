@@ -74,7 +74,7 @@
             this.lblMeldung.AutoSize = true;
             this.lblMeldung.Font = new System.Drawing.Font("Book Antiqua", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMeldung.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.lblMeldung.Location = new System.Drawing.Point(34, 167);
+            this.lblMeldung.Location = new System.Drawing.Point(34, 155);
             this.lblMeldung.Name = "lblMeldung";
             this.lblMeldung.Size = new System.Drawing.Size(517, 18);
             this.lblMeldung.TabIndex = 3;
@@ -112,7 +112,7 @@
             // bAbbrechen
             // 
             this.bAbbrechen.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.bAbbrechen.Location = new System.Drawing.Point(299, 209);
+            this.bAbbrechen.Location = new System.Drawing.Point(301, 193);
             this.bAbbrechen.Name = "bAbbrechen";
             this.bAbbrechen.Size = new System.Drawing.Size(100, 30);
             this.bAbbrechen.TabIndex = 8;
@@ -122,7 +122,7 @@
             // 
             // bRegistrieren
             // 
-            this.bRegistrieren.Location = new System.Drawing.Point(93, 209);
+            this.bRegistrieren.Location = new System.Drawing.Point(153, 193);
             this.bRegistrieren.Name = "bRegistrieren";
             this.bRegistrieren.Size = new System.Drawing.Size(100, 30);
             this.bRegistrieren.TabIndex = 7;
@@ -136,7 +136,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.bAbbrechen;
-            this.ClientSize = new System.Drawing.Size(580, 257);
+            this.ClientSize = new System.Drawing.Size(580, 238);
             this.Controls.Add(this.bAbbrechen);
             this.Controls.Add(this.bRegistrieren);
             this.Controls.Add(this.txtPasswortWdh);
@@ -150,6 +150,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "FormRegistrierung";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registrierung";
             this.Load += new System.EventHandler(this.formRegistrierung_Load);
             this.ResumeLayout(false);

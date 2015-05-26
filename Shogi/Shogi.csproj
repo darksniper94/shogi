@@ -40,6 +40,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Shogi.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -86,9 +87,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Befoerderungsmapper.cs" />
+    <Compile Include="BenutzernameAendern.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BenutzernameAendern.Designer.cs">
+      <DependentUpon>BenutzernameAendern.cs</DependentUpon>
+    </Compile>
     <Compile Include="Bewegungsmuster.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="Designmapper.cs" />
+    <Compile Include="Farbewaehlen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Farbewaehlen.Designer.cs">
+      <DependentUpon>Farbewaehlen.cs</DependentUpon>
+    </Compile>
     <Compile Include="FigurTyp.cs" />
     <Compile Include="Anmeldung.cs">
       <SubType>Form</SubType>
@@ -101,6 +114,18 @@
     </Compile>
     <Compile Include="AbfragePasswort.Designer.cs">
       <DependentUpon>AbfragePasswort.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Info.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Info.Designer.cs">
+      <DependentUpon>Info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswortAendern.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswortAendern.Designer.cs">
+      <DependentUpon>PasswortAendern.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -130,12 +155,31 @@
     <Compile Include="Spielfigur.cs" />
     <Compile Include="Spielleiter_Spiellogik.cs" />
     <Compile Include="Statistik.cs" />
+    <Compile Include="Steinwaehlen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Steinwaehlen.Designer.cs">
+      <DependentUpon>Steinwaehlen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Stoppuhr.cs" />
     <Compile Include="Testklasse_Logik.cs" />
     <EmbeddedResource Include="Anmeldung.resx">
       <DependentUpon>Anmeldung.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AbfragePasswort.resx">
       <DependentUpon>AbfragePasswort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BenutzernameAendern.resx">
+      <DependentUpon>BenutzernameAendern.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Farbewaehlen.resx">
+      <DependentUpon>Farbewaehlen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Info.resx">
+      <DependentUpon>Info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PasswortAendern.resx">
+      <DependentUpon>PasswortAendern.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Regelwerk.resx">
       <DependentUpon>Regelwerk.cs</DependentUpon>
@@ -150,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Registrierung.resx">
       <DependentUpon>Registrierung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Steinwaehlen.resx">
+      <DependentUpon>Steinwaehlen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
@@ -196,6 +243,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <None Include="Resources\befoerderterSilbernerGeneralJ.png" />
+    <Content Include="Resources\TokinJ.png" />
     <None Include="Resources\befoerderterSpringerE.png" />
     <None Include="Resources\befoerderterSilbernerGeneralE.png" />
     <None Include="Resources\befoerderteLanzeE.png" />
@@ -241,8 +290,6 @@
     <None Include="Resources\TurmJ.png" />
     <None Include="Resources\BauerJ.png" />
     <None Include="Resources\befoerderteLanzeJ.png" />
-    <None Include="Resources\befoerderterBauerJ.png" />
-    <None Include="Resources\befoerderterSilberJ.png" />
     <None Include="Resources\befoerderterSpringerJ.png" />
     <None Include="Resources\DracheJ.png" />
     <None Include="Resources\GoldenerGeneralJ.png" />
